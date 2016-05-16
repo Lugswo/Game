@@ -30,56 +30,17 @@ namespace The_Dream.Classes
         }
         enum MoveDirection
         {
-            UP,
-            DOWN,
-            LEFT,
-            RIGHT,
-            UPLEFT,
-            UPRIGHT,
-            DOWNLEFT,
-            DOWNRIGHT,
+            MOVE,
             NONE
         }
         private static void GetInputAndSendItToServer()
         {
             MoveDirection MoveDir = new MoveDirection();
+            if (InputManager.Instance.KeyDown(Keys.Up) == true || InputManager.Instance.KeyDown(Keys.Down) == true)
+            {
+                MoveDir = MoveDirection.MOVE;
+            }
             MoveDir = MoveDirection.NONE;
-            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.S) == true)
-            {
-                MoveDir = MoveDirection.NONE;
-            }
-            else if (InputManager.Instance.KeyDown(Keys.W) == true)
-            {
-                MoveDir = MoveDirection.UP;
-            }
-            else if (InputManager.Instance.KeyDown(Keys.S) == true)
-            {
-                MoveDir = MoveDirection.DOWN;
-            }
-            if (InputManager.Instance.KeyDown(Keys.A) == true)
-            {
-                MoveDir = MoveDirection.LEFT;
-            }
-            if (InputManager.Instance.KeyDown(Keys.D) == true)
-            {
-                MoveDir = MoveDirection.RIGHT;
-            }
-            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.A))
-            {
-                MoveDir = MoveDirection.UPLEFT;
-            }
-            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.D))
-            {
-                MoveDir = MoveDirection.UPRIGHT;
-            }
-            if (InputManager.Instance.KeyDown(Keys.S) == true && InputManager.Instance.KeyDown(Keys.A))
-            {
-                MoveDir = MoveDirection.DOWNLEFT;
-            }
-            if (InputManager.Instance.KeyDown(Keys.S) == true && InputManager.Instance.KeyDown(Keys.D))
-            {
-                MoveDir = MoveDirection.DOWNRIGHT;
-            }
             if (InputManager.Instance.KeyDown(Keys.Q) == true)
             {
                 client.Disconnect("bye bye");
@@ -165,7 +126,8 @@ namespace The_Dream.Classes
                                 {
                                     continue;
                                 }
-                                playerUpdate.Update(gameTime, p);
+                                Player temp = p;
+                                playerUpdate.Update(gameTime, ref temp);
                                 //byte b = ServerInc.ReadByte();
                                 //if ((byte)MoveDirection.UP == b)
                                 //    p.Y -= 10;

@@ -65,13 +65,55 @@ namespace The_Dream.Classes
             LevelUp.UnloadContent();
             HavePoints.UnloadContent();
         }
-        public void Update(GameTime gameTime, Player player)
+        public void Update(GameTime gameTime, ref Player player)
         {
-            if (InputManager.Instance.KeyDown(Keys.W))
+            Vector2 Velocity = new Vector2();
+            if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Up))
             {
-                player.Y -= 10;
+                Velocity.Y = 0;
             }
-            if (InputManager.Instance.KeyDown)
+            else if (InputManager.Instance.KeyDown(Keys.Down))
+            {
+                Velocity.Y = 10;
+                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 0;
+            }
+            else if (InputManager.Instance.KeyDown(Keys.Up))
+            {
+                Velocity.Y = -10;
+                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 1;
+            }
+            else
+            {
+                Velocity.Y = 0;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Right) && InputManager.Instance.KeyDown(Keys.Left))
+            {
+                Velocity.X = 0;
+            }
+            else if (InputManager.Instance.KeyDown(Keys.Right))
+            {
+                Velocity.X = 10;
+                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 2;
+            }
+            else if (InputManager.Instance.KeyDown(Keys.Left))
+            {
+                Velocity.X = -10;
+                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
+            }
+            else
+            {
+                Velocity.X = 0;
+            }
+            if (InputManager.Instance.KeyUp(Keys.Down) && InputManager.Instance.KeyUp(Keys.Up))
+            {
+                Velocity.Y = 0;
+            }
+            if (InputManager.Instance.KeyUp(Keys.Left) && InputManager.Instance.KeyUp(Keys.Right))
+            {
+                Velocity.X = 0;
+            }
+            player.X += (int)Velocity.X;
+            player.Y += (int)Velocity.Y;
         //    if (map.Pause == false)
         //    {
         //        LevelUp.Position.X = image.Position.X - ((LevelUp.spriteSheetEffect.FrameWidth - image.spriteSheetEffect.FrameWidth) / 2);
