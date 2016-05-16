@@ -17,8 +17,9 @@ namespace The_Dream.Classes
         static NetPeerConfiguration ServerConfig;
         static NetServer server;
         static NetClient client;
-        NetOutgoingMessage ServerOut, ClientOut;
+        NetOutgoingMessage ClientOut;
         static List<Player> PlayerList, GameState;
+        float ConnectionTimer;
         public Image image = new Image();
         enum PacketTypes
         {
@@ -82,7 +83,7 @@ namespace The_Dream.Classes
             ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             server = new NetServer(ServerConfig);
             server.Start();
-            hostip = "173.58.231.224";
+            hostip = "localhost";
             NetPeerConfiguration ClientConfig = new NetPeerConfiguration("game");
             client = new NetClient(ClientConfig);
             ClientOut = client.CreateMessage();
@@ -92,18 +93,6 @@ namespace The_Dream.Classes
             XmlManager<Player> playerLoader;
             playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
-            //ClientOut.Write(player.Level);
-            //ClientOut.Write(player.Strength);
-            //ClientOut.Write(player.Defense);
-            //ClientOut.Write(player.Dexterity);
-            //ClientOut.Write(player.Intelligence);
-            //ClientOut.Write(player.Speed);
-            //ClientOut.Write(player.Health);
-            //ClientOut.Write(player.Energy);
-            //ClientOut.Write(player.EXP);
-            //ClientOut.Write(player.NextLevel);
-            //ClientOut.Write(player.StatPoints);
-            //ClientOut.Write(player.Name);
             ClientOut.WriteAllProperties(player);
             client.Connect(hostip, 12345, ClientOut);
             GameState = new List<Player>();
@@ -111,6 +100,7 @@ namespace The_Dream.Classes
             image.Path = "Gameplay/Characters/Sprites/Player/Player";
             image.Position = new Vector2(100, 100);
             image.LoadContent();
+            ConnectionTimer = 0;
         }
         public void UnloadContent()
         {
@@ -119,35 +109,6 @@ namespace The_Dream.Classes
         public void Update(GameTime gameTime)
         {
             GetInputAndSendItToServer();
-            if ((ClientInc = client.ReadMessage()) != null)
-            {
-                switch (ClientInc.MessageType)
-                {
-                    case NetIncomingMessageType.Data:
-                        if (ClientInc.ReadByte() == (byte)PacketTypes.WORLDSTATE)
-                        {
-                            PlayerList.Clear();
-                            int count = 0;
-                            count = ClientInc.ReadInt32();
-                            for (int i = 0; i < count; i++)
-                            {
-                                Player p = new Player();
-                                ClientInc.ReadAllProperties(p);
-                                PlayerList.Add(p);
-                                PlayerList[PlayerList.Count - 1].LoadContent();
-                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.X = p.X;
-                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.Y = p.Y;
-                            }
-                        }
-                        break;
-                    case NetIncomingMessageType.StatusChanged:
-                        switch (ClientInc.SenderConnection.Status)
-                        {
-                            /**/
-                        }
-                        break;
-                }
-            }
             if ((ServerInc = server.ReadMessage()) != null)
             {
                 switch (ServerInc.MessageType)
@@ -180,8 +141,6 @@ namespace The_Dream.Classes
                                     continue;
                                 }
                                 byte b = ServerInc.ReadByte();
-
-                                // Handle movement. This byte should correspond to some direction
                                 if ((byte)MoveDirection.UP == b)
                                     p.Y -= 10;
                                 if ((byte)MoveDirection.DOWN == b)
@@ -190,28 +149,13 @@ namespace The_Dream.Classes
                                     p.X -= 10;
                                 if ((byte)MoveDirection.RIGHT == b)
                                     p.X += 10;
-                                // Create new message
                                 NetOutgoingMessage outmsg = server.CreateMessage();
-
-                                // Write byte, that is type of world state
                                 outmsg.Write((byte)PacketTypes.WORLDSTATE);
-
-                                // Write int, "how many players in game?"
                                 outmsg.Write(GameState.Count);
-
-                                // Iterate throught all the players in game
                                 foreach (Player ch2 in GameState)
                                 {
-                                    // Write all the properties of object to message
                                     outmsg.WriteAllProperties(ch2);
                                 }
-
-                                // Message contains
-                                // Byte = PacketType
-                                // Int = Player count
-                                // Character obj * Player count
-
-                                // Send messsage to clients ( All connections, in reliable order, channel 0)
                                 server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                                 break;
                             }
@@ -229,6 +173,35 @@ namespace The_Dream.Classes
                                     break;
                                 }
                             }
+                        }
+                        break;
+                }
+            }
+            if ((ClientInc = client.ReadMessage()) != null)
+            {
+                switch (ClientInc.MessageType)
+                {
+                    case NetIncomingMessageType.Data:
+                        if (ClientInc.ReadByte() == (byte)PacketTypes.WORLDSTATE)
+                        {
+                            PlayerList.Clear();
+                            int count = 0;
+                            count = ClientInc.ReadInt32();
+                            for (int i = 0; i < count; i++)
+                            {
+                                Player p = new Player();
+                                ClientInc.ReadAllProperties(p);
+                                PlayerList.Add(p);
+                                PlayerList[PlayerList.Count - 1].LoadContent();
+                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.X = p.X;
+                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.Y = p.Y;
+                            }
+                        }
+                        break;
+                    case NetIncomingMessageType.StatusChanged:
+                        switch (ClientInc.SenderConnection.Status)
+                        {
+                            /**/
                         }
                         break;
                 }
