@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Axis>Y</Axis>
+  <Item>
+    <LinkType>Menu</LinkType>
+    <LinkID>Load/Menus/TitleMenu.xml</LinkID>
+    <image>
+      <Text>Feego</Text>
+    </image>
+  </Item>
+  
+  <Item>
+    <image>
+      <Text>Load Game</Text>
+    </image>
+  </Item>
+  
+  <Item>
+    <image>
+      <Text>Options</Text>
+    </image>
+  </Item>
+  
+  <Item>
+    <image>
+      <Text>Credits</Text>
+    </image>
+  </Item>
+</Menu>
