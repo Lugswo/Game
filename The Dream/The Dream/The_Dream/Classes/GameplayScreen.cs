@@ -11,7 +11,6 @@ namespace The_Dream.Classes
 {
     public class GameplayScreen : GameScreen
     {
-        Player player;
         PlayerUpdate playerUpdate;
         Map map = new Map();
         Textures textures;

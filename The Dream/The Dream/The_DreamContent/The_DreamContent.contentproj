@@ -87,7 +87,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Characters\Sprites\Player\Level Up.png">
+    <Compile Include="Gameplay\Effects\Level Up.png">
       <Name>Level Up</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

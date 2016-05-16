@@ -74,15 +74,6 @@
       <Time>2016-05-04T18:13:49.2599341-07:00</Time>
     </Item>
     <Item>
-      <Source>Gameplay\Characters\Sprites\Player\Level Up.png</Source>
-      <Name>Gameplay\Characters\Sprites\Player\Level Up</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\Level Up.xnb</Output>
-      <Time>2016-05-09T14:24:57.7106465-07:00</Time>
-    </Item>
-    <Item>
       <Source>Gameplay\Monsters\TestMonster2.png</Source>
       <Name>Gameplay\Monsters\TestMonster2</Name>
       <Importer>TextureImporter</Importer>
@@ -270,6 +261,15 @@
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Sound Effects\Attack.xnb</Output>
       <Time>2016-05-11T13:47:32.8485367-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Effects\Level Up.png</Source>
+      <Name>Gameplay\Effects\Level Up</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Effects\Level Up.xnb</Output>
+      <Time>2016-05-09T14:24:57.7106465-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -20,6 +20,7 @@ namespace The_Dream.Classes
         NetOutgoingMessage ClientOut;
         static List<Player> PlayerList, GameState;
         float ConnectionTimer;
+        PlayerUpdate playerUpdate;
         public Image image = new Image();
         enum PacketTypes
         {
@@ -33,30 +34,53 @@ namespace The_Dream.Classes
             DOWN,
             LEFT,
             RIGHT,
+            UPLEFT,
+            UPRIGHT,
+            DOWNLEFT,
+            DOWNRIGHT,
             NONE
         }
         private static void GetInputAndSendItToServer()
         {
             MoveDirection MoveDir = new MoveDirection();
             MoveDir = MoveDirection.NONE;
-            KeyboardState currentstate = Keyboard.GetState();
-            if (currentstate.IsKeyDown(Keys.W) == true)
+            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.S) == true)
+            {
+                MoveDir = MoveDirection.NONE;
+            }
+            else if (InputManager.Instance.KeyDown(Keys.W) == true)
             {
                 MoveDir = MoveDirection.UP;
             }
-            if (currentstate.IsKeyDown(Keys.S) == true)
+            else if (InputManager.Instance.KeyDown(Keys.S) == true)
             {
                 MoveDir = MoveDirection.DOWN;
             }
-            if (currentstate.IsKeyDown(Keys.A) == true)
+            if (InputManager.Instance.KeyDown(Keys.A) == true)
             {
                 MoveDir = MoveDirection.LEFT;
             }
-            if (currentstate.IsKeyDown(Keys.D) == true)
+            if (InputManager.Instance.KeyDown(Keys.D) == true)
             {
                 MoveDir = MoveDirection.RIGHT;
             }
-            if (currentstate.IsKeyDown(Keys.Q) == true)
+            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.A))
+            {
+                MoveDir = MoveDirection.UPLEFT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.W) == true && InputManager.Instance.KeyDown(Keys.D))
+            {
+                MoveDir = MoveDirection.UPRIGHT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.S) == true && InputManager.Instance.KeyDown(Keys.A))
+            {
+                MoveDir = MoveDirection.DOWNLEFT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.S) == true && InputManager.Instance.KeyDown(Keys.D))
+            {
+                MoveDir = MoveDirection.DOWNRIGHT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Q) == true)
             {
                 client.Disconnect("bye bye");
                 server.Shutdown("bye bye");
@@ -101,6 +125,7 @@ namespace The_Dream.Classes
             image.Position = new Vector2(100, 100);
             image.LoadContent();
             ConnectionTimer = 0;
+            playerUpdate = new PlayerUpdate();
         }
         public void UnloadContent()
         {
@@ -140,15 +165,36 @@ namespace The_Dream.Classes
                                 {
                                     continue;
                                 }
-                                byte b = ServerInc.ReadByte();
-                                if ((byte)MoveDirection.UP == b)
-                                    p.Y -= 10;
-                                if ((byte)MoveDirection.DOWN == b)
-                                    p.Y += 10;
-                                if ((byte)MoveDirection.LEFT == b)
-                                    p.X -= 10;
-                                if ((byte)MoveDirection.RIGHT == b)
-                                    p.X += 10;
+                                playerUpdate.Update(gameTime, p);
+                                //byte b = ServerInc.ReadByte();
+                                //if ((byte)MoveDirection.UP == b)
+                                //    p.Y -= 10;
+                                //if ((byte)MoveDirection.DOWN == b)
+                                //    p.Y += 10;
+                                //if ((byte)MoveDirection.LEFT == b)
+                                //    p.X -= 10;
+                                //if ((byte)MoveDirection.RIGHT == b)
+                                //    p.X += 10;
+                                //if ((byte)MoveDirection.UPLEFT == b)
+                                //{
+                                //    p.Y -= 10;
+                                //    p.X -= 10;
+                                //}
+                                //if ((byte)MoveDirection.UPRIGHT == b)
+                                //{
+                                //    p.Y -= 10;
+                                //    p.X += 10;
+                                //}
+                                //if ((byte)MoveDirection.DOWNLEFT == b)
+                                //{
+                                //    p.Y += 10;
+                                //    p.X -= 10;
+                                //}
+                                //if ((byte)MoveDirection.DOWNRIGHT == b)
+                                //{
+                                //    p.Y += 10;
+                                //    p.X += 10;
+                                //}
                                 NetOutgoingMessage outmsg = server.CreateMessage();
                                 outmsg.Write((byte)PacketTypes.WORLDSTATE);
                                 outmsg.Write(GameState.Count);
@@ -169,7 +215,6 @@ namespace The_Dream.Classes
                                 if (p.Connection == ServerInc.SenderConnection)
                                 {
                                     GameState.Remove(p);
-                                    PlayerList.Remove(p);
                                     break;
                                 }
                             }
@@ -199,9 +244,9 @@ namespace The_Dream.Classes
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
-                        switch (ClientInc.SenderConnection.Status)
+                        if (ClientInc.SenderConnection.Status == NetConnectionStatus.Disconnected || ClientInc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
                         {
-                            /**/
+                            PlayerList.Clear();
                         }
                         break;
                 }

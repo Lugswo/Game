@@ -6,7 +6,6 @@ Content\Gameplay\Textures\Tree.xnb
 Content\Gameplay\Backgrounds\Blanks\Black.xnb
 Content\Gameplay\Characters\Sprites\Player\Player.xnb
 Content\Gameplay\Monsters\TestMonster.xnb
-Content\Gameplay\Characters\Sprites\Player\Level Up.xnb
 Content\Gameplay\Monsters\TestMonster2.xnb
 Content\Gameplay\Menu\Stats.xnb
 Content\Gameplay\Menu\Equipment.xnb
@@ -28,3 +27,4 @@ Content\Gameplay\Menu\InSkills.xnb
 Content\Gameplay\Menu\InStats.xnb
 Content\Gameplay\Music\Megalovania.xnb
 Content\Gameplay\Sound Effects\Attack.xnb
+Content\Gameplay\Effects\Level Up.xnb
