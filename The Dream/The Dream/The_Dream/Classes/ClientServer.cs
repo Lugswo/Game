@@ -36,16 +36,19 @@ namespace The_Dream.Classes
         private static void GetInputAndSendItToServer()
         {
             MoveDirection MoveDir = new MoveDirection();
-            if (InputManager.Instance.KeyDown(Keys.Up) == true || InputManager.Instance.KeyDown(Keys.Down) == true)
+            if (InputManager.Instance.KeyDown(Keys.Up) == true || InputManager.Instance.KeyDown(Keys.Down) == true || InputManager.Instance.KeyDown(Keys.Left) || InputManager.Instance.KeyDown(Keys.Right))
             {
                 MoveDir = MoveDirection.MOVE;
             }
-            MoveDir = MoveDirection.NONE;
-            if (InputManager.Instance.KeyDown(Keys.Q) == true)
+            if (InputManager.Instance.KeyDown(Keys.Q))
             {
                 client.Disconnect("bye bye");
                 server.Shutdown("bye bye");
-                ScreenManager.Instance.ChangeScreens("TitleScreen");
+                MoveDir = MoveDirection.NONE;
+                if (ScreenManager.Instance.IsTransitioning == false)
+                {
+                    ScreenManager.Instance.ChangeScreens("TitleScreen");
+                }
             }
             if (MoveDir != MoveDirection.NONE)
             {
@@ -107,14 +110,6 @@ namespace The_Dream.Classes
                             ServerInc.ReadAllProperties(player);
                             player.Connection = ServerInc.SenderConnection;
                             GameState.Add(player);
-                            NetOutgoingMessage outmsg = server.CreateMessage();
-                            outmsg.Write((byte)PacketTypes.WORLDSTATE);
-                            outmsg.Write(GameState.Count);
-                            foreach (Player p in GameState)
-                            {
-                                outmsg.WriteAllProperties(p);
-                            }
-                            server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
                         }
                         break;
                     case NetIncomingMessageType.Data:
@@ -128,43 +123,6 @@ namespace The_Dream.Classes
                                 }
                                 Player temp = p;
                                 playerUpdate.Update(gameTime, ref temp);
-                                //byte b = ServerInc.ReadByte();
-                                //if ((byte)MoveDirection.UP == b)
-                                //    p.Y -= 10;
-                                //if ((byte)MoveDirection.DOWN == b)
-                                //    p.Y += 10;
-                                //if ((byte)MoveDirection.LEFT == b)
-                                //    p.X -= 10;
-                                //if ((byte)MoveDirection.RIGHT == b)
-                                //    p.X += 10;
-                                //if ((byte)MoveDirection.UPLEFT == b)
-                                //{
-                                //    p.Y -= 10;
-                                //    p.X -= 10;
-                                //}
-                                //if ((byte)MoveDirection.UPRIGHT == b)
-                                //{
-                                //    p.Y -= 10;
-                                //    p.X += 10;
-                                //}
-                                //if ((byte)MoveDirection.DOWNLEFT == b)
-                                //{
-                                //    p.Y += 10;
-                                //    p.X -= 10;
-                                //}
-                                //if ((byte)MoveDirection.DOWNRIGHT == b)
-                                //{
-                                //    p.Y += 10;
-                                //    p.X += 10;
-                                //}
-                                NetOutgoingMessage outmsg = server.CreateMessage();
-                                outmsg.Write((byte)PacketTypes.WORLDSTATE);
-                                outmsg.Write(GameState.Count);
-                                foreach (Player ch2 in GameState)
-                                {
-                                    outmsg.WriteAllProperties(ch2);
-                                }
-                                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                                 break;
                             }
                         }
@@ -217,6 +175,17 @@ namespace The_Dream.Classes
             {
                 p.PlayerImage.Position = new Vector2(p.X, p.Y);
                 p.PlayerImage.Update(gameTime);
+            }
+            if (server.ConnectionsCount > 0)
+            {
+                NetOutgoingMessage outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketTypes.WORLDSTATE);
+                outmsg.Write(GameState.Count);
+                foreach (Player ch2 in GameState)
+                {
+                    outmsg.WriteAllProperties(ch2);
+                }
+                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
