@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Lidgren.Network;
+using Lidgren.Network.Xna;
 
 namespace The_Dream.Classes
 {
@@ -142,6 +143,17 @@ namespace The_Dream.Classes
                         break;
                 }
             }
+            if (server.ConnectionsCount > 0)
+            {
+                NetOutgoingMessage outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketTypes.WORLDSTATE);
+                outmsg.Write(GameState.Count);
+                foreach (Player p in GameState)
+                {
+                    outmsg.WriteAllProperties(p);
+                }
+                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            }
             if ((ClientInc = client.ReadMessage()) != null)
             {
                 switch (ClientInc.MessageType)
@@ -152,15 +164,13 @@ namespace The_Dream.Classes
                             PlayerList.Clear();
                             int count = 0;
                             count = ClientInc.ReadInt32();
-                            for (int i = 0; i < count; i++)
+                            foreach (Player p in PlayerList)
                             {
-                                Player p = new Player();
                                 ClientInc.ReadAllProperties(p);
-                                PlayerList.Add(p);
-                                PlayerList[PlayerList.Count - 1].LoadContent();
-                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.X = p.X;
-                                PlayerList[PlayerList.Count - 1].PlayerImage.Position.Y = p.Y;
                             }
+                            Player newPlayer = new Player();
+                            ClientInc.ReadAllProperties(newPlayer);
+                            PlayerList.Add(newPlayer);
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
@@ -175,17 +185,6 @@ namespace The_Dream.Classes
             {
                 p.PlayerImage.Position = new Vector2(p.X, p.Y);
                 p.PlayerImage.Update(gameTime);
-            }
-            if (server.ConnectionsCount > 0)
-            {
-                NetOutgoingMessage outmsg = server.CreateMessage();
-                outmsg.Write((byte)PacketTypes.WORLDSTATE);
-                outmsg.Write(GameState.Count);
-                foreach (Player ch2 in GameState)
-                {
-                    outmsg.WriteAllProperties(ch2);
-                }
-                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
             }
         }
         public void Draw(SpriteBatch spriteBatch)

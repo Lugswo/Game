@@ -62,7 +62,10 @@
   <ItemGroup>
     <Reference Include="Lidgren.Network, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\cygwin64\home\Lugswo\Game\The Dream\The Dream\The_Dream\bin\x86\Debug\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\cygwin64\home\Lugswo\Game\The Dream\Lib\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network.Xna">
+      <HintPath>..\..\..\..\..\..\cygwin64\home\Lugswo\Game\The Dream\Lib\Lidgren.Network.Xna.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
