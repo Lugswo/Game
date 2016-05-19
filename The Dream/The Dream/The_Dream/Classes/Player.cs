@@ -26,6 +26,8 @@ namespace The_Dream.Classes
         public string Name { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public int AreaX { get; set; }
+        public int AreaY { get; set; }
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Player()

@@ -24,9 +24,9 @@ namespace The_Dream.Classes
         {
             base.LoadContent();
             clientServer.LoadContent();
-            //XmlManager<Map> mapLoader = new XmlManager<Map>();
-            //map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[map.AreaX, map.AreaY] + "/Background.xml");
-            //map.LoadContent();
+            XmlManager<Map> mapLoader = new XmlManager<Map>();
+            map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[map.AreaX, map.AreaY] + "/Background.xml");
+            map.LoadContent();
             //XmlManager<Player> playerLoader = new XmlManager<Player>();
             //player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             //player.LoadContent();

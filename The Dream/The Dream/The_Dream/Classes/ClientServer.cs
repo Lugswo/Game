@@ -19,11 +19,12 @@ namespace The_Dream.Classes
         static NetServer server;
         static NetClient client;
         NetOutgoingMessage ClientOut;
-        static List<Player> PlayerList, GameState;
+        public List<Player> PlayerList, GameState;
         float ConnectionTimer;
         PlayerUpdate playerUpdate;
         public Image image = new Image();
         bool addedNewPlayer = true;
+        public int PlayerID;
         enum PacketTypes
         {
             LOGIN,
@@ -35,6 +36,17 @@ namespace The_Dream.Classes
         {
             MOVE,
             NONE
+        }
+        public void SendGameState()
+        {
+            NetOutgoingMessage outmsg = server.CreateMessage();
+            outmsg.Write((byte)PacketTypes.WORLDSTATE);
+            outmsg.Write(GameState.Count);
+            foreach (Player p in GameState)
+            {
+                outmsg.WriteAllProperties(p);
+            }
+            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
         }
         private static void GetInputAndSendItToServer()
         {
@@ -112,23 +124,17 @@ namespace The_Dream.Classes
                     }
                 }
             }
-            if (server.ConnectionsCount > 0 && addedNewPlayer == true)
-            {
-                NetOutgoingMessage outmsg = server.CreateMessage();
-                outmsg.Write((byte)PacketTypes.WORLDSTATE);
-                outmsg.Write(GameState.Count);
-                foreach (Player p in GameState)
-                {
-                    outmsg.WriteAllProperties(p);
-                }
-                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-            }
             if (addedNewPlayer == false && server.ConnectionsCount > 0)
             {
                 NetOutgoingMessage outmsg = server.CreateMessage();
                 Player temp = GameState[GameState.Count - 1];
+                int count = GameState.Count;
                 outmsg.Write((byte)PacketTypes.ADDPLAYER);
-                outmsg.WriteAllProperties(temp);
+                outmsg.Write(count);
+                foreach (Player p in GameState)
+                {
+                    outmsg.WriteAllProperties(p);
+                }
                 server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                 addedNewPlayer = true;
             }
@@ -158,6 +164,7 @@ namespace The_Dream.Classes
                                 }
                                 Player temp = p;
                                 playerUpdate.Update(gameTime, ref temp);
+                                SendGameState();
                                 break;
                             }
                         }
@@ -185,10 +192,15 @@ namespace The_Dream.Classes
                         byte b = ClientInc.ReadByte();
                         if (b == (byte)PacketTypes.ADDPLAYER)
                         {
-                            Player newPlayer = new Player();
-                            ClientInc.ReadAllProperties(newPlayer);
-                            newPlayer.LoadContent();
-                            PlayerList.Add(newPlayer);
+                            int count = ClientInc.ReadInt32();
+                            for (int i = 0; i < count; i++)
+                            {
+                                Player temp = new Player();
+                                ClientInc.ReadAllProperties(temp);
+                                temp.LoadContent();
+                                PlayerList.Add(temp);
+                            }
+                            PlayerID = PlayerList.Count - 1;
                             addedNewPlayer = true;
                         }
                         else if (b == (byte)PacketTypes.WORLDSTATE)
