@@ -23,11 +23,13 @@ namespace The_Dream.Classes
         float ConnectionTimer;
         PlayerUpdate playerUpdate;
         public Image image = new Image();
+        bool addedNewPlayer = true;
         enum PacketTypes
         {
             LOGIN,
             MOVE,
-            WORLDSTATE
+            WORLDSTATE,
+            ADDPLAYER
         }
         enum MoveDirection
         {
@@ -67,7 +69,7 @@ namespace The_Dream.Classes
         public void LoadContent()
         {
             ServerConfig = new NetPeerConfiguration("game");
-            ServerConfig.Port = 12345;
+            ServerConfig.Port = 25565;
             ServerConfig.MaximumConnections = 4;
             ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             server = new NetServer(ServerConfig);
@@ -83,7 +85,7 @@ namespace The_Dream.Classes
             playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             ClientOut.WriteAllProperties(player);
-            client.Connect(hostip, 12345, ClientOut);
+            client.Connect(hostip, 25565, ClientOut);
             GameState = new List<Player>();
             PlayerList = new List<Player>();
             image.Path = "Gameplay/Characters/Sprites/Player/Player";
@@ -99,6 +101,37 @@ namespace The_Dream.Classes
         public void Update(GameTime gameTime)
         {
             GetInputAndSendItToServer();
+            if (PlayerList.Count == 0)
+            {
+                ConnectionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (ConnectionTimer >= 5)
+                {
+                    if (ScreenManager.Instance.IsTransitioning == false)
+                    {
+                        ScreenManager.Instance.ChangeScreens("TitleScreen");
+                    }
+                }
+            }
+            if (server.ConnectionsCount > 0 && addedNewPlayer == true)
+            {
+                NetOutgoingMessage outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketTypes.WORLDSTATE);
+                outmsg.Write(GameState.Count);
+                foreach (Player p in GameState)
+                {
+                    outmsg.WriteAllProperties(p);
+                }
+                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            }
+            if (addedNewPlayer == false && server.ConnectionsCount > 0)
+            {
+                NetOutgoingMessage outmsg = server.CreateMessage();
+                Player temp = GameState[GameState.Count - 1];
+                outmsg.Write((byte)PacketTypes.ADDPLAYER);
+                outmsg.WriteAllProperties(temp);
+                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                addedNewPlayer = true;
+            }
             if ((ServerInc = server.ReadMessage()) != null)
             {
                 switch (ServerInc.MessageType)
@@ -111,6 +144,7 @@ namespace The_Dream.Classes
                             ServerInc.ReadAllProperties(player);
                             player.Connection = ServerInc.SenderConnection;
                             GameState.Add(player);
+                            addedNewPlayer = false;
                         }
                         break;
                     case NetIncomingMessageType.Data:
@@ -143,34 +177,28 @@ namespace The_Dream.Classes
                         break;
                 }
             }
-            if (server.ConnectionsCount > 0)
-            {
-                NetOutgoingMessage outmsg = server.CreateMessage();
-                outmsg.Write((byte)PacketTypes.WORLDSTATE);
-                outmsg.Write(GameState.Count);
-                foreach (Player p in GameState)
-                {
-                    outmsg.WriteAllProperties(p);
-                }
-                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-            }
             if ((ClientInc = client.ReadMessage()) != null)
             {
                 switch (ClientInc.MessageType)
                 {
                     case NetIncomingMessageType.Data:
-                        if (ClientInc.ReadByte() == (byte)PacketTypes.WORLDSTATE)
+                        byte b = ClientInc.ReadByte();
+                        if (b == (byte)PacketTypes.ADDPLAYER)
                         {
-                            PlayerList.Clear();
+                            Player newPlayer = new Player();
+                            ClientInc.ReadAllProperties(newPlayer);
+                            newPlayer.LoadContent();
+                            PlayerList.Add(newPlayer);
+                            addedNewPlayer = true;
+                        }
+                        else if (b == (byte)PacketTypes.WORLDSTATE)
+                        {
                             int count = 0;
                             count = ClientInc.ReadInt32();
                             foreach (Player p in PlayerList)
                             {
                                 ClientInc.ReadAllProperties(p);
                             }
-                            Player newPlayer = new Player();
-                            ClientInc.ReadAllProperties(newPlayer);
-                            PlayerList.Add(newPlayer);
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
