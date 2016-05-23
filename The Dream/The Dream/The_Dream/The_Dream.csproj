@@ -83,6 +83,7 @@
     <Compile Include="Classes\CharacterCreationScreen.cs" />
     <Compile Include="Classes\ClientServer.cs" />
     <Compile Include="Classes\Controls.cs" />
+    <Compile Include="Classes\ExitScreen.cs" />
     <Compile Include="Classes\ExpandEffect.cs" />
     <Compile Include="Classes\FadeEffect.cs" />
     <Compile Include="Classes\Monsters\TestMonster2.cs" />

@@ -78,7 +78,7 @@ namespace The_Dream.Classes
             }
             else if (InputManager.Instance.KeyDown(Keys.Up))
             {
-                Velocity.Y = -10;
+                player.VelocityY = -10;
                 player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 1;
             }
             else
@@ -111,6 +111,8 @@ namespace The_Dream.Classes
             {
                 player.VelocityX = 0;
             }
+            player.X += player.VelocityX;
+            player.Y += player.VelocityY;
         //    if (map.Pause == false)
         //    {
         //        LevelUp.Position.X = image.Position.X - ((LevelUp.spriteSheetEffect.FrameWidth - image.spriteSheetEffect.FrameWidth) / 2);

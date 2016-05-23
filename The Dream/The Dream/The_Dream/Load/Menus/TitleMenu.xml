@@ -25,8 +25,10 @@
   </Item>
   
   <Item>
+    <LinkType>Screen</LinkType>
+    <LinkID>ExitScreen</LinkID>
     <image>
-      <Text>Credits</Text>
+      <Text>Exit</Text>
     </image>
   </Item>
 </Menu>

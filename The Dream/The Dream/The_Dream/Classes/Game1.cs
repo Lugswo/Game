@@ -68,6 +68,10 @@ namespace The_Dream.Classes
 
             // TODO: Add your update logic here
             ScreenManager.Instance.Update(gameTime);
+            if (ScreenManager.Instance.currentScreen.type == typeof(ExitScreen))
+            {
+                this.Exit();
+            }
             base.Update(gameTime);
         }
 

@@ -28,8 +28,8 @@ namespace The_Dream.Classes
         public int Y { get; set; }
         public int AreaX { get; set; }
         public int AreaY { get; set; }
-        public int VelocityX;
-        public int VelocityY;
+        public int VelocityX { get; set; }
+        public int VelocityY { get; set; }
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Player()
@@ -46,6 +46,16 @@ namespace The_Dream.Classes
         public void UnloadContent()
         {
             PlayerImage.UnloadContent();
+        }
+        public void Update(GameTime gameTime)
+        {
+            PlayerImage.IsActive = true;
+            PlayerImage.Position = new Vector2(X, Y);
+            if (VelocityX == 0 && VelocityY == 0)
+            {
+                PlayerImage.IsActive = false;
+            }
+            PlayerImage.Update(gameTime);
         }
     }
 }

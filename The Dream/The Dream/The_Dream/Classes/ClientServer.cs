@@ -73,6 +73,7 @@ namespace The_Dream.Classes
                 client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered);
                 MoveDir = MoveDirection.NONE;
             }
+            MoveDir = MoveDirection.NONE;
         }
         public ClientServer()
         {
@@ -223,8 +224,7 @@ namespace The_Dream.Classes
             }
             foreach (Player p in PlayerList)
             {
-                p.PlayerImage.Position = new Vector2(p.X, p.Y);
-                p.PlayerImage.Update(gameTime);
+                p.Update(gameTime);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
