@@ -74,12 +74,10 @@ namespace The_Dream.Classes
             else if (InputManager.Instance.KeyDown(Keys.Down))
             {
                 player.VelocityY = 10;
-                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 0;
             }
             else if (InputManager.Instance.KeyDown(Keys.Up))
             {
                 player.VelocityY = -10;
-                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 1;
             }
             else
             {
@@ -92,12 +90,10 @@ namespace The_Dream.Classes
             else if (InputManager.Instance.KeyDown(Keys.Right))
             {
                 player.VelocityX = 10;
-                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 2;
             }
             else if (InputManager.Instance.KeyDown(Keys.Left))
             {
                 player.VelocityX = -10;
-                player.PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
             }
             else
             {

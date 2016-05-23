@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -30,11 +31,19 @@ namespace The_Dream.Classes
             LOGIN,
             MOVE,
             WORLDSTATE,
-            ADDPLAYER
+            ADDPLAYER,
+            JOINED
         }
         enum MoveDirection
         {
-            MOVE,
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT,
+            UPLEFT,
+            UPRIGHT,
+            DOWNLEFT,
+            DOWNRIGHT,
             NONE
         }
         public void SendGameState()
@@ -51,10 +60,40 @@ namespace The_Dream.Classes
         private static void GetInputAndSendItToServer()
         {
             MoveDirection MoveDir = new MoveDirection();
-            if (InputManager.Instance.KeyDown(Keys.Up) == true || InputManager.Instance.KeyDown(Keys.Down) == true || InputManager.Instance.KeyDown(Keys.Left) || InputManager.Instance.KeyDown(Keys.Right))
+            MoveDir = MoveDirection.NONE;
+            if (InputManager.Instance.KeyDown(Keys.Up))
             {
-                MoveDir = MoveDirection.MOVE;
+                MoveDir = MoveDirection.UP;
             }
+            if (InputManager.Instance.KeyDown(Keys.Down))
+            {
+                MoveDir = MoveDirection.DOWN;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Left))
+            {
+                MoveDir = MoveDirection.LEFT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Right))
+            {
+                MoveDir = MoveDirection.RIGHT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Up) && InputManager.Instance.KeyDown(Keys.Left))
+            {
+                MoveDir = MoveDirection.UPLEFT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Up) && InputManager.Instance.KeyDown(Keys.Right))
+            {
+                MoveDir = MoveDirection.UPRIGHT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Left))
+            {
+                MoveDir = MoveDirection.DOWNLEFT;
+            }
+            if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Right))
+            {
+                MoveDir = MoveDirection.DOWNRIGHT;
+            }
+
             if (InputManager.Instance.KeyDown(Keys.Q))
             {
                 client.Disconnect("bye bye");
@@ -73,7 +112,6 @@ namespace The_Dream.Classes
                 client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered);
                 MoveDir = MoveDirection.NONE;
             }
-            MoveDir = MoveDirection.NONE;
         }
         public ClientServer()
         {
@@ -143,6 +181,18 @@ namespace The_Dream.Classes
                             {
                                 if (server.ConnectionsCount == GameState.Count)
                                 {
+                                    NetOutgoingMessage joinMsg = server.CreateMessage();
+                                    joinMsg.Write((byte)PacketTypes.JOINED);
+                                    int count = GameState.Count - 1;
+                                    joinMsg.Write(count);
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        Player temp = new Player();
+                                        temp = GameState[i];
+                                        joinMsg.WriteAllProperties(temp);
+                                    }
+                                    Thread.Sleep(100);
+                                    server.SendMessage(joinMsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
                                     NetOutgoingMessage outmsg = server.CreateMessage();
                                     outmsg.Write((byte)PacketTypes.ADDPLAYER);
                                     outmsg.WriteAllProperties(player);
@@ -162,7 +212,47 @@ namespace The_Dream.Classes
                                     continue;
                                 }
                                 Player temp = p;
-                                playerUpdate.Update(gameTime, ref temp);
+                                temp.VelocityX = 0;
+                                temp.VelocityY = 0;
+                                byte b = ServerInc.ReadByte();
+                                if (b == (byte)MoveDirection.UP)
+                                {
+                                    temp.VelocityY = -10;
+                                }
+                                if (b == (byte)MoveDirection.DOWN)
+                                {
+                                    temp.VelocityY = 10;
+                                }
+                                if (b == (byte)MoveDirection.LEFT)
+                                {
+                                    temp.VelocityX = -10;
+                                }
+                                if (b == (byte)MoveDirection.RIGHT)
+                                {
+                                    temp.VelocityX = 10;
+                                }
+                                if (b == (byte)MoveDirection.UPLEFT)
+                                {
+                                    temp.VelocityX = -10;
+                                    temp.VelocityY = -10;
+                                }
+                                if (b == (byte)MoveDirection.UPRIGHT)
+                                {
+                                    temp.VelocityX = 10;
+                                    temp.VelocityY = -10;
+                                }
+                                if (b == (byte)MoveDirection.DOWNLEFT)
+                                {
+                                    temp.VelocityX = -10;
+                                    temp.VelocityY = 10;
+                                }
+                                if (b == (byte)MoveDirection.DOWNRIGHT)
+                                {
+                                    temp.VelocityX = 10;
+                                    temp.VelocityY = 10;
+                                }
+                                temp.X += temp.VelocityX;
+                                temp.Y += temp.VelocityY;
                                 SendGameState();
                                 break;
                             }
@@ -195,7 +285,6 @@ namespace The_Dream.Classes
                             ClientInc.ReadAllProperties(temp);
                             temp.LoadContent();
                             PlayerList.Add(temp);
-                            PlayerID = PlayerList.Count - 1;
                         }
                         else if (b == (byte)PacketTypes.WORLDSTATE)
                         {
@@ -204,6 +293,18 @@ namespace The_Dream.Classes
                             foreach (Player p in PlayerList)
                             {
                                 ClientInc.ReadAllProperties(p);
+                            }
+                        }
+                        else if (b == (byte)PacketTypes.JOINED)
+                        {
+                            PlayerList.Clear();
+                            int count = ClientInc.ReadInt32();
+                            for (int i = 0; i < count; i ++)
+                            {
+                                Player temp = new Player();
+                                ClientInc.ReadAllProperties(temp);
+                                temp.LoadContent();
+                                PlayerList.Add(temp);
                             }
                         }
                         break;
