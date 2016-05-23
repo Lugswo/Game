@@ -87,7 +87,7 @@ namespace The_Dream.Classes
             ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             server = new NetServer(ServerConfig);
             server.Start();
-            hostip = "localhost";
+            hostip = "10.65.30.213";
             NetPeerConfiguration ClientConfig = new NetPeerConfiguration("game");
             client = new NetClient(ClientConfig);
             ClientOut = client.CreateMessage();
@@ -121,23 +121,10 @@ namespace The_Dream.Classes
                 {
                     if (ScreenManager.Instance.IsTransitioning == false)
                     {
+                        server.Shutdown("bye bye");
                         ScreenManager.Instance.ChangeScreens("TitleScreen");
                     }
                 }
-            }
-            if (addedNewPlayer == false && server.ConnectionsCount > 0)
-            {
-                NetOutgoingMessage outmsg = server.CreateMessage();
-                Player temp = GameState[GameState.Count - 1];
-                int count = GameState.Count;
-                outmsg.Write((byte)PacketTypes.ADDPLAYER);
-                outmsg.Write(count);
-                foreach (Player p in GameState)
-                {
-                    outmsg.WriteAllProperties(p);
-                }
-                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-                addedNewPlayer = true;
             }
             if ((ServerInc = server.ReadMessage()) != null)
             {
@@ -152,6 +139,17 @@ namespace The_Dream.Classes
                             player.Connection = ServerInc.SenderConnection;
                             GameState.Add(player);
                             addedNewPlayer = false;
+                            while (addedNewPlayer == false)
+                            {
+                                if (server.ConnectionsCount == GameState.Count)
+                                {
+                                    NetOutgoingMessage outmsg = server.CreateMessage();
+                                    outmsg.Write((byte)PacketTypes.ADDPLAYER);
+                                    outmsg.WriteAllProperties(player);
+                                    server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                                    addedNewPlayer = true;
+                                }
+                            }
                         }
                         break;
                     case NetIncomingMessageType.Data:
@@ -193,16 +191,11 @@ namespace The_Dream.Classes
                         byte b = ClientInc.ReadByte();
                         if (b == (byte)PacketTypes.ADDPLAYER)
                         {
-                            int count = ClientInc.ReadInt32();
-                            for (int i = 0; i < count; i++)
-                            {
-                                Player temp = new Player();
-                                ClientInc.ReadAllProperties(temp);
-                                temp.LoadContent();
-                                PlayerList.Add(temp);
-                            }
+                            Player temp = new Player();
+                            ClientInc.ReadAllProperties(temp);
+                            temp.LoadContent();
+                            PlayerList.Add(temp);
                             PlayerID = PlayerList.Count - 1;
-                            addedNewPlayer = true;
                         }
                         else if (b == (byte)PacketTypes.WORLDSTATE)
                         {

@@ -55,6 +55,22 @@ namespace The_Dream.Classes
             {
                 PlayerImage.IsActive = false;
             }
+            if (VelocityY > 0)
+            {
+                PlayerImage.spriteSheetEffect.CurrentFrame.Y = 0;
+            }
+            if (VelocityY < 0)
+            {
+                PlayerImage.spriteSheetEffect.CurrentFrame.Y = 1;
+            }
+            if (VelocityX > 0)
+            {
+                PlayerImage.spriteSheetEffect.CurrentFrame.Y = 2;
+            }
+            if (VelocityX < 0)
+            {
+                PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
+            }
             PlayerImage.Update(gameTime);
         }
     }
