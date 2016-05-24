@@ -55,7 +55,7 @@ namespace The_Dream.Classes
             {
                 outmsg.WriteAllProperties(p);
             }
-            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.Unreliable, 0);
         }
         private static void GetInputAndSendItToServer()
         {
@@ -125,7 +125,7 @@ namespace The_Dream.Classes
             ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             server = new NetServer(ServerConfig);
             server.Start();
-            hostip = "10.65.30.213";
+            hostip = "localhost";
             NetPeerConfiguration ClientConfig = new NetPeerConfiguration("game");
             client = new NetClient(ClientConfig);
             ClientOut = client.CreateMessage();
@@ -212,9 +212,9 @@ namespace The_Dream.Classes
                                     continue;
                                 }
                                 Player temp = p;
+                                byte b = ServerInc.ReadByte();
                                 temp.VelocityX = 0;
                                 temp.VelocityY = 0;
-                                byte b = ServerInc.ReadByte();
                                 if (b == (byte)MoveDirection.UP)
                                 {
                                     temp.VelocityY = -10;

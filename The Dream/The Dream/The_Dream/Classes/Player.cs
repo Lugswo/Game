@@ -71,6 +71,8 @@ namespace The_Dream.Classes
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
             }
+            VelocityX = 0;
+            VelocityY = 0;
             PlayerImage.Update(gameTime);
         }
     }
