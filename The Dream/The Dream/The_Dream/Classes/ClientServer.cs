@@ -168,7 +168,7 @@ namespace The_Dream.Classes
                     }
                 }
             }
-            if ((ServerInc = server.ReadMessage()) != null)
+            while ((ServerInc = server.ReadMessage()) != null)
             {
                 switch (ServerInc.MessageType)
                 {
@@ -217,6 +217,8 @@ namespace The_Dream.Classes
                                 }
                                 int X = ServerInc.ReadInt32();
                                 int Y = ServerInc.ReadInt32();
+                                p.VelocityX = X;
+                                p.VelocityY = Y;
                                 p.X += X;
                                 p.Y += Y;
                                 SendGameState();
@@ -239,7 +241,7 @@ namespace The_Dream.Classes
                         break;
                 }
             }
-            if ((ClientInc = client.ReadMessage()) != null)
+            while ((ClientInc = client.ReadMessage()) != null)
             {
                 switch (ClientInc.MessageType)
                 {
