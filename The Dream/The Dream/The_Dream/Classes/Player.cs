@@ -51,6 +51,22 @@ namespace The_Dream.Classes
         {
             PlayerImage.IsActive = true;
             PlayerImage.Position = new Vector2(X, Y);
+            if (PlayerImage.Position.X < 0)
+            {
+                AreaX--;
+            }
+            if (PlayerImage.Position.X > Game1.ScreenDimensions.ScreenWidth)
+            {
+                AreaX++;
+            }
+            if (PlayerImage.Position.Y < 0)
+            {
+                AreaY++;
+            }
+            if (PlayerImage.Position.Y > Game1.ScreenDimensions.ScreenHeight)
+            {
+                AreaY--;
+            }
             if (VelocityX == 0 && VelocityY == 0)
             {
                 PlayerImage.IsActive = false;

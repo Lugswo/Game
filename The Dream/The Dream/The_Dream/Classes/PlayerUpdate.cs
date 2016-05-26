@@ -26,9 +26,11 @@ namespace The_Dream.Classes
         public List<Rectangle> AttackHitboxes;
         public string Name;
         int Attacks, prevY;
+        public int Height, Width;
         public PlayerUpdate()
         {
-
+            Width = 54;
+            Height = 64;
         }
         public void GetReferences(Map GameMap, SoundManager RealSounds)
         {
@@ -65,50 +67,98 @@ namespace The_Dream.Classes
             LevelUp.UnloadContent();
             HavePoints.UnloadContent();
         }
-        public void Update(GameTime gameTime, ref Player player)
+        public void Update(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
         {
-            if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Up))
-            {
-                player.VelocityY = 0;
-            }
-            else if (InputManager.Instance.KeyDown(Keys.Down))
+            if (Down == true)
             {
                 player.VelocityY = 10;
             }
-            else if (InputManager.Instance.KeyDown(Keys.Up))
+            else if (Up == true)
             {
                 player.VelocityY = -10;
             }
-            else
-            {
-                player.VelocityY = 0;
-            }
-            if (InputManager.Instance.KeyDown(Keys.Right) && InputManager.Instance.KeyDown(Keys.Left))
-            {
-                player.VelocityX = 0;
-            }
-            else if (InputManager.Instance.KeyDown(Keys.Right))
+            if (Right == true)
             {
                 player.VelocityX = 10;
             }
-            else if (InputManager.Instance.KeyDown(Keys.Left))
+            else if (Left == true)
             {
                 player.VelocityX = -10;
             }
-            else
-            {
-                player.VelocityX = 0;
-            }
-            if (InputManager.Instance.KeyUp(Keys.Down) && InputManager.Instance.KeyUp(Keys.Up))
+            if (Up == false && Down == false)
             {
                 player.VelocityY = 0;
             }
-            if (InputManager.Instance.KeyUp(Keys.Left) && InputManager.Instance.KeyUp(Keys.Right))
+            if (Left == false && Right == false)
             {
                 player.VelocityX = 0;
             }
             player.X += player.VelocityX;
             player.Y += player.VelocityY;
+            if (map.Area[player.AreaX, player.AreaY + 1] != null)
+            {
+                if (player.Y > Game1.ScreenDimensions.ScreenHeight - Height)
+                {
+                    player.AreaY++;
+                    player.Y = 0;
+                }
+            }
+            else
+            {
+                if (player.Y > Game1.ScreenDimensions.ScreenHeight - Height)
+                {
+                    player.Y = Game1.ScreenDimensions.ScreenHeight - Height;
+                    player.VelocityY = 0;
+                }
+            }
+            if (map.Area[player.AreaX, player.AreaY - 1] != null)
+            {
+                if (player.Y < 0)
+                {
+                    player.AreaY--;
+                    player.Y = Game1.ScreenDimensions.ScreenHeight;
+                }
+            }
+            else
+            {
+                if (player.Y < 0)
+                {
+                    player.Y = 0;
+                    player.VelocityY = 0;
+                }
+            }
+            if (map.Area[player.AreaX + 1, player.AreaY] != null)
+            {
+                if (player.X > Game1.ScreenDimensions.ScreenWidth - Width)
+                {
+                    player.AreaX++;
+                    player.X = 0;
+                }
+            }
+            else
+            {
+                if (player.X > Game1.ScreenDimensions.ScreenWidth - Width)
+                {
+                    player.X = Game1.ScreenDimensions.ScreenWidth - Width;
+                    player.VelocityY = 0;
+                }
+            }
+            if (map.Area[player.AreaX - 1, player.AreaY] != null)
+            {
+                if (player.X < 0)
+                {
+                    player.AreaX--;
+                    player.X = Game1.ScreenDimensions.ScreenWidth - Width;
+                }
+            }
+            else
+            {
+                if (player.X < 0)
+                {
+                    player.X = 0;
+                    player.VelocityY = 0;
+                }
+            }
         //    if (map.Pause == false)
         //    {
         //        LevelUp.Position.X = image.Position.X - ((LevelUp.spriteSheetEffect.FrameWidth - image.spriteSheetEffect.FrameWidth) / 2);

@@ -8,7 +8,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Fonts\Secret of Mana.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>SplashScreen\Screen.jpg</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Screen.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>ScreenManager\FadeImage.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\ScreenManager\FadeImage.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Backgrounds\Map1\Map1.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Map1\Map1.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Textures\Tree.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Textures\Tree.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Backgrounds\Blanks\Black.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Blanks\Black.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Characters\Sprites\Player\Player.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\Player.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Monsters\TestMonster.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Effects\Level Up.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Effects\Level Up.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Monsters\TestMonster2.png</Source>
@@ -89,7 +89,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster2.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Stats.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Stats.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Equipment.png</Source>
@@ -107,7 +107,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Equipment.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Inventory.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Inventory.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Map.png</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Map.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Relics.png</Source>
@@ -134,7 +134,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Relics.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Save.png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Save.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Settings.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Settings.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Skills.png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Skills.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\Beastiary.png</Source>
@@ -170,7 +170,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Beastiary.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InBeastiary.png</Source>
@@ -179,7 +179,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InBeastiary.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InEquipment.png</Source>
@@ -188,7 +188,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InEquipment.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InInventory.png</Source>
@@ -197,7 +197,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InInventory.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InMap.png</Source>
@@ -206,7 +206,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InMap.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InRelics.png</Source>
@@ -215,7 +215,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InRelics.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InSave.png</Source>
@@ -224,7 +224,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSave.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InSettings.png</Source>
@@ -233,7 +233,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSettings.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InSkills.png</Source>
@@ -242,7 +242,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSkills.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Menu\InStats.png</Source>
@@ -251,7 +251,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InStats.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Music\Megalovania.mp3</Source>
@@ -260,7 +260,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Music\Megalovania.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Sound Effects\Attack.mp3</Source>
@@ -269,7 +269,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Sound Effects\Attack.xnb</Output>
-      <Time>2016-05-23T20:09:10-07:00</Time>
+      <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

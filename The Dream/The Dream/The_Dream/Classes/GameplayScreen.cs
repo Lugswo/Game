@@ -20,12 +20,19 @@ namespace The_Dream.Classes
         CharacterCreationScreen characterCreate = new CharacterCreationScreen();
         SoundManager soundManager = new SoundManager();
         ClientServer clientServer = new ClientServer();
+        Player player = new Player();
+        public GameplayScreen()
+        {
+
+        }
         public override void LoadContent()
         {
             base.LoadContent();
             clientServer.LoadContent();
+            XmlManager<Player> playerLoader = new XmlManager<Player>();
+            player = playerLoader.Load("Load/Gameplay/Savefile.xml");
             XmlManager<Map> mapLoader = new XmlManager<Map>();
-            map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[map.AreaX, map.AreaY] + "/Background.xml");
+            map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             map.LoadContent();
             //XmlManager<Player> playerLoader = new XmlManager<Player>();
             //player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
@@ -51,6 +58,7 @@ namespace The_Dream.Classes
         {
             base.UnloadContent();
             clientServer.UnloadContent();
+            map.UnloadContent();
             //map.UnloadContent();
             //player.UnloadContent();
             //gameMenu.UnloadContent();
@@ -71,6 +79,7 @@ namespace The_Dream.Classes
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+            map.Draw(spriteBatch);
             clientServer.Draw(spriteBatch);
             //map.Draw(spriteBatch);
             //updateMonsters.Draw(spriteBatch);

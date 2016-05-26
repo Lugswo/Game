@@ -12,6 +12,7 @@ namespace The_Dream.Classes
     public class Map
     {
         public PlayerUpdate player;
+        public Image fadeImage;
         public Vector2 Moved, prevMoved;
         public Rectangle DeadZone, Screen, OriginalDeadZone;
         public SoundManager soundManager;
@@ -26,39 +27,46 @@ namespace The_Dream.Classes
         public int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public int AreaX, AreaY;
         List<int> x, y;
+        public bool IsTransitioning;
         public bool Vertical, Horizontal, EdgeVertical, EdgeHorizontal, Right, Left, Up, Down, Column, Row, Pause, NewMap, ExitTop, ExitBottom, ExitRight, ExitLeft, SongPlaying;
         public Map()
         {
             Moved = Vector2.Zero;
             Screen = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
             Vertical = Horizontal = EdgeHorizontal = EdgeVertical = Pause = false;
-            Area = new string[1, 1];
-            Area[0, 0] = "Test Map";
+            Area = new string[4, 3];
+            Area[1, 1] = "Test Map";
+            Area[2, 1] = "Right Map";
             NewMap = SongPlaying = false;
+            fadeImage = new Image();
+            fadeImage.Alpha = 0;
+            fadeImage.Path = "ScreenManager/FadeImage";
+            fadeImage.Effects = "fadeEffect";
+            fadeImage.Scale = new Vector2(10, 10);
+            fadeImage.LoadContent();
         }
-        void NewArea()
+        public void NewArea(GameTime gameTime, Player player, ref Map map)
         {
-            if (ExitBottom == true)
+            fadeImage.IsActive = true;
+            fadeImage.Update(gameTime);
+            if (fadeImage.Alpha == 1.0f)
             {
-
+                foreach (MapSprite m in map.Maps)
+                {
+                    m.image.UnloadContent();
+                }
+                XmlManager<Map> mapLoader = new XmlManager<Map>();
+                map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             }
-            if (ExitTop == true)
+            else if (fadeImage.Alpha == 0.0f)
             {
-
-            }
-            if (ExitRight == true)
-            {
-
-            }
-            if (ExitLeft == true)
-            {
-
+                fadeImage.IsActive = false;
             }
         }
         public void GetReferences(PlayerUpdate RealPlayer, SoundManager RealSounds)
         {
-            player = RealPlayer;
-            soundManager = RealSounds;
+            //player = RealPlayer;
+            //soundManager = RealSounds;
         }
         public void LoadContent()
         {
@@ -96,119 +104,119 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime)
         {
-            if (ScreenManager.Instance.IsTransitioning == false)
-            {
-                if (SongPlaying == false)
-                {
-                    SongPlaying = true;
-                    soundManager.Music["Megalovania"].soundEffect.Play();
-                }
-            }
-            if (Pause == false)
-            {
-                EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
-                prevMoved = Moved;
-                Moved -= player.Velocity;
-                DeadZone.X = (int)-Moved.X + OriginalDeadZone.X;
-                DeadZone.Width = OriginalDeadZone.Width;
-                DeadZone.Y = (int)-Moved.Y + OriginalDeadZone.Y;
-                DeadZone.Height = OriginalDeadZone.Height;
-                if (!(DeadZone.Contains(Screen)))
-                {
-                    if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
-                    {
-                        Vertical = true;
-                        foreach (MapSprite map in Maps)
-                        {
-                            Moved.Y = prevMoved.Y;
-                            map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
-                        }
-                    }
-                    if (Screen.X < DeadZone.X || Screen.Width > DeadZone.Width - Moved.X)
-                    {
-                        Horizontal = true;
-                        foreach (MapSprite map in Maps)
-                        {
-                            Moved.X = prevMoved.X;
-                            map.image.Position.X = map.OriginalPosition.X - Moved.X;
-                        }
-                    }
-                }
-                if (NewMap == true)
-                {
-                    NewArea();
-                    SongPlaying = false;
-                }
-                foreach (MapSprite map in Blanks)
-                {
-                    map.HitBox.X = (int)-Moved.X + (int)map.OriginalPosition.X;
-                    map.HitBox.Y = (int)-Moved.Y + (int)map.OriginalPosition.Y;
-                    if ((player.HitBox.Left - 1 > map.HitBox.Left && player.HitBox.Left - 1 < map.HitBox.Right) || (player.HitBox.Right - 1 > map.HitBox.Left && player.HitBox.Right - 1 < map.HitBox.Right))
-                    {
-                        Column = true;
-                    }
-                    if ((player.HitBox.Top + 1 > map.HitBox.Top && player.HitBox.Top + 1 < map.HitBox.Bottom) || (player.HitBox.Bottom - 5 > map.HitBox.Top && player.HitBox.Bottom - 5 < map.HitBox.Bottom))
-                    {
-                        Row = true;
-                    }
-                    if (Column == true)
-                    {
-                        if (player.HitBox.Top <= map.HitBox.Bottom)
-                        {
-                            Up = true;
-                        }
-                        if (player.HitBox.Bottom >= map.HitBox.Top)
-                        {
-                            Down = true;
-                        }
-                    }
-                    if (Row == true)
-                    {
-                        if (player.HitBox.Left <= map.HitBox.Right)
-                        {
-                            Left = true;
-                        }
-                        if (player.HitBox.Right >= map.HitBox.Left)
-                        {
-                            Right = true;
-                        }
-                    }
-                    if (Column == true)
-                    {
-                        if (Up == true && Down == true)
-                        {
-                            EdgeVertical = true;
-                            Moved.Y = prevMoved.Y;
-                        }
-                    }
-                    if (Row == true)
-                    {
-                        if (Right == true && Left == true)
-                        {
-                            EdgeHorizontal = true;
-                            Moved.X = prevMoved.X;
-                        }
-                    }
-                }
-                foreach (MapSprite map in Maps)
-                {
-                    map.image.Update(gameTime);
-                }
-                if (Horizontal == false && EdgeHorizontal == false && player.Attacking == false)
-                {
-                    foreach (MapSprite map in Maps)
-                    {
-                        map.image.Position.X = map.OriginalPosition.X - Moved.X;
-                    }
-                }
-                if (Vertical == false && EdgeVertical == false && player.Attacking == false)
-                {
-                    foreach (MapSprite map in Maps)
-                    {
-                        map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
-                    }
-                }
-            }
+        //    if (ScreenManager.Instance.IsTransitioning == false)
+        //    {
+        //        if (SongPlaying == false)
+        //        {
+        //            SongPlaying = true;
+        //            soundManager.Music["Megalovania"].soundEffect.Play();
+        //        }
+        //    }
+        //    if (Pause == false)
+        //    {
+        //        EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
+        //        prevMoved = Moved;
+        //        Moved -= player.Velocity;
+        //        DeadZone.X = (int)-Moved.X + OriginalDeadZone.X;
+        //        DeadZone.Width = OriginalDeadZone.Width;
+        //        DeadZone.Y = (int)-Moved.Y + OriginalDeadZone.Y;
+        //        DeadZone.Height = OriginalDeadZone.Height;
+        //        if (!(DeadZone.Contains(Screen)))
+        //        {
+        //            if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
+        //            {
+        //                Vertical = true;
+        //                foreach (MapSprite map in Maps)
+        //                {
+        //                    Moved.Y = prevMoved.Y;
+        //                    map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
+        //                }
+        //            }
+        //            if (Screen.X < DeadZone.X || Screen.Width > DeadZone.Width - Moved.X)
+        //            {
+        //                Horizontal = true;
+        //                foreach (MapSprite map in Maps)
+        //                {
+        //                    Moved.X = prevMoved.X;
+        //                    map.image.Position.X = map.OriginalPosition.X - Moved.X;
+        //                }
+        //            }
+        //        }
+        //        if (NewMap == true)
+        //        {
+        //            NewArea();
+        //            SongPlaying = false;
+        //        }
+        //        foreach (MapSprite map in Blanks)
+        //        {
+        //            map.HitBox.X = (int)-Moved.X + (int)map.OriginalPosition.X;
+        //            map.HitBox.Y = (int)-Moved.Y + (int)map.OriginalPosition.Y;
+        //            if ((player.HitBox.Left - 1 > map.HitBox.Left && player.HitBox.Left - 1 < map.HitBox.Right) || (player.HitBox.Right - 1 > map.HitBox.Left && player.HitBox.Right - 1 < map.HitBox.Right))
+        //            {
+        //                Column = true;
+        //            }
+        //            if ((player.HitBox.Top + 1 > map.HitBox.Top && player.HitBox.Top + 1 < map.HitBox.Bottom) || (player.HitBox.Bottom - 5 > map.HitBox.Top && player.HitBox.Bottom - 5 < map.HitBox.Bottom))
+        //            {
+        //                Row = true;
+        //            }
+        //            if (Column == true)
+        //            {
+        //                if (player.HitBox.Top <= map.HitBox.Bottom)
+        //                {
+        //                    Up = true;
+        //                }
+        //                if (player.HitBox.Bottom >= map.HitBox.Top)
+        //                {
+        //                    Down = true;
+        //                }
+        //            }
+        //            if (Row == true)
+        //            {
+        //                if (player.HitBox.Left <= map.HitBox.Right)
+        //                {
+        //                    Left = true;
+        //                }
+        //                if (player.HitBox.Right >= map.HitBox.Left)
+        //                {
+        //                    Right = true;
+        //                }
+        //            }
+        //            if (Column == true)
+        //            {
+        //                if (Up == true && Down == true)
+        //                {
+        //                    EdgeVertical = true;
+        //                    Moved.Y = prevMoved.Y;
+        //                }
+        //            }
+        //            if (Row == true)
+        //            {
+        //                if (Right == true && Left == true)
+        //                {
+        //                    EdgeHorizontal = true;
+        //                    Moved.X = prevMoved.X;
+        //                }
+        //            }
+        //        }
+        //        foreach (MapSprite map in Maps)
+        //        {
+        //            map.image.Update(gameTime);
+        //        }
+        //        if (Horizontal == false && EdgeHorizontal == false && player.Attacking == false)
+        //        {
+        //            foreach (MapSprite map in Maps)
+        //            {
+        //                map.image.Position.X = map.OriginalPosition.X - Moved.X;
+        //            }
+        //        }
+        //        if (Vertical == false && EdgeVertical == false && player.Attacking == false)
+        //        {
+        //            foreach (MapSprite map in Maps)
+        //            {
+        //                map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
+        //            }
+        //        }
+        //    }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

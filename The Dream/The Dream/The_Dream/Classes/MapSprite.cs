@@ -12,5 +12,9 @@ namespace The_Dream.Classes
         public Image image;
         public Rectangle HitBox;
         public Vector2 OriginalPosition;
+        public MapSprite()
+        {
+
+        }
     }
 }

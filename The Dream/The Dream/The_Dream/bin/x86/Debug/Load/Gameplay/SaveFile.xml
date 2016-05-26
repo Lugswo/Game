@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Player>
-  <Name>sp</Name>
+  <Name>Spencer</Name>
   <Strength>5</Strength>
   <Defense>5</Defense>
   <Dexterity>5</Dexterity>
@@ -12,6 +12,8 @@
   <Energy>100</Energy>
   <NextLevel>100</NextLevel>
   <StatPoints>0</StatPoints>
+  <AreaX>1</AreaX>
+  <AreaY>1</AreaY>
   <PlayerImage>
     <Path>Gameplay/Characters/Sprites/Player/Player</Path>
     <Effects>SpriteSheetEffect</Effects>

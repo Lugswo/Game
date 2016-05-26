@@ -12,6 +12,8 @@
   <Energy>100</Energy>
   <NextLevel>100</NextLevel>
   <StatPoints>0</StatPoints>
+  <AreaX>1</AreaX>
+  <AreaY>1</AreaY>
   <PlayerImage>
     <Path>Gameplay/Characters/Sprites/Player/Player</Path>
     <Effects>SpriteSheetEffect</Effects>

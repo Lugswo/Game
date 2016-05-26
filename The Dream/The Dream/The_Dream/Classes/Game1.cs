@@ -11,6 +11,11 @@ namespace The_Dream.Classes
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static class ScreenDimensions
+        {
+            public static int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            public static int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        }
 
         public Game1()
         {
@@ -81,7 +86,7 @@ namespace The_Dream.Classes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();

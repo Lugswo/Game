@@ -48,54 +48,51 @@ namespace The_Dream.Classes
             {
                 outmsg.WriteAllProperties(p);
             }
-            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.Unreliable, 0);
+            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
         }
         public void GetInput()
         {
             MoveDirection MoveDir = new MoveDirection();
             MoveDir = MoveDirection.NONE;
-            int X, Y;
+            bool Up, Down, Left, Right;
+            Up = Down = Left = Right = false;
             if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Up))
             {
-                Y = 0;
+                Up = false;
+                Down = false;
             }
             else if (InputManager.Instance.KeyDown(Keys.Down))
             {
-                Y = 10;
+                Down = true;
             }
             else if (InputManager.Instance.KeyDown(Keys.Up))
             {
-                Y = -10;
+                Up = true;
             }
             else
             {
-                Y = 0;
+                Up = false;
+                Down = false;
             }
             if (InputManager.Instance.KeyDown(Keys.Right) && InputManager.Instance.KeyDown(Keys.Left))
             {
-                X = 0;
+                Left = false;
+                Right = false;
             }
             else if (InputManager.Instance.KeyDown(Keys.Right))
             {
-                X = 10;
+                Right = true;
             }
             else if (InputManager.Instance.KeyDown(Keys.Left))
             {
-                X = -10;
+                Left = true;
             }
             else
             {
-                X = 0;
+                Left = false;
+                Right = false;
             }
-            if (InputManager.Instance.KeyUp(Keys.Down) && InputManager.Instance.KeyUp(Keys.Up))
-            {
-                Y = 0;
-            }
-            if (InputManager.Instance.KeyUp(Keys.Left) && InputManager.Instance.KeyUp(Keys.Right))
-            {
-                X = 0;
-            }
-            if (X != 0 || Y != 0)
+            if (Up == true || Down == true || Left == true || Right == true)
             {
                 MoveDir = MoveDirection.MOVE;
             }
@@ -112,8 +109,10 @@ namespace The_Dream.Classes
             {
                 NetOutgoingMessage outmsg = client.CreateMessage();
                 outmsg.Write((byte)PacketTypes.MOVE);
-                outmsg.Write(X);
-                outmsg.Write(Y);
+                outmsg.Write(Up);
+                outmsg.Write(Down);
+                outmsg.Write(Left);
+                outmsg.Write(Right);
                 client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
             }
         }
@@ -215,12 +214,12 @@ namespace The_Dream.Classes
                                 {
                                     continue;
                                 }
-                                int X = ServerInc.ReadInt32();
-                                int Y = ServerInc.ReadInt32();
-                                p.VelocityX = X;
-                                p.VelocityY = Y;
-                                p.X += X;
-                                p.Y += Y;
+                                Player temp = p;
+                                bool Up = ServerInc.ReadBoolean();
+                                bool Down = ServerInc.ReadBoolean();
+                                bool Left = ServerInc.ReadBoolean();
+                                bool Right = ServerInc.ReadBoolean();
+                                playerUpdate.Update(gameTime, ref temp, Up, Down, Left, Right);
                                 SendGameState();
                                 break;
                             }
@@ -274,7 +273,7 @@ namespace The_Dream.Classes
                                 temp.LoadContent();
                                 PlayerList.Add(temp);
                             }
-                            PlayerID = count + 1;
+                            PlayerID = count;
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
@@ -294,7 +293,10 @@ namespace The_Dream.Classes
         {
             foreach (Player p in PlayerList)
             {
-                p.PlayerImage.Draw(spriteBatch);
+                if (PlayerList[PlayerID].AreaX == p.AreaX && PlayerList[PlayerID].AreaY == p.AreaY)
+                {
+                    p.PlayerImage.Draw(spriteBatch);
+                }
             }
         }
     }
