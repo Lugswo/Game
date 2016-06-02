@@ -32,10 +32,9 @@ namespace The_Dream.Classes
             Width = 54;
             Height = 64;
         }
-        public void GetReferences(Map GameMap, SoundManager RealSounds)
+        public void GetReferences(Map GameMap)
         {
             map = GameMap;
-            soundManager = RealSounds;
         }
         public void LoadContent()
         {
@@ -67,8 +66,9 @@ namespace The_Dream.Classes
             LevelUp.UnloadContent();
             HavePoints.UnloadContent();
         }
-        public void Update(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
+        public void Move(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
         {
+            map.Update(gameTime, player);
             if (Down == true)
             {
                 player.VelocityY = 10;
@@ -93,14 +93,31 @@ namespace The_Dream.Classes
             {
                 player.VelocityX = 0;
             }
-            player.X += player.VelocityX;
-            player.Y += player.VelocityY;
+
+            if (map.Horizontal == true)
+            {
+                player.X += player.VelocityX;
+            }
+            else
+            {
+                map.HorizontalMove(player.VelocityX);
+            }
+            if (map.Vertical == true)
+            {
+                player.Y += player.VelocityY;
+            }
+            else
+            {
+                map.VerticalMove(player.VelocityY);
+            }
+
             if (map.Area[player.AreaX, player.AreaY + 1] != null)
             {
                 if (player.Y > Game1.ScreenDimensions.ScreenHeight - Height)
                 {
                     player.AreaY++;
                     player.Y = 0;
+                    player.newArea = true;
                 }
             }
             else
@@ -117,6 +134,7 @@ namespace The_Dream.Classes
                 {
                     player.AreaY--;
                     player.Y = Game1.ScreenDimensions.ScreenHeight;
+                    player.newArea = true;
                 }
             }
             else
@@ -133,6 +151,7 @@ namespace The_Dream.Classes
                 {
                     player.AreaX++;
                     player.X = 0;
+                    player.newArea = true;
                 }
             }
             else
@@ -149,6 +168,7 @@ namespace The_Dream.Classes
                 {
                     player.AreaX--;
                     player.X = Game1.ScreenDimensions.ScreenWidth - Width;
+                    player.newArea = true;
                 }
             }
             else
@@ -175,16 +195,6 @@ namespace The_Dream.Classes
         //        AttackHitboxes[1] = new Rectangle((int)image.Position.X, (int)image.Position.Y - image.spriteSheetEffect.FrameHeight / 2, image.spriteSheetEffect.FrameWidth, image.spriteSheetEffect.FrameHeight);
         //        AttackHitboxes[2] = new Rectangle((int)image.Position.X + image.spriteSheetEffect.FrameWidth / 2, (int)image.Position.Y, image.spriteSheetEffect.FrameWidth, image.spriteSheetEffect.FrameHeight);
         //        AttackHitboxes[3] = new Rectangle((int)image.Position.X - image.spriteSheetEffect.FrameWidth / 2, (int)image.Position.Y, image.spriteSheetEffect.FrameWidth, image.spriteSheetEffect.FrameHeight);
-        //        if (map.Horizontal == true)
-        //        {
-        //            PrevPlayerMoved.X = PlayerMoved.X;
-        //            PlayerMoved.X += Velocity.X;
-        //        }
-        //        if (map.Vertical == true)
-        //        {
-        //            PrevPlayerMoved.Y = PlayerMoved.Y;
-        //            PlayerMoved.Y += Velocity.Y;
-        //        }
         //        if (EXP >= NextLevel)
         //        {
         //            EXP = 0;

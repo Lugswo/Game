@@ -9,7 +9,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Spla
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\ScreenManager\FadeImage.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\ScreenManager.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\TitleMenu.xml
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\TestMenu.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Player.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Textures\Tree.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Map1\Map1.xnb
@@ -188,7 +187,6 @@ C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\L
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Test Map\Textures.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Player.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Sound.xml
-C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\TestMenu.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\TitleMenu.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\ScreenManager.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\SplashScreen.xml
@@ -228,3 +226,11 @@ C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\T
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.pdb
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\IPandHost.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\IPandHost.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb

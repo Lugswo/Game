@@ -74,7 +74,7 @@ namespace The_Dream.Classes
         }
         public void DespawnMonster(Monster monster)
         {
-            map.player.EXP += monster.EXP;
+            //map.player.EXP += monster.EXP;
             monster.IsAlive = false;
             monster.UnloadContent();
         }
@@ -151,16 +151,16 @@ namespace The_Dream.Classes
                     }
                     Entered = false;
                 }
-                if (map.player.Attacking == true)
-                {
-                    foreach (Monster monster in SpawnedMonsters)
-                    {
-                        if (map.player.AttackHitboxes[map.player.Direction].Intersects(monster.Hitbox))
-                        {
-                            monster.Health -= map.player.Strength;
-                        }
-                    }
-                }
+                //if (map.player.Attacking == true)
+                //{
+                //    foreach (Monster monster in SpawnedMonsters)
+                //    {
+                //        if (map.player.AttackHitboxes[map.player.Direction].Intersects(monster.Hitbox))
+                //        {
+                //            monster.Health -= map.player.Strength;
+                //        }
+                //    }
+                //}
                 foreach (Monster monster in SpawnedMonsters)
                 {
                     if (monster.Health <= 0)

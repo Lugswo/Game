@@ -86,8 +86,10 @@
     <Compile Include="Classes\ExitScreen.cs" />
     <Compile Include="Classes\ExpandEffect.cs" />
     <Compile Include="Classes\FadeEffect.cs" />
+    <Compile Include="Classes\InputIPScreen.cs" />
     <Compile Include="Classes\Monsters\TestMonster2.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\SetHostScreen.cs" />
     <Compile Include="Classes\SoundItem.cs" />
     <Compile Include="Classes\SoundManager.cs" />
     <Compile Include="Classes\UpdateGameMenu.cs" />
@@ -126,6 +128,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Load\Gameplay\Maps\Right Map\Background.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Load\Gameplay\Maps\Test Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -139,9 +144,12 @@
     <Content Include="Load\Gameplay\Sound.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Load\Menus\TestMenu.xml">
-      <SubType>Designer</SubType>
+    <Content Include="Load\IPandHost.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Load\Menus\MultiplayerScreen.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\Menus\TitleMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

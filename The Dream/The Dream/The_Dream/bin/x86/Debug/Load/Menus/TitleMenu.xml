@@ -3,27 +3,24 @@
   <Axis>Y</Axis>
   <Effects>FadeEffect</Effects>
   <Item>
-    <LinkType>Screen</LinkType>
-    <LinkID>GameplayScreen</LinkID>
+    <LinkType>Menu</LinkType>
+    <LinkID>Load/Menus/MultiplayerScreen.xml</LinkID>
     <image>
-      <Text>Continue</Text>
+      <Text>Multiplayer</Text>
     </image>
   </Item>
-  
   <Item>
-    <LinkType>Screen</LinkType>
-    <LinkID>CharacterCreationScreen</LinkID>
+    <LinkType>Menu</LinkType>
+    <LinkID>Load/Menus/SingleplayerScreen.xml</LinkID>
     <image>
-      <Text>New Game</Text>
+      <Text>Single Player</Text>
     </image>
-  </Item>
-  
+  </Item>  
   <Item>
     <image>
       <Text>Options</Text>
     </image>
   </Item>
-  
   <Item>
     <LinkType>Screen</LinkType>
     <LinkID>ExitScreen</LinkID>

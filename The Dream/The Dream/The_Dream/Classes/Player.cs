@@ -30,6 +30,7 @@ namespace The_Dream.Classes
         public int AreaY { get; set; }
         public int VelocityX { get; set; }
         public int VelocityY { get; set; }
+        public bool newArea = false;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Player()
@@ -50,7 +51,8 @@ namespace The_Dream.Classes
         public void Update(GameTime gameTime)
         {
             PlayerImage.IsActive = true;
-            PlayerImage.Position = new Vector2(X, Y);
+            PlayerImage.Position.X = X;
+            PlayerImage.Position.Y = Y;
             if (PlayerImage.Position.X < 0)
             {
                 AreaX--;

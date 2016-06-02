@@ -254,6 +254,15 @@
       <Time>2016-05-24T12:24:22-07:00</Time>
     </Item>
     <Item>
+      <Source>Gameplay\Backgrounds\Right Map\Right Map.png</Source>
+      <Name>Gameplay\Backgrounds\Right Map\Right Map</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb</Output>
+      <Time>2016-05-26T14:38:48.2103991-07:00</Time>
+    </Item>
+    <Item>
       <Source>Gameplay\Music\Megalovania.mp3</Source>
       <Name>Gameplay\Music\Megalovania</Name>
       <Importer>Mp3Importer</Importer>

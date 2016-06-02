@@ -11,8 +11,6 @@ namespace The_Dream.Classes
 {
     public class Map
     {
-        public PlayerUpdate player;
-        public Image fadeImage;
         public Vector2 Moved, prevMoved;
         public Rectangle DeadZone, Screen, OriginalDeadZone;
         public SoundManager soundManager;
@@ -38,35 +36,12 @@ namespace The_Dream.Classes
             Area[1, 1] = "Test Map";
             Area[2, 1] = "Right Map";
             NewMap = SongPlaying = false;
-            fadeImage = new Image();
-            fadeImage.Alpha = 0;
-            fadeImage.Path = "ScreenManager/FadeImage";
-            fadeImage.Effects = "fadeEffect";
-            fadeImage.Scale = new Vector2(10, 10);
-            fadeImage.LoadContent();
         }
-        public void NewArea(GameTime gameTime, Player player, ref Map map)
+        public void NewArea(int X, int Y)
         {
-            fadeImage.IsActive = true;
-            fadeImage.Update(gameTime);
-            if (fadeImage.Alpha == 1.0f)
-            {
-                foreach (MapSprite m in map.Maps)
-                {
-                    m.image.UnloadContent();
-                }
-                XmlManager<Map> mapLoader = new XmlManager<Map>();
-                map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
-            }
-            else if (fadeImage.Alpha == 0.0f)
-            {
-                fadeImage.IsActive = false;
-            }
-        }
-        public void GetReferences(PlayerUpdate RealPlayer, SoundManager RealSounds)
-        {
-            //player = RealPlayer;
-            //soundManager = RealSounds;
+            AreaX = X;
+            AreaY = Y;
+            IsTransitioning = true;
         }
         public void LoadContent()
         {
@@ -102,7 +77,7 @@ namespace The_Dream.Classes
                 map.image.UnloadContent();
             }
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Player player)
         {
         //    if (ScreenManager.Instance.IsTransitioning == false)
         //    {
@@ -114,34 +89,43 @@ namespace The_Dream.Classes
         //    }
         //    if (Pause == false)
         //    {
-        //        EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
-        //        prevMoved = Moved;
-        //        Moved -= player.Velocity;
-        //        DeadZone.X = (int)-Moved.X + OriginalDeadZone.X;
-        //        DeadZone.Width = OriginalDeadZone.Width;
-        //        DeadZone.Y = (int)-Moved.Y + OriginalDeadZone.Y;
-        //        DeadZone.Height = OriginalDeadZone.Height;
-        //        if (!(DeadZone.Contains(Screen)))
-        //        {
-        //            if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
-        //            {
-        //                Vertical = true;
-        //                foreach (MapSprite map in Maps)
-        //                {
-        //                    Moved.Y = prevMoved.Y;
-        //                    map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
-        //                }
-        //            }
-        //            if (Screen.X < DeadZone.X || Screen.Width > DeadZone.Width - Moved.X)
-        //            {
-        //                Horizontal = true;
-        //                foreach (MapSprite map in Maps)
-        //                {
-        //                    Moved.X = prevMoved.X;
-        //                    map.image.Position.X = map.OriginalPosition.X - Moved.X;
-        //                }
-        //            }
-        //        }
+            //EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
+            prevMoved = Moved;
+            Moved = new Vector2(player.X, player.Y);
+            DeadZone.X = (int)-Moved.X + OriginalDeadZone.X;
+            DeadZone.Width = OriginalDeadZone.Width;
+            DeadZone.Y = (int)-Moved.Y + OriginalDeadZone.Y;
+            DeadZone.Height = OriginalDeadZone.Height;
+            if (Moved.X < Game1.ScreenDimensions.ScreenWidth / 2 || Moved.X > DeadZone.Right - Game1.ScreenDimensions.ScreenWidth / 2)
+            {
+                Horizontal = true;
+            }
+            if (Moved.Y < Game1.ScreenDimensions.ScreenHeight / 2 || Moved.Y > DeadZone.Bottom - Game1.ScreenDimensions.ScreenHeight / 2)
+            {
+                Vertical = true;
+            }
+            
+            //if (!(DeadZone.Contains(Screen)))
+            //{
+            //    if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
+            //    {
+            //        Vertical = true;
+            //        foreach (MapSprite map in Maps)
+            //        {
+            //            Moved.Y = prevMoved.Y;
+            //            map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
+            //        }
+            //    }
+            //    if (Screen.X < DeadZone.X || Screen.Width > DeadZone.Width - Moved.X)
+            //    {
+            //        Horizontal = true;
+            //        foreach (MapSprite map in Maps)
+            //        {
+            //            Moved.X = prevMoved.X;
+            //            map.image.Position.X = map.OriginalPosition.X - Moved.X;
+            //        }
+            //    }
+            //}
         //        if (NewMap == true)
         //        {
         //            NewArea();
@@ -217,6 +201,20 @@ namespace The_Dream.Classes
         //            }
         //        }
         //    }
+        }
+        public void HorizontalMove(int X)
+        {
+            foreach (MapSprite map in Maps)
+            {
+                map.image.Position.X -= X;
+            }
+        }
+        public void VerticalMove(int Y)
+        {
+            foreach (MapSprite map in Maps)
+            {
+                map.image.Position.Y -= Y;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {

@@ -13,7 +13,7 @@ namespace The_Dream.Classes
 {
     public class ClientServer
     {
-        string hostip;
+        public string hostip;
         NetIncomingMessage ClientInc;
         static NetIncomingMessage ServerInc;
         static NetPeerConfiguration ServerConfig;
@@ -26,18 +26,27 @@ namespace The_Dream.Classes
         public Image image = new Image();
         bool addedNewPlayer = true;
         public int PlayerID;
+        public Map map;
+        public bool host;
         enum PacketTypes
         {
             LOGIN,
             MOVE,
             WORLDSTATE,
             ADDPLAYER,
-            JOINED
+            REMOVEPLAYER,
+            JOINED,
+            NEWAREA
         }
         enum MoveDirection
         {
             MOVE,
             NONE
+        }
+        public void GetReferences(Map realMap)
+        {
+            map = realMap;
+            playerUpdate.GetReferences(map);
         }
         public void SendGameState()
         {
@@ -127,8 +136,11 @@ namespace The_Dream.Classes
             ServerConfig.MaximumConnections = 4;
             ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
             server = new NetServer(ServerConfig);
-            server.Start();
-            hostip = "localhost";
+            if (host == true)
+            {
+                server.Start();
+                hostip = "localhost";
+            }
             NetPeerConfiguration ClientConfig = new NetPeerConfiguration("game");
             client = new NetClient(ClientConfig);
             ClientOut = client.CreateMessage();
@@ -147,6 +159,7 @@ namespace The_Dream.Classes
             image.LoadContent();
             ConnectionTimer = 0;
             playerUpdate = new PlayerUpdate();
+            playerUpdate.map = map;
         }
         public void UnloadContent()
         {
@@ -154,7 +167,10 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime)
         {
-            GetInput();
+            if (map.IsTransitioning == false)
+            {
+                GetInput();
+            }
             if (PlayerList.Count == 0)
             {
                 ConnectionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -219,8 +235,15 @@ namespace The_Dream.Classes
                                 bool Down = ServerInc.ReadBoolean();
                                 bool Left = ServerInc.ReadBoolean();
                                 bool Right = ServerInc.ReadBoolean();
-                                playerUpdate.Update(gameTime, ref temp, Up, Down, Left, Right);
+                                playerUpdate.Move(gameTime, ref temp, Up, Down, Left, Right);
                                 SendGameState();
+                                if (p.newArea == true)
+                                {
+                                    NetOutgoingMessage outmsg = server.CreateMessage();
+                                    outmsg.Write((byte)PacketTypes.NEWAREA);
+                                    server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
+                                    p.newArea = false;
+                                }
                                 break;
                             }
                         }
@@ -232,7 +255,14 @@ namespace The_Dream.Classes
                             {
                                 if (p.Connection == ServerInc.SenderConnection)
                                 {
+                                    NetOutgoingMessage outmsg = server.CreateMessage();
+                                    outmsg.Write((byte)PacketTypes.REMOVEPLAYER);
+                                    outmsg.Write(GameState.IndexOf(p));
                                     GameState.Remove(p);
+                                    if (server.ConnectionsCount > 0)
+                                    {
+                                        server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                                    }
                                     break;
                                 }
                             }
@@ -274,6 +304,15 @@ namespace The_Dream.Classes
                                 PlayerList.Add(temp);
                             }
                             PlayerID = count;
+                        }
+                        else if (b == (byte)PacketTypes.REMOVEPLAYER)
+                        {
+                            int toRemove = ClientInc.ReadInt32();
+                            PlayerList.Remove(PlayerList[toRemove]);
+                        }
+                        else if (b == (byte)PacketTypes.NEWAREA)
+                        {
+                            map.NewArea(PlayerList[PlayerID].AreaX, PlayerList[PlayerID].AreaY);
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
