@@ -29,13 +29,14 @@ Content\Gameplay\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 Content\Gameplay\Music\Megalovania.xnb
 Content\Gameplay\Sound Effects\Attack.xnb
+Load\ClientIPandHost.xml
+Load\ServerIPandHost.xml
 Load\Gameplay\GameMenu.xml
 Load\Gameplay\Maps\Right Map\Background.xml
 Load\Gameplay\Maps\Test Map\Background.xml
 Load\Gameplay\Maps\Test Map\Textures.xml
 Load\Gameplay\Player.xml
 Load\Gameplay\Sound.xml
-Load\IPandHost.xml
 Load\Menus\MultiplayerScreen.xml
 Load\Menus\TitleMenu.xml
 Load\ScreenManager.xml

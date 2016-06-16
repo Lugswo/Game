@@ -20,8 +20,9 @@ namespace The_Dream.Classes
         Controls controls = new Controls();
         CharacterCreationScreen characterCreate = new CharacterCreationScreen();
         SoundManager soundManager = new SoundManager();
-        ClientServer clientServer = new ClientServer();
+        Client client = new Client();
         Player player = new Player();
+        Server server = new Server();
         bool setFade = false;
         Image fadeImage;
         void AreaTransition(GameTime gameTime, int X, int Y, ref Map map, ref Image fadeImage)
@@ -51,7 +52,7 @@ namespace The_Dream.Classes
                     fadeImage.IsActive = false;
                     map.IsTransitioning = false;
                     setFade = false;
-                    clientServer.GetReferences(map);
+                    client.GetReferences(map);
                 }
             }
         }
@@ -67,18 +68,28 @@ namespace The_Dream.Classes
         public override void LoadContent()
         {
             base.LoadContent();
-            XmlManager<ClientServer> clientLoader = new XmlManager<ClientServer>();
-            if (File.Exists("Load/SavedIPandHost.xml"))
+            XmlManager<Client> clientLoader = new XmlManager<Client>();
+            if (File.Exists("Load/ClientSavedIPandHost.xml"))
             {
-                clientServer = clientLoader.Load("Load/SavedIPandHost.xml");
+                client = clientLoader.Load("Load/ClientSavedIPandHost.xml");
             }
-            clientServer.LoadContent();
+            XmlManager<Server> serverLoader = new XmlManager<Server>();
+            if (File.Exists("Load/ServerSavedIPandHost.xml"))
+            {
+                server = serverLoader.Load("Load/ServerSavedIPandHost.xml");
+            }
+            if (server.host == true)
+            {
+                server.LoadContent();
+            }
+            client.LoadContent();
             XmlManager<Player> playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/Savefile.xml");
             XmlManager<Map> mapLoader = new XmlManager<Map>();
             map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             map.LoadContent();
-            clientServer.GetReferences(map);
+            client.GetReferences(map);
+            server.GetReferences(map);
             //XmlManager<Player> playerLoader = new XmlManager<Player>();
             //player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             //player.LoadContent();
@@ -102,8 +113,9 @@ namespace The_Dream.Classes
         public override void UnloadContent()
         {
             base.UnloadContent();
-            clientServer.UnloadContent();
+            client.UnloadContent();
             map.UnloadContent();
+            server.UnloadContent();
             //map.UnloadContent();
             //player.UnloadContent();
             //gameMenu.UnloadContent();
@@ -114,7 +126,11 @@ namespace The_Dream.Classes
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            clientServer.Update(gameTime);
+            client.Update(gameTime);
+            if (server.host == true)
+            {
+                server.Update(gameTime);
+            }
             AreaTransition(gameTime, map.AreaX, map.AreaY, ref map, ref fadeImage);
             //map.Update(gameTime);
             //textures.Update(gameTime);
@@ -126,7 +142,7 @@ namespace The_Dream.Classes
         {
             base.Draw(spriteBatch);
             map.Draw(spriteBatch);
-            clientServer.Draw(spriteBatch);
+            client.Draw(spriteBatch);
             if (map.IsTransitioning == true)
             {
                 fadeImage.Draw(spriteBatch);

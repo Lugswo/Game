@@ -22,7 +22,7 @@ namespace The_Dream.Classes
         public void SaveIP(string ip, bool host)
         {
             XmlDocument IP = new XmlDocument();
-            IP.Load("Load/IPandHost.xml");
+            IP.Load("Load/ClientIPandHost.xml");
             XmlNode node;
             node = IP.DocumentElement;
             foreach (XmlNode node1 in node.ChildNodes)
@@ -36,7 +36,7 @@ namespace The_Dream.Classes
                     node1.InnerText = "0";
                 }
             }
-            IP.Save("Load/SavedIPandHost.xml");
+            IP.Save("Load/ClientSavedIPandHost.xml");
         }
         public override void LoadContent()
         {

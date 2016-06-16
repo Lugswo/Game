@@ -11,11 +11,6 @@ namespace The_Dream.Classes
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        public static class ScreenDimensions
-        {
-            public static int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            public static int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        }
 
         public Game1()
         {

@@ -90,21 +90,30 @@ namespace The_Dream.Classes
         //    if (Pause == false)
         //    {
             //EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
-            prevMoved = Moved;
             Moved = new Vector2(player.X, player.Y);
-            DeadZone.X = (int)-Moved.X + OriginalDeadZone.X;
-            DeadZone.Width = OriginalDeadZone.Width;
-            DeadZone.Y = (int)-Moved.Y + OriginalDeadZone.Y;
-            DeadZone.Height = OriginalDeadZone.Height;
-            if (Moved.X < Game1.ScreenDimensions.ScreenWidth / 2 || Moved.X > DeadZone.Right - Game1.ScreenDimensions.ScreenWidth / 2)
+            if (Moved.X <= ScreenManager.Instance.Dimensions.X / 2 || Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
             {
                 Horizontal = true;
             }
-            if (Moved.Y < Game1.ScreenDimensions.ScreenHeight / 2 || Moved.Y > DeadZone.Bottom - Game1.ScreenDimensions.ScreenHeight / 2)
+            else
+            {
+                Horizontal = false;
+            }
+            if (Moved.X == ScreenManager.instance.Dimensions.X / 2)
+            {
+                if (InputManager.Instance.KeyDown(Keys.Right))
+                {
+                    Horizontal = false;
+                }
+            }
+            if (Moved.Y <= ScreenManager.Instance.Dimensions.Y / 2 || Moved.Y >= DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
             {
                 Vertical = true;
             }
-            
+            else
+            {
+                Vertical = false;
+            }
             //if (!(DeadZone.Contains(Screen)))
             //{
             //    if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)

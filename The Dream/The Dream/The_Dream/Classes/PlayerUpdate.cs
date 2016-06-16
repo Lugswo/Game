@@ -94,88 +94,107 @@ namespace The_Dream.Classes
                 player.VelocityX = 0;
             }
 
+            player.X += player.VelocityX;
+            player.Y += player.VelocityY;
             if (map.Horizontal == true)
             {
-                player.X += player.VelocityX;
-            }
-            else
-            {
-                map.HorizontalMove(player.VelocityX);
+                player.PositionX += player.VelocityX;
+                if (player.PositionX >= 960)
+                {
+                    player.PositionX = 960;
+                    player.X = 960;
+                }
             }
             if (map.Vertical == true)
             {
-                player.Y += player.VelocityY;
+                player.PositionY += player.VelocityY;
+                if (player.PositionY >= 540)
+                {
+                    player.PositionY = 540;
+                }
             }
-            else
+            if (map.Horizontal == false)
+            {
+                map.HorizontalMove(player.VelocityX);
+            }
+            if (map.Vertical == false)
             {
                 map.VerticalMove(player.VelocityY);
             }
 
             if (map.Area[player.AreaX, player.AreaY + 1] != null)
             {
-                if (player.Y > Game1.ScreenDimensions.ScreenHeight - Height)
+                if (player.Y > map.DeadZone.Bottom - Height)
                 {
                     player.AreaY++;
-                    player.Y = 0;
+                    player.Y = map.DeadZone.Top;
+                    player.PositionY = map.DeadZone.Top;
                     player.newArea = true;
                 }
             }
             else
             {
-                if (player.Y > Game1.ScreenDimensions.ScreenHeight - Height)
+                if (player.Y > map.DeadZone.Bottom - Height)
                 {
-                    player.Y = Game1.ScreenDimensions.ScreenHeight - Height;
+                    player.Y = map.DeadZone.Bottom - Height;
+                    player.PositionY = map.DeadZone.Bottom - Height;
                     player.VelocityY = 0;
                 }
             }
             if (map.Area[player.AreaX, player.AreaY - 1] != null)
             {
-                if (player.Y < 0)
+                if (player.Y < map.DeadZone.Top)
                 {
                     player.AreaY--;
-                    player.Y = Game1.ScreenDimensions.ScreenHeight;
+                    player.Y = map.DeadZone.Bottom - Height;
+                    player.PositionY = map.DeadZone.Bottom - Height;
                     player.newArea = true;
                 }
             }
             else
             {
-                if (player.Y < 0)
+                if (player.Y < map.DeadZone.Top)
                 {
-                    player.Y = 0;
+                    player.Y = map.DeadZone.Top;
+                    player.PositionY = map.DeadZone.Top;
                     player.VelocityY = 0;
                 }
             }
             if (map.Area[player.AreaX + 1, player.AreaY] != null)
             {
-                if (player.X > Game1.ScreenDimensions.ScreenWidth - Width)
+                if (player.X > map.DeadZone.Right - Width)
                 {
                     player.AreaX++;
-                    player.X = 0;
+                    player.X = map.DeadZone.Left;
+                    player.PositionX = map.DeadZone.Left;
                     player.newArea = true;
                 }
             }
             else
             {
-                if (player.X > Game1.ScreenDimensions.ScreenWidth - Width)
+                if (player.X > map.DeadZone.Right - Width)
                 {
-                    player.X = Game1.ScreenDimensions.ScreenWidth - Width;
+                    player.X = map.DeadZone.Right - Width;
+                    player.PositionX = map.DeadZone.Right - Width;
                     player.VelocityY = 0;
                 }
             }
             if (map.Area[player.AreaX - 1, player.AreaY] != null)
             {
-                if (player.X < 0)
+                if (player.X < map.DeadZone.Left)
                 {
                     player.AreaX--;
-                    player.X = Game1.ScreenDimensions.ScreenWidth - Width;
+                    player.X = map.DeadZone.Right - Width;
+                    player.PositionX = map.DeadZone.Right - Width;
                     player.newArea = true;
                 }
             }
             else
             {
-                if (player.X < 0)
+                if (player.X < map.DeadZone.Left)
                 {
                     player.X = 0;
+                    player.PositionX = map.DeadZone.Right - Width;
                     player.VelocityY = 0;
                 }
             }

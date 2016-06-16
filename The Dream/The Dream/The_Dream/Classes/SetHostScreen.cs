@@ -13,7 +13,7 @@ namespace The_Dream.Classes
         public void SetHost()
         {
             XmlDocument IP = new XmlDocument();
-            IP.Load("Load/IPandHost.xml");
+            IP.Load("Load/ServerIPandHost.xml");
             XmlNode node;
             node = IP.DocumentElement;
             foreach (XmlNode node1 in node.ChildNodes)
@@ -22,8 +22,28 @@ namespace The_Dream.Classes
                 {
                     node1.InnerText = "1";
                 }
+                if (node1.Name == "hostip")
+                {
+                    node1.InnerText = "localhost";
+                }
             }
-            IP.Save("Load/SavedIPandHost.xml");
+            IP.Save("Load/ServerSavedIPandHost.xml");
+            XmlDocument Client = new XmlDocument();
+            Client.Load("Load/ClientIPandHost.xml");
+            XmlNode node2;
+            node2 = Client.DocumentElement;
+            foreach (XmlNode node3 in node2.ChildNodes)
+            {
+                if (node3.Name == "host")
+                {
+                    node3.InnerText = "1";
+                }
+                if (node3.Name == "hostip")
+                {
+                    node3.InnerText = "localhost";
+                }
+            }
+            Client.Save("Load/ClientSavedIPandHost.xml");
         }
         public override void LoadContent()
         {

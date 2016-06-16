@@ -29,7 +29,7 @@ namespace The_Dream.Classes
             image.Update(gameTime);
             if (InputManager.Instance.KeyPressed(Keys.Enter, Keys.Z))
             {
-                ScreenManager.Instance.ChangeScreens("GameplayScreen");
+                ScreenManager.Instance.ChangeScreens("TitleScreen");
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

@@ -11,23 +11,18 @@ using Lidgren.Network.Xna;
 
 namespace The_Dream.Classes
 {
-    public class ClientServer
+    public class Client
     {
         public string hostip;
+        public bool host;
         NetIncomingMessage ClientInc;
-        static NetIncomingMessage ServerInc;
-        static NetPeerConfiguration ServerConfig;
-        static NetServer server;
         static NetClient client;
         NetOutgoingMessage ClientOut;
-        public List<Player> PlayerList, GameState;
+        public List<Player> PlayerList;
         float ConnectionTimer;
-        PlayerUpdate playerUpdate;
         public Image image = new Image();
-        bool addedNewPlayer = true;
         public int PlayerID;
         public Map map;
-        public bool host;
         enum PacketTypes
         {
             LOGIN,
@@ -36,7 +31,8 @@ namespace The_Dream.Classes
             ADDPLAYER,
             REMOVEPLAYER,
             JOINED,
-            NEWAREA
+            NEWAREA,
+            CLOSE
         }
         enum MoveDirection
         {
@@ -46,24 +42,12 @@ namespace The_Dream.Classes
         public void GetReferences(Map realMap)
         {
             map = realMap;
-            playerUpdate.GetReferences(map);
-        }
-        public void SendGameState()
-        {
-            NetOutgoingMessage outmsg = server.CreateMessage();
-            outmsg.Write((byte)PacketTypes.WORLDSTATE);
-            outmsg.Write(GameState.Count);
-            foreach (Player p in GameState)
-            {
-                outmsg.WriteAllProperties(p);
-            }
-            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
         }
         public void GetInput()
         {
             MoveDirection MoveDir = new MoveDirection();
             MoveDir = MoveDirection.NONE;
-            bool Up, Down, Left, Right;
+            bool Up, Down, Left, Right, Close;
             Up = Down = Left = Right = false;
             if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Up))
             {
@@ -108,7 +92,9 @@ namespace The_Dream.Classes
             if (InputManager.Instance.KeyDown(Keys.Q))
             {
                 client.Disconnect("bye bye");
-                server.Shutdown("bye bye");
+                NetOutgoingMessage outmsg = client.CreateMessage();
+                outmsg.Write((byte)PacketTypes.CLOSE);
+                client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
                 if (ScreenManager.Instance.IsTransitioning == false)
                 {
                     ScreenManager.Instance.ChangeScreens("TitleScreen");
@@ -125,22 +111,12 @@ namespace The_Dream.Classes
                 client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
             }
         }
-        public ClientServer()
+        public Client()
         {
 
         }
         public void LoadContent()
         {
-            ServerConfig = new NetPeerConfiguration("game");
-            ServerConfig.Port = 25565;
-            ServerConfig.MaximumConnections = 4;
-            ServerConfig.EnableMessageType(NetIncomingMessageType.ConnectionApproval);
-            server = new NetServer(ServerConfig);
-            if (host == true)
-            {
-                server.Start();
-                hostip = "localhost";
-            }
             NetPeerConfiguration ClientConfig = new NetPeerConfiguration("game");
             client = new NetClient(ClientConfig);
             ClientOut = client.CreateMessage();
@@ -152,14 +128,11 @@ namespace The_Dream.Classes
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             ClientOut.WriteAllProperties(player);
             client.Connect(hostip, 25565, ClientOut);
-            GameState = new List<Player>();
             PlayerList = new List<Player>();
             image.Path = "Gameplay/Characters/Sprites/Player/Player";
             image.Position = new Vector2(100, 100);
             image.LoadContent();
             ConnectionTimer = 0;
-            playerUpdate = new PlayerUpdate();
-            playerUpdate.map = map;
         }
         public void UnloadContent()
         {
@@ -170,105 +143,6 @@ namespace The_Dream.Classes
             if (map.IsTransitioning == false)
             {
                 GetInput();
-            }
-            if (PlayerList.Count == 0)
-            {
-                ConnectionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (ConnectionTimer >= 5)
-                {
-                    if (ScreenManager.Instance.IsTransitioning == false)
-                    {
-                        server.Shutdown("bye bye");
-                        ScreenManager.Instance.ChangeScreens("TitleScreen");
-                    }
-                }
-            }
-            while ((ServerInc = server.ReadMessage()) != null)
-            {
-                switch (ServerInc.MessageType)
-                {
-                    case NetIncomingMessageType.ConnectionApproval:
-                        if (ServerInc.ReadByte() == (byte)PacketTypes.LOGIN)
-                        {
-                            ServerInc.SenderConnection.Approve();
-                            Player player = new Player();
-                            ServerInc.ReadAllProperties(player);
-                            player.Connection = ServerInc.SenderConnection;
-                            GameState.Add(player);
-                            addedNewPlayer = false;
-                            while (addedNewPlayer == false)
-                            {
-                                if (server.ConnectionsCount == GameState.Count)
-                                {
-                                    NetOutgoingMessage joinMsg = server.CreateMessage();
-                                    joinMsg.Write((byte)PacketTypes.JOINED);
-                                    int count = GameState.Count - 1;
-                                    joinMsg.Write(count);
-                                    for (int i = 0; i < count; i++)
-                                    {
-                                        Player temp = new Player();
-                                        temp = GameState[i];
-                                        joinMsg.WriteAllProperties(temp);
-                                    }
-                                    Thread.Sleep(100);
-                                    server.SendMessage(joinMsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
-                                    NetOutgoingMessage outmsg = server.CreateMessage();
-                                    outmsg.Write((byte)PacketTypes.ADDPLAYER);
-                                    outmsg.WriteAllProperties(player);
-                                    server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-                                    addedNewPlayer = true;
-                                }
-                            }
-                        }
-                        break;
-                    case NetIncomingMessageType.Data:
-                        if (ServerInc.ReadByte() == (byte)PacketTypes.MOVE)
-                        {
-                            foreach (Player p in GameState)
-                            {
-                                if (p.Connection != ServerInc.SenderConnection)
-                                {
-                                    continue;
-                                }
-                                Player temp = p;
-                                bool Up = ServerInc.ReadBoolean();
-                                bool Down = ServerInc.ReadBoolean();
-                                bool Left = ServerInc.ReadBoolean();
-                                bool Right = ServerInc.ReadBoolean();
-                                playerUpdate.Move(gameTime, ref temp, Up, Down, Left, Right);
-                                SendGameState();
-                                if (p.newArea == true)
-                                {
-                                    NetOutgoingMessage outmsg = server.CreateMessage();
-                                    outmsg.Write((byte)PacketTypes.NEWAREA);
-                                    server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
-                                    p.newArea = false;
-                                }
-                                break;
-                            }
-                        }
-                        break;
-                    case NetIncomingMessageType.StatusChanged:
-                        if (ServerInc.SenderConnection.Status == NetConnectionStatus.Disconnected || ServerInc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
-                        {
-                            foreach (Player p in GameState)
-                            {
-                                if (p.Connection == ServerInc.SenderConnection)
-                                {
-                                    NetOutgoingMessage outmsg = server.CreateMessage();
-                                    outmsg.Write((byte)PacketTypes.REMOVEPLAYER);
-                                    outmsg.Write(GameState.IndexOf(p));
-                                    GameState.Remove(p);
-                                    if (server.ConnectionsCount > 0)
-                                    {
-                                        server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                }
             }
             while ((ClientInc = client.ReadMessage()) != null)
             {
@@ -323,9 +197,17 @@ namespace The_Dream.Classes
                         break;
                 }
             }
-            foreach (Player p in PlayerList)
+            if (PlayerList.Count > PlayerID)
             {
-                p.Update(gameTime);
+                PlayerList[PlayerID].Update(gameTime);
+                if (map.Horizontal == true)
+                {
+                    PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
+                }
+                if (map.Vertical == true)
+                {
+                    PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
+                }
             }
         }
         public void Draw(SpriteBatch spriteBatch)
