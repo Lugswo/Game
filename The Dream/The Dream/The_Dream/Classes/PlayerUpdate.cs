@@ -96,28 +96,19 @@ namespace The_Dream.Classes
 
             player.X += player.VelocityX;
             player.Y += player.VelocityY;
-            if (map.Horizontal == true)
+            if (map.Left == true || map.Right == true)
             {
                 player.PositionX += player.VelocityX;
-                if (player.PositionX >= 960)
-                {
-                    player.PositionX = 960;
-                    player.X = 960;
-                }
             }
-            if (map.Vertical == true)
+            if (map.Down == true || map.Up == true)
             {
                 player.PositionY += player.VelocityY;
-                if (player.PositionY >= 540)
-                {
-                    player.PositionY = 540;
-                }
             }
-            if (map.Horizontal == false)
+            if (map.Left == false && map.Right == false)
             {
                 map.HorizontalMove(player.VelocityX);
             }
-            if (map.Vertical == false)
+            if (map.Up == false && map.Down == false)
             {
                 map.VerticalMove(player.VelocityY);
             }

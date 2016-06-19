@@ -34,7 +34,7 @@ namespace The_Dream.Classes
             REMOVEPLAYER,
             JOINED,
             NEWAREA,
-            CLOSE
+            SHUTDOWN
         }
         public void SendGameState()
         {
@@ -108,7 +108,8 @@ namespace The_Dream.Classes
                         }
                         break;
                     case NetIncomingMessageType.Data:
-                        if (ServerInc.ReadByte() == (byte)PacketTypes.MOVE)
+                        byte b = ServerInc.ReadByte();
+                        if (b == (byte)PacketTypes.MOVE)
                         {
                             foreach (Player p in GameState)
                             {
@@ -132,6 +133,10 @@ namespace The_Dream.Classes
                                 }
                                 break;
                             }
+                        }
+                        else if (b == (byte)PacketTypes.SHUTDOWN)
+                        {
+                            server.Shutdown("bye");
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:

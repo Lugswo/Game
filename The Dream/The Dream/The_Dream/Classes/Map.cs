@@ -91,28 +91,53 @@ namespace The_Dream.Classes
         //    {
             //EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
             Moved = new Vector2(player.X, player.Y);
-            if (Moved.X <= ScreenManager.Instance.Dimensions.X / 2 || Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            if (Moved.X <= ScreenManager.Instance.Dimensions.X / 2)
             {
-                Horizontal = true;
+                Left = true;
+            }
+            else if (Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            {
+                Right = true;
             }
             else
             {
-                Horizontal = false;
+                Left = false;
+                Right = false;
+            }
+            if (Moved.Y <= ScreenManager.Instance.Dimensions.Y / 2)
+            {
+                Up = true;
+            }
+            else if (Moved.Y >= DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
+            {
+                Down = false;
+            }
+            else
+            {
+                Up = false;
+                Down = false;
             }
             if (Moved.X == ScreenManager.instance.Dimensions.X / 2)
             {
                 if (InputManager.Instance.KeyDown(Keys.Right))
                 {
-                    Horizontal = false;
+                    Left = false;
+                }
+                if (InputManager.Instance.KeyDown(Keys.Left))
+                {
+                    Right = false;
                 }
             }
-            if (Moved.Y <= ScreenManager.Instance.Dimensions.Y / 2 || Moved.Y >= DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
+            if (Moved.Y == ScreenManager.Instance.Dimensions.Y / 2)
             {
-                Vertical = true;
-            }
-            else
-            {
-                Vertical = false;
+                if (InputManager.Instance.KeyDown(Keys.Up))
+                {
+                    Down = false;
+                }
+                if (InputManager.Instance.KeyDown(Keys.Down))
+                {
+                    Up = false;
+                }
             }
             //if (!(DeadZone.Contains(Screen)))
             //{

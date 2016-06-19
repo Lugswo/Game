@@ -32,7 +32,7 @@ namespace The_Dream.Classes
             REMOVEPLAYER,
             JOINED,
             NEWAREA,
-            CLOSE
+            SHUTDOWN
         }
         enum MoveDirection
         {
@@ -91,10 +91,13 @@ namespace The_Dream.Classes
             }
             if (InputManager.Instance.KeyDown(Keys.Q))
             {
+                if (host == true)
+                {
+                    NetOutgoingMessage outmsg2 = client.CreateMessage();
+                    outmsg2.Write((byte)PacketTypes.SHUTDOWN);
+                    client.SendMessage(outmsg2, NetDeliveryMethod.ReliableOrdered, 0);
+                }
                 client.Disconnect("bye bye");
-                NetOutgoingMessage outmsg = client.CreateMessage();
-                outmsg.Write((byte)PacketTypes.CLOSE);
-                client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
                 if (ScreenManager.Instance.IsTransitioning == false)
                 {
                     ScreenManager.Instance.ChangeScreens("TitleScreen");
@@ -200,11 +203,11 @@ namespace The_Dream.Classes
             if (PlayerList.Count > PlayerID)
             {
                 PlayerList[PlayerID].Update(gameTime);
-                if (map.Horizontal == true)
+                if (map.Right == true || map.Left == true)
                 {
                     PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
                 }
-                if (map.Vertical == true)
+                if (map.Up == true || map.Down == true)
                 {
                     PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
                 }
