@@ -91,14 +91,18 @@ namespace The_Dream.Classes
         //    {
             //EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
             Moved = new Vector2(player.X, player.Y);
-            if (Moved.X <= ScreenManager.Instance.Dimensions.X / 2)
+            if (Moved.X < ScreenManager.Instance.Dimensions.X / 2)
             {
                 Left = true;
+                //foreach (MapSprite sprite in Maps)
+                //{
+                //    sprite.image.Position.X = sprite.OriginalPosition.X;
+                //}
             }
-            else if (Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
-            {
-                Right = true;
-            }
+            //else if (Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            //{
+            //    Right = true;
+            //}
             else
             {
                 Left = false;

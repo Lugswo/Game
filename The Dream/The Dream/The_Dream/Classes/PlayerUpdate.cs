@@ -68,7 +68,7 @@ namespace The_Dream.Classes
         }
         public void Move(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
         {
-            map.Update(gameTime, player);
+            //map.Update(gameTime, player);
             if (Down == true)
             {
                 player.VelocityY = 10;
@@ -96,22 +96,22 @@ namespace The_Dream.Classes
 
             player.X += player.VelocityX;
             player.Y += player.VelocityY;
-            if (map.Left == true || map.Right == true)
-            {
-                player.PositionX += player.VelocityX;
-            }
-            if (map.Down == true || map.Up == true)
-            {
-                player.PositionY += player.VelocityY;
-            }
-            if (map.Left == false && map.Right == false)
-            {
-                map.HorizontalMove(player.VelocityX);
-            }
-            if (map.Up == false && map.Down == false)
-            {
-                map.VerticalMove(player.VelocityY);
-            }
+            //if (map.Left == true || map.Right == true)
+            //{
+            //    player.PositionX += player.VelocityX;
+            //}
+            //if (map.Down == true || map.Up == true)
+            //{
+            //    player.PositionY += player.VelocityY;
+            //}
+            //if (map.Left == false && map.Right == false)
+            //{
+            //    map.HorizontalMove(player.VelocityX);
+            //}
+            //if (map.Up == false && map.Down == false)
+            //{
+            //    map.VerticalMove(player.VelocityY);
+            //}
 
             if (map.Area[player.AreaX, player.AreaY + 1] != null)
             {
@@ -167,7 +167,7 @@ namespace The_Dream.Classes
                 {
                     player.X = map.DeadZone.Right - Width;
                     player.PositionX = map.DeadZone.Right - Width;
-                    player.VelocityY = 0;
+                    player.VelocityX = 0;
                 }
             }
             if (map.Area[player.AreaX - 1, player.AreaY] != null)
@@ -186,7 +186,7 @@ namespace The_Dream.Classes
                 {
                     player.X = 0;
                     player.PositionX = map.DeadZone.Right - Width;
-                    player.VelocityY = 0;
+                    player.VelocityX = 0;
                 }
             }
         //    if (map.Pause == false)

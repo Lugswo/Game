@@ -69,13 +69,14 @@ namespace The_Dream.Classes
         {
             base.LoadContent();
             XmlManager<Client> clientLoader = new XmlManager<Client>();
-            if (File.Exists("Load/ClientSavedIPandHost.xml"))
-            {
-                client = clientLoader.Load("Load/ClientSavedIPandHost.xml");
-            }
             XmlManager<Server> serverLoader = new XmlManager<Server>();
             if (File.Exists("Load/ServerSavedIPandHost.xml"))
             {
+                server = serverLoader.Load("Load/ServerSavedIPandHost.xml");
+            }
+            if (File.Exists("Load/ClientSavedIPandHost.xml"))
+            {
+                client = clientLoader.Load("Load/ClientSavedIPandHost.xml");
                 server = serverLoader.Load("Load/ServerSavedIPandHost.xml");
             }
             if (server.host == true)
@@ -89,7 +90,10 @@ namespace The_Dream.Classes
             map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             map.LoadContent();
             client.GetReferences(map);
-            server.GetReferences(map);
+            if (server.host == true)
+            {
+                server.GetReferences(map);
+            }
             //XmlManager<Player> playerLoader = new XmlManager<Player>();
             //player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             //player.LoadContent();

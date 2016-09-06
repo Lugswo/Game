@@ -37,6 +37,22 @@ namespace The_Dream.Classes
                 }
             }
             IP.Save("Load/ClientSavedIPandHost.xml");
+            XmlDocument saveHost = new XmlDocument();
+            saveHost.Load("Load/ServerIPandHost.xml");
+            XmlNode hnode;
+            hnode = saveHost.DocumentElement;
+            foreach (XmlNode node1 in hnode.ChildNodes)
+            {
+                if (node1.Name == "hostip")
+                {
+                    node1.InnerText = ip;
+                }
+                if (node1.Name == "host")
+                {
+                    node1.InnerText = "0";
+                }
+            }
+            saveHost.Save("Load/ServerSavedIPandHost.xml");
         }
         public override void LoadContent()
         {

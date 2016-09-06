@@ -43,7 +43,10 @@ namespace The_Dream.Classes
             outmsg.Write(GameState.Count);
             foreach (Player p in GameState)
             {
-                outmsg.WriteAllProperties(p);
+                outmsg.Write(p.X);
+                outmsg.Write(p.Y);
+                outmsg.Write(p.VelocityX);
+                outmsg.Write(p.VelocityY);
             }
             server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
         }

@@ -74,7 +74,7 @@ namespace The_Dream.Classes
         public ScreenManager()
         {
             Dimensions = new Vector2(
-                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2,
                 GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
             currentScreen = new SplashScreen();
             xmlGameScreenManager = new XmlManager<GameScreen>();

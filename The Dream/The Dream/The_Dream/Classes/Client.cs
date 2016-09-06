@@ -166,7 +166,10 @@ namespace The_Dream.Classes
                             count = ClientInc.ReadInt32();
                             foreach (Player p in PlayerList)
                             {
-                                ClientInc.ReadAllProperties(p);
+                                p.X = ClientInc.ReadInt32();
+                                p.Y = ClientInc.ReadInt32();
+                                p.VelocityX = ClientInc.ReadInt32();
+                                p.VelocityY = ClientInc.ReadInt32();
                             }
                         }
                         else if (b == (byte)PacketTypes.JOINED)
@@ -200,17 +203,36 @@ namespace The_Dream.Classes
                         break;
                 }
             }
+            foreach (Player p in PlayerList)
+            {
+                p.PlayerImage.Position.X = p.X;
+                p.PlayerImage.Position.Y = p.Y;
+            }
             if (PlayerList.Count > PlayerID)
             {
-                PlayerList[PlayerID].Update(gameTime);
-                if (map.Right == true || map.Left == true)
+                map.Update(gameTime, PlayerList[PlayerID]);
+                if (map.Left == true || map.Right == true)
                 {
-                    PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
+                    PlayerList[PlayerID].PositionX += PlayerList[PlayerID].VelocityX;
                 }
-                if (map.Up == true || map.Down == true)
-                {
-                    PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
-                }
+                //if (map.Down == true || map.Up == true)
+                //{
+                //    PlayerList[PlayerID].PositionY += PlayerList[PlayerID].VelocityY;
+                //}
+                //if (map.Left == false && map.Right == false)
+                //{
+                //    map.HorizontalMove(PlayerList[PlayerID].VelocityX);
+                //}
+                //if (map.Up == false && map.Down == false)
+                //{
+                //    map.VerticalMove(PlayerList[PlayerID].VelocityY);
+                //}
+                PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
+                PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
+            }
+            foreach (Player p in PlayerList)
+            {
+                p.Update(gameTime);
             }
         }
         public void Draw(SpriteBatch spriteBatch)
