@@ -93,6 +93,11 @@ namespace The_Dream.Classes
             {
                 player.VelocityX = 0;
             }
+            
+            foreach (MapSprite blank in map.Blanks)
+            {
+                if (blank.HitBox)
+            }
 
             player.X += player.VelocityX;
             player.Y += player.VelocityY;

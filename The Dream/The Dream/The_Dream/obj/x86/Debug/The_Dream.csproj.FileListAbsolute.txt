@@ -172,8 +172,6 @@ C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSettings.xnb
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSkills.xnb
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InStats.xnb
-C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Music\Megalovania.xnb
-C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Sound Effects\Attack.xnb
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\The_Dream.exe
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\The_Dream.pdb
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Lidgren.Network.dll
@@ -217,8 +215,6 @@ C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\C
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSettings.xnb
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InSkills.xnb
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InStats.xnb
-C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Music\Megalovania.xnb
-C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Sound Effects\Attack.xnb
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\The_Dream.exe
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\The_Dream.pdb
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.csprojResolveAssemblyReference.cache
@@ -228,7 +224,6 @@ C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\obj\x86\Debug\T
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
-C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\IPandHost.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
@@ -239,3 +234,5 @@ C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
 C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\ClientIPandHost.xml
+C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\ServerIPandHost.xml

@@ -34,7 +34,7 @@ namespace The_Dream.Classes
             Vertical = Horizontal = EdgeHorizontal = EdgeVertical = Pause = false;
             Area = new string[4, 3];
             Area[1, 1] = "Test Map";
-            Area[2, 1] = "Right Map";
+            //Area[2, 1] = "Right Map";
             NewMap = SongPlaying = false;
         }
         public void NewArea(int X, int Y)
@@ -91,58 +91,54 @@ namespace The_Dream.Classes
         //    {
             //EdgeHorizontal = EdgeVertical = Right = Left = Up = Down = Column = Row = false;
             Moved = new Vector2(player.X, player.Y);
-            if (Moved.X < ScreenManager.Instance.Dimensions.X / 2)
+            if (Moved.X < ScreenManager.instance.Dimensions.X / 2)
             {
                 Left = true;
-                //foreach (MapSprite sprite in Maps)
-                //{
-                //    sprite.image.Position.X = sprite.OriginalPosition.X;
-                //}
             }
-            //else if (Moved.X >= DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
-            //{
-            //    Right = true;
-            //}
+            else if (Moved.X > DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            {
+                Right = true;
+            }
             else
             {
                 Left = false;
                 Right = false;
             }
-            if (Moved.Y <= ScreenManager.Instance.Dimensions.Y / 2)
+            if (Moved.Y < ScreenManager.Instance.Dimensions.Y / 2)
             {
                 Up = true;
             }
-            else if (Moved.Y >= DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
+            else if (Moved.Y > DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
             {
-                Down = false;
+                Down = true;
             }
             else
             {
                 Up = false;
                 Down = false;
             }
-            if (Moved.X == ScreenManager.instance.Dimensions.X / 2)
-            {
-                if (InputManager.Instance.KeyDown(Keys.Right))
-                {
-                    Left = false;
-                }
-                if (InputManager.Instance.KeyDown(Keys.Left))
-                {
-                    Right = false;
-                }
-            }
-            if (Moved.Y == ScreenManager.Instance.Dimensions.Y / 2)
-            {
-                if (InputManager.Instance.KeyDown(Keys.Up))
-                {
-                    Down = false;
-                }
-                if (InputManager.Instance.KeyDown(Keys.Down))
-                {
-                    Up = false;
-                }
-            }
+            //if (Moved.X == ScreenManager.instance.Dimensions.X / 2)
+            //{
+            //    if (InputManager.Instance.KeyDown(Keys.Right))
+            //    {
+            //        Left = false;
+            //    }
+            //    if (InputManager.Instance.KeyDown(Keys.Left))
+            //    {
+            //        Right = false;
+            //    }
+            //}
+            //if (Moved.Y == ScreenManager.Instance.Dimensions.Y / 2)
+            //{
+            //    if (InputManager.Instance.KeyDown(Keys.Up))
+            //    {
+            //        Down = false;
+            //    }
+            //    if (InputManager.Instance.KeyDown(Keys.Down))
+            //    {
+            //        Up = false;
+            //    }
+            //}
             //if (!(DeadZone.Contains(Screen)))
             //{
             //    if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
@@ -244,14 +240,18 @@ namespace The_Dream.Classes
         {
             foreach (MapSprite map in Maps)
             {
-                map.image.Position.X -= X;
+                map.image.Position.X = map.OriginalPosition.X - Moved.X + ScreenManager.instance.Dimensions.X / 2;
+            }
+            foreach (MapSprite blank in Blanks)
+            {
+                blank.HitBox.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
             }
         }
         public void VerticalMove(int Y)
         {
             foreach (MapSprite map in Maps)
             {
-                map.image.Position.Y -= Y;
+                map.image.Position.Y = map.OriginalPosition.Y - Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
             }
         }
         public void Draw(SpriteBatch spriteBatch)

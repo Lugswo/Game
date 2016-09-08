@@ -32,6 +32,9 @@ namespace The_Dream.Classes
         public int VelocityY { get; set; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
+        public bool Up, Down, Left, Right;
+        public int pX;
+        public int pY;
         public bool newArea = false;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
@@ -53,22 +56,22 @@ namespace The_Dream.Classes
         public void Update(GameTime gameTime)
         {
             PlayerImage.IsActive = true;
-            if (PlayerImage.Position.X < 0)
-            {
-                AreaX--;
-            }
-            if (PlayerImage.Position.X > ScreenManager.Instance.Dimensions.X)
-            {
-                AreaX++;
-            }
-            if (PlayerImage.Position.Y < 0)
-            {
-                AreaY++;
-            }
-            if (PlayerImage.Position.Y > ScreenManager.Instance.Dimensions.Y)
-            {
-                AreaY--;
-            }
+            //if (PlayerImage.Position.X < 0)
+            //{
+            //    AreaX--;
+            //}
+            //if (PlayerImage.Position.X > ScreenManager.Instance.Dimensions.X)
+            //{
+            //    AreaX++;
+            //}
+            //if (PlayerImage.Position.Y < 0)
+            //{
+            //    AreaY++;
+            //}
+            //if (PlayerImage.Position.Y > ScreenManager.Instance.Dimensions.Y)
+            //{
+            //    AreaY--;
+            //}
             if (VelocityX == 0 && VelocityY == 0)
             {
                 PlayerImage.IsActive = false;

@@ -20,6 +20,7 @@ namespace The_Dream.Classes
         bool addedNewPlayer = true;
         PlayerUpdate playerUpdate;
         public Map map;
+        bool Up, Down, Left, Right;
         public void GetReferences(Map realMap)
         {
             map = realMap;
@@ -48,7 +49,10 @@ namespace The_Dream.Classes
                 outmsg.Write(p.VelocityX);
                 outmsg.Write(p.VelocityY);
             }
-            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            if (server.ConnectionsCount > 0)
+            {
+                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            }
         }
         public void LoadContent()
         {
@@ -120,20 +124,17 @@ namespace The_Dream.Classes
                                 {
                                     continue;
                                 }
-                                Player temp = p;
-                                bool Up = ServerInc.ReadBoolean();
-                                bool Down = ServerInc.ReadBoolean();
-                                bool Left = ServerInc.ReadBoolean();
-                                bool Right = ServerInc.ReadBoolean();
-                                playerUpdate.Move(gameTime, ref temp, Up, Down, Left, Right);
-                                SendGameState();
-                                if (p.newArea == true)
-                                {
-                                    NetOutgoingMessage outmsg = server.CreateMessage();
-                                    outmsg.Write((byte)PacketTypes.NEWAREA);
-                                    server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
-                                    p.newArea = false;
-                                }
+                                p.Up = ServerInc.ReadBoolean();
+                                p.Down = ServerInc.ReadBoolean();
+                                p.Left = ServerInc.ReadBoolean();
+                                p.Right = ServerInc.ReadBoolean();
+                                //if (p.newArea == true)
+                                //{
+                                //    NetOutgoingMessage outmsg = server.CreateMessage();
+                                //    outmsg.Write((byte)PacketTypes.NEWAREA);
+                                //    server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
+                                //    p.newArea = false;
+                                //}
                                 break;
                             }
                         }
@@ -163,6 +164,17 @@ namespace The_Dream.Classes
                         }
                         break;
                 }
+            }
+            foreach (Player p in GameState)
+            {
+                Player temp = p;
+                playerUpdate.Move(gameTime, ref temp, p.Up, p.Down, p.Left, p.Right);
+            }
+            SendGameState();
+            foreach (Player pl in GameState)
+            {
+                pl.VelocityX = 0;
+                pl.VelocityY = 0;
             }
         }
     }

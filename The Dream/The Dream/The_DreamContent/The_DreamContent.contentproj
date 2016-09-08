@@ -164,20 +164,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Music\Megalovania.mp3">
-      <Name>Megalovania</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Gameplay\Sound Effects\Attack.mp3">
-      <Name>Attack</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Gameplay\Menu\InBeastiary.png">
       <Name>InBeastiary</Name>
       <Importer>TextureImporter</Importer>
@@ -240,7 +226,10 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Gameplay\Music\" />
+    <Folder Include="Gameplay\Sound Effects\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Gameplay\Backgrounds\Right Map\Right Map.png">
       <Name>Right Map</Name>

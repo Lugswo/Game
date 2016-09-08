@@ -23,6 +23,8 @@ namespace The_Dream.Classes
         public Image image = new Image();
         public int PlayerID;
         public Map map;
+        int mapMoveX, mapMoveY;
+        bool Up, Down, Left, Right, pUp, pDown, pLeft, pRight, Close;
         enum PacketTypes
         {
             LOGIN,
@@ -46,9 +48,7 @@ namespace The_Dream.Classes
         public void GetInput()
         {
             MoveDirection MoveDir = new MoveDirection();
-            MoveDir = MoveDirection.NONE;
-            bool Up, Down, Left, Right, Close;
-            Up = Down = Left = Right = false;
+            MoveDir = MoveDirection.MOVE;
             if (InputManager.Instance.KeyDown(Keys.Down) && InputManager.Instance.KeyDown(Keys.Up))
             {
                 Up = false;
@@ -85,10 +85,14 @@ namespace The_Dream.Classes
                 Left = false;
                 Right = false;
             }
-            if (Up == true || Down == true || Left == true || Right == true)
+            if (Up == pUp && Down == pDown && Left == pLeft && Right == pRight)
             {
-                MoveDir = MoveDirection.MOVE;
+                MoveDir = MoveDirection.NONE;
             }
+            pUp = Up;
+            pDown = Down;
+            pLeft = Left;
+            pRight = Right;
             if (InputManager.Instance.KeyDown(Keys.Q))
             {
                 if (host == true)
@@ -205,28 +209,38 @@ namespace The_Dream.Classes
             }
             foreach (Player p in PlayerList)
             {
-                p.PlayerImage.Position.X = p.X;
-                p.PlayerImage.Position.Y = p.Y;
+                p.PlayerImage.Position.X = p.X - mapMoveX;
+                p.PlayerImage.Position.Y = p.Y - mapMoveY;
             }
             if (PlayerList.Count > PlayerID)
             {
                 map.Update(gameTime, PlayerList[PlayerID]);
-                if (map.Left == true || map.Right == true)
+                if (map.Left == true)
                 {
-                    PlayerList[PlayerID].PositionX += PlayerList[PlayerID].VelocityX;
+                    PlayerList[PlayerID].PositionX = PlayerList[PlayerID].X;
                 }
-                //if (map.Down == true || map.Up == true)
-                //{
-                //    PlayerList[PlayerID].PositionY += PlayerList[PlayerID].VelocityY;
-                //}
-                //if (map.Left == false && map.Right == false)
-                //{
-                //    map.HorizontalMove(PlayerList[PlayerID].VelocityX);
-                //}
-                //if (map.Up == false && map.Down == false)
-                //{
-                //    map.VerticalMove(PlayerList[PlayerID].VelocityY);
-                //}
+                if (map.Right == true)
+                {
+                    PlayerList[PlayerID].PositionX = PlayerList[PlayerID].X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
+                }
+                if (map.Down == true)
+                {
+                    PlayerList[PlayerID].PositionY = PlayerList[PlayerID].Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
+                }
+                if (map.Up == true)
+                {
+                    PlayerList[PlayerID].PositionY = PlayerList[PlayerID].Y;
+                }
+                if (map.Left == false && map.Right == false)
+                {
+                    map.HorizontalMove(PlayerList[PlayerID].VelocityX);
+                    mapMoveX = PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2;
+                }
+                if (map.Up == false && map.Down == false)
+                {
+                    map.VerticalMove(PlayerList[PlayerID].VelocityY);
+                    mapMoveY = PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2;
+                }
                 PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
                 PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
             }
@@ -243,6 +257,10 @@ namespace The_Dream.Classes
                 {
                     p.PlayerImage.Draw(spriteBatch);
                 }
+            }
+            if (PlayerList.Count > PlayerID)
+            {
+                PlayerList[PlayerID].PlayerImage.Draw(spriteBatch);
             }
         }
     }
