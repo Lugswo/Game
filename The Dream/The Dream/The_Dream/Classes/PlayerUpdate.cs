@@ -69,6 +69,7 @@ namespace The_Dream.Classes
         public void Move(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
         {
             //map.Update(gameTime, player);
+            Rectangle pHitBox = new Rectangle(player.PositionX, player.PositionY, Width, Height);
             if (Down == true)
             {
                 player.VelocityY = 10;
@@ -96,11 +97,78 @@ namespace The_Dream.Classes
             
             foreach (MapSprite blank in map.Blanks)
             {
-                if (blank.HitBox)
+                if (blank.HitBox.Left < player.PositionX + Width && blank.HitBox.Right > player.PositionX)
+                {
+                    blank.Column = true;
+                }
+                else
+                {
+                    blank.Column = false;
+                }
+                if (blank.HitBox.Top < player.PositionY + Height && blank.HitBox.Bottom > player.PositionY)
+                {
+                    blank.Row = true;
+                }
+                else
+                {
+                    blank.Row = false;
+                }
+                if (blank.Row == true)
+                {
+                    if (blank.Left.Intersects(pHitBox))
+                    {
+                        if (player.VelocityX < 0)
+                        {
+                            player.VelocityX = -10;
+                        }
+                        else
+                        {
+                            player.VelocityX = 0;
+                        }
+                    }
+
+                    if (blank.Right.Intersects(pHitBox))
+                    {
+                        if (player.VelocityX > 0)
+                        {
+                            player.VelocityX = 10;
+                        }
+                        else
+                        {
+                            player.VelocityX = 0;
+                        }
+                    }
+                }
+                if (blank.Column == true)
+                {
+                    if (blank.Down.Intersects(pHitBox))
+                    {
+                        if (player.VelocityY > 0)
+                        {
+                            player.VelocityY = 10;
+                        }
+                        else
+                        {
+                            player.VelocityY = 0;
+                        }
+                    }
+                    if (blank.Up.Intersects(pHitBox))
+                    {
+                        if (player.VelocityY < 0)
+                        {
+                            player.VelocityY = -10;
+                        }
+                        else
+                        {
+                            player.VelocityY = 0;
+                        }
+                    }
+                }
             }
 
             player.X += player.VelocityX;
             player.Y += player.VelocityY;
+
             //if (map.Left == true || map.Right == true)
             //{
             //    player.PositionX += player.VelocityX;
@@ -124,7 +192,6 @@ namespace The_Dream.Classes
                 {
                     player.AreaY++;
                     player.Y = map.DeadZone.Top;
-                    player.PositionY = map.DeadZone.Top;
                     player.newArea = true;
                 }
             }
@@ -133,7 +200,6 @@ namespace The_Dream.Classes
                 if (player.Y > map.DeadZone.Bottom - Height)
                 {
                     player.Y = map.DeadZone.Bottom - Height;
-                    player.PositionY = map.DeadZone.Bottom - Height;
                     player.VelocityY = 0;
                 }
             }
@@ -143,7 +209,6 @@ namespace The_Dream.Classes
                 {
                     player.AreaY--;
                     player.Y = map.DeadZone.Bottom - Height;
-                    player.PositionY = map.DeadZone.Bottom - Height;
                     player.newArea = true;
                 }
             }
@@ -152,7 +217,6 @@ namespace The_Dream.Classes
                 if (player.Y < map.DeadZone.Top)
                 {
                     player.Y = map.DeadZone.Top;
-                    player.PositionY = map.DeadZone.Top;
                     player.VelocityY = 0;
                 }
             }
@@ -162,7 +226,6 @@ namespace The_Dream.Classes
                 {
                     player.AreaX++;
                     player.X = map.DeadZone.Left;
-                    player.PositionX = map.DeadZone.Left;
                     player.newArea = true;
                 }
             }
@@ -181,7 +244,6 @@ namespace The_Dream.Classes
                 {
                     player.AreaX--;
                     player.X = map.DeadZone.Right - Width;
-                    player.PositionX = map.DeadZone.Right - Width;
                     player.newArea = true;
                 }
             }

@@ -48,6 +48,8 @@ namespace The_Dream.Classes
                 outmsg.Write(p.Y);
                 outmsg.Write(p.VelocityX);
                 outmsg.Write(p.VelocityY);
+                outmsg.Write(p.AreaX);
+                outmsg.Write(p.AreaY);
             }
             if (server.ConnectionsCount > 0)
             {
@@ -128,13 +130,8 @@ namespace The_Dream.Classes
                                 p.Down = ServerInc.ReadBoolean();
                                 p.Left = ServerInc.ReadBoolean();
                                 p.Right = ServerInc.ReadBoolean();
-                                //if (p.newArea == true)
-                                //{
-                                //    NetOutgoingMessage outmsg = server.CreateMessage();
-                                //    outmsg.Write((byte)PacketTypes.NEWAREA);
-                                //    server.SendMessage(outmsg, ServerInc.SenderConnection, NetDeliveryMethod.ReliableOrdered, 0);
-                                //    p.newArea = false;
-                                //}
+                                p.PositionX = ServerInc.ReadInt32();
+                                p.PositionY = ServerInc.ReadInt32();
                                 break;
                             }
                         }
@@ -167,6 +164,13 @@ namespace The_Dream.Classes
             }
             foreach (Player p in GameState)
             {
+                if (p.newArea == true)
+                {
+                    NetOutgoingMessage outmsg = server.CreateMessage();
+                    outmsg.Write((byte)PacketTypes.NEWAREA);
+                    server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                    p.newArea = false;
+                }
                 Player temp = p;
                 playerUpdate.Move(gameTime, ref temp, p.Up, p.Down, p.Left, p.Right);
             }

@@ -45,14 +45,39 @@ namespace The_Dream.Classes
                     XmlManager<Map> mapLoader = new XmlManager<Map>();
                     map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[X, Y] + "/Background.xml");
                     map.IsTransitioning = true;
+                    map.Update(gameTime, client.PlayerList[client.PlayerID]);
                     map.LoadContent();
+                    foreach (MapSprite m in map.Maps)
+                    {
+                        if (map.Left == false && map.Right == false)
+                        {
+                            m.image.Position.X = m.OriginalPosition.X - map.Moved.X + ScreenManager.instance.Dimensions.X / 2;
+                        }
+                        else if (map.Right == true)
+                        {
+                            m.image.Position.X = m.OriginalPosition.X - map.DeadZone.Width + ScreenManager.instance.Dimensions.X;
+                        }
+                        if (map.Down == false && map.Up == false)
+                        {
+                            m.image.Position.Y = m.OriginalPosition.Y - map.Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
+                        }
+                        else if (map.Down == true)
+                        {
+                            m.image.Position.Y = m.OriginalPosition.Y - map.DeadZone.Height + ScreenManager.instance.Dimensions.Y;
+                        }
+                    }
+                    foreach (MapSprite b in map.Blanks)
+                    {
+                        b.image.Position.X = b.OriginalPosition.X - map.Moved.X;
+                        b.image.Position.Y = b.OriginalPosition.Y - map.Moved.Y;
+                    }
+                    client.GetReferences(map);
                 }
                 else if (fadeImage.Alpha == 0.0f)
                 {
                     fadeImage.IsActive = false;
                     map.IsTransitioning = false;
                     setFade = false;
-                    client.GetReferences(map);
                 }
             }
         }

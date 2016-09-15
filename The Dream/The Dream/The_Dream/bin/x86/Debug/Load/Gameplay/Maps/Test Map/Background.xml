@@ -27,6 +27,51 @@
       </Position>
     </image>
   </Sprite>
+  <Sprite>
+    <image>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>3999</X>
+        <Y>0</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Sprite>
+    <image>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>3999</X>
+        <Y>2000</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Sprite>
+    <image>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>0</X>
+        <Y>4000</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Sprite>
+    <image>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>1999</X>
+        <Y>4000</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Sprite>
+    <image>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>3999</X>
+        <Y>4000</Y>
+      </Position>
+    </image>
+  </Sprite>
   <Blank>
     <image>
       <Path>Gameplay/Backgrounds/Blanks/Black</Path>

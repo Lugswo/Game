@@ -56,22 +56,6 @@ namespace The_Dream.Classes
         public void Update(GameTime gameTime)
         {
             PlayerImage.IsActive = true;
-            //if (PlayerImage.Position.X < 0)
-            //{
-            //    AreaX--;
-            //}
-            //if (PlayerImage.Position.X > ScreenManager.Instance.Dimensions.X)
-            //{
-            //    AreaX++;
-            //}
-            //if (PlayerImage.Position.Y < 0)
-            //{
-            //    AreaY++;
-            //}
-            //if (PlayerImage.Position.Y > ScreenManager.Instance.Dimensions.Y)
-            //{
-            //    AreaY--;
-            //}
             if (VelocityX == 0 && VelocityY == 0)
             {
                 PlayerImage.IsActive = false;

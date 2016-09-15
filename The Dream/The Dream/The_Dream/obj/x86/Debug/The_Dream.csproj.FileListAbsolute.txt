@@ -62,9 +62,7 @@ C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gamep
 C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Settings.xnb
 C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Skills.xnb
 C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\Beastiary.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Sound Effects\Attack.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Sound.xml
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Music\Megalovania.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InBeastiary.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InEquipment.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Menu\InInventory.xnb

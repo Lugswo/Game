@@ -115,6 +115,8 @@ namespace The_Dream.Classes
                 outmsg.Write(Down);
                 outmsg.Write(Left);
                 outmsg.Write(Right);
+                outmsg.Write(PlayerList[PlayerID].PositionX);
+                outmsg.Write(PlayerList[PlayerID].PositionY);
                 client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
             }
         }
@@ -147,10 +149,7 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime)
         {
-            if (map.IsTransitioning == false)
-            {
-                GetInput();
-            }
+            GetInput();
             while ((ClientInc = client.ReadMessage()) != null)
             {
                 switch (ClientInc.MessageType)
@@ -174,6 +173,8 @@ namespace The_Dream.Classes
                                 p.Y = ClientInc.ReadInt32();
                                 p.VelocityX = ClientInc.ReadInt32();
                                 p.VelocityY = ClientInc.ReadInt32();
+                                p.AreaX = ClientInc.ReadInt32();
+                                p.AreaY = ClientInc.ReadInt32();
                             }
                         }
                         else if (b == (byte)PacketTypes.JOINED)
@@ -233,13 +234,13 @@ namespace The_Dream.Classes
                 }
                 if (map.Left == false && map.Right == false)
                 {
-                    map.HorizontalMove(PlayerList[PlayerID].VelocityX);
-                    mapMoveX = PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2;
+                    map.HorizontalMove();
+                    mapMoveX = (PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2) + 10;
                 }
                 if (map.Up == false && map.Down == false)
                 {
-                    map.VerticalMove(PlayerList[PlayerID].VelocityY);
-                    mapMoveY = PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2;
+                    map.VerticalMove();
+                    mapMoveY = (PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2) + 10;
                 }
                 PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
                 PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;

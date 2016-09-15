@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Menu>
+  <Background>
+    <Path>SplashScreen/Screen</Path>
+  </Background>
   <Axis>Y</Axis>
   <Effects>FadeEffect</Effects>
   <Item>

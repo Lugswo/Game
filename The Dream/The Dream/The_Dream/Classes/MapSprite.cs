@@ -10,8 +10,9 @@ namespace The_Dream.Classes
     public class MapSprite
     {
         public Image image;
-        public Rectangle HitBox;
+        public Rectangle HitBox, Left, Right, Up, Down;
         public Vector2 OriginalPosition;
+        public bool Row, Column;
         public MapSprite()
         {
 

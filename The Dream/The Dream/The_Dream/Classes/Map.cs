@@ -34,7 +34,7 @@ namespace The_Dream.Classes
             Vertical = Horizontal = EdgeHorizontal = EdgeVertical = Pause = false;
             Area = new string[4, 3];
             Area[1, 1] = "Test Map";
-            //Area[2, 1] = "Right Map";
+            Area[2, 1] = "Right Map";
             NewMap = SongPlaying = false;
         }
         public void NewArea(int X, int Y)
@@ -62,6 +62,10 @@ namespace The_Dream.Classes
                 map.image.LoadContent();
                 map.OriginalPosition = map.image.Position;
                 map.HitBox = new Rectangle((int)map.OriginalPosition.X, (int)map.OriginalPosition.Y, map.image.texture.Width, map.image.texture.Height);
+                map.Left = new Rectangle((int)map.OriginalPosition.X, (int)map.OriginalPosition.Y, 1, map.image.texture.Height);
+                map.Right = new Rectangle(map.image.texture.Width, (int)map.OriginalPosition.Y, -1, map.image.texture.Height);
+                map.Up = new Rectangle((int)map.OriginalPosition.X, (int)map.OriginalPosition.Y, map.image.texture.Width, 1);
+                map.Down = new Rectangle((int)map.OriginalPosition.X, map.image.texture.Height, map.image.texture.Width, -1);
             }
             DeadZone = new Rectangle(x.Min(), y.Min(), x.Max(), y.Max());
             OriginalDeadZone = new Rectangle(x.Min(), y.Min(), x.Max(), y.Max());
@@ -236,7 +240,7 @@ namespace The_Dream.Classes
         //        }
         //    }
         }
-        public void HorizontalMove(int X)
+        public void HorizontalMove()
         {
             foreach (MapSprite map in Maps)
             {
@@ -245,13 +249,25 @@ namespace The_Dream.Classes
             foreach (MapSprite blank in Blanks)
             {
                 blank.HitBox.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                blank.Left.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                blank.Right.X = (int)blank.OriginalPosition.X + (int)blank.image.texture.Width - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                blank.Up.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                blank.Down.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
             }
         }
-        public void VerticalMove(int Y)
+        public void VerticalMove()
         {
             foreach (MapSprite map in Maps)
             {
                 map.image.Position.Y = map.OriginalPosition.Y - Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
+            }
+            foreach (MapSprite blank in Blanks)
+            {
+                blank.HitBox.Y = (int)blank.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                blank.Left.Y = (int)blank.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                blank.Right.Y = (int)blank.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                blank.Up.Y = (int)blank.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                blank.Down.Y = (int)blank.OriginalPosition.Y + (int)blank.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
             }
         }
         public void Draw(SpriteBatch spriteBatch)

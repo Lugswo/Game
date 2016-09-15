@@ -18,6 +18,7 @@ namespace The_Dream.Classes
         public List<MenuItem> Items;
         int itemNumber;
         string id;
+        public Image Background;
         public int ItemNumber
         {
             get { return itemNumber; }
@@ -91,6 +92,7 @@ namespace The_Dream.Classes
                 }
                 AlignMenuItems();
             }
+            Background.LoadContent();
         }
         public void UnloadContent()
         {
@@ -146,11 +148,11 @@ namespace The_Dream.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
+            Background.Draw(spriteBatch);
             foreach (MenuItem item in Items)
             {
                 item.image.Draw(spriteBatch);
             }
         }
-
     }
 }
