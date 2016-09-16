@@ -85,6 +85,10 @@ namespace The_Dream.Classes
                 Left = false;
                 Right = false;
             }
+            if (map.IsTransitioning == true)
+            {
+                Up = Down = Left = Right = false;
+            }
             if (Up == pUp && Down == pDown && Left == pLeft && Right == pRight)
             {
                 MoveDir = MoveDirection.NONE;

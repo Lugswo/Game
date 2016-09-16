@@ -26,16 +26,21 @@ namespace The_Dream.Classes
         public int AreaX, AreaY;
         List<int> x, y;
         public bool IsTransitioning;
+        public Textures textures;
         public bool Vertical, Horizontal, EdgeVertical, EdgeHorizontal, Right, Left, Up, Down, Column, Row, Pause, NewMap, ExitTop, ExitBottom, ExitRight, ExitLeft, SongPlaying;
         public Map()
         {
             Moved = Vector2.Zero;
             Screen = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
             Vertical = Horizontal = EdgeHorizontal = EdgeVertical = Pause = false;
-            Area = new string[4, 3];
+            Area = new string[3, 3];
             Area[1, 1] = "Test Map";
             Area[2, 1] = "Right Map";
             NewMap = SongPlaying = false;
+        }
+        public void GetReferences(Textures realTextures)
+        {
+            textures = realTextures;
         }
         public void NewArea(int X, int Y)
         {

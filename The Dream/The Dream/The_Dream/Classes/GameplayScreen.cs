@@ -114,6 +114,7 @@ namespace The_Dream.Classes
             XmlManager<Map> mapLoader = new XmlManager<Map>();
             map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             map.LoadContent();
+            map.GetReferences(textures);
             client.GetReferences(map);
             if (server.host == true)
             {

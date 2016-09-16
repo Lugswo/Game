@@ -40,6 +40,10 @@ namespace The_Dream.Classes
             {
                 MonsterList[monster].CanSpawn = true;
             }
+            else
+            {
+                MonsterList[monster].CanSpawn = false;
+            }
         }
         public void SpawnMonster(Monster monster)
         {
