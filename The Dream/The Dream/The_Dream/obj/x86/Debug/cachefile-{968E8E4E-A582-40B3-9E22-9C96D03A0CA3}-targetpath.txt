@@ -27,3 +27,4 @@ Content\Gameplay\Menu\InSettings.xnb
 Content\Gameplay\Menu\InSkills.xnb
 Content\Gameplay\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
+Content\Gameplay\Backgrounds\Down Map\Down Map.xnb

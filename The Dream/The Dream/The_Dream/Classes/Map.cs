@@ -33,9 +33,10 @@ namespace The_Dream.Classes
             Moved = Vector2.Zero;
             Screen = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
             Vertical = Horizontal = EdgeHorizontal = EdgeVertical = Pause = false;
-            Area = new string[3, 3];
+            Area = new string[4, 4];
             Area[1, 1] = "Test Map";
             Area[2, 1] = "Right Map";
+            Area[1, 2] = "Down Map";
             NewMap = SongPlaying = false;
         }
         public void GetReferences(Textures realTextures)
@@ -104,146 +105,34 @@ namespace The_Dream.Classes
             {
                 Left = true;
             }
-            else if (Moved.X > DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            else
+            {
+                Left = false;
+            }
+            if (Moved.X > DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
             {
                 Right = true;
             }
             else
             {
-                Left = false;
                 Right = false;
             }
             if (Moved.Y < ScreenManager.Instance.Dimensions.Y / 2)
             {
                 Up = true;
             }
-            else if (Moved.Y > DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
+            else
+            {
+                Up = false;
+            }
+            if (Moved.Y > DeadZone.Bottom - ScreenManager.Instance.Dimensions.Y / 2)
             {
                 Down = true;
             }
             else
             {
-                Up = false;
                 Down = false;
             }
-            //if (Moved.X == ScreenManager.instance.Dimensions.X / 2)
-            //{
-            //    if (InputManager.Instance.KeyDown(Keys.Right))
-            //    {
-            //        Left = false;
-            //    }
-            //    if (InputManager.Instance.KeyDown(Keys.Left))
-            //    {
-            //        Right = false;
-            //    }
-            //}
-            //if (Moved.Y == ScreenManager.Instance.Dimensions.Y / 2)
-            //{
-            //    if (InputManager.Instance.KeyDown(Keys.Up))
-            //    {
-            //        Down = false;
-            //    }
-            //    if (InputManager.Instance.KeyDown(Keys.Down))
-            //    {
-            //        Up = false;
-            //    }
-            //}
-            //if (!(DeadZone.Contains(Screen)))
-            //{
-            //    if (Screen.Y < DeadZone.Y || Screen.Height - 1 > DeadZone.Height - Moved.Y)
-            //    {
-            //        Vertical = true;
-            //        foreach (MapSprite map in Maps)
-            //        {
-            //            Moved.Y = prevMoved.Y;
-            //            map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
-            //        }
-            //    }
-            //    if (Screen.X < DeadZone.X || Screen.Width > DeadZone.Width - Moved.X)
-            //    {
-            //        Horizontal = true;
-            //        foreach (MapSprite map in Maps)
-            //        {
-            //            Moved.X = prevMoved.X;
-            //            map.image.Position.X = map.OriginalPosition.X - Moved.X;
-            //        }
-            //    }
-            //}
-        //        if (NewMap == true)
-        //        {
-        //            NewArea();
-        //            SongPlaying = false;
-        //        }
-        //        foreach (MapSprite map in Blanks)
-        //        {
-        //            map.HitBox.X = (int)-Moved.X + (int)map.OriginalPosition.X;
-        //            map.HitBox.Y = (int)-Moved.Y + (int)map.OriginalPosition.Y;
-        //            if ((player.HitBox.Left - 1 > map.HitBox.Left && player.HitBox.Left - 1 < map.HitBox.Right) || (player.HitBox.Right - 1 > map.HitBox.Left && player.HitBox.Right - 1 < map.HitBox.Right))
-        //            {
-        //                Column = true;
-        //            }
-        //            if ((player.HitBox.Top + 1 > map.HitBox.Top && player.HitBox.Top + 1 < map.HitBox.Bottom) || (player.HitBox.Bottom - 5 > map.HitBox.Top && player.HitBox.Bottom - 5 < map.HitBox.Bottom))
-        //            {
-        //                Row = true;
-        //            }
-        //            if (Column == true)
-        //            {
-        //                if (player.HitBox.Top <= map.HitBox.Bottom)
-        //                {
-        //                    Up = true;
-        //                }
-        //                if (player.HitBox.Bottom >= map.HitBox.Top)
-        //                {
-        //                    Down = true;
-        //                }
-        //            }
-        //            if (Row == true)
-        //            {
-        //                if (player.HitBox.Left <= map.HitBox.Right)
-        //                {
-        //                    Left = true;
-        //                }
-        //                if (player.HitBox.Right >= map.HitBox.Left)
-        //                {
-        //                    Right = true;
-        //                }
-        //            }
-        //            if (Column == true)
-        //            {
-        //                if (Up == true && Down == true)
-        //                {
-        //                    EdgeVertical = true;
-        //                    Moved.Y = prevMoved.Y;
-        //                }
-        //            }
-        //            if (Row == true)
-        //            {
-        //                if (Right == true && Left == true)
-        //                {
-        //                    EdgeHorizontal = true;
-        //                    Moved.X = prevMoved.X;
-        //                }
-        //            }
-        //        }
-        //        foreach (MapSprite map in Maps)
-        //        {
-        //            map.image.Update(gameTime);
-        //        }
-        //        if (Horizontal == false && EdgeHorizontal == false && player.Attacking == false)
-        //        {
-        //            foreach (MapSprite map in Maps)
-        //            {
-        //                map.image.Position.X = map.OriginalPosition.X - Moved.X;
-        //            }
-        //        }
-        //        if (Vertical == false && EdgeVertical == false && player.Attacking == false)
-        //        {
-        //            foreach (MapSprite map in Maps)
-        //            {
-        //                map.image.Position.Y = map.OriginalPosition.Y - Moved.Y;
-        //            }
-        //        }
-        //    }
         }
         public void HorizontalMove()
         {

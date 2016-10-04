@@ -15,6 +15,7 @@ namespace The_Dream.Classes
         public Image image;
         public Image LevelUp;
         public Image HavePoints;
+        public Textures textures;
         public SoundManager soundManager;
         [XmlIgnore]
         public Rectangle HitBox;
@@ -22,7 +23,7 @@ namespace The_Dream.Classes
         public Vector2 Velocity, PlayerMoved, PrevPlayerMoved, OriginalPosition;
         public float MoveSpeed;
         public int playerHeight, playerWidth, Combo, Health, Energy, EXP, Level, NextLevel, Strength, Defense, Dexterity, Intelligence, Speed, Direction, StatPoints;
-        public bool Attacking, SetZero, NextAttack, Rolling, IncreaseVelocity, AtHorizontalEdge, AtVerticalEdge, Leveled;
+        public bool Attacking, SetZero, NextAttack, Rolling, IncreaseVelocity, AtHorizontalEdge, AtVerticalEdge, Leveled, addMonsters;
         public List<Rectangle> AttackHitboxes;
         public string Name;
         int Attacks, prevY;
@@ -31,6 +32,7 @@ namespace The_Dream.Classes
         {
             Width = 54;
             Height = 64;
+            addMonsters = false;
         }
         public void GetReferences(Map GameMap)
         {
@@ -66,10 +68,31 @@ namespace The_Dream.Classes
             LevelUp.UnloadContent();
             HavePoints.UnloadContent();
         }
+        public void NewArea(ref Player player, bool Up, bool Down, bool Left, bool Right)
+        {
+            if (Up == true)
+            {
+                player.Y = player.DeadZone.Bottom - Height;
+                player.AreaY--;
+            }
+            else if (Down == true)
+            {
+                player.Y = player.DeadZone.Top;
+                player.AreaY++;
+            }
+            else if (Left == true)
+            {
+                player.X = player.DeadZone.Right - Width;
+                player.AreaX--;
+            }
+            else if (Right == true)
+            {
+                player.X = player.DeadZone.Left;
+                player.AreaX++;
+            }
+        }
         public void Move(GameTime gameTime, ref Player player, bool Up, bool Down, bool Left, bool Right)
         {
-            //map.Update(gameTime, player);
-            Rectangle pHitBox = new Rectangle(player.PositionX, player.PositionY, Width, Height);
             if (Down == true)
             {
                 player.VelocityY = 10;
@@ -95,167 +118,227 @@ namespace The_Dream.Classes
                 player.VelocityX = 0;
             }
             
-            foreach (MapSprite blank in map.Blanks)
-            {
-                if (blank.HitBox.Left < player.PositionX + Width && blank.HitBox.Right > player.PositionX)
-                {
-                    blank.Column = true;
-                }
-                else
-                {
-                    blank.Column = false;
-                }
-                if (blank.HitBox.Top < player.PositionY + Height && blank.HitBox.Bottom > player.PositionY)
-                {
-                    blank.Row = true;
-                }
-                else
-                {
-                    blank.Row = false;
-                }
-                if (blank.Row == true)
-                {
-                    if (blank.Left.Intersects(pHitBox))
-                    {
-                        if (player.VelocityX < 0)
-                        {
-                            player.VelocityX = -10;
-                        }
-                        else
-                        {
-                            player.VelocityX = 0;
-                        }
-                    }
+            //foreach (MapSprite blank in player.Blanks)
+            //{
+            //    if (blank.HitBox.Left < player.PositionX + Width && blank.HitBox.Right > player.PositionX)
+            //    {
+            //        blank.Column = true;
+            //    }
+            //    else
+            //    {
+            //        blank.Column = false;
+            //    }
+            //    if (blank.HitBox.Top < player.PositionY + Height && blank.HitBox.Bottom > player.PositionY)
+            //    {
+            //        blank.Row = true;
+            //    }
+            //    else
+            //    {
+            //        blank.Row = false;
+            //    }
+            //    if (blank.Row == true)
+            //    {
+            //        if (blank.Left.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityX < 0)
+            //            {
+            //                player.VelocityX = -10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityX = 0;
+            //            }
+            //        }
 
-                    if (blank.Right.Intersects(pHitBox))
-                    {
-                        if (player.VelocityX > 0)
-                        {
-                            player.VelocityX = 10;
-                        }
-                        else
-                        {
-                            player.VelocityX = 0;
-                        }
-                    }
-                }
-                if (blank.Column == true)
-                {
-                    if (blank.Down.Intersects(pHitBox))
-                    {
-                        if (player.VelocityY > 0)
-                        {
-                            player.VelocityY = 10;
-                        }
-                        else
-                        {
-                            player.VelocityY = 0;
-                        }
-                    }
-                    if (blank.Up.Intersects(pHitBox))
-                    {
-                        if (player.VelocityY < 0)
-                        {
-                            player.VelocityY = -10;
-                        }
-                        else
-                        {
-                            player.VelocityY = 0;
-                        }
-                    }
-                }
-            }
+            //        if (blank.Right.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityX > 0)
+            //            {
+            //                player.VelocityX = 10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityX = 0;
+            //            }
+            //        }
+            //    }
+            //    if (blank.Column == true)
+            //    {
+            //        if (blank.Down.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityY > 0)
+            //            {
+            //                player.VelocityY = 10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityY = 0;
+            //            }
+            //        }
+            //        if (blank.Up.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityY < 0)
+            //            {
+            //                player.VelocityY = -10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityY = 0;
+            //            }
+            //        }
+            //    }
+            //}
+
+            //foreach (Sprite sprite in textures.Sprites)
+            //{
+            //    if (sprite.HitBox.Left < player.PositionX + Width && sprite.HitBox.Right > player.PositionX)
+            //    {
+            //        sprite.Column = true;
+            //    }
+            //    else
+            //    {
+            //        sprite.Column = false;
+            //    }
+            //    if (sprite.HitBox.Top < player.PositionY + Height && sprite.HitBox.Bottom > player.PositionY)
+            //    {
+            //        sprite.Row = true;
+            //    }
+            //    else
+            //    {
+            //        sprite.Row = false;
+            //    }
+            //    if (sprite.Row == true)
+            //    {
+            //        if (sprite.Left.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityX < 0)
+            //            {
+            //                player.VelocityX = -10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityX = 0;
+            //            }
+            //        }
+
+            //        if (sprite.Right.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityX > 0)
+            //            {
+            //                player.VelocityX = 10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityX = 0;
+            //            }
+            //        }
+            //    }
+            //    if (sprite.Column == true)
+            //    {
+            //        if (sprite.Down.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityY > 0)
+            //            {
+            //                player.VelocityY = 10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityY = 0;
+            //            }
+            //        }
+            //        if (sprite.Up.Intersects(pHitBox))
+            //        {
+            //            if (player.VelocityY < 0)
+            //            {
+            //                player.VelocityY = -10;
+            //            }
+            //            else
+            //            {
+            //                player.VelocityY = 0;
+            //            }
+            //        }
+            //    }
+            //}
 
             player.X += player.VelocityX;
             player.Y += player.VelocityY;
 
-            //if (map.Left == true || map.Right == true)
+            //if (map.Area[player.AreaX, player.AreaY + 1] != null)
             //{
-            //    player.PositionX += player.VelocityX;
+            //    if (player.Y > map.DeadZone.Bottom - Height)
+            //    {
+            //        player.AreaY++;
+            //        GetDeadZone(player.AreaX, player.AreaY);
+            //        player.Y = map.DeadZone.Top;
+            //        player.newArea = true;
+            //    }
             //}
-            //if (map.Down == true || map.Up == true)
+            //else
             //{
-            //    player.PositionY += player.VelocityY;
+            //    if (player.Y > map.DeadZone.Bottom - Height)
+            //    {
+            //        player.Y = map.DeadZone.Bottom - Height;
+            //        player.VelocityY = 0;
+            //    }
             //}
-            //if (map.Left == false && map.Right == false)
+            //if (map.Area[player.AreaX, player.AreaY - 1] != null)
             //{
-            //    map.HorizontalMove(player.VelocityX);
+            //    if (player.Y < map.DeadZone.Top)
+            //    {
+            //        player.AreaY--;
+            //        GetDeadZone(player.AreaX, player.AreaY);
+            //        player.Y = map.DeadZone.Bottom - Height;
+            //        player.newArea = true;
+            //    }
             //}
-            //if (map.Up == false && map.Down == false)
+            //else
             //{
-            //    map.VerticalMove(player.VelocityY);
+            //    if (player.Y < map.DeadZone.Top)
+            //    {
+            //        player.Y = map.DeadZone.Top;
+            //        player.VelocityY = 0;
+            //    }
             //}
-
-            if (map.Area[player.AreaX, player.AreaY + 1] != null)
-            {
-                if (player.Y > map.DeadZone.Bottom - Height)
-                {
-                    player.AreaY++;
-                    player.Y = map.DeadZone.Top;
-                    player.newArea = true;
-                }
-            }
-            else
-            {
-                if (player.Y > map.DeadZone.Bottom - Height)
-                {
-                    player.Y = map.DeadZone.Bottom - Height;
-                    player.VelocityY = 0;
-                }
-            }
-            if (map.Area[player.AreaX, player.AreaY - 1] != null)
-            {
-                if (player.Y < map.DeadZone.Top)
-                {
-                    player.AreaY--;
-                    player.Y = map.DeadZone.Bottom - Height;
-                    player.newArea = true;
-                }
-            }
-            else
-            {
-                if (player.Y < map.DeadZone.Top)
-                {
-                    player.Y = map.DeadZone.Top;
-                    player.VelocityY = 0;
-                }
-            }
-            if (map.Area[player.AreaX + 1, player.AreaY] != null)
-            {
-                if (player.X > map.DeadZone.Right - Width)
-                {
-                    player.AreaX++;
-                    player.X = map.DeadZone.Left;
-                    player.newArea = true;
-                }
-            }
-            else
-            {
-                if (player.X > map.DeadZone.Right - Width)
-                {
-                    player.X = map.DeadZone.Right - Width;
-                    player.PositionX = map.DeadZone.Right - Width;
-                    player.VelocityX = 0;
-                }
-            }
-            if (map.Area[player.AreaX - 1, player.AreaY] != null)
-            {
-                if (player.X < map.DeadZone.Left)
-                {
-                    player.AreaX--;
-                    player.X = map.DeadZone.Right - Width;
-                    player.newArea = true;
-                }
-            }
-            else
-            {
-                if (player.X < map.DeadZone.Left)
-                {
-                    player.X = 0;
-                    player.PositionX = map.DeadZone.Right - Width;
-                    player.VelocityX = 0;
-                }
-            }
+            //if (map.Area[player.AreaX + 1, player.AreaY] != null)
+            //{
+            //    if (player.X > map.DeadZone.Right - Width)
+            //    {
+            //        player.AreaX++;
+            //        GetDeadZone(player.AreaX, player.AreaY);
+            //        player.X = map.DeadZone.Left;
+            //        player.newArea = true;
+            //    }
+            //}
+            //else
+            //{
+            //    if (player.X > map.DeadZone.Right - Width)
+            //    {
+            //        player.X = map.DeadZone.Right - Width;
+            //        player.VelocityX = 0;
+            //    }
+            //}
+            //if (map.Area[player.AreaX - 1, player.AreaY] != null)
+            //{
+            //    if (player.X < map.DeadZone.Left)
+            //    {
+            //        player.AreaX--;
+            //        GetDeadZone(player.AreaX, player.AreaY);
+            //        player.X = map.DeadZone.Right - Width;
+            //        player.newArea = true;
+            //    }
+            //}
+            //else
+            //{
+            //    if (player.X < map.DeadZone.Left)
+            //    {
+            //        player.X = 0;
+            //        player.VelocityX = 0;
+            //    }
+            //}
+            //if (player.newArea == true)
+            //{
+            //    GetDeadZone(player.AreaY, player.AreaY);
+            //}
         //    if (map.Pause == false)
         //    {
         //        LevelUp.Position.X = image.Position.X - ((LevelUp.spriteSheetEffect.FrameWidth - image.spriteSheetEffect.FrameWidth) / 2);

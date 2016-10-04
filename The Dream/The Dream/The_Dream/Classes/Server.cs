@@ -21,10 +21,10 @@ namespace The_Dream.Classes
         PlayerUpdate playerUpdate;
         public Map map;
         bool Up, Down, Left, Right;
+        UpdateMonsters updateMonsters;
         public void GetReferences(Map realMap)
         {
             map = realMap;
-            playerUpdate.GetReferences(map);
         }
         enum PacketTypes
         {
@@ -35,13 +35,14 @@ namespace The_Dream.Classes
             REMOVEPLAYER,
             JOINED,
             NEWAREA,
-            SHUTDOWN
+            SHUTDOWN,
+            ADDMONSTER,
+            NEWAREAMONSTERS
         }
         public void SendGameState()
         {
             NetOutgoingMessage outmsg = server.CreateMessage();
             outmsg.Write((byte)PacketTypes.WORLDSTATE);
-            outmsg.Write(GameState.Count);
             foreach (Player p in GameState)
             {
                 outmsg.Write(p.X);
@@ -50,6 +51,11 @@ namespace The_Dream.Classes
                 outmsg.Write(p.VelocityY);
                 outmsg.Write(p.AreaX);
                 outmsg.Write(p.AreaY);
+            }
+            foreach (Monster m in updateMonsters.SpawnedMonsters)
+            {
+                outmsg.Write(m.X);
+                outmsg.Write(m.Y);
             }
             if (server.ConnectionsCount > 0)
             {
@@ -70,14 +76,41 @@ namespace The_Dream.Classes
             }
             GameState = new List<Player>();
             playerUpdate = new PlayerUpdate();
-            playerUpdate.map = map;
+            updateMonsters = new UpdateMonsters();
+            updateMonsters.LoadContent();
         }
         public void UnloadContent()
         {
-
+            updateMonsters.UnloadContent();
         }
         public void Update(GameTime gameTime)
         {
+            foreach (Player p in GameState)
+            {
+                int MaxMonsters = 5;
+                updateMonsters.Update(gameTime, p.AreaX, p.AreaY);
+                if (updateMonsters.MonsterAdded == true)
+                {
+                    NetOutgoingMessage outmsg = server.CreateMessage();
+                    outmsg.Write((byte)PacketTypes.ADDMONSTER);
+                    foreach (Monster m in updateMonsters.SpawnedMonsters)
+                    {
+                        if (p.AreaX == m.AreaX && p.AreaY == m.AreaY)
+                        {
+                            outmsg.Write(m.X);
+                            outmsg.Write(m.Y);
+                            outmsg.Write(m.image.Path);
+                            outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.X);
+                            outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.Y);
+                        }
+                    }
+                    if (server.ConnectionsCount > 0)
+                    {
+                        server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                    }
+                    updateMonsters.MonsterAdded = false;
+                }
+            }
             while ((ServerInc = server.ReadMessage()) != null)
             {
                 switch (ServerInc.MessageType)
@@ -139,6 +172,50 @@ namespace The_Dream.Classes
                         {
                             server.Shutdown("bye");
                         }
+                        else if (b == (byte)PacketTypes.NEWAREA)
+                        {
+                            foreach (Player p in GameState)
+                            {
+                                if (p.Connection != ServerInc.SenderConnection)
+                                {
+                                    continue;
+                                }
+                                Player temp = p;
+                                temp.AreaX = ServerInc.ReadInt32();
+                                temp.AreaY = ServerInc.ReadInt32();
+                                bool Up = ServerInc.ReadBoolean();
+                                bool Down = ServerInc.ReadBoolean();
+                                bool Left = ServerInc.ReadBoolean();
+                                bool Right = ServerInc.ReadBoolean();
+                                p.DeadZone.X = ServerInc.ReadInt32();
+                                p.DeadZone.Y = ServerInc.ReadInt32();
+                                p.DeadZone.Width = ServerInc.ReadInt32();
+                                p.DeadZone.Height = ServerInc.ReadInt32();
+                                playerUpdate.NewArea(ref temp, Up, Down, Left, Right);
+                                updateMonsters.Entered = true;
+                                NetOutgoingMessage outmsg = server.CreateMessage();
+                                outmsg.Write((byte)PacketTypes.NEWAREAMONSTERS);
+                                int count = 0;
+                                foreach (Monster m in updateMonsters.SpawnedMonsters)
+                                {
+                                    if (p.AreaX == m.AreaX && p.AreaY == m.AreaY)
+                                    {
+                                        count++;
+                                    }
+                                }
+                                outmsg.Write(count);
+                                foreach (Monster m in updateMonsters.SpawnedMonsters)
+                                {
+                                    outmsg.Write(m.X);
+                                    outmsg.Write(m.Y);
+                                    outmsg.Write(m.image.Path);
+                                    outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.X);
+                                    outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.Y);
+                                }
+                                server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered);
+                                break;
+                            }
+                        }
                         break;
                     case NetIncomingMessageType.StatusChanged:
                         if (ServerInc.SenderConnection.Status == NetConnectionStatus.Disconnected || ServerInc.SenderConnection.Status == NetConnectionStatus.Disconnecting)
@@ -164,13 +241,6 @@ namespace The_Dream.Classes
             }
             foreach (Player p in GameState)
             {
-                if (p.newArea == true)
-                {
-                    NetOutgoingMessage outmsg = server.CreateMessage();
-                    outmsg.Write((byte)PacketTypes.NEWAREA);
-                    server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
-                    p.newArea = false;
-                }
                 Player temp = p;
                 playerUpdate.Move(gameTime, ref temp, p.Up, p.Down, p.Left, p.Right);
             }

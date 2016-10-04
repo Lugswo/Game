@@ -16,8 +16,8 @@ namespace The_Dream.Classes.Monsters
             image.spriteSheetEffect.AmountOfFrames.Y = 1;
             base.LoadContent();
             MonsterID = 2;
-            XSpawn = 0;
-            YSpawn = 0;
+            XSpawn = 1;
+            YSpawn = 2;
             Health = 1;
             Armor = 0;
             Attack = 0;

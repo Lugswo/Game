@@ -25,62 +25,6 @@ namespace The_Dream.Classes
         Server server = new Server();
         bool setFade = false;
         Image fadeImage;
-        void AreaTransition(GameTime gameTime, int X, int Y, ref Map map, ref Image fadeImage)
-        {
-            if (map.IsTransitioning == true)
-            {
-                if (setFade == false)
-                {
-                    fadeImage.IsActive = true;
-                    fadeImage.fadeEffect.Increase = true;
-                    setFade = true;
-                }
-                fadeImage.Update(gameTime);
-                if (fadeImage.Alpha == 1.0f)
-                {
-                    foreach (MapSprite m in map.Maps)
-                    {
-                        m.image.UnloadContent();
-                    }
-                    XmlManager<Map> mapLoader = new XmlManager<Map>();
-                    map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[X, Y] + "/Background.xml");
-                    map.IsTransitioning = true;
-                    map.Update(gameTime, client.PlayerList[client.PlayerID]);
-                    map.LoadContent();
-                    foreach (MapSprite m in map.Maps)
-                    {
-                        if (map.Left == false && map.Right == false)
-                        {
-                            m.image.Position.X = m.OriginalPosition.X - map.Moved.X + ScreenManager.instance.Dimensions.X / 2;
-                        }
-                        else if (map.Right == true)
-                        {
-                            m.image.Position.X = m.OriginalPosition.X - map.DeadZone.Width + ScreenManager.instance.Dimensions.X;
-                        }
-                        if (map.Down == false && map.Up == false)
-                        {
-                            m.image.Position.Y = m.OriginalPosition.Y - map.Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
-                        }
-                        else if (map.Down == true)
-                        {
-                            m.image.Position.Y = m.OriginalPosition.Y - map.DeadZone.Height + ScreenManager.instance.Dimensions.Y;
-                        }
-                    }
-                    foreach (MapSprite b in map.Blanks)
-                    {
-                        b.image.Position.X = b.OriginalPosition.X - map.Moved.X;
-                        b.image.Position.Y = b.OriginalPosition.Y - map.Moved.Y;
-                    }
-                    client.GetReferences(map);
-                }
-                else if (fadeImage.Alpha == 0.0f)
-                {
-                    fadeImage.IsActive = false;
-                    map.IsTransitioning = false;
-                    setFade = false;
-                }
-            }
-        }
         public GameplayScreen()
         {
             fadeImage = new Image();
@@ -145,7 +89,10 @@ namespace The_Dream.Classes
             base.UnloadContent();
             client.UnloadContent();
             map.UnloadContent();
-            server.UnloadContent();
+            if (server.host == true)
+            {
+                server.UnloadContent();
+            }
             //map.UnloadContent();
             //player.UnloadContent();
             //gameMenu.UnloadContent();
@@ -161,7 +108,7 @@ namespace The_Dream.Classes
             {
                 server.Update(gameTime);
             }
-            AreaTransition(gameTime, map.AreaX, map.AreaY, ref map, ref fadeImage);
+            client.AreaTransition(gameTime, client.map.AreaX, client.map.AreaY, ref client.map, ref fadeImage);
             //map.Update(gameTime);
             //textures.Update(gameTime);
             //updateMonsters.Update(gameTime);
@@ -171,7 +118,7 @@ namespace The_Dream.Classes
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            map.Draw(spriteBatch);
+            client.map.Draw(spriteBatch);
             client.Draw(spriteBatch);
             if (map.IsTransitioning == true)
             {

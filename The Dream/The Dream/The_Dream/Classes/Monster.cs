@@ -12,7 +12,7 @@ namespace The_Dream.Classes
         public Image image = new Image();
         public Rectangle Hitbox;
         public bool CanSpawn, Boss, IsAlive;
-        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP;
+        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY;
         public Vector2 OriginalPosition;
         public Monster()
         {

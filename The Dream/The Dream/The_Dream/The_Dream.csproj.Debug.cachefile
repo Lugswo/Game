@@ -27,7 +27,9 @@ Content\Gameplay\Menu\InSettings.xnb
 Content\Gameplay\Menu\InSkills.xnb
 Content\Gameplay\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
+Content\Gameplay\Backgrounds\Down Map\Down Map.xnb
 Load\ClientIPandHost.xml
+Load\Gameplay\Maps\Down Map\Background.xml
 Load\ServerIPandHost.xml
 Load\Gameplay\GameMenu.xml
 Load\Gameplay\Maps\Right Map\Background.xml

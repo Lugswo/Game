@@ -36,7 +36,11 @@ namespace The_Dream.Classes
             {
                 sprite.image.LoadContent();
                 sprite.OriginalPosition = sprite.image.Position;
-                sprite.Hitbox = new Rectangle((int)sprite.image.Position.X, (int)sprite.image.Position.Y, sprite.image.texture.Width, sprite.image.texture.Height);
+                sprite.HitBox = new Rectangle((int)sprite.image.Position.X, (int)sprite.image.Position.Y, sprite.image.texture.Width, sprite.image.texture.Height);
+                sprite.Left = new Rectangle((int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y, 1, sprite.image.texture.Height);
+                sprite.Right = new Rectangle(sprite.image.texture.Width, (int)sprite.OriginalPosition.Y, -1, sprite.image.texture.Height);
+                sprite.Up = new Rectangle((int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y, sprite.image.texture.Width, 1);
+                sprite.Down = new Rectangle((int)sprite.OriginalPosition.X, sprite.image.texture.Height, sprite.image.texture.Width, -1);
             }
         }
         public void UnloadContent()

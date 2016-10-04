@@ -128,6 +128,9 @@
     <Content Include="Load\ClientIPandHost.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Load\Gameplay\Maps\Down Map\Background.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Load\ServerIPandHost.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -137,6 +140,7 @@
     </Content>
     <Content Include="Load\Gameplay\Maps\Right Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\Gameplay\Maps\Test Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

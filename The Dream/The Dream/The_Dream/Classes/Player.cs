@@ -35,12 +35,16 @@ namespace The_Dream.Classes
         public bool Up, Down, Left, Right;
         public int pX;
         public int pY;
+        public List<MapSprite> Blanks;
+        public Rectangle DeadZone;
         public bool newArea = false;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Player()
         {
             PlayerImage = new Image();
+            Blanks = new List<MapSprite>();
+            DeadZone = new Rectangle();
         }
         public void LoadContent()
         {

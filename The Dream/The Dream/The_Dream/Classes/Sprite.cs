@@ -11,6 +11,7 @@ namespace The_Dream.Classes
     {
         public Image image;
         public Vector2 OriginalPosition;
-        public Rectangle Hitbox;
+        public Rectangle HitBox, Left, Right, Up, Down;
+        public bool Row, Column;
     }
 }

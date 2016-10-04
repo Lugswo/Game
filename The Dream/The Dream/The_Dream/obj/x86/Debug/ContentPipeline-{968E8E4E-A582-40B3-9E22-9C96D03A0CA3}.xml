@@ -262,6 +262,15 @@
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb</Output>
       <Time>2016-09-09T10:12:52.280596-07:00</Time>
     </Item>
+    <Item>
+      <Source>Gameplay\Backgrounds\Down Map\Down Map.png</Source>
+      <Name>Gameplay\Backgrounds\Down Map\Down Map</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb</Output>
+      <Time>2016-10-03T14:19:34.3255871-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{968E8E4E-A582-40B3-9E22-9C96D03A0CA3}</ContentProjectGUID>
