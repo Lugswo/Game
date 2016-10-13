@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Menu>
   <Background>
-    <Path>SplashScreen/Screen</Path>
+    <Path>SplashScreen/Title</Path>
   </Background>
   <Axis>Y</Axis>
   <Effects>FadeEffect</Effects>
@@ -10,6 +10,12 @@
     <LinkID>Load/Menus/MultiplayerScreen.xml</LinkID>
     <image>
       <Text>Multiplayer</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
     </image>
   </Item>
   <Item>
@@ -17,11 +23,23 @@
     <LinkID>Load/Menus/SingleplayerScreen.xml</LinkID>
     <image>
       <Text>Single Player</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
     </image>
   </Item>  
   <Item>
     <image>
       <Text>Options</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
     </image>
   </Item>
   <Item>
@@ -29,6 +47,12 @@
     <LinkID>ExitScreen</LinkID>
     <image>
       <Text>Exit</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
     </image>
   </Item>
 </Menu>

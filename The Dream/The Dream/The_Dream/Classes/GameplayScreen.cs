@@ -12,7 +12,6 @@ namespace The_Dream.Classes
 {
     public class GameplayScreen : GameScreen
     {
-        PlayerUpdate playerUpdate;
         Map map = new Map();
         Textures textures;
         UpdateGameMenu gameMenu;
@@ -58,8 +57,11 @@ namespace The_Dream.Classes
             XmlManager<Map> mapLoader = new XmlManager<Map>();
             map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
             map.LoadContent();
+            XmlManager<Textures> textureLoader = new XmlManager<Textures>();
+            textures = textureLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Textures.xml");
+            textures.LoadContent();
             map.GetReferences(textures);
-            client.GetReferences(map);
+            client.GetReferences(map, textures);
             if (server.host == true)
             {
                 server.GetReferences(map);
@@ -67,13 +69,10 @@ namespace The_Dream.Classes
             //XmlManager<Player> playerLoader = new XmlManager<Player>();
             //player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             //player.LoadContent();
-            //XmlManager<UpdateGameMenu> menuLoader = new XmlManager<UpdateGameMenu>();
-            //gameMenu = menuLoader.Load("Load/Gameplay/GameMenu.xml");
-            //gameMenu.SetReferences(map, playerUpdate);
-            //gameMenu.LoadContent();
-            //XmlManager<Textures> textureLoader = new XmlManager<Textures>();
-            //textures = textureLoader.Load("Load/Gameplay/Maps/" + map.Area[map.AreaX, map.AreaY] + "/Textures.xml");
-            //textures.LoadContent();
+            XmlManager<UpdateGameMenu> menuLoader = new XmlManager<UpdateGameMenu>();
+            gameMenu = menuLoader.Load("Load/Gameplay/GameMenu.xml");
+            gameMenu.LoadContent(player);
+
             //XmlManager<SoundManager> soundLoader = new XmlManager<SoundManager>();
             //soundManager = soundLoader.Load("Load/Gameplay/Sound.xml");
             //soundManager.LoadContent();
@@ -93,6 +92,7 @@ namespace The_Dream.Classes
             {
                 server.UnloadContent();
             }
+            gameMenu.UnloadContent();
             //map.UnloadContent();
             //player.UnloadContent();
             //gameMenu.UnloadContent();
@@ -103,7 +103,11 @@ namespace The_Dream.Classes
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            client.Update(gameTime);
+            if (client.PlayerList.Count > client.PlayerID)
+            {
+                gameMenu.Update(gameTime, client.PlayerList[client.PlayerID]);
+            }
+            client.Update(gameTime, gameMenu.paused);
             if (server.host == true)
             {
                 server.Update(gameTime);
@@ -119,7 +123,9 @@ namespace The_Dream.Classes
         {
             base.Draw(spriteBatch);
             client.map.Draw(spriteBatch);
+            client.textures.Draw(spriteBatch);
             client.Draw(spriteBatch);
+            gameMenu.Draw(spriteBatch);
             if (map.IsTransitioning == true)
             {
                 fadeImage.Draw(spriteBatch);

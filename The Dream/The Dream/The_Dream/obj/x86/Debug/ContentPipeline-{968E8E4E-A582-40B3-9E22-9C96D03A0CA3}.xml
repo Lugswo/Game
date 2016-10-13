@@ -271,6 +271,15 @@
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb</Output>
       <Time>2016-10-03T14:19:34.3255871-07:00</Time>
     </Item>
+    <Item>
+      <Source>SplashScreen\Title.jpg</Source>
+      <Name>SplashScreen\Title</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Title.xnb</Output>
+      <Time>2016-10-05T14:06:55.4192968-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{968E8E4E-A582-40B3-9E22-9C96D03A0CA3}</ContentProjectGUID>

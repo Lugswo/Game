@@ -15,17 +15,17 @@ namespace The_Dream.Classes
         [XmlElement("Item")]
         public List<Image> MenuItems;
         public Image PlayerImage, Level, charName;
-        public Map map;
-        public PlayerUpdate player;
         public int MenuNumber;
-        public bool InMenu;
+        public bool InMenu, paused, releasedPause;
         public UpdateGameMenu()
         {
             MenuNumber = 0;
             Level = new Image();
             charName = new Image();
+            paused = false;
+            releasedPause = true;
         }
-        void LoadMenu(int menu)
+        void LoadMenu(int menu, Player player)
         {
             foreach (Image image in MenuItems)
             {
@@ -129,12 +129,7 @@ namespace The_Dream.Classes
 
             }
         }
-        public void SetReferences(Map RealMap, PlayerUpdate RealPlayer)
-        {
-            map = RealMap;
-            player = RealPlayer;
-        }
-        public void LoadContent()
+        public void LoadContent(Player player)
         {
             PlayerImage.LoadContent();
             Level.Text = player.Level.ToString();
@@ -144,8 +139,8 @@ namespace The_Dream.Classes
             foreach (Image image in MenuItems)
             {
                 image.LoadContent();
-                image.Position.X = (map.ScreenWidth - image.texture.Width) / 2;
-                image.Position.Y = (map.ScreenHeight - image.texture.Height) / 2;
+                image.Position.X = (ScreenManager.instance.Dimensions.X - image.texture.Width) / 2;
+                image.Position.Y = (ScreenManager.instance.Dimensions.Y - image.texture.Height) / 2;
             }
             PlayerImage.Position.X = MenuItems[0].Position.X + 118;
             PlayerImage.Position.Y = MenuItems[0].Position.Y + 100;
@@ -161,9 +156,31 @@ namespace The_Dream.Classes
                 image.UnloadContent();
             }
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Player player)
         {
-            if (map.Pause == true)
+            if (paused == true)
+            {
+                if (InputManager.Instance.KeyPressed(Keys.Escape))
+                {
+                    paused = false;
+                }
+            }
+            if (paused == false)
+            {
+                if (InputManager.Instance.KeyUp(Keys.Escape))
+                {
+                    releasedPause = true;
+                }
+            }
+            if (releasedPause == true)
+            {
+                if (InputManager.Instance.KeyPressed(Keys.Escape))
+                {
+                    paused = true;
+                    releasedPause = false;
+                }
+            }
+            if (paused == true)
             {
                 Level = new Image();
                 Level.Text = player.Level.ToString();
@@ -172,6 +189,32 @@ namespace The_Dream.Classes
                 Level.LoadContent();
                 Level.Update(gameTime);
                 PlayerImage.Update(gameTime);
+                if (InMenu == false)
+                {
+                    if (InputManager.Instance.KeyPressed(Keys.Left))
+                    {
+                        MenuNumber--;
+                    }
+                    if (InputManager.Instance.KeyPressed(Keys.Right))
+                    {
+                        MenuNumber++;
+                    }
+                    if (InputManager.Instance.KeyPressed(Keys.X))
+                    {
+                        paused = false;
+                    }
+                }
+                if (InMenu == true)
+                {
+                    if (InputManager.Instance.KeyPressed(Keys.X))
+                    {
+                        InMenu = false;
+                    }
+                }
+                if (InputManager.Instance.KeyPressed(Keys.Z))
+                {
+                    InMenu = true;
+                }
                 if (MenuNumber < 0)
                 {
                     MenuNumber++;
@@ -180,7 +223,7 @@ namespace The_Dream.Classes
                 {
                     MenuNumber--;
                 }
-                LoadMenu(MenuNumber);
+                LoadMenu(MenuNumber, player);
                 foreach (Image image in MenuItems)
                 {
                     image.Update(gameTime);
@@ -189,7 +232,7 @@ namespace The_Dream.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (map.Pause == true)
+            if (paused == true)
             {
                 foreach (Image image in MenuItems)
                 {

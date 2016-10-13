@@ -23,6 +23,7 @@ namespace The_Dream.Classes
         float SpawnTimer;
         Random random;
         List<Vector2> AreasAdded;
+        public List<AreaMonsters> AreaList;
         bool AreaAdded;
         public void GetMap(Map realMap)
         {
@@ -47,45 +48,59 @@ namespace The_Dream.Classes
                 MonsterList[monster].CanSpawn = false;
             }
         }
-        public void SpawnMonster(Monster monster, int AreaX, int AreaY)
-        {
-            //RandomX = random.Next(map.DeadZone.Left, map.DeadZone.Right - monster.image.texture.Width);
-            //RandomY = random.Next(map.DeadZone.Top, map.DeadZone.Bottom - monster.image.texture.Height);
-            RandomX = random.Next(0, 1000);
-            RandomY = random.Next(0, 1000);
-            Point temp = new Point(RandomX, RandomY);
-            Point temp2 = new Point(RandomX + monster.image.texture.Width, RandomY + monster.image.texture.Height);
-            //foreach (MapSprite blank in map.Blanks)
-            //{
-            //    if (blank.HitBox.Contains(temp) || blank.HitBox.Contains(temp2))
-            //    {
-            //        SpawnMonster(monster);
-            //    }
-            //}
-            //foreach (Sprite sprite in textures.Sprites)
-            //{
-            //    if (sprite.HitBox.Contains(temp) || sprite.HitBox.Contains(temp2))
-            //    {
-            //        SpawnMonster(monster);
-            //    }
-            //}
-            Type tempType = monster.GetType();
-            Monster tempMonster = new Monster();
-            tempMonster = (Monster)Activator.CreateInstance(monster.GetType());
-            tempMonster.LoadContent();
-            tempMonster.AreaX = AreaX;
-            tempMonster.AreaY = AreaY;
-            tempMonster.X = RandomX;
-            tempMonster.Y = RandomY;
-            tempMonster.Hitbox = new Rectangle(RandomX, RandomY, monster.image.spriteSheetEffect.FrameWidth, monster.image.spriteSheetEffect.FrameHeight);
-            SpawnedMonsters.Add(tempMonster);
-            MonsterAdded = true;
-        }
         public void DespawnMonster(Monster monster)
         {
             //map.player.EXP += monster.EXP;
             monster.IsAlive = false;
             monster.UnloadContent();
+        }
+        public void NewArea(int AreaX, int AreaY)
+        {
+            Vector2 Area = new Vector2(AreaX, AreaY);
+            if (AreasAdded.Count == 0)
+            {
+                AreasAdded.Add(Area);
+                AreaMonsters temp = new AreaMonsters();
+                temp.AreaX = AreaX;
+                temp.AreaY = AreaY;
+                temp.MaxMonsters = 5;
+                AreaList.Add(temp);
+            }
+            foreach (Vector2 v in AreasAdded)
+            {
+                if (v == Area)
+                {
+                    AreaAdded = true;
+                }
+            }
+            if (AreaAdded == false)
+            {
+                AreasAdded.Add(Area);
+                AreaMonsters temp = new AreaMonsters();
+                temp.AreaX = AreaX;
+                temp.AreaY = AreaY;
+                temp.MaxMonsters = 5;
+                AreaList.Add(temp);
+            }
+            foreach (AreaMonsters area in AreaList)
+            {
+                if (area.AreaX != AreaX || area.AreaY != AreaY)
+                {
+                    continue;
+                }
+                area.SpawnableMonsters.Clear();
+                foreach (var monster in MonsterList)
+                {
+                    if (monster.Value.XSpawn == AreaX && monster.Value.YSpawn == AreaY)
+                    {
+                        monster.Value.CanSpawn = true;
+                        area.SpawnableMonsters.Add(monster.Value);
+                    }
+                }
+                AreaAdded = false;
+                Entered = false;
+                break;
+            }
         }
         public UpdateMonsters()
         {
@@ -100,6 +115,7 @@ namespace The_Dream.Classes
             AreasAdded = new List<Vector2>();
             MaxMonsters = 0;
             AreaAdded = false;
+            AreaList = new List<AreaMonsters>();
         }
         public void LoadContent()
         {
@@ -112,123 +128,19 @@ namespace The_Dream.Classes
         }
         public void UnloadContent()
         {
-            foreach (Monster monster in SpawnedMonsters)
+            foreach (AreaMonsters area in AreaList)
             {
-                monster.UnloadContent();
+                foreach (Monster m in area.SpawnedMonsters)
+                {
+                    m.UnloadContent();
+                }
             }
         }
         public void Update(GameTime gameTime, int AreaX, int AreaY)
         {
-            SpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //if (map.NewMap == true)
-            //{
-            //    SpawnTimer = 0;
-            //    Entered = true;
-            //    foreach (Monster monster in SpawnedMonsters)
-            //    {
-            //        monster.UnloadContent();
-            //    }
-            //    foreach (var monster in MonsterList)
-            //    {
-            //        monster.Value.CanSpawn = false;
-            //    }
-            //}
-            if (Entered == true)
+            foreach (AreaMonsters area in AreaList)
             {
-                SpawnableMonsters.Clear();
-                foreach (var monster in MonsterList)
-                {
-                    if (monster.Value.XSpawn == AreaX && monster.Value.YSpawn == AreaY)
-                    {
-                        monster.Value.CanSpawn = true;
-                        SpawnableMonsters.Add(monster.Value);
-                    }
-                //    if (monster.Value.CanSpawn)
-                //    {
-                //        SpawnableMonsterKeys += monster.Key + ":";
-                //    }
-                //    if (SpawnableMonsterKeys == null)
-                //    {
-
-                //    }
-                //    else if (SpawnableMonsterKeys != String.Empty)
-                //    {
-                //        SpawnableMonsterKeys.Remove(SpawnableMonsterKeys.Length - 1);
-                //    }
-                //}
-                //if (SpawnableMonsterKeys == null)
-                //{
-
-                //}
-                //else if (SpawnableMonsterKeys != String.Empty)
-                //{
-                //    string[] split = SpawnableMonsterKeys.Split(':');
-                //    foreach (string item in split)
-                //    {
-                //        if (item != "")
-                //        {
-                //            CanMonsterSpawn(item);
-                //        }
-                //    }
-                }
-                Vector2 Area = new Vector2(AreaX, AreaY);
-                if (SpawnableMonsters.Count > 0)
-                {
-                    if (AreasAdded.Count == 0)
-                    {
-                        AreasAdded.Add(Area);
-                        MaxMonsters += 5;
-                    }
-                    foreach (Vector2 v in AreasAdded)
-                    {
-                        if (v == Area)
-                        {
-                            AreaAdded = true;
-                        }
-                    }
-                    if (AreaAdded == false)
-                    {
-                        AreasAdded.Add(Area);
-                        MaxMonsters += 5;
-                    }
-                }
-                AreaAdded = false;
-                Entered = false;
-            }
-            //if (map.player.Attacking == true)
-            //{
-            //    foreach (Monster monster in SpawnedMonsters)
-            //    {
-            //        if (map.player.AttackHitboxes[map.player.Direction].Intersects(monster.Hitbox))
-            //        {
-            //            monster.Health -= map.player.Strength;
-            //        }
-            //    }
-            //}
-            foreach (Monster monster in SpawnedMonsters)
-            {
-                if (monster.Health <= 0)
-                {
-                    DespawnMonster(monster);
-                }
-            }
-            AliveMonsters = new List<Monster>();
-            foreach (Monster monster in SpawnedMonsters)
-            {
-                if (monster.IsAlive == true)
-                {
-                    AliveMonsters.Add(monster);
-                }
-            }
-            SpawnedMonsters = new List<Monster>(AliveMonsters);
-            if (SpawnTimer >= 1)
-            {
-                WhichMonster = random.Next(0, SpawnableMonsters.Count);
-                if (SpawnableMonsters.Count > 0 && SpawnedMonsters.Count < MaxMonsters)
-                {
-                    SpawnMonster(SpawnableMonsters[WhichMonster], AreaX, AreaY);
-                }
-                SpawnTimer = 0;
+                area.Update(gameTime, AreaX, AreaY);
             }
         }
     }

@@ -80,6 +80,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AreaMonsters.cs" />
     <Compile Include="Classes\CharacterCreationScreen.cs" />
     <Compile Include="Classes\Client.cs" />
     <Compile Include="Classes\Controls.cs" />
@@ -131,6 +132,13 @@
     <Content Include="Load\Gameplay\Maps\Down Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Load\Gameplay\Maps\Down Map\Textures.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Load\Gameplay\Maps\Right Map\Textures.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Load\ServerIPandHost.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -147,6 +155,7 @@
     </Content>
     <Content Include="Load\Gameplay\Maps\Test Map\Textures.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\Gameplay\Player.xml">
       <SubType>Designer</SubType>

@@ -287,3 +287,6 @@ C:\Users\Lugswo\Desktop\Client\The Dream\The_Dream\bin\x86\Debug\Content\Gamepla
 C:\Users\Lugswo\Desktop\Client\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Background.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Background.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Title.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Textures.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Textures.xml

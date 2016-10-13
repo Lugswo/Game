@@ -117,7 +117,45 @@ namespace The_Dream.Classes
             {
                 player.VelocityX = 0;
             }
-            
+            if (Attacking == true)
+            {
+                if (SetZero == true)
+                {
+                    Attacks += 8;
+                    prevY = (int)image.spriteSheetEffect.CurrentFrame.Y;
+                    image.spriteSheetEffect.CurrentFrame.Y += Attacks;
+                    image.spriteSheetEffect.CurrentFrame.X = 0;
+                    SetZero = false;
+                    Combo = 0;
+                    Direction = prevY;
+                }
+                if (NextAttack == true)
+                {
+                    if (image.spriteSheetEffect.CurrentFrame.X == image.spriteSheetEffect.AmountOfFrames.X - 1)
+                    {
+                        soundManager.soundEffects["Attack"].soundEffect.Play();
+                        NextAttack = false;
+                        Combo++;
+                        image.spriteSheetEffect.CurrentFrame.Y += 4;
+                        Attacks += 4;
+                        image.spriteSheetEffect.CurrentFrame.X = 0;
+                        if (Attacks >= image.spriteSheetEffect.AmountOfFrames.Y)
+                        {
+                            Attacks = 8;
+                            Combo = 0;
+                            image.spriteSheetEffect.CurrentFrame.Y = prevY + Attacks;
+                        }
+                    }
+                }
+                if (image.spriteSheetEffect.CurrentFrame.X == image.spriteSheetEffect.AmountOfFrames.X - 1)
+                {
+                    Attacking = false;
+                    Attacks = 0;
+                    image.spriteSheetEffect.CurrentFrame.Y = prevY;
+                    SetZero = true;
+                    Direction = 0;
+                }
+            }
             //foreach (MapSprite blank in player.Blanks)
             //{
             //    if (blank.HitBox.Left < player.PositionX + Width && blank.HitBox.Right > player.PositionX)

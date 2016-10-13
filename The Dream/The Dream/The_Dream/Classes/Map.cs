@@ -27,7 +27,7 @@ namespace The_Dream.Classes
         List<int> x, y;
         public bool IsTransitioning;
         public Textures textures;
-        public bool Vertical, Horizontal, EdgeVertical, EdgeHorizontal, Right, Left, Up, Down, Column, Row, Pause, NewMap, ExitTop, ExitBottom, ExitRight, ExitLeft, SongPlaying;
+        public bool Vertical, Horizontal, EdgeVertical, EdgeHorizontal, Right, Left, Up, Down, Column, Row, Pause, NewMap, ExitTop, ExitBottom, ExitRight, ExitLeft, SongPlaying, Centered, vCentered;
         public Map()
         {
             Moved = Vector2.Zero;
@@ -109,7 +109,7 @@ namespace The_Dream.Classes
             {
                 Left = false;
             }
-            if (Moved.X > DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2)
+            if (Moved.X > (DeadZone.Right - ScreenManager.Instance.Dimensions.X / 2))
             {
                 Right = true;
             }
@@ -143,7 +143,7 @@ namespace The_Dream.Classes
             foreach (MapSprite blank in Blanks)
             {
                 blank.HitBox.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
-                blank.Left.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                blank.Left.X = (int)blank.OriginalPosition.X -(int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
                 blank.Right.X = (int)blank.OriginalPosition.X + (int)blank.image.texture.Width - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
                 blank.Up.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
                 blank.Down.X = (int)blank.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;

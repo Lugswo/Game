@@ -27,9 +27,9 @@ namespace The_Dream.Classes.Monsters
         {
             base.UnloadContent();
         }
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, Player player)
         {
-            base.Update(gameTime);
+            base.Update(gameTime, player);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

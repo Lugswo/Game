@@ -20,10 +20,41 @@ namespace The_Dream.Classes
         public int ScreenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         public int ScreenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         bool Column, Row, Up, Down, Left, Right;
+        public Vector2 Moved;
         public Textures()
         {
             Velocity = Vector2.Zero;
             Sprites = new List<Sprite>();
+        }
+        public void HorizontalMove()
+        {
+            foreach (Sprite sprite in Sprites)
+            {
+                sprite.image.Position.X = sprite.OriginalPosition.X - 10 - Moved.X + ScreenManager.instance.Dimensions.X / 2;
+            }
+            foreach (Sprite sprite in Sprites)
+            {
+                sprite.HitBox.X = (int)sprite.OriginalPosition.X - 10 - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Left.X = (int)sprite.OriginalPosition.X - 10 -(int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Right.X = (int)sprite.OriginalPosition.X - 10 + (int)sprite.image.texture.Width - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Up.X = (int)sprite.OriginalPosition.X - 10 -(int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Down.X = (int)sprite.OriginalPosition.X - 10 - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+            }
+        }
+        public void VerticalMove()
+        {
+            foreach (Sprite sprite in Sprites)
+            {
+                sprite.image.Position.Y = sprite.OriginalPosition.Y - Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
+            }
+            foreach (Sprite sprite in Sprites)
+            {
+                sprite.HitBox.Y = (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                sprite.Left.Y = (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                sprite.Right.Y = (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                sprite.Up.Y = (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+                sprite.Down.Y = (int)sprite.OriginalPosition.Y + (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
+            }
         }
         public void GetPlayerMap(PlayerUpdate RealPlayer, Map RealMap)
         {
@@ -38,9 +69,9 @@ namespace The_Dream.Classes
                 sprite.OriginalPosition = sprite.image.Position;
                 sprite.HitBox = new Rectangle((int)sprite.image.Position.X, (int)sprite.image.Position.Y, sprite.image.texture.Width, sprite.image.texture.Height);
                 sprite.Left = new Rectangle((int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y, 1, sprite.image.texture.Height);
-                sprite.Right = new Rectangle(sprite.image.texture.Width, (int)sprite.OriginalPosition.Y, -1, sprite.image.texture.Height);
+                sprite.Right = new Rectangle(sprite.image.texture.Width + (int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y, -1, sprite.image.texture.Height);
                 sprite.Up = new Rectangle((int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y, sprite.image.texture.Width, 1);
-                sprite.Down = new Rectangle((int)sprite.OriginalPosition.X, sprite.image.texture.Height, sprite.image.texture.Width, -1);
+                sprite.Down = new Rectangle((int)sprite.OriginalPosition.X, sprite.image.texture.Height + (int)sprite.OriginalPosition.Y, sprite.image.texture.Width, -1);
             }
         }
         public void UnloadContent()
@@ -50,88 +81,9 @@ namespace The_Dream.Classes
                 sprite.image.UnloadContent();
             }
         }
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Player player)
         {
-            //if (map.Pause == false)
-            //{
-            //    map.EdgeHorizontal = map.EdgeVertical = Right = Left = Up = Down = Column = Row = false;
-            //    foreach (Sprite sprite in Sprites)
-            //    {
-            //        sprite.Hitbox = new Rectangle((int)sprite.image.Position.X, (int)sprite.image.Position.Y, sprite.image.texture.Width, sprite.image.texture.Height);
-            //        if ((player.HitBox.Left - 1 > sprite.Hitbox.Left && player.HitBox.Left - 1 < sprite.Hitbox.Right) || (player.HitBox.Right - 1 > sprite.Hitbox.Left && player.HitBox.Right - 1 < sprite.Hitbox.Right))
-            //        {
-            //            Column = true;
-            //        }
-            //        if ((player.HitBox.Top + 1 > sprite.Hitbox.Top && player.HitBox.Top + 1 < sprite.Hitbox.Bottom) || (player.HitBox.Bottom - 5 > sprite.Hitbox.Top && player.HitBox.Bottom - 5 < sprite.Hitbox.Bottom))
-            //        {
-            //            Row = true;
-            //        }
-            //        if (Column == true)
-            //        {
-            //            if (player.HitBox.Top <= sprite.Hitbox.Bottom)
-            //            {
-            //                Up = true;
-            //            }
-            //            if (player.HitBox.Bottom >= sprite.Hitbox.Top)
-            //            {
-            //                Down = true;
-            //            }
-            //        }
-            //        if (Row == true)
-            //        {
-            //            if (player.HitBox.Left <= sprite.Hitbox.Right)
-            //            {
-            //                Left = true;
-            //            }
-            //            if (player.HitBox.Right >= sprite.Hitbox.Left)
-            //            {
-            //                Right = true;
-            //            }
-            //        }
-            //        if (Column == true)
-            //        {
-            //            if (Up == true && Down == true)
-            //            {
-            //                map.EdgeVertical = true;
-            //                map.Moved.Y = map.prevMoved.Y;
-            //                if (map.Vertical == true)
-            //                {
-            //                    player.PlayerMoved.Y = player.PrevPlayerMoved.Y;
-            //                }
-            //            }
-            //        }
-            //        if (Row == true)
-            //        {
-            //            if (Right == true && Left == true)
-            //            {
-            //                map.EdgeHorizontal = true;
-            //                map.Moved.X = map.prevMoved.X;
-            //                if (map.Horizontal == true)
-            //                {
-            //                    player.PlayerMoved.X = player.PrevPlayerMoved.X;
-            //                }
-            //            }
-            //        }
-            //    }
-            //    if (map.Horizontal == false && map.EdgeHorizontal == false && player.Attacking == false)
-            //    {
-            //        foreach (Sprite sprite in Sprites)
-            //        {
-            //            sprite.image.Position.X = sprite.OriginalPosition.X - map.Moved.X;
-            //        }
-            //    }
-            //    if (map.Vertical == false && map.EdgeVertical == false && player.Attacking == false)
-            //    {
-            //        foreach (Sprite sprite in Sprites)
-            //        {
-            //            sprite.image.Position.Y = sprite.OriginalPosition.Y - map.Moved.Y;
-            //        }
-            //    }
-            //    foreach (Sprite sprite in Sprites)
-            //    {
-            //        sprite.image.Update(gameTime);
-            //    }
-            //}
+            Moved = new Vector2(player.X, player.Y);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

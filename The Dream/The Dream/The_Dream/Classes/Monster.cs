@@ -12,7 +12,7 @@ namespace The_Dream.Classes
         public Image image = new Image();
         public Rectangle Hitbox;
         public bool CanSpawn, Boss, IsAlive;
-        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY;
+        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY, pX, pY;
         public Vector2 OriginalPosition;
         public Monster()
         {
@@ -29,7 +29,7 @@ namespace The_Dream.Classes
         {
             image.UnloadContent();
         }
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, Player player)
         {
             image.Update(gameTime);
         }

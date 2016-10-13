@@ -20,6 +20,7 @@ namespace The_Dream.Classes
         [XmlIgnore]
         public Texture2D texture;
         Vector2 origin;
+        public Color color;
         ContentManager content;
         [XmlIgnore]
         RenderTarget2D renderTarget;
@@ -137,7 +138,14 @@ namespace The_Dream.Classes
             {
                 ScreenManager.Instance.SpriteBatch.Draw(texture, Vector2.Zero, Color.White);
             }
-            ScreenManager.Instance.SpriteBatch.DrawString(Font, Text, Vector2.Zero, Color.White);
+            if (color.A == 0 && color.R == 0 && color.G == 0 && color.B == 0)
+            {
+                ScreenManager.Instance.SpriteBatch.DrawString(Font, Text, Vector2.Zero, Color.White);
+            }
+            else
+            {
+                ScreenManager.Instance.SpriteBatch.DrawString(Font, Text, Vector2.Zero, color);
+            }
             ScreenManager.Instance.SpriteBatch.End();
             texture = renderTarget;
             ScreenManager.Instance.GraphicsDevice.SetRenderTarget(null);
