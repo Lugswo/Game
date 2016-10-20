@@ -48,12 +48,6 @@ namespace The_Dream.Classes
                 MonsterList[monster].CanSpawn = false;
             }
         }
-        public void DespawnMonster(Monster monster)
-        {
-            //map.player.EXP += monster.EXP;
-            monster.IsAlive = false;
-            monster.UnloadContent();
-        }
         public void NewArea(int AreaX, int AreaY)
         {
             Vector2 Area = new Vector2(AreaX, AreaY);
@@ -136,11 +130,11 @@ namespace The_Dream.Classes
                 }
             }
         }
-        public void Update(GameTime gameTime, int AreaX, int AreaY)
+        public void Update(GameTime gameTime, Player player, int AreaX, int AreaY)
         {
             foreach (AreaMonsters area in AreaList)
             {
-                area.Update(gameTime, AreaX, AreaY);
+                area.Update(gameTime, player);
             }
         }
     }

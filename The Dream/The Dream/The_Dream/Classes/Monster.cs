@@ -32,6 +32,7 @@ namespace The_Dream.Classes
         public virtual void Update(GameTime gameTime, Player player)
         {
             image.Update(gameTime);
+            Hitbox = new Rectangle(X, Y, image.spriteSheetEffect.FrameWidth, image.spriteSheetEffect.FrameHeight);
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {

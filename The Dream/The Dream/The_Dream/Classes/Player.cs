@@ -35,17 +35,21 @@ namespace The_Dream.Classes
         public int PositionY { get; set; }
         public bool Attacking { get; set; }
         public bool NextAttack { get; set;}
+        public bool levelUp { get; set; }
         public bool zPressed;
         public int Combo { get; set; }
-        public bool Up, Down, Left, Right;
+        public bool aUp, aDown, aLeft, aRight, Up, Down, Left, Right;
         public int pX;
         public int pY;
+        bool ChangedFrames;
+        int AttackCounter;
         public List<MapSprite> Blanks;
         public Rectangle DeadZone;
         public Rectangle HitBox;
         public Rectangle upAttackHitBox, downAttackHitBox, leftAttackHitBox, rightAttackHitBox;
         public bool newArea = false;
-        int prevDir;
+        public int prevDir;
+        public int HitTimer;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Player()
@@ -54,13 +58,26 @@ namespace The_Dream.Classes
             Blanks = new List<MapSprite>();
             DeadZone = new Rectangle();
             Attacking = NextAttack = zPressed = false;
+            AttackCounter = 0;
+            HitTimer = 0;
+        }
+        public void UpdateHitTimer(GameTime gameTime)
+        {
+            if (Attacking == true)
+            {
+                HitTimer += gameTime.ElapsedGameTime.Milliseconds;
+            }
+            else
+            {
+                HitTimer = 0;
+            }
         }
         public void UpdateHitBoxes()
         {
             upAttackHitBox = new Rectangle(X, Y - 64, 54, 64);
             downAttackHitBox = new Rectangle(X, Y + 64, 54, 64);
             leftAttackHitBox = new Rectangle(X - 54, Y, 54, 64);
-            rightAttackHitBox = new Rectangle(X + 54, Y + 64, 54, 64);
+            rightAttackHitBox = new Rectangle(X + 54, Y, 54, 64);
         }
         public void LoadContent()
         {
@@ -68,6 +85,8 @@ namespace The_Dream.Classes
             PlayerImage.Effects = "SpriteSheetEffect";
             PlayerImage.spriteSheetEffect.AmountOfFrames = new Vector2(6, 16);
             PlayerImage.LoadContent();
+            ChangedFrames = false;
+            NextLevel = 100 + Level * Level * Level;
         }
         public void UnloadContent()
         {
@@ -82,26 +101,63 @@ namespace The_Dream.Classes
             }
             if (Attacking == true)
             {
-                if (zPressed == true)
+                if (ChangedFrames == false)
                 {
                     prevDir = (int)PlayerImage.spriteSheetEffect.CurrentFrame.Y;
                     PlayerImage.spriteSheetEffect.CurrentFrame.Y += 8;
                     PlayerImage.spriteSheetEffect.CurrentFrame.X = 0;
-                    zPressed = false;
+                    ChangedFrames = true;
                 }
-                if (PlayerImage.spriteSheetEffect.CurrentFrame.X == PlayerImage.spriteSheetEffect.AmountOfFrames.X - 1)
+                if (AttackCounter == 0)
+                {
+                    if (prevDir == 0)
+                    {
+                        aDown = true;
+                    }
+                    else if (prevDir == 1)
+                    {
+                        aUp = true;
+                    }
+                    else if (prevDir == 2)
+                    {
+                        aRight = true;
+                    }
+                    else if (prevDir == 3)
+                    {
+                        aLeft = true;
+                    }
+                }
+                if (AttackCounter > 0)
+                {
+                    aUp = aDown = aLeft = aRight = false;
+                }
+                AttackCounter += gameTime.ElapsedGameTime.Milliseconds;
+                if (AttackCounter > PlayerImage.spriteSheetEffect.AmountOfFrames.X * 100)
                 {
                     if (NextAttack == true)
                     {
-                        PlayerImage.spriteSheetEffect.CurrentFrame.Y = prevDir + (Combo * 4) + 8;
+                        PlayerImage.spriteSheetEffect.CurrentFrame.Y = prevDir + 8 + Combo * 4;
                         PlayerImage.spriteSheetEffect.CurrentFrame.X = 0;
-                        NextAttack = false;
+                        AttackCounter = 0;
                     }
                     else
                     {
                         Attacking = false;
                         PlayerImage.spriteSheetEffect.CurrentFrame.Y = prevDir;
+                        PlayerImage.spriteSheetEffect.CurrentFrame.X = 0;
                     }
+                    NextAttack = false;
+                }
+            }
+            else
+            {
+                AttackCounter = 0;
+                Combo = 0;
+                ChangedFrames = false;
+                aUp = aDown = aLeft = aRight = false;
+                if (PlayerImage.spriteSheetEffect.CurrentFrame.Y >= 8)
+                {
+                    PlayerImage.spriteSheetEffect.CurrentFrame.Y = prevDir;
                 }
             }
             if (VelocityY > 0 && Attacking == false)
@@ -120,11 +176,13 @@ namespace The_Dream.Classes
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
             }
+            if (EXP >= NextLevel)
+            {
+                levelUp = true;
+                Level++;
+                NextLevel = NextLevel = 100 + Level * Level * Level;
+            }
             PlayerImage.Update(gameTime);
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            PlayerImage.Draw(spriteBatch);
         }
     }
 }

@@ -40,38 +40,48 @@ namespace The_Dream.Classes
             NEWAREAMONSTERS,
             ATTACK,
             NEXTATTACK,
-            ATTACKEND
+            ATTACKEND,
+            REMOVEMONSTER,
+            NEWAREAPLAYER
         }
         public void SendGameState()
         {
-            NetOutgoingMessage outmsg = server.CreateMessage();
-            outmsg.Write((byte)PacketTypes.WORLDSTATE);
-            foreach (Player p in GameState)
+            foreach (Player play in GameState)
             {
-                outmsg.Write(p.X);
-                outmsg.Write(p.Y);
-                outmsg.Write(p.VelocityX);
-                outmsg.Write(p.VelocityY);
-                outmsg.Write(p.AreaX);
-                outmsg.Write(p.AreaY);
-                //outmsg.Write(p.Attacking);
-                //outmsg.Write(p.NextAttack);
-                //outmsg.Write(p.Combo);
-            }
-            foreach (Player p in GameState)
-            {
+                NetOutgoingMessage outmsg = server.CreateMessage();
+                outmsg.Write((byte)PacketTypes.WORLDSTATE);
+                foreach (Player p in GameState)
+                {
+                    outmsg.Write(p.X);
+                    outmsg.Write(p.Y);
+                    outmsg.Write(p.VelocityX);
+                    outmsg.Write(p.VelocityY);
+                    outmsg.Write(p.AreaX);
+                    outmsg.Write(p.AreaY);
+                    outmsg.Write(p.EXP);
+                }
+                foreach (Player p in GameState)
+                {
+                    outmsg.Write(p.Attacking);
+                    outmsg.Write(p.NextAttack);
+                    outmsg.Write(p.Combo);
+                }
                 foreach (AreaMonsters area in updateMonsters.AreaList)
                 {
+                    if (play.AreaX != area.AreaX || play.AreaY != area.AreaY)
+                    {
+                        continue;
+                    }
                     foreach (Monster m in area.SpawnedMonsters)
                     {
                         outmsg.Write(m.X);
                         outmsg.Write(m.Y);
                     }
                 }
-            }
-            if (server.ConnectionsCount > 0)
-            {
-                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                if (server.ConnectionsCount > 0)
+                {
+                    server.SendMessage(outmsg, play.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                }
             }
         }
         public void LoadContent()
@@ -101,9 +111,29 @@ namespace The_Dream.Classes
             foreach (Player p in GameState)
             {
                 p.HitBox = new Rectangle(p.X, p.Y, 54, 64);
-                updateMonsters.Update(gameTime, p.AreaX, p.AreaY);
+                updateMonsters.Update(gameTime, p, p.AreaX, p.AreaY);
                 foreach (AreaMonsters area in updateMonsters.AreaList)
                 {
+                    if (p.AreaX != area.AreaX || p.AreaY != area.AreaY)
+                    {
+                        continue;
+                    }
+                    int count = area.DeadMonsters.Count;
+                    for (int i = 0; i < count; i++)
+                    {
+                        NetOutgoingMessage outmsg = server.CreateMessage();
+                        outmsg.Write((byte)PacketTypes.REMOVEMONSTER);
+                        outmsg.Write(area.DeadMonsters[i]);
+                        server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                        for (int j = 0; j < count; j++)
+                        {
+                            if (area.DeadMonsters[j] > area.DeadMonsters[i])
+                            {
+                                area.DeadMonsters[j] = area.DeadMonsters[j] - 1;
+                            }
+                        }
+                    }
+                    area.DeadMonsters.Clear();
                     foreach (Monster m in area.SpawnedMonsters)
                     {
                         m.Update(gameTime, p);
@@ -125,7 +155,7 @@ namespace The_Dream.Classes
                         }
                         if (server.ConnectionsCount > 0)
                         {
-                            server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                            server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
                         }
                         area.MonsterAdded = false;
                     }
@@ -197,6 +227,50 @@ namespace The_Dream.Classes
                                     continue;
                                 }
                                 p.Attacking = ServerInc.ReadBoolean();
+                                p.NextAttack = ServerInc.ReadBoolean();
+                                p.Combo = ServerInc.ReadInt32();
+                                p.aUp = ServerInc.ReadBoolean();
+                                p.aDown = ServerInc.ReadBoolean();
+                                p.aLeft = ServerInc.ReadBoolean();
+                                p.aRight = ServerInc.ReadBoolean();
+                                foreach (AreaMonsters area in updateMonsters.AreaList)
+                                {
+                                    if (area.AreaX != p.AreaX || area.AreaY != p.AreaY)
+                                    {
+                                        continue;
+                                    }
+                                    foreach (Monster m in area.SpawnedMonsters)
+                                    {
+                                        if (p.aUp == true)
+                                        {
+                                            if (p.upAttackHitBox.Intersects(m.Hitbox))
+                                            {
+                                                m.Health = m.Health - p.Strength;
+                                            }
+                                        }
+                                        else if (p.aDown == true)
+                                        {
+                                            if (p.downAttackHitBox.Intersects(m.Hitbox))
+                                            {
+                                                m.Health = m.Health - p.Strength;
+                                            }
+                                        }
+                                        else if (p.aLeft == true)
+                                        {
+                                            if (p.leftAttackHitBox.Intersects(m.Hitbox))
+                                            {
+                                                m.Health = m.Health - p.Strength;
+                                            }
+                                        }
+                                        else if (p.aRight == true)
+                                        {
+                                            if (p.rightAttackHitBox.Intersects(m.Hitbox))
+                                            {
+                                                m.Health = m.Health - p.Strength;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                         else if (b == (byte)PacketTypes.NEXTATTACK)
@@ -255,12 +329,9 @@ namespace The_Dream.Classes
                                 int count = 0;
                                 foreach (AreaMonsters area in updateMonsters.AreaList)
                                 {
-                                    foreach (Monster m in area.SpawnedMonsters)
+                                    if (area.AreaX == p.AreaX && area.AreaY == p.AreaY)
                                     {
-                                        if (p.AreaX == m.AreaX && p.AreaY == m.AreaY)
-                                        {
-                                            count++;
-                                        }
+                                        count = area.SpawnedMonsters.Count();
                                     }
                                 }
                                 outmsg.Write(count);
@@ -279,6 +350,11 @@ namespace The_Dream.Classes
                                     }
                                 }
                                 server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered);
+                                int id = GameState.IndexOf(p);
+                                NetOutgoingMessage outmsg2 = server.CreateMessage();
+                                outmsg2.Write((byte)PacketTypes.NEWAREAPLAYER);
+                                outmsg2.Write(id);
+                                server.SendMessage(outmsg2, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                                 break;
                             }
                         }

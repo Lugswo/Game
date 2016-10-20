@@ -11,6 +11,7 @@ namespace The_Dream.Classes
         public float SpawnTimer;
         public List<Monster> SpawnedMonsters, SpawnableMonsters;
         public List<Monster> AliveMonsters;
+        public List<int> DeadMonsters;
         Random random;
         int WhichMonster, RandomX, RandomY;
         public int MaxMonsters, AreaX, AreaY;
@@ -20,9 +21,10 @@ namespace The_Dream.Classes
             SpawnedMonsters = new List<Monster>();
             AliveMonsters = new List<Monster>();
             SpawnableMonsters = new List<Monster>();
+            DeadMonsters = new List<int>();
             random = new Random();
         }
-        public void SpawnMonster(Monster monster, int AreaX, int AreaY)
+        public void SpawnMonster(Monster monster)
         {
             //RandomX = random.Next(map.DeadZone.Left, map.DeadZone.Right - monster.image.texture.Width);
             //RandomY = random.Next(map.DeadZone.Top, map.DeadZone.Bottom - monster.image.texture.Height);
@@ -56,6 +58,12 @@ namespace The_Dream.Classes
             SpawnedMonsters.Add(tempMonster);
             MonsterAdded = true;
         }
+        public void DespawnMonster(Monster monster, Player player)
+        {
+            player.EXP += monster.EXP;
+            monster.IsAlive = false;
+            DeadMonsters.Add(SpawnedMonsters.IndexOf(monster));
+        }
         public void LoadContent()
         {
 
@@ -64,9 +72,16 @@ namespace The_Dream.Classes
         {
 
         }
-        public void Update(GameTime gameTime, int AreaX, int AreaY)
+        public void Update(GameTime gameTime, Player player)
         {
             SpawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (Monster m in SpawnedMonsters)
+            {
+                if (m.Health <= 0)
+                {
+                    DespawnMonster(m, player);
+                }
+            }
             AliveMonsters = new List<Monster>();
             foreach (Monster monster in SpawnedMonsters)
             {
@@ -81,7 +96,7 @@ namespace The_Dream.Classes
                 WhichMonster = random.Next(0, SpawnableMonsters.Count);
                 if (SpawnableMonsters.Count > 0 && SpawnedMonsters.Count < MaxMonsters)
                 {
-                    SpawnMonster(SpawnableMonsters[WhichMonster], AreaX, AreaY);
+                    SpawnMonster(SpawnableMonsters[WhichMonster]);
                 }
                 SpawnTimer = 0;
             }

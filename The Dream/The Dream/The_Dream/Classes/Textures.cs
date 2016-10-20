@@ -30,15 +30,15 @@ namespace The_Dream.Classes
         {
             foreach (Sprite sprite in Sprites)
             {
-                sprite.image.Position.X = sprite.OriginalPosition.X - 10 - Moved.X + ScreenManager.instance.Dimensions.X / 2;
+                sprite.image.Position.X = sprite.OriginalPosition.X - Moved.X + ScreenManager.instance.Dimensions.X / 2;
             }
             foreach (Sprite sprite in Sprites)
             {
-                sprite.HitBox.X = (int)sprite.OriginalPosition.X - 10 - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
-                sprite.Left.X = (int)sprite.OriginalPosition.X - 10 -(int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
-                sprite.Right.X = (int)sprite.OriginalPosition.X - 10 + (int)sprite.image.texture.Width - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
-                sprite.Up.X = (int)sprite.OriginalPosition.X - 10 -(int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
-                sprite.Down.X = (int)sprite.OriginalPosition.X - 10 - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.HitBox.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Left.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Right.X = (int)sprite.OriginalPosition.X + (int)sprite.image.texture.Width - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Up.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
+                sprite.Down.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
             }
         }
         public void VerticalMove()
