@@ -11,7 +11,6 @@ namespace The_Dream.Classes
     public class UpdateMonsters
     {
         Map map;
-        Textures textures;
         public Dictionary<string, Monster> MonsterList;
         public List<Monster> SpawnedMonsters, SpawnableMonsters, AliveMonsters;
         public string SpawnableMonsterKeys;
@@ -48,7 +47,7 @@ namespace The_Dream.Classes
                 MonsterList[monster].CanSpawn = false;
             }
         }
-        public void NewArea(int AreaX, int AreaY)
+        public void NewArea(int AreaX, int AreaY, Map map)
         {
             Vector2 Area = new Vector2(AreaX, AreaY);
             if (AreasAdded.Count == 0)
@@ -57,7 +56,7 @@ namespace The_Dream.Classes
                 AreaMonsters temp = new AreaMonsters();
                 temp.AreaX = AreaX;
                 temp.AreaY = AreaY;
-                temp.MaxMonsters = 5;
+                temp.LoadContent(map);
                 AreaList.Add(temp);
             }
             foreach (Vector2 v in AreasAdded)
@@ -73,7 +72,7 @@ namespace The_Dream.Classes
                 AreaMonsters temp = new AreaMonsters();
                 temp.AreaX = AreaX;
                 temp.AreaY = AreaY;
-                temp.MaxMonsters = 5;
+                temp.LoadContent(map);
                 AreaList.Add(temp);
             }
             foreach (AreaMonsters area in AreaList)

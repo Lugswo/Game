@@ -34,7 +34,6 @@ C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\obj\x86\Debug\Microsoft.Xna
 C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe
 C:\Users\Lugsw\Desktop\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.pdb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Test Map\Background.xml
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Test Map\Textures.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Fonts\Secret of Mana.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster2.xnb
@@ -288,5 +287,4 @@ C:\Users\Lugswo\Desktop\Client\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\M
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Background.xml
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Title.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Textures.xml
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Textures.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\notPlayer.xnb

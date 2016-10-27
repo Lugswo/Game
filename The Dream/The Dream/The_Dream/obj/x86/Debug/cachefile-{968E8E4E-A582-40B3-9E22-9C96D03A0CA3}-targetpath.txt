@@ -29,3 +29,4 @@ Content\Gameplay\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 Content\Gameplay\Backgrounds\Down Map\Down Map.xnb
 Content\SplashScreen\Title.xnb
+Content\Gameplay\Characters\Sprites\Player\notPlayer.xnb

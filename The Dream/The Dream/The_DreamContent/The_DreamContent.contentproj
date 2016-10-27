@@ -73,8 +73,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Characters\Sprites\Player\Player.png">
-      <Name>Player</Name>
+    <Compile Include="Gameplay\Characters\Sprites\Player\notPlayer.png">
+      <Name>notPlayer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -247,6 +247,13 @@
   <ItemGroup>
     <Compile Include="SplashScreen\Title.jpg">
       <Name>Title</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Characters\Sprites\Player\Player.png">
+      <Name>Player</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

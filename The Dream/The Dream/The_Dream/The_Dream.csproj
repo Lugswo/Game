@@ -112,7 +112,6 @@
     <Compile Include="Classes\ShowSpriteEffect.cs" />
     <Compile Include="Classes\SplashScreen.cs" />
     <Compile Include="Classes\Sprite.cs" />
-    <Compile Include="Classes\Textures.cs" />
     <Compile Include="Classes\SpriteSheetEffect.cs" />
     <Compile Include="Classes\TitleScreen.cs" />
     <Compile Include="Classes\XmlManager.cs" />
@@ -132,13 +131,6 @@
     <Content Include="Load\Gameplay\Maps\Down Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Load\Gameplay\Maps\Down Map\Textures.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Load\Gameplay\Maps\Right Map\Textures.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Load\ServerIPandHost.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,10 +144,6 @@
     </Content>
     <Content Include="Load\Gameplay\Maps\Test Map\Background.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Load\Gameplay\Maps\Test Map\Textures.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
     <Content Include="Load\Gameplay\Player.xml">
       <SubType>Designer</SubType>

@@ -38,7 +38,7 @@ namespace The_Dream.Classes
         public bool levelUp { get; set; }
         public bool zPressed;
         public int Combo { get; set; }
-        public bool aUp, aDown, aLeft, aRight, Up, Down, Left, Right;
+        public bool aUp, aDown, aLeft, aRight, Up, Down, Left, Right, cUp, cDown, cLeft, cRight;
         public int pX;
         public int pY;
         bool ChangedFrames;
@@ -74,10 +74,10 @@ namespace The_Dream.Classes
         }
         public void UpdateHitBoxes()
         {
-            upAttackHitBox = new Rectangle(X, Y - 64, 54, 64);
-            downAttackHitBox = new Rectangle(X, Y + 64, 54, 64);
-            leftAttackHitBox = new Rectangle(X - 54, Y, 54, 64);
-            rightAttackHitBox = new Rectangle(X + 54, Y, 54, 64);
+            upAttackHitBox = new Rectangle(X, Y - 60, 60, 60);
+            downAttackHitBox = new Rectangle(X, Y + 60, 60, 60);
+            leftAttackHitBox = new Rectangle(X - 60, Y, 60, 60);
+            rightAttackHitBox = new Rectangle(X + 60, Y, 60, 60);
         }
         public void LoadContent()
         {

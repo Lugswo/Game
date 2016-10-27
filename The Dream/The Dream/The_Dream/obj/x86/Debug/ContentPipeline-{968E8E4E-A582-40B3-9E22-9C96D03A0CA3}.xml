@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Textures\Tree.xnb</Output>
-      <Time>2016-09-06T14:45:50-07:00</Time>
+      <Time>2016-10-21T11:57:56.6609089-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Backgrounds\Blanks\Black.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\Player.xnb</Output>
-      <Time>2016-10-19T13:51:05.6909851-07:00</Time>
+      <Time>2016-10-21T11:53:37.6861276-07:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Monsters\TestMonster.png</Source>
@@ -279,6 +279,15 @@
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Title.xnb</Output>
       <Time>2016-10-05T14:06:55.4192968-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Sprites\Player\notPlayer.png</Source>
+      <Name>Gameplay\Characters\Sprites\Player\notPlayer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\notPlayer.xnb</Output>
+      <Time>2016-10-19T13:51:05.6909851-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

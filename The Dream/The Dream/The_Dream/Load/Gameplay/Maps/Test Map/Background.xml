@@ -27,4 +27,13 @@
       </Position>
     </image>
   </Blank>
+  <Texture>
+    <image>
+      <Path>Gameplay/Textures/Tree</Path>
+      <Position>
+        <X>100</X>
+        <Y>100</Y>
+      </Position>
+    </image>
+  </Texture>
 </Map>

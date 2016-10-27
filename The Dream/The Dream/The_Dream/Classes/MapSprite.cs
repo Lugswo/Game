@@ -7,12 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Dream.Classes
 {
-    public class MapSprite
+    public class MapSprite : Sprite
     {
-        public Image image;
-        public Rectangle HitBox, Left, Right, Up, Down;
-        public Vector2 OriginalPosition;
-        public bool Row, Column;
         public MapSprite()
         {
 

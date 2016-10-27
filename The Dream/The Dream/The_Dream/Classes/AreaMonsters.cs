@@ -16,6 +16,7 @@ namespace The_Dream.Classes
         int WhichMonster, RandomX, RandomY;
         public int MaxMonsters, AreaX, AreaY;
         public bool MonsterAdded;
+        Map map;
         public AreaMonsters()
         {
             SpawnedMonsters = new List<Monster>();
@@ -26,10 +27,8 @@ namespace The_Dream.Classes
         }
         public void SpawnMonster(Monster monster)
         {
-            //RandomX = random.Next(map.DeadZone.Left, map.DeadZone.Right - monster.image.texture.Width);
-            //RandomY = random.Next(map.DeadZone.Top, map.DeadZone.Bottom - monster.image.texture.Height);
-            RandomX = random.Next(0, 1000);
-            RandomY = random.Next(0, 1000);
+            RandomX = random.Next(map.DeadZone.Left, map.DeadZone.Right - monster.image.texture.Width);
+            RandomY = random.Next(map.DeadZone.Top, map.DeadZone.Bottom - monster.image.texture.Height);
             Point temp = new Point(RandomX, RandomY);
             Point temp2 = new Point(RandomX + monster.image.texture.Width, RandomY + monster.image.texture.Height);
             //foreach (MapSprite blank in map.Blanks)
@@ -64,9 +63,10 @@ namespace The_Dream.Classes
             monster.IsAlive = false;
             DeadMonsters.Add(SpawnedMonsters.IndexOf(monster));
         }
-        public void LoadContent()
+        public void LoadContent(Map gameMap)
         {
-
+            map = gameMap;
+            MaxMonsters = map.Maps.Count * 5;
         }
         public void UnloadContent()
         {
