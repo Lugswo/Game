@@ -2,6 +2,7 @@
 <Map>
   <Sprite>
     <image>
+      <Layer>0</Layer>
       <Path>Gameplay/Backgrounds/Down Map/Down Map</Path>
       <Position>
         <X>0</X>

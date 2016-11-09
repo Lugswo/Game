@@ -42,24 +42,35 @@ namespace The_Dream.Classes
         public int pX;
         public int pY;
         bool ChangedFrames;
-        int AttackCounter;
+        public int AttackCounter;
         public List<MapSprite> Blanks;
         public Rectangle DeadZone;
         public Rectangle HitBox;
-        public Rectangle upAttackHitBox, downAttackHitBox, leftAttackHitBox, rightAttackHitBox;
+        public Rectangle upAttackHitBox, downAttackHitBox, leftAttackHitBox, rightAttackHitBox, facingHitBox;
         public bool newArea = false;
         public int prevDir;
         public int HitTimer;
+        public int maxHealth;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
+        public Image levelUpImage;
         public Player()
         {
+            Health = maxHealth;
             PlayerImage = new Image();
             Blanks = new List<MapSprite>();
             DeadZone = new Rectangle();
             Attacking = NextAttack = zPressed = false;
             AttackCounter = 0;
             HitTimer = 0;
+            levelUpImage = new Image();
+            levelUpImage.Path = "Gameplay/Effects/Level Up";
+            levelUpImage.Effects = "SpriteSheetEffect";
+            levelUpImage.spriteSheetEffect.AmountOfFrames.X = 15;
+            levelUpImage.spriteSheetEffect.AmountOfFrames.Y = 1;
+            levelUpImage.IsActive = false;
+            levelUpImage.LoadContent();
+            facingHitBox = new Rectangle();
         }
         public void UpdateHitTimer(GameTime gameTime)
         {
@@ -81,7 +92,7 @@ namespace The_Dream.Classes
         }
         public void LoadContent()
         {
-            PlayerImage.Path = "Gameplay/Characters/Sprites/Player/Player";
+            PlayerImage.Path = "Gameplay/Characters/Player/Player";
             PlayerImage.Effects = "SpriteSheetEffect";
             PlayerImage.spriteSheetEffect.AmountOfFrames = new Vector2(6, 16);
             PlayerImage.LoadContent();
@@ -163,24 +174,35 @@ namespace The_Dream.Classes
             if (VelocityY > 0 && Attacking == false)
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 0;
+                facingHitBox = downAttackHitBox;
             }
             if (VelocityY < 0 && Attacking == false)
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 1;
+                facingHitBox = upAttackHitBox;
             }
             if (VelocityX > 0 && Attacking == false)
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 2;
+                facingHitBox = rightAttackHitBox;
             }
             if (VelocityX < 0 && Attacking == false)
             {
                 PlayerImage.spriteSheetEffect.CurrentFrame.Y = 3;
+                facingHitBox = leftAttackHitBox;
             }
             if (EXP >= NextLevel)
             {
+                maxHealth++;
+                Health = maxHealth;
                 levelUp = true;
                 Level++;
+                if (levelUpImage.IsActive == true)
+                {
+                    Level--;
+                }
                 NextLevel = NextLevel = 100 + Level * Level * Level;
+                EXP = 0;
             }
             PlayerImage.Update(gameTime);
         }

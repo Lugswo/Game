@@ -89,11 +89,14 @@
     <Compile Include="Classes\FadeEffect.cs" />
     <Compile Include="Classes\InputIPScreen.cs" />
     <Compile Include="Classes\Monsters\TestMonster2.cs" />
+    <Compile Include="Classes\NPC.cs" />
+    <Compile Include="Classes\NPCs\TestNPC.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Server.cs" />
     <Compile Include="Classes\SetHostScreen.cs" />
     <Compile Include="Classes\SoundItem.cs" />
     <Compile Include="Classes\SoundManager.cs" />
+    <Compile Include="Classes\TextScrollEffect.cs" />
     <Compile Include="Classes\UpdateGameMenu.cs" />
     <Compile Include="Classes\GameplayScreen.cs" />
     <Compile Include="Classes\GameScreen.cs" />

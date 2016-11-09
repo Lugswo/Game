@@ -11,6 +11,7 @@ namespace The_Dream.Classes
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteSortMode sortMode;
 
         public Game1()
         {
@@ -30,6 +31,8 @@ namespace The_Dream.Classes
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
+            Window.AllowUserResizing = true;
+            sortMode = new SpriteSortMode();
             base.Initialize();
         }
 
@@ -84,7 +87,7 @@ namespace The_Dream.Classes
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null);
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

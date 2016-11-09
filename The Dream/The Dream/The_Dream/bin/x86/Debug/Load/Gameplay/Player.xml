@@ -17,7 +17,7 @@
   <X>10</X>
   <Y>10</Y>
   <PlayerImage>
-    <Path>Gameplay/Characters/Sprites/Player/Player</Path>
+    <Path>Gameplay/Characters/Player/Player</Path>
     <Effects>SpriteSheetEffect</Effects>
     <spriteSheetEffect>
       <AmountOfFrames>

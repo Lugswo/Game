@@ -2,6 +2,7 @@
 <Map>
   <Sprite>
     <image>
+      <Layer>0</Layer>
       <Path>Gameplay/Backgrounds/Map1/Map1</Path>
       <Position>
         <X>0</X>
@@ -11,6 +12,7 @@
   </Sprite>
   <Sprite>
     <image>
+      <Layer>0</Layer>
       <Path>Gameplay/Backgrounds/Map1/Map1</Path>
       <Position>
         <X>1999</X>
@@ -20,6 +22,7 @@
   </Sprite>
   <Blank>
     <image>
+      <Layer>0</Layer>
       <Path>Gameplay/Backgrounds/Blanks/Black</Path>
       <Position>
         <X>1999</X>
@@ -29,6 +32,7 @@
   </Blank>
   <Texture>
     <image>
+      <Layer>.5</Layer>
       <Path>Gameplay/Textures/Tree</Path>
       <Position>
         <X>100</X>
@@ -36,4 +40,31 @@
       </Position>
     </image>
   </Texture>
+  <NPC>
+    <image>
+      <Layer>.5</Layer>
+      <Effects>SpriteSheetEffect</Effects>
+      <spriteSheetEffect>
+        <AmountOfFrames>
+          <X>2</X>
+          <Y>1</Y>
+        </AmountOfFrames>
+      </spriteSheetEffect>
+      <Path>Gameplay/Characters/NPCs/TestNPC/Sprite</Path>
+      <Position>
+        <X>300</X>
+        <Y>100</Y>
+      </Position>
+    </image>
+    <portrait>
+      <Path>Gameplay/Characters/NPCs/TestNPC/Portrait</Path>
+    </portrait>
+    <Name>Test</Name>
+    <Greeting>Hello.</Greeting>
+    <Greeting>Hi.</Greeting>
+    <Dialogue>I can shoot stuff.</Dialogue>
+    <Dialogue>I'm Chrom.</Dialogue>
+    <Farewell>Bye.</Farewell>
+    <Farwell>Goodbye.</Farwell>
+  </NPC>
 </Map>

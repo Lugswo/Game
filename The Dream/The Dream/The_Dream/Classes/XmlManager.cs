@@ -26,9 +26,5 @@ namespace The_Dream.Classes
             }
             return instance;
         }
-        public void Save()
-        {
-
-        }
     }
 }

@@ -22,18 +22,19 @@ namespace The_Dream.Classes
         List<Monster> MonsterList;
         float ConnectionTimer;
         public Image image = new Image();
+        public Image dialogueImage;
         public int PlayerID;
         public Map map;
         public bool setFade = false;
         public bool Unloaded = false;
         public bool packetSent = false;
         UpdateMonsters updateMonsters;
-        int mapMoveX, mapMoveY, prevDir, Combo, RogueCombo, newAreaX, newAreaY;
-        bool Up, Down, Left, Right, pUp, pDown, pLeft, pRight, Close, newArea, aLeft, aUp, aRight, aDown;
+        int mapMoveX, mapMoveY, prevDir, Combo, RogueCombo, newAreaX, newAreaY, nAreaX, nAreaY;
+        bool Up, Down, Left, Right, pUp, pDown, pLeft, pRight, Close, newArea, aLeft, aUp, aRight, aDown, Talking;
         public bool paused = false;
         bool releasedPause = true;
         Image text = new Image();
-        Image levelUpImage;
+        Image health;
         enum PacketTypes
         {
             LOGIN,
@@ -51,7 +52,8 @@ namespace The_Dream.Classes
             ATTACKEND,
             REMOVEMONSTER,
             NEWAREAPLAYER,
-            WALLCOLLISION
+            LEVELUP,
+            DEBUG
         }
         enum MoveDirection
         {
@@ -62,7 +64,7 @@ namespace The_Dream.Classes
         {
             map = realMap;
         }
-        public void AreaTransition(GameTime gameTime, int X, int Y, ref Map map, ref Image fadeImage)
+        public void AreaTransition(GameTime gameTime, ref Map map, ref Image fadeImage)
         {
             if (map.IsTransitioning == true)
             {
@@ -78,6 +80,10 @@ namespace The_Dream.Classes
                     newArea = false;
                     PlayerList[PlayerID].X = newAreaX;
                     PlayerList[PlayerID].Y = newAreaY;
+                    PlayerList[PlayerID].pX = newAreaX;
+                    PlayerList[PlayerID].pY = newAreaY;
+                    PlayerList[PlayerID].AreaX = nAreaX;
+                    PlayerList[PlayerID].AreaY = nAreaY;
                     foreach (MapSprite m in map.Maps)
                     {
                         m.image.UnloadContent();
@@ -87,7 +93,7 @@ namespace The_Dream.Classes
                         s.image.UnloadContent();
                     }
                     XmlManager<Map> mapLoader = new XmlManager<Map>();
-                    map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[X, Y] + "/Background.xml");
+                    map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[PlayerList[PlayerID].AreaX, PlayerList[PlayerID].AreaY] + "/Background.xml");
                     map.IsTransitioning = true;
                     map.LoadContent();
                     map.Update(gameTime, PlayerList[PlayerID]);
@@ -132,6 +138,25 @@ namespace The_Dream.Classes
                         else if (map.Down == true)
                         {
                             s.image.Position.Y = s.OriginalPosition.Y - map.DeadZone.Height + ScreenManager.instance.Dimensions.Y;
+                        }
+                    }
+                    foreach (NPC npc in map.NPCs)
+                    {
+                        if (map.Left == false && map.Right == false)
+                        {
+                            npc.image.Position.X = npc.OriginalPosition.X - map.Moved.X + ScreenManager.instance.Dimensions.X / 2;
+                        }
+                        else if (map.Right == true)
+                        {
+                            npc.image.Position.X = npc.OriginalPosition.X - map.DeadZone.Width + ScreenManager.instance.Dimensions.X;
+                        }
+                        if (map.Down == false && map.Up == false)
+                        {
+                            npc.image.Position.Y = npc.OriginalPosition.Y - map.Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
+                        }
+                        else if (map.Down == true)
+                        {
+                            npc.image.Position.Y = npc.OriginalPosition.Y - map.DeadZone.Height + ScreenManager.instance.Dimensions.Y;
                         }
                     }
                 }
@@ -207,13 +232,40 @@ namespace The_Dream.Classes
             {
                 if (PlayerList[PlayerID].Attacking == false)
                 {
-                    PlayerList[PlayerID].Attacking = true;
-                    PlayerList[PlayerID].zPressed = true;
+                    if (Talking == true)
+                    {
+                        foreach (NPC npc in map.NPCs)
+                        {
+                            if (npc.bFarewell == true)
+                            {
+                                npc.dialogueEnded = true;
+                            }
+                            else if (npc.Talking == true)
+                            {
+                                npc.ContinueDialogue();
+                                break;
+                            }
+                        }
+                    }
+                    foreach (NPC npc in map.NPCs)
+                    {
+                        if (npc.interactable == true)
+                        {
+                            Talking = true;
+                            npc.Talking = true;
+                            break;
+                        }
+                    }
+                    if (Talking == false)
+                    {
+                        PlayerList[PlayerID].Attacking = true;
+                        PlayerList[PlayerID].zPressed = true;
+                    }
                 }
             }
             if (PlayerList[PlayerID].Attacking == true)
             {
-                if (PlayerList[PlayerID].PlayerImage.spriteSheetEffect.CurrentFrame.X >= PlayerList[PlayerID].PlayerImage.spriteSheetEffect.AmountOfFrames.X - 3)
+                if (PlayerList[PlayerID].AttackCounter >= 300)
                 {
                     if (PlayerList[PlayerID].NextAttack == false)
                     {
@@ -229,7 +281,7 @@ namespace The_Dream.Classes
                     }
                 }
             }
-            if (map.IsTransitioning == true || paused == true || PlayerList[PlayerID].Attacking == true)
+            if (map.IsTransitioning == true || paused == true || PlayerList[PlayerID].Attacking == true || Talking == true)
             {
                 Up = Down = Left = Right = false;
             }
@@ -246,6 +298,12 @@ namespace The_Dream.Classes
                 {
                     ScreenManager.Instance.ChangeScreens("TitleScreen");
                 }
+            }
+            if (InputManager.Instance.KeyPressed(Keys.B))
+            {
+                NetOutgoingMessage outmsg = client.CreateMessage();
+                outmsg.Write((byte)PacketTypes.DEBUG);
+                client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
             }
             if (dir == MoveDirection.MOVE)
             {
@@ -284,7 +342,8 @@ namespace The_Dream.Classes
         }
         public Client()
         {
-
+            dialogueImage = new Image();
+            health = new Image();
         }
         public void LoadContent()
         {
@@ -301,21 +360,17 @@ namespace The_Dream.Classes
             ClientOut.WriteAllProperties(player);
             client.Connect(hostip, 25565, ClientOut);
             PlayerList = new List<Player>();
-            image.Path = "Gameplay/Characters/Sprites/Player/Player";
+            image.Path = "Gameplay/Characters/Player/Player";
             image.Position = new Vector2(100, 100);
             image.LoadContent();
             ConnectionTimer = 0;
             MonsterList = new List<Monster>();
             Combo = 0;
             RogueCombo = 1;
-            levelUpImage = new Image();
-            levelUpImage.Path = "Gameplay/Effects/Level Up";
-            levelUpImage.Effects = "SpriteSheetEffect";
-            levelUpImage.spriteSheetEffect.AmountOfFrames.X = 15;
-            levelUpImage.spriteSheetEffect.AmountOfFrames.Y = 1;
-            levelUpImage.IsActive = false;
-            levelUpImage.LoadContent();
             newArea = false;
+            dialogueImage.Path = "Gameplay/GUI/Dialogue";
+            dialogueImage.LoadContent();
+            Talking = false;
         }
         public void UnloadContent()
         {
@@ -325,11 +380,25 @@ namespace The_Dream.Classes
         {
             if (PlayerList.Count > PlayerID)
             {
+                foreach (NPC npc in map.NPCs)
+                {
+                    if (npc.dialogueEnded == true)
+                    {
+                        Talking = npc.Talking = npc.dialogueEnded = npc.bGreeting = npc.bDialogue = npc.bFarewell = npc.initiated = false;
+                        npc.UnloadText();
+                    }
+                }
+                health = new Image();
+                health.Text = PlayerList[PlayerID].Health.ToString() + "/" + PlayerList[PlayerID].maxHealth;
+                health.LoadContent();
                 //text = new Image();
-                //text.Text = PlayerList[0].EXP.ToString();
+                //text.Text = PlayerList[PlayerID].Level.ToString();
                 //text.LoadContent();
                 GetInput(paused);
-                SendAttackState();
+                if (Talking == false)
+                {
+                    SendAttackState();
+                }
             }
             while ((ClientInc = client.ReadMessage()) != null)
             {
@@ -341,6 +410,7 @@ namespace The_Dream.Classes
                         {
                             Player temp = new Player();
                             ClientInc.ReadAllProperties(temp);
+                            temp.PlayerImage.Layer = .5f;
                             temp.LoadContent();
                             PlayerList.Add(temp);
                         }
@@ -354,6 +424,16 @@ namespace The_Dream.Classes
                                     {
                                         ClientInc.ReadInt32();
                                         ClientInc.ReadInt32();
+                                        p.VelocityX = ClientInc.ReadInt32();
+                                        p.VelocityY = ClientInc.ReadInt32();
+                                        p.AreaX = ClientInc.ReadInt32();
+                                        p.AreaY = ClientInc.ReadInt32();
+                                        p.EXP = ClientInc.ReadInt32();
+                                    }
+                                    else
+                                    {
+                                        p.X = ClientInc.ReadInt32();
+                                        p.Y = ClientInc.ReadInt32();
                                         p.VelocityX = ClientInc.ReadInt32();
                                         p.VelocityY = ClientInc.ReadInt32();
                                         p.AreaX = ClientInc.ReadInt32();
@@ -393,6 +473,15 @@ namespace The_Dream.Classes
                                 m.Y = ClientInc.ReadInt32();
                             }
                         }
+                        else if (b == (byte)PacketTypes.LEVELUP)
+                        {
+                            int player = ClientInc.ReadInt32();
+                            if (player != PlayerID)
+                            {
+                                PlayerList[player].levelUp = true;
+                                PlayerList[player].levelUpImage.IsActive = true;
+                            }
+                        }
                         else if (b == (byte)PacketTypes.ADDMONSTER)
                         {
                             Monster temp = new Monster();
@@ -407,13 +496,13 @@ namespace The_Dream.Classes
                         else if (b == (byte)PacketTypes.NEWAREAPLAYER)
                         {
                             int id = ClientInc.ReadInt32();
-                            PlayerList[id].pX = PlayerList[id].X;
-                            PlayerList[id].pY = PlayerList[id].Y;
+                            PlayerList[id].pX = ClientInc.ReadInt32();
+                            PlayerList[id].pY = ClientInc.ReadInt32();
                         }
                         else if (b == (byte)PacketTypes.NEWAREA)
                         {
-                            PlayerList[PlayerID].AreaX = ClientInc.ReadInt32();
-                            PlayerList[PlayerID].AreaY = ClientInc.ReadInt32();
+                            nAreaX = ClientInc.ReadInt32();
+                            nAreaY = ClientInc.ReadInt32();
                             newAreaX = ClientInc.ReadInt32();
                             newAreaY = ClientInc.ReadInt32();
                             PlayerList[PlayerID].pX = newAreaX;
@@ -442,6 +531,7 @@ namespace The_Dream.Classes
                             {
                                 Player temp = new Player();
                                 ClientInc.ReadAllProperties(temp);
+                                temp.PlayerImage.Layer = .5f;
                                 temp.LoadContent();
                                 temp.pX = temp.X;
                                 temp.pY = temp.Y;
@@ -456,8 +546,13 @@ namespace The_Dream.Classes
                         }
                         else if (b == (byte)PacketTypes.REMOVEMONSTER)
                         {
-                            int toRemove = ClientInc.ReadInt32();
-                            MonsterList.Remove(MonsterList[toRemove]);
+                            int count = ClientInc.ReadInt32();
+                            for (int i = 0; i < count; i++)
+                            {
+                                int j = ClientInc.ReadInt32();
+                                j = j - i;
+                                MonsterList.Remove(MonsterList[j]);
+                            }
                         }
                         break;
                     case NetIncomingMessageType.StatusChanged:
@@ -498,9 +593,17 @@ namespace The_Dream.Classes
                             PlayerList[PlayerID].pX -= 10;
                         }
                     }
+                    else
+                    {
+                        PlayerList[PlayerID].PositionX = PlayerList[PlayerID].X;
+                    }
                     foreach (MapSprite m in map.Maps)
                     {
                         m.image.Position.X = m.OriginalPosition.X;
+                    }
+                    foreach (Sprite s in map.Sprites)
+                    {
+                        s.image.Position.X = s.OriginalPosition.X;
                     }
                     mapMoveX = 0;
                 }
@@ -529,7 +632,15 @@ namespace The_Dream.Classes
                             PlayerList[PlayerID].pX -= 10;
                         }
                     }
+                    else
+                    {
+                        PlayerList[PlayerID].PositionX = PlayerList[PlayerID].X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
+                    }
                     foreach (MapSprite m in map.Maps)
+                    {
+                        m.image.Position.X = m.OriginalPosition.X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
+                    }
+                    foreach (Sprite m in map.Sprites)
                     {
                         m.image.Position.X = m.OriginalPosition.X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
                     }
@@ -560,7 +671,15 @@ namespace The_Dream.Classes
                             PlayerList[PlayerID].pY -= 10;
                         }
                     }
+                    else
+                    {
+                        PlayerList[PlayerID].PositionY = PlayerList[PlayerID].Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
+                    }
                     foreach (MapSprite m in map.Maps)
+                    {
+                        m.image.Position.Y = m.OriginalPosition.Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
+                    }
+                    foreach (Sprite m in map.Sprites)
                     {
                         m.image.Position.Y = m.OriginalPosition.Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
                     }
@@ -591,7 +710,15 @@ namespace The_Dream.Classes
                             PlayerList[PlayerID].pY -= 10;
                         }
                     }
+                    else
+                    {
+                        PlayerList[PlayerID].PositionY = PlayerList[PlayerID].Y;
+                    }
                     foreach (MapSprite m in map.Maps)
+                    {
+                        m.image.Position.Y = m.OriginalPosition.Y;
+                    }
+                    foreach (Sprite m in map.Sprites)
                     {
                         m.image.Position.Y = m.OriginalPosition.Y;
                     }
@@ -710,18 +837,49 @@ namespace The_Dream.Classes
                 PlayerList[PlayerID].PlayerImage.Position.X = PlayerList[PlayerID].PositionX;
                 PlayerList[PlayerID].PlayerImage.Position.Y = PlayerList[PlayerID].PositionY;
             }
+            if (PlayerList.Count > PlayerID)
+            {
+                if (PlayerList[PlayerID].levelUp == true)
+                {
+                    PlayerList[PlayerID].levelUpImage.IsActive = true;
+                    NetOutgoingMessage outmsg = client.CreateMessage();
+                    outmsg.Write((byte)PacketTypes.LEVELUP);
+                    client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered, 0);
+                }
+                PlayerList[PlayerID].UpdateHitBoxes();
+                PlayerList[PlayerID].Update(gameTime);
+                map.UpdateNPCs(gameTime, PlayerList[PlayerID]);
+            }
             foreach (Player p in PlayerList)
             {
-                p.Update(gameTime);
-                if (p.levelUp == true)
+                foreach (NPC npc in map.NPCs)
                 {
-                    levelUpImage.IsActive = true;
+                    if (p.Y + p.PlayerImage.spriteSheetEffect.FrameHeight < npc.HitBox.Bottom)
+                    {
+                        npc.image.Layer = .6f;
+                    }
+                    else
+                    {
+                        npc.image.Layer = .4f;
+                    }
+                }
+                foreach (Monster m in MonsterList)
+                {
+                    if (p.Y + p.PlayerImage.spriteSheetEffect.FrameHeight < m.Y + m.image.spriteSheetEffect.FrameHeight)
+                    {
+                        m.image.Layer = .6f;
+                    }
+                    else
+                    {
+                        m.image.Layer = .4f;
+                    }
                 }
             }
             foreach (Player p in PlayerList)
             {
                 if (PlayerList.IndexOf(p) != PlayerID)
                 {
+                    p.Update(gameTime);
                     if (p.X != p.pX)
                     {
                         if (p.X == p.pX + 10)
@@ -833,7 +991,10 @@ namespace The_Dream.Classes
                 //    }
                 //    m.image.Update(gameTime);
             }
-            levelUpImage.Update(gameTime);
+            foreach (Player p in PlayerList)
+            {
+                p.levelUpImage.Update(gameTime);
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -843,6 +1004,7 @@ namespace The_Dream.Classes
             }
             if (PlayerList.Count > PlayerID)
             {
+                health.Draw(spriteBatch);
                 foreach (Monster m in MonsterList)
                 {
                     m.Draw(spriteBatch);
@@ -854,26 +1016,21 @@ namespace The_Dream.Classes
                         p.PlayerImage.Draw(spriteBatch);
                         if (p.levelUp == true)
                         {
-                            if (PlayerList.IndexOf(p) == PlayerID)
-                            {
-                                levelUpImage.Position.X = p.PositionX - ((levelUpImage.spriteSheetEffect.FrameWidth - p.PlayerImage.spriteSheetEffect.FrameWidth) / 2);
-                                levelUpImage.Position.Y = p.PositionY - p.PlayerImage.spriteSheetEffect.FrameHeight;
-                            }
-                            else
-                            {
-                                levelUpImage.Position.X = p.X - ((levelUpImage.spriteSheetEffect.FrameWidth - p.PlayerImage.spriteSheetEffect.FrameWidth / 2));
-                                levelUpImage.Position.Y = p.Y - p.PlayerImage.spriteSheetEffect.FrameHeight;
-                            }
-                            if (levelUpImage.spriteSheetEffect.CurrentFrame.X == levelUpImage.spriteSheetEffect.AmountOfFrames.X - 1)
+                            p.levelUpImage.Position.X = p.PlayerImage.Position.X - ((p.levelUpImage.spriteSheetEffect.FrameWidth - p.PlayerImage.spriteSheetEffect.FrameWidth) / 2);
+                            p.levelUpImage.Position.Y = p.PlayerImage.Position.Y - p.PlayerImage.spriteSheetEffect.FrameHeight;
+                            if (p.levelUpImage.spriteSheetEffect.CurrentFrame.X == p.levelUpImage.spriteSheetEffect.AmountOfFrames.X - 1)
                             {
                                 p.levelUp = false;
-                                levelUpImage.IsActive = false;
+                                p.levelUpImage.IsActive = false;
                             }
-                            levelUpImage.Draw(spriteBatch);
+                            p.levelUpImage.Draw(spriteBatch);
                         }
                     }
                 }
-                PlayerList[PlayerID].PlayerImage.Draw(spriteBatch);
+                if (Talking == true)
+                {
+                    dialogueImage.Draw(spriteBatch);
+                }
             }
         }
     }

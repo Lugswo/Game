@@ -2,6 +2,7 @@
 <ScreenManager>
   <image>
     <Path>ScreenManager/FadeImage</Path>
+    <Layer>1</Layer>
     <Effects>FadeEffect</Effects>
     <Scale>
       <X>10</X>

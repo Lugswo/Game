@@ -41,7 +41,8 @@ namespace The_Dream.Classes
             ATTACKEND,
             REMOVEMONSTER,
             NEWAREAPLAYER,
-            WALLCOLLISION
+            LEVELUP,
+            DEBUG
         }
         public void SendGameState()
         {
@@ -156,28 +157,27 @@ namespace The_Dream.Classes
                     {
                         continue;
                     }
-                    int count = area.DeadMonsters.Count;
-                    for (int i = 0; i < count; i++)
+                    if (area.DeadMonsters.Count > 0)
                     {
+                        p.EXP += area.EXP;
                         NetOutgoingMessage outmsg = server.CreateMessage();
                         outmsg.Write((byte)PacketTypes.REMOVEMONSTER);
-                        outmsg.Write(area.DeadMonsters[i]);
-                        server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
-                        for (int j = 0; j < count; j++)
+                        outmsg.Write(area.DeadMonsters.Count);
+                        foreach (int i in area.DeadMonsters)
                         {
-                            if (area.DeadMonsters[j] > area.DeadMonsters[i])
-                            {
-                                area.DeadMonsters[j] = area.DeadMonsters[j] - 1;
-                            }
+                            outmsg.Write(i);
                         }
+                        server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
                     }
-                    area.DeadMonsters.Clear();
                     foreach (Monster m in area.SpawnedMonsters)
                     {
                         m.Update(gameTime, p);
                     }
                 }
-                foreach (AreaMonsters area in updateMonsters.AreaList)
+            }
+            foreach (AreaMonsters area in updateMonsters.AreaList)
+            {
+                foreach (Player p in GameState)
                 {
                     if (area.MonsterAdded == true && p.AreaX == area.AreaX && p.AreaY == area.AreaY)
                     {
@@ -195,9 +195,14 @@ namespace The_Dream.Classes
                         {
                             server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
                         }
-                        area.MonsterAdded = false;
                     }
                 }
+                area.MonsterAdded = false;
+            }
+            foreach (AreaMonsters area in updateMonsters.AreaList)
+            {
+                area.DeadMonsters.Clear();
+                area.EXP = 0;
             }
             while ((ServerInc = server.ReadMessage()) != null)
             {
@@ -313,6 +318,22 @@ namespace The_Dream.Classes
                                 break;
                             }
                         }
+                        else if (b == (byte)PacketTypes.LEVELUP)
+                        {
+                            foreach (Player p in GameState)
+                            {
+                                if (p.Connection != ServerInc.SenderConnection)
+                                {
+                                    continue;
+                                }
+                                p.EXP = 0;
+                                NetOutgoingMessage outmsg = server.CreateMessage();
+                                outmsg.Write((byte)PacketTypes.LEVELUP);
+                                outmsg.Write(GameState.IndexOf(p));
+                                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                                break;
+                            }
+                        }
                         else if (b == (byte)PacketTypes.NEXTATTACK)
                         {
                             foreach (Player p in GameState)
@@ -339,6 +360,13 @@ namespace The_Dream.Classes
                                 p.NextAttack = false;
                                 p.Combo = 0;
                                 break;
+                            }
+                        }
+                        else if (b == (byte)PacketTypes.DEBUG)
+                        {
+                            foreach (Player p in GameState)
+                            {
+                                p.EXP += 1000;
                             }
                         }
                         else if (b == (byte)PacketTypes.SHUTDOWN)
@@ -368,8 +396,30 @@ namespace The_Dream.Classes
                         break;
                 }
             }
+            foreach (AreaMonsters area in updateMonsters.AreaList)
+            {
+                foreach (Player p in GameState)
+                {
+                    if (area.AreaX == p.AreaX && area.AreaY == p.AreaY)
+                    {
+                        area.playersInside = true;
+                        break;
+                    }
+                    else
+                    {
+                        area.playersInside = false;
+                    }
+                }
+            }
             foreach (Player p in GameState)
             {
+                foreach (AreaMonsters area in updateMonsters.AreaList)
+                {
+                    if (area.playersInside == false)
+                    {
+                        area.UnloadContent();
+                    }
+                }
                 Player temp = p;
                 p.UpdateHitBoxes();
                 foreach (Map map in maps)
@@ -430,8 +480,10 @@ namespace The_Dream.Classes
                             }
                             server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
                             NetOutgoingMessage outmsg2 = server.CreateMessage();
-                            outmsg.Write((byte)PacketTypes.NEWAREAPLAYER);
-                            outmsg.Write(GameState.IndexOf(p));
+                            outmsg2.Write((byte)PacketTypes.NEWAREAPLAYER);
+                            outmsg2.Write(GameState.IndexOf(p));
+                            outmsg2.Write(p.X);
+                            outmsg2.Write(p.Y);
                             server.SendMessage(outmsg2, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                             playerUpdate.newArea = playerUpdate.aUp = playerUpdate.aDown = playerUpdate.aLeft = playerUpdate.aRight = false;
                             break;

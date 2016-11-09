@@ -34,6 +34,7 @@ namespace The_Dream.Classes
         public SpriteSheetEffect spriteSheetEffect = new SpriteSheetEffect();
         public ShowSpriteEffect showSpriteEffect;
         public Vector2 dimensions;
+        public float Layer;
         void SetEffect<T>(ref T effect)
         {
             if (effect == null)
@@ -100,6 +101,7 @@ namespace The_Dream.Classes
             Alpha = 1.0f;
             SourceRect = Rectangle.Empty;
             effectList = new Dictionary<string, ImageEffect>();
+            Layer = .9f;
         }
         public void LoadContent()
         {
@@ -184,7 +186,7 @@ namespace The_Dream.Classes
         {
             origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
             spriteBatch.Draw(texture, Position + origin, SourceRect, Color.White * Alpha,
-                0.0f, origin, Scale, SpriteEffects.None, 0.0f);
+                0.0f, origin, Scale, SpriteEffects.None, Layer);
         }
     }
 }

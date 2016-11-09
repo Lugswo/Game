@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Menu>
   <Background>
+    <Layer>0</Layer>
     <Path>SplashScreen/Title</Path>
   </Background>
   <Axis>Y</Axis>

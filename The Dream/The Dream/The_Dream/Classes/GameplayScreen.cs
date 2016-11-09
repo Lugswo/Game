@@ -92,12 +92,13 @@ namespace The_Dream.Classes
             {
                 server.Update(gameTime);
             }
-            client.AreaTransition(gameTime, client.map.AreaX, client.map.AreaY, ref client.map, ref fadeImage);
+            client.AreaTransition(gameTime, ref client.map, ref fadeImage);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
             client.map.Draw(spriteBatch);
+            client.map.DrawNPCs(spriteBatch);
             client.Draw(spriteBatch);
             gameMenu.Draw(spriteBatch);
             if (map.IsTransitioning == true)

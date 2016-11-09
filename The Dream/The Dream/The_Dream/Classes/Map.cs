@@ -19,6 +19,8 @@ namespace The_Dream.Classes
         public List<MapSprite> Blanks;
         [XmlElement("Texture")]
         public List<Sprite> Sprites;
+        [XmlElement("NPC")]
+        public List<NPC> NPCs;
         [XmlIgnore]
         public string[,] Area;
         public string AreaName;
@@ -41,6 +43,27 @@ namespace The_Dream.Classes
             AreaY = Y;
             IsTransitioning = true;
         }
+        public void UpdateNPCs(GameTime gameTime, Player player)
+        {
+            foreach (NPC npc in NPCs)
+            {
+                npc.Update(gameTime, player);
+            }
+        }
+        public void DrawNPCs(SpriteBatch spriteBatch)
+        {
+            foreach (NPC npc in NPCs)
+            {
+                npc.Draw(spriteBatch);
+            }
+        }
+        //public void LoadNPC(NPC npc)
+        //{
+        //    NPC temp = new NPC();
+        //    temp = (NPC)Activator.CreateInstance(npc.GetType());
+        //    temp.LoadContent();
+        //    temp.image.Position = npc.image.Position;
+        //}
         public void LoadContent()
         {
             x = new List<int>();
@@ -76,6 +99,10 @@ namespace The_Dream.Classes
                 sprite.Up = new Rectangle((int)sprite.OriginalPosition.X, (int)sprite.OriginalPosition.Y - 1, sprite.image.texture.Width - 1, 1);
                 sprite.Down = new Rectangle((int)sprite.OriginalPosition.X, sprite.image.texture.Height + (int)sprite.OriginalPosition.Y, sprite.image.texture.Width - 1, 1);
             }
+            foreach (NPC npc in NPCs)
+            {
+                npc.LoadContent();
+            }
         }
         public void UnloadContent()
         {
@@ -90,6 +117,10 @@ namespace The_Dream.Classes
             foreach (Sprite sprite in Sprites)
             {
                 sprite.image.UnloadContent();
+            }
+            foreach (NPC npc in NPCs)
+            {
+                npc.image.UnloadContent();
             }
         }
         public void Update(GameTime gameTime, Player player)
@@ -165,6 +196,10 @@ namespace The_Dream.Classes
                 sprite.Up.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
                 sprite.Down.X = (int)sprite.OriginalPosition.X - (int)Moved.X + (int)ScreenManager.instance.Dimensions.X / 2;
             }
+            foreach (NPC npc in NPCs)
+            {
+                npc.image.Position.X = npc.OriginalPosition.X - Moved.X + ScreenManager.instance.Dimensions.X / 2;
+            }
         }
         public void VerticalMove()
         {
@@ -192,6 +227,10 @@ namespace The_Dream.Classes
                 sprite.Up.Y = (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
                 sprite.Down.Y = (int)sprite.OriginalPosition.Y + (int)sprite.OriginalPosition.Y - (int)Moved.Y + (int)ScreenManager.instance.Dimensions.Y / 2;
             }
+            foreach (NPC npc in NPCs)
+            {
+                npc.image.Position.Y = npc.OriginalPosition.Y - Moved.Y + ScreenManager.instance.Dimensions.Y / 2;
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -202,6 +241,13 @@ namespace The_Dream.Classes
             foreach (Sprite sprite in Sprites)
             {
                 sprite.image.Draw(spriteBatch);
+            }
+            foreach (NPC npc in NPCs)
+            {
+                if (npc.Talking == true)
+                {
+                    npc.portrait.Draw(spriteBatch);
+                }
             }
         }
     }

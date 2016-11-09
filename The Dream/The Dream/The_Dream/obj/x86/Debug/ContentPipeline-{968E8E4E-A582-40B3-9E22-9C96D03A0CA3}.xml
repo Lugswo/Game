@@ -56,15 +56,6 @@
       <Time>2016-09-06T14:45:50-07:00</Time>
     </Item>
     <Item>
-      <Source>Gameplay\Characters\Sprites\Player\Player.png</Source>
-      <Name>Gameplay\Characters\Sprites\Player\Player</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\Player.xnb</Output>
-      <Time>2016-10-21T11:53:37.6861276-07:00</Time>
-    </Item>
-    <Item>
       <Source>Gameplay\Monsters\TestMonster.png</Source>
       <Name>Gameplay\Monsters\TestMonster</Name>
       <Importer>TextureImporter</Importer>
@@ -269,7 +260,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb</Output>
-      <Time>2016-10-03T14:19:34.3255871-07:00</Time>
+      <Time>2016-11-03T12:58:25.7004902-07:00</Time>
     </Item>
     <Item>
       <Source>SplashScreen\Title.jpg</Source>
@@ -281,13 +272,58 @@
       <Time>2016-10-05T14:06:55.4192968-07:00</Time>
     </Item>
     <Item>
-      <Source>Gameplay\Characters\Sprites\Player\notPlayer.png</Source>
-      <Name>Gameplay\Characters\Sprites\Player\notPlayer</Name>
+      <Source>Gameplay\Characters\Emotes\Speech Bubble.png</Source>
+      <Name>Gameplay\Characters\Emotes\Speech Bubble</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Sprites\Player\notPlayer.xnb</Output>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Emotes\Speech Bubble.xnb</Output>
+      <Time>2016-11-06T17:55:32.2792877-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\GUI\Dialogue.png</Source>
+      <Name>Gameplay\GUI\Dialogue</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Dialogue.xnb</Output>
+      <Time>2016-11-07T14:29:31.1728522-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\notPlayer.png</Source>
+      <Name>Gameplay\Characters\Player\notPlayer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\notPlayer.xnb</Output>
       <Time>2016-10-19T13:51:05.6909851-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\Player.png</Source>
+      <Name>Gameplay\Characters\Player\Player</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Player.xnb</Output>
+      <Time>2016-10-21T11:53:37.6861276-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\NPCs\TestNPC\Sprite.png</Source>
+      <Name>Gameplay\Characters\NPCs\TestNPC\Sprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\NPCs\TestNPC\Sprite.xnb</Output>
+      <Time>2016-11-07T14:24:41.657465-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\NPCs\TestNPC\Portrait.png</Source>
+      <Name>Gameplay\Characters\NPCs\TestNPC\Portrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\NPCs\TestNPC\Portrait.xnb</Output>
+      <Time>2016-11-07T14:26:24.7594933-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
