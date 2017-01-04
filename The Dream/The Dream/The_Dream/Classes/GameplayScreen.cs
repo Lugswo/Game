@@ -26,6 +26,7 @@ namespace The_Dream.Classes
         {
             fadeImage = new Image();
             fadeImage.Alpha = 0;
+            fadeImage.Layer = 1.0f;
             fadeImage.Path = "ScreenManager/FadeImage";
             fadeImage.Effects = "FadeEffect";
             fadeImage.Scale = new Vector2(10, 10);
@@ -57,7 +58,7 @@ namespace The_Dream.Classes
             map.LoadContent();
             client.GetReferences(map);
             XmlManager<UpdateGameMenu> menuLoader = new XmlManager<UpdateGameMenu>();
-            gameMenu = menuLoader.Load("Load/Gameplay/GameMenu.xml");
+            gameMenu = new UpdateGameMenu();
             gameMenu.LoadContent(player);
             //XmlManager<SoundManager> soundLoader = new XmlManager<SoundManager>();
             //soundManager = soundLoader.Load("Load/Gameplay/Sound.xml");
@@ -100,7 +101,10 @@ namespace The_Dream.Classes
             client.map.Draw(spriteBatch);
             client.map.DrawNPCs(spriteBatch);
             client.Draw(spriteBatch);
-            gameMenu.Draw(spriteBatch);
+            if (client.PlayerList.Count > 0)
+            {
+                gameMenu.Draw(spriteBatch, client.PlayerList[client.PlayerID]);
+            }
             if (map.IsTransitioning == true)
             {
                 fadeImage.Draw(spriteBatch);

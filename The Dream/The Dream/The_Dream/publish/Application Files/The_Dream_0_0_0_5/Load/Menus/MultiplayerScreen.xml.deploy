@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Menu>
+  <Background>
+    <Layer>0</Layer>
+    <Path>SplashScreen/Title</Path>
+  </Background>
+  <Axis>Y</Axis>
+  <Effects>FadeEffect</Effects>
+  <Item>
+    <LinkType>Screen</LinkType>
+    <LinkID>SetHostScreen</LinkID>
+    <image>
+      <Text>Host Game</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
+    </image>
+  </Item>
+  <Item>
+    <LinkType>Screen</LinkType>
+    <LinkID>InputIPScreen</LinkID>
+    <image>
+      <Text>Join Game</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
+    </image>
+  </Item>
+  <Item>
+    <LinkType>Menu</LinkType>
+    <LinkID>Load/Menus/TitleMenu.xml</LinkID>
+    <image>
+      <Text>Back</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
+    </image>
+  </Item>
+</Menu>

@@ -101,126 +101,126 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Stats.png">
+    <Compile Include="Gameplay\GUI\Menu\Stats.png">
       <Name>Stats</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Equipment.png">
+    <Compile Include="Gameplay\GUI\Menu\Equipment.png">
       <Name>Equipment</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Inventory.png">
+    <Compile Include="Gameplay\GUI\Menu\Inventory.png">
       <Name>Inventory</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Map.png">
+    <Compile Include="Gameplay\GUI\Menu\Map.png">
       <Name>Map</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Relics.png">
+    <Compile Include="Gameplay\GUI\Menu\Relics.png">
       <Name>Relics</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Save.png">
+    <Compile Include="Gameplay\GUI\Menu\Save.png">
       <Name>Save</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Settings.png">
+    <Compile Include="Gameplay\GUI\Menu\Settings\Settings.png">
       <Name>Settings</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Skills.png">
+    <Compile Include="Gameplay\GUI\Menu\Skills.png">
       <Name>Skills</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\Beastiary.png">
+    <Compile Include="Gameplay\GUI\Menu\Beastiary.png">
       <Name>Beastiary</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InBeastiary.png">
+    <Compile Include="Gameplay\GUI\Menu\InBeastiary.png">
       <Name>InBeastiary</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InEquipment.png">
+    <Compile Include="Gameplay\GUI\Menu\InEquipment.png">
       <Name>InEquipment</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InInventory.png">
+    <Compile Include="Gameplay\GUI\Menu\InInventory.png">
       <Name>InInventory</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InMap.png">
+    <Compile Include="Gameplay\GUI\Menu\InMap.png">
       <Name>InMap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InRelics.png">
+    <Compile Include="Gameplay\GUI\Menu\InRelics.png">
       <Name>InRelics</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InSave.png">
+    <Compile Include="Gameplay\GUI\Menu\InSave.png">
       <Name>InSave</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InSettings.png">
+    <Compile Include="Gameplay\GUI\Menu\Settings\InSettings.png">
       <Name>InSettings</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InSkills.png">
+    <Compile Include="Gameplay\GUI\Menu\InSkills.png">
       <Name>InSkills</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\Menu\InStats.png">
+    <Compile Include="Gameplay\GUI\Menu\InStats.png">
       <Name>InStats</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -282,6 +282,83 @@
   <ItemGroup>
     <Compile Include="Gameplay\Characters\NPCs\TestNPC\Portrait.png">
       <Name>Portrait</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Items\TestGear\Drop.png">
+      <Name>Drop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Items\TestGear\Inventory.png">
+      <Name>Inventory</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Items\TestItem\Drop.png">
+      <Name>Drop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Items\TestItem\Inventory.png">
+      <Name>Inventory</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Inventory\Gear.png">
+      <Name>Gear</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Inventory\Items.png">
+      <Name>Items</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Inventory\InGear.png">
+      <Name>InGear</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Inventory\InItems.png">
+      <Name>InItems</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Items\ItemFrame.png">
+      <Name>ItemFrame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Skills\TestSkill\Sprite.png">
+      <Name>Sprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\Skills\TestSkill\Icon.png">
+      <Name>Icon</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

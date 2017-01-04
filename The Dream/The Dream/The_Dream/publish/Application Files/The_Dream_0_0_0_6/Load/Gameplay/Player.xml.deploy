@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Player>
+  <Name></Name>
+  <Strength>5</Strength>
+  <Defense>5</Defense>
+  <Dexterity>5</Dexterity>
+  <Intelligence>5</Intelligence>
+  <Speed>5</Speed>
+  <Level>1</Level>
+  <EXP>0</EXP>
+  <Health>100</Health>
+  <Energy>100</Energy>
+  <NextLevel>100</NextLevel>
+  <StatPoints>0</StatPoints>
+  <AreaX>1</AreaX>
+  <AreaY>1</AreaY>
+  <X>10</X>
+  <Y>10</Y>
+  <PlayerImage>
+    <Path>Gameplay/Characters/Player/Player</Path>
+    <Effects>SpriteSheetEffect</Effects>
+    <spriteSheetEffect>
+      <AmountOfFrames>
+        <X>6</X>
+        <Y>16</Y>
+      </AmountOfFrames>
+    </spriteSheetEffect>
+  </PlayerImage>
+  <MoveSpeed>400</MoveSpeed>
+</Player>

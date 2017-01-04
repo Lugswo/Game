@@ -19,6 +19,7 @@ namespace The_Dream.Classes
         public bool MonsterAdded;
         public int EXP;
         Map map;
+        public List<Item> Drops;
         public AreaMonsters()
         {
             SpawnedMonsters = new List<Monster>();
@@ -27,6 +28,7 @@ namespace The_Dream.Classes
             DeadMonsters = new List<int>();
             random = new Random();
             playersInside = false;
+            Drops = new List<Item>();
             EXP = 0;
         }
         public void SpawnMonster(Monster monster)
@@ -64,6 +66,12 @@ namespace The_Dream.Classes
         public void DespawnMonster(Monster monster)
         {
             monster.IsAlive = false;
+            monster.Drop();
+            foreach (Item item in monster.Drops)
+            {
+                Drops.Add(item);
+            }
+            monster.Drops.Clear();
             EXP += monster.EXP;
             DeadMonsters.Add(SpawnedMonsters.IndexOf(monster));
         }

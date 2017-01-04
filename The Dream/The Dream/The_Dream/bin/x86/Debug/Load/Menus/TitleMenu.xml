@@ -45,6 +45,19 @@
   </Item>
   <Item>
     <LinkType>Screen</LinkType>
+    <LinkID>CharacterCreationScreen</LinkID>
+    <image>
+      <Text>Create Character</Text>
+      <color>
+        <A>255</A>
+        <R>255</R>
+        <G>255</G>
+        <B>255</B>
+      </color>
+    </image>
+  </Item>
+  <Item>
+    <LinkType>Screen</LinkType>
     <LinkID>ExitScreen</LinkID>
     <image>
       <Text>Exit</Text>

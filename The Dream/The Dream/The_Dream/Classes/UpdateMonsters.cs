@@ -11,7 +11,7 @@ namespace The_Dream.Classes
     public class UpdateMonsters
     {
         Map map;
-        public Dictionary<string, Monster> MonsterList;
+        public Dictionary<int, Monster> MonsterList;
         public List<Monster> SpawnedMonsters, SpawnableMonsters, AliveMonsters;
         public string SpawnableMonsterKeys;
         public Monsters.TestMonster testMonster;
@@ -28,24 +28,13 @@ namespace The_Dream.Classes
         {
             map = realMap;
         }
-        void SetMonster<T>(ref T monster)
+        void SetMonster<T>(ref T monster, int ID)
         {
             if (monster == null)
             {
                 monster = (T)Activator.CreateInstance(typeof(T));
             }
-            MonsterList.Add(monster.GetType().ToString().Replace("The_Dream.Classes.Monsters.", ""), (monster as Monster));
-        }
-        public void CanMonsterSpawn(string monster)
-        {
-            if (MonsterList.ContainsKey(monster))
-            {
-                MonsterList[monster].CanSpawn = true;
-            }
-            else
-            {
-                MonsterList[monster].CanSpawn = false;
-            }
+            MonsterList.Add(ID, (monster as Monster));
         }
         public void NewArea(int AreaX, int AreaY, Map map)
         {
@@ -97,7 +86,7 @@ namespace The_Dream.Classes
         }
         public UpdateMonsters()
         {
-            MonsterList = new Dictionary<string, Monster>();
+            MonsterList = new Dictionary<int, Monster>();
             SpawnedMonsters = new List<Monster>();
             SpawnableMonsters = new List<Monster>();
             AliveMonsters = new List<Monster>();
@@ -109,11 +98,13 @@ namespace The_Dream.Classes
             MaxMonsters = 0;
             AreaAdded = false;
             AreaList = new List<AreaMonsters>();
+            testMonster = new Monsters.TestMonster();
+            testMonster2 = new Monsters.TestMonster2();
         }
         public void LoadContent()
         {
-            SetMonster<Monsters.TestMonster>(ref testMonster);
-            SetMonster<Monsters.TestMonster2>(ref testMonster2);
+            SetMonster<Monsters.TestMonster>(ref testMonster, testMonster.MonsterID);
+            SetMonster<Monsters.TestMonster2>(ref testMonster2, testMonster2.MonsterID);
             foreach (var monster in MonsterList)
             {
                 monster.Value.LoadContent();

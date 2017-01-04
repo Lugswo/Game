@@ -36,11 +36,16 @@ namespace The_Dream.Classes
         public bool Attacking { get; set; }
         public bool NextAttack { get; set;}
         public bool levelUp { get; set; }
+        public int HealthRegen { get; set; }
+        public double OneSecond;
+        public double combatTimer;
         public bool zPressed;
+        public bool inCombat;
         public int Combo { get; set; }
         public bool aUp, aDown, aLeft, aRight, Up, Down, Left, Right, cUp, cDown, cLeft, cRight;
         public int pX;
         public int pY;
+        public int moveSpeed;
         bool ChangedFrames;
         public int AttackCounter;
         public List<MapSprite> Blanks;
@@ -51,12 +56,17 @@ namespace The_Dream.Classes
         public int prevDir;
         public int HitTimer;
         public int maxHealth;
+        public int skillPoints;
+        public Image skillPointsImage;
+        public List<Item> inventory;
+        [XmlElement("Skill")]
+        public List<Skills.Skill> skills;
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Image levelUpImage;
+        public Skills.Skill shiftSkill;
         public Player()
         {
-            Health = maxHealth;
             PlayerImage = new Image();
             Blanks = new List<MapSprite>();
             DeadZone = new Rectangle();
@@ -71,6 +81,14 @@ namespace The_Dream.Classes
             levelUpImage.IsActive = false;
             levelUpImage.LoadContent();
             facingHitBox = new Rectangle();
+            inCombat = false;
+            combatTimer = 0;
+            moveSpeed = 10;
+            inventory = new List<Item>();
+            skills = new List<Skills.Skill>();
+            shiftSkill = new Skills.Skill();
+            shiftSkill.SkillID = 0;
+            skillPointsImage = new Image();
         }
         public void UpdateHitTimer(GameTime gameTime)
         {
@@ -90,14 +108,22 @@ namespace The_Dream.Classes
             leftAttackHitBox = new Rectangle(X - 60, Y, 60, 60);
             rightAttackHitBox = new Rectangle(X + 60, Y, 60, 60);
         }
+        public int Direction()
+        {
+            return (int)PlayerImage.spriteSheetEffect.CurrentFrame.Y;
+        }
         public void LoadContent()
         {
+            maxHealth = Health;
             PlayerImage.Path = "Gameplay/Characters/Player/Player";
             PlayerImage.Effects = "SpriteSheetEffect";
             PlayerImage.spriteSheetEffect.AmountOfFrames = new Vector2(6, 16);
             PlayerImage.LoadContent();
             ChangedFrames = false;
             NextLevel = 100 + Level * Level * Level;
+            skillPointsImage.Position.Y = 125;
+            skillPointsImage.Position.X = 125;
+            skillPointsImage.LoadContent();
         }
         public void UnloadContent()
         {
@@ -143,7 +169,7 @@ namespace The_Dream.Classes
                     aUp = aDown = aLeft = aRight = false;
                 }
                 AttackCounter += gameTime.ElapsedGameTime.Milliseconds;
-                if (AttackCounter > PlayerImage.spriteSheetEffect.AmountOfFrames.X * 100)
+                if (AttackCounter > PlayerImage.spriteSheetEffect.AmountOfFrames.X * 50)
                 {
                     if (NextAttack == true)
                     {
@@ -193,15 +219,16 @@ namespace The_Dream.Classes
             }
             if (EXP >= NextLevel)
             {
-                maxHealth++;
                 Health = maxHealth;
                 levelUp = true;
                 Level++;
+                skillPoints++;
                 if (levelUpImage.IsActive == true)
                 {
                     Level--;
+                    skillPoints--;
                 }
-                NextLevel = NextLevel = 100 + Level * Level * Level;
+                NextLevel = 100 + Level * Level * Level;
                 EXP = 0;
             }
             PlayerImage.Update(gameTime);

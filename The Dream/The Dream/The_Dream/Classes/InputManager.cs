@@ -9,6 +9,7 @@ namespace The_Dream.Classes
     public class InputManager
     {
         KeyboardState currentKeyState, prevKeyState;
+        MouseState currentMouseState, prevMouseState;
         private static InputManager instance;
         public static InputManager Instance
         {
@@ -24,9 +25,11 @@ namespace The_Dream.Classes
         public void Update()
         {
             prevKeyState = currentKeyState;
+            prevMouseState = currentMouseState;
             if (!ScreenManager.Instance.IsTransitioning)
             {
                 currentKeyState = Keyboard.GetState();
+                currentMouseState = Mouse.GetState();
             }
         }
         public bool KeyPressed(params Keys[] keys)
@@ -70,6 +73,14 @@ namespace The_Dream.Classes
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+        public bool LeftClick()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
             }
             return false;
         }

@@ -24,6 +24,9 @@ namespace The_Dream.Classes
         List<Map> maps;
         List<Vector2> AreasAdded;
         Map map;
+        List<Skills.Skill> skillList;
+        Dictionary<int, Skills.Skill> dSkills;
+        Skills.TestSkill testSkill;
         enum PacketTypes
         {
             LOGIN,
@@ -42,6 +45,11 @@ namespace The_Dream.Classes
             REMOVEMONSTER,
             NEWAREAPLAYER,
             LEVELUP,
+            PLAYERSTATE,
+            ADDITEM,
+            REMOVEITEM,
+            SKILL,
+            REMOVESKILL,
             DEBUG
         }
         public void SendGameState()
@@ -59,6 +67,7 @@ namespace The_Dream.Classes
                     outmsg.Write(p.AreaX);
                     outmsg.Write(p.AreaY);
                     outmsg.Write(p.EXP);
+                    outmsg.Write(p.Health);
                 }
                 foreach (Player p in GameState)
                 {
@@ -77,6 +86,11 @@ namespace The_Dream.Classes
                         outmsg.Write(m.X);
                         outmsg.Write(m.Y);
                     }
+                }
+                foreach (Skills.Skill skill in skillList)
+                {
+                    outmsg.Write(skill.X);
+                    outmsg.Write(skill.Y);
                 }
                 if (server.ConnectionsCount > 0)
                 {
@@ -119,6 +133,11 @@ namespace The_Dream.Classes
                 maps.Add(temp);
             }
         }
+        public void SetSkill<T>(ref T skill, int ID)
+        {
+            skill = (T)Activator.CreateInstance(typeof(T));
+            dSkills.Add(ID, (skill as Skills.Skill));
+        }
         public void LoadContent()
         {
             ServerConfig = new NetPeerConfiguration("game");
@@ -140,6 +159,10 @@ namespace The_Dream.Classes
             AreaAdded = false;
             map = new Map();
             AreasAdded = new List<Vector2>();
+            skillList = new List<Skills.Skill>();
+            dSkills = new Dictionary<int, Skills.Skill>();
+            testSkill = new Skills.TestSkill();
+            SetSkill(ref testSkill, testSkill.SkillID);
         }
         public void UnloadContent()
         {
@@ -147,6 +170,28 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime)
         {
+            List<int> temp2 = new List<int>();
+            foreach (Skills.Skill skill in skillList)
+            {
+                skill.Update(gameTime);
+                if (skill.despawn == true)
+                {
+                    skill.UnloadContent();
+                    temp2.Add(skillList.IndexOf(skill));
+                }
+            }
+            NetOutgoingMessage outmsg3 = server.CreateMessage();
+            outmsg3.Write((byte)PacketTypes.REMOVESKILL);
+            outmsg3.Write(temp2.Count);
+            foreach (int i in temp2)
+            {
+                outmsg3.Write(i);
+                skillList.Remove(skillList[i]);
+            }
+            if (server.Connections.Count > 0)
+            {
+                server.SendMessage(outmsg3, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+            }
             foreach (Player p in GameState)
             {
                 p.HitBox = new Rectangle(p.X, p.Y, 60, 60);
@@ -168,10 +213,56 @@ namespace The_Dream.Classes
                             outmsg.Write(i);
                         }
                         server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                        int count = 0;
+                        foreach (Item item in area.Drops)
+                        {
+                            if (item.itemAdded == true)
+                            {
+                                count++;
+                            }
+                        }
+                        if (count > 0)
+                        {
+                            NetOutgoingMessage outmsg2 = server.CreateMessage();
+                            outmsg2.Write((byte)PacketTypes.ADDITEM);
+                            outmsg2.Write(count);
+                            foreach (Item item in area.Drops)
+                            {
+                                if (item.itemAdded == true)
+                                {
+                                    outmsg2.Write(item.ItemID);
+                                    outmsg2.Write(item.X);
+                                    outmsg2.Write(item.Y);
+                                    item.itemAdded = false;
+                                }
+                            }
+                            server.SendMessage(outmsg2, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                        }
                     }
                     foreach (Monster m in area.SpawnedMonsters)
                     {
                         m.Update(gameTime, p);
+                    }
+                }
+                if (p.inCombat == true)
+                {
+                    p.combatTimer += gameTime.ElapsedGameTime.TotalSeconds;
+                    if (p.combatTimer >= 5)
+                    {
+                        p.inCombat = false;
+                        p.combatTimer = 0;
+                    }
+                }
+                if (p.inCombat == false)
+                {
+                    if (p.Health < p.maxHealth)
+                    {
+                        p.OneSecond += gameTime.ElapsedGameTime.TotalSeconds;
+                        if (p.OneSecond >= 1)
+                        {
+                            p.Health += p.HealthRegen;
+                            p.OneSecond = 0;
+                        }
                     }
                 }
             }
@@ -183,17 +274,59 @@ namespace The_Dream.Classes
                     {
                         NetOutgoingMessage outmsg = server.CreateMessage();
                         outmsg.Write((byte)PacketTypes.ADDMONSTER);
-                        foreach (Monster m in area.SpawnedMonsters)
-                        {
-                            outmsg.Write(m.X);
-                            outmsg.Write(m.Y);
-                            outmsg.Write(m.image.Path);
-                            outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.X);
-                            outmsg.Write(m.image.spriteSheetEffect.AmountOfFrames.Y);
-                        }
+                        outmsg.Write(area.SpawnedMonsters[area.SpawnedMonsters.Count - 1].MonsterID);
+                        outmsg.Write(area.SpawnedMonsters[area.SpawnedMonsters.Count - 1].X);
+                        outmsg.Write(area.SpawnedMonsters[area.SpawnedMonsters.Count - 1].Y);
                         if (server.ConnectionsCount > 0)
                         {
                             server.SendMessage(outmsg, p.Connection, NetDeliveryMethod.ReliableOrdered, 0);
+                        }
+                    }
+                    if (p.AreaX == area.AreaX && p.AreaY == area.AreaY)
+                    {
+                        NetOutgoingMessage outmsg2 = server.CreateMessage();
+                        outmsg2.Write((byte)PacketTypes.REMOVEITEM);
+                        int count = 0;
+                        foreach (Item item in area.Drops)
+                        {
+                            item.Update(gameTime, p);
+                            if (item.pickedUp == true)
+                            {
+                                count++;
+                            }
+                        }
+                        outmsg2.Write(count);
+                        List<int> temp = new List<int>();
+                        foreach (Item item in area.Drops)
+                        {
+                            if (item.pickedUp == true)
+                            {
+                                temp.Add(area.Drops.IndexOf(item));
+                                outmsg2.Write(area.Drops.IndexOf(item));
+                            }
+                        }
+                        for (int i = 0; i < temp.Count; i++)
+                        {
+                            area.Drops.Remove(area.Drops[temp[i]]);
+                            for (int ii = 0; ii < temp.Count; ii++)
+                            {
+                                temp[ii]--;
+                            }
+                        }
+                        if (server.ConnectionsCount > 0)
+                        {
+                            server.SendMessage(outmsg2, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
+                        }
+                    }
+                }
+                foreach (Monster monster in area.SpawnedMonsters)
+                {
+                    foreach (Skills.Skill skill in skillList)
+                    {
+                        if (skill.hitBox.Intersects(monster.Hitbox))
+                        {
+                            monster.Health -= skill.skillDamage;
+                            skill.despawn = true;
                         }
                     }
                 }
@@ -262,6 +395,18 @@ namespace The_Dream.Classes
                                 break;
                             }
                         }
+                        else if (b == (byte)PacketTypes.PLAYERSTATE)
+                        {
+                            foreach (Player p in GameState)
+                            {
+                                if (p.Connection != ServerInc.SenderConnection)
+                                {
+                                    continue;
+                                }
+                                p.maxHealth = ServerInc.ReadInt32();
+                                p.HealthRegen = ServerInc.ReadInt32();
+                            }
+                        }
                         else if (b == (byte)PacketTypes.ATTACK)
                         {
                             foreach (Player p in GameState)
@@ -277,6 +422,8 @@ namespace The_Dream.Classes
                                 p.aDown = ServerInc.ReadBoolean();
                                 p.aLeft = ServerInc.ReadBoolean();
                                 p.aRight = ServerInc.ReadBoolean();
+                                p.inCombat = true;
+                                p.combatTimer = 0;
                                 foreach (AreaMonsters area in updateMonsters.AreaList)
                                 {
                                     if (area.AreaX != p.AreaX || area.AreaY != p.AreaY)
@@ -316,6 +463,48 @@ namespace The_Dream.Classes
                                     }
                                 }
                                 break;
+                            }
+                        }
+                        else if (b == (byte)PacketTypes.SKILL)
+                        {
+                            foreach (Player p in GameState)
+                            {
+                                if (p.Connection != ServerInc.SenderConnection)
+                                {
+                                    continue;
+                                }
+                                int ID = ServerInc.ReadInt32();
+                                int direction = ServerInc.ReadInt32();
+                                Skills.Skill skill;
+                                skill = (Skills.Skill)Activator.CreateInstance(dSkills[ID].GetType());
+                                skill.LoadContent(p.X, p.Y);
+                                if (direction == 0)
+                                {
+                                    skill.down = true;
+                                }
+                                else if (direction == 1)
+                                {
+                                    skill.up = true;
+                                }
+                                else if (direction == 2)
+                                {
+                                    skill.right = true;
+                                }
+                                else if (direction == 3)
+                                {
+                                    skill.left = true;
+                                }
+                                skillList.Add(skill);
+                                NetOutgoingMessage outmsg = server.CreateMessage();
+                                outmsg.Write((byte)PacketTypes.SKILL);
+                                outmsg.Write(skill.image.Path);
+                                outmsg.Write(skill.X);
+                                outmsg.Write(skill.Y);
+                                outmsg.Write(skill.projSpeed);
+                                //outmsg.Write(skill.startLag);
+                                outmsg.Write(skill.endLag);
+                                //outmsg.Write(skill.cooldown);
+                                server.SendMessage(outmsg, server.Connections, NetDeliveryMethod.ReliableOrdered, 0);
                             }
                         }
                         else if (b == (byte)PacketTypes.LEVELUP)

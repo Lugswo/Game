@@ -33,6 +33,7 @@ namespace The_Dream.Classes
         public ExpandEffect expandEffect;
         public SpriteSheetEffect spriteSheetEffect = new SpriteSheetEffect();
         public ShowSpriteEffect showSpriteEffect;
+        public TextScrollEffect textScrollEffect;
         public Vector2 dimensions;
         public float Layer;
         void SetEffect<T>(ref T effect)
@@ -155,6 +156,7 @@ namespace The_Dream.Classes
             SetEffect<ExpandEffect>(ref expandEffect);
             SetEffect<SpriteSheetEffect>(ref spriteSheetEffect);
             SetEffect<ShowSpriteEffect>(ref showSpriteEffect);
+            SetEffect<TextScrollEffect>(ref textScrollEffect);
             if (Effects != String.Empty)
             {
                 string[] split = Effects.Split(':');
@@ -186,6 +188,16 @@ namespace The_Dream.Classes
         {
             origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
             spriteBatch.Draw(texture, Position + origin, SourceRect, Color.White * Alpha,
+                0.0f, origin, Scale, SpriteEffects.None, Layer);
+        }
+        public void DrawString(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(Font, Text, Position, color, 0.0f, origin, Scale, SpriteEffects.None, Layer);
+        }
+        public void DrawFaded(SpriteBatch spriteBatch)
+        {
+            origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
+            spriteBatch.Draw(texture, Position + origin, SourceRect, Color.Gray * Alpha,
                 0.0f, origin, Scale, SpriteEffects.None, Layer);
         }
     }

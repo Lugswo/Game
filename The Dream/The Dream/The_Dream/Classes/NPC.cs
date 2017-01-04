@@ -114,33 +114,21 @@ namespace The_Dream.Classes
             if (broken == true)
             {
                 string brokenText = BrokenDialogue();
-                text = new Image();
-                text.color = new Color(0, 0, 0, 255);
                 text.Text = brokenText;
-                text.Position.X = 20;
-                text.Position.Y = 830;
-                text.LoadContent();
+                text.IsActive = true;
             }
             else if (bGreeting == true && bDialogue == false)
             {
                 int dialogue = random.Next(0, Dialogue.Count);
-                text = new Image();
-                text.color = new Color(0, 0, 0, 255);
                 text.Text = Dialogue[dialogue];
-                text.Position.X = 20;
-                text.Position.Y = 830;
-                text.LoadContent();
+                text.IsActive = true;
                 bDialogue = true;
             }
             else if (bDialogue == true && bFarewell == false)
             {
                 int farewell = random.Next(0, Farewells.Count);
-                text = new Image();
-                text.color = new Color(0, 0, 0, 255);
                 text.Text = Farewells[farewell];
-                text.Position.X = 20;
-                text.Position.Y = 830;
-                text.LoadContent();
+                text.IsActive = true;
                 bFarewell = true;
             }
         }
@@ -153,6 +141,7 @@ namespace The_Dream.Classes
             portrait.LoadContent();
             portrait.Position.X = ScreenManager.instance.Dimensions.X - portrait.texture.Width;
             portrait.Position.Y = 795 - portrait.texture.Height;
+            portrait.Layer = .7f;
         }
         public virtual void UnloadContent()
         {
@@ -187,22 +176,29 @@ namespace The_Dream.Classes
                     name.Text = Name;
                     name.Position.X = 20;
                     name.Position.Y = 750;
+                    name.Layer = .7f;
                     name.LoadContent();
 
                     int greeting = random.Next(0, Greetings.Count);
-                    text = new Image();
-                    text.color = new Color(0, 0, 0, 255);
                     splitText = Greetings[greeting].Split(' ');
                     string brokenText = BrokenDialogue();
                     text = new Image();
+                    text.IsActive = true;
+                    text.Effects = "TextScrollEffect";
                     text.color = new Color(0, 0, 0, 255);
                     text.Text = brokenText;
                     text.Position.X = 20;
                     text.Position.Y = 830;
+                    text.Layer = .7f;
                     text.LoadContent();
                     initiated = true;
                     bGreeting = true;
                 }
+                text.Update(gameTime);
+            }
+            else
+            {
+                text.IsActive = false;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
@@ -214,8 +210,9 @@ namespace The_Dream.Classes
             }
             if (Talking == true)
             {
-                text.Draw(spriteBatch);
-                name.Draw(spriteBatch);
+                text.DrawString(spriteBatch);
+                name.DrawString(spriteBatch);
+                portrait.Draw(spriteBatch);
             }
         }
     }

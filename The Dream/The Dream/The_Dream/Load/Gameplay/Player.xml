@@ -16,6 +16,7 @@
   <AreaY>1</AreaY>
   <X>10</X>
   <Y>10</Y>
+  <HealthRegen>1</HealthRegen>
   <PlayerImage>
     <Path>Gameplay/Characters/Player/Player</Path>
     <Effects>SpriteSheetEffect</Effects>

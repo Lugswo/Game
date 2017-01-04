@@ -102,7 +102,7 @@ namespace The_Dream.Classes
             if (InputManager.Instance.KeyPressed(Keys.Enter))
             {
                 CreateCharacterSave(charName);
-                ScreenManager.Instance.ChangeScreens("GameplayScreen");
+                ScreenManager.Instance.ChangeScreens("SetHostScreen");
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

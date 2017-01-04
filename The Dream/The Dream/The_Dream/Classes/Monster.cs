@@ -11,15 +11,45 @@ namespace The_Dream.Classes
     {
         public Image image = new Image();
         public Rectangle Hitbox;
-        public bool CanSpawn, Boss, IsAlive;
-        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY, pX, pY;
+        public bool CanSpawn, Boss, IsAlive, Hit;
+        public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY, pX, pY, hitCounter, hitTimer, PositionX, PositionY, moveSpeed;
         public Vector2 OriginalPosition;
+        public Random random;
+        public List<Item> DropList;
+        public List<Item> Drops;
         public Monster()
         {
             CanSpawn = Boss = false;
             IsAlive = true;
             OriginalPosition = Vector2.Zero;
+            hitCounter = 0;
             image.Effects = "SpriteSheetEffect";
+            DropList = new List<Item>();
+            Drops = new List<Item>();
+            random = new Random();
+        }
+        public void SetItem<T>(ref T item)
+        {
+            if (item == null)
+            {
+                item = (T)Activator.CreateInstance(typeof(T));
+            }
+            DropList.Add(item as Item);
+        }
+        public void Drop()
+        {
+            int rand = random.Next(0, 1000000);
+            foreach (Item item in DropList)
+            {
+                if (rand <= item.dropChance)
+                {
+                    item.X = X;
+                    item.Y = Y;
+                    item.itemAdded = true;
+                    item.LoadContent();
+                    Drops.Add(item);
+                }
+            }
         }
         public virtual void LoadContent()
         {

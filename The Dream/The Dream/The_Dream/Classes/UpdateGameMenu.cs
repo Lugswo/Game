@@ -12,11 +12,20 @@ namespace The_Dream.Classes
 {
     public class UpdateGameMenu
     {
-        [XmlElement("Item")]
-        public List<Image> MenuItems;
         public Image PlayerImage, Level, charName;
         public int MenuNumber;
         public bool InMenu, paused, releasedPause;
+        public GameMenu.MenuTab menu;
+        Dictionary<int, GameMenu.MenuTab> dMenu;
+        public GameMenu.Stats stats;
+        public GameMenu.Equipment equipment;
+        public GameMenu.Inventory inventory;
+        public GameMenu.Skills skills;
+        public GameMenu.Relics relics;
+        public GameMenu.Beastiary beastiary;
+        public GameMenu.Map map;
+        public GameMenu.Save save;
+        public GameMenu.Settings settings;
         public UpdateGameMenu()
         {
             MenuNumber = 0;
@@ -24,137 +33,57 @@ namespace The_Dream.Classes
             charName = new Image();
             paused = false;
             releasedPause = true;
+            dMenu = new Dictionary<int, GameMenu.MenuTab>();
         }
-        void LoadMenu(int menu, Player player)
+        void SetMenu<T>(ref T menu, int ID)
         {
-            foreach (Image image in MenuItems)
+            if (menu == null)
             {
-                image.Alpha = 0;
+                menu = (T)Activator.CreateInstance(typeof(T));
             }
-            if (InMenu == false)
-            {
-                MenuItems[menu].Alpha = 1;
-            }
-            else
-            {
-                MenuItems[menu + 9].Alpha = 1;
-            }
-            if (menu == 0)
-            {
-                
-            }
-            if (menu == 1)
-            {
-                
-            }
-            if (menu == 2)
-            {
-
-            }
-            if (menu == 3)
-            {
-
-            }
-            if (menu == 4)
-            {
-
-            }
-            if (menu == 5)
-            {
-
-            }
-            if (menu == 6)
-            {
-
-            }
-            if (menu == 7)
-            {
-                if (InMenu == true)
-                {
-                    if (InputManager.Instance.KeyPressed(Keys.Z))
-                    {
-                        XmlDocument SaveFile = new XmlDocument();
-                        SaveFile.Load("Load/Gameplay/SaveFile.xml");
-                        XmlNode node;
-                        node = SaveFile.DocumentElement;
-                        foreach (XmlNode node1 in node.ChildNodes)
-                        {
-                            if (node1.Name == "Strength")
-                            {
-                                node1.InnerText = player.Strength.ToString();
-                            }
-                            if (node1.Name == "Defense")
-                            {
-                                node1.InnerText = player.Defense.ToString();
-                            }
-                            if (node1.Name == "Dexterity")
-                            {
-                                node1.InnerText = player.Dexterity.ToString();
-                            }
-                            if (node1.Name == "Intelligence")
-                            {
-                                node1.InnerText = player.Intelligence.ToString();
-                            }
-                            if (node1.Name == "Speed")
-                            {
-                                node1.InnerText = player.Speed.ToString();
-                            }
-                            if (node1.Name == "Level")
-                            {
-                                node1.InnerText = player.Level.ToString();
-                            }
-                            if (node1.Name == "EXP")
-                            {
-                                node1.InnerText = player.EXP.ToString();
-                            }
-                            if (node1.Name == "Health")
-                            {
-                                node1.InnerText = player.Health.ToString();
-                            }
-                            if (node1.Name == "Energy")
-                            {
-                                node1.InnerText = player.Energy.ToString();
-                            }
-                            if (node1.Name == "StatPoints")
-                            {
-                                node1.InnerText = player.StatPoints.ToString();
-                            }
-                        }
-                        SaveFile.Save("Load/Gameplay/SaveFile.xml");
-                    }
-                }
-            }
-            if (menu == 8)
-            {
-
-            }
+            dMenu.Add(ID, (menu as GameMenu.MenuTab));
         }
         public void LoadContent(Player player)
         {
+            PlayerImage = new Image();
+            PlayerImage.Path = "Gameplay/Characters/Player/Player";
+            PlayerImage.Effects = "ShowSpriteEffect";
             PlayerImage.LoadContent();
+            PlayerImage.showSpriteEffect.AmountOfSprites.X = 6;
+            PlayerImage.showSpriteEffect.AmountOfSprites.Y = 16;
+            PlayerImage.showSpriteEffect.Sprite.X = 1;
+            PlayerImage.showSpriteEffect.Sprite.Y = 0;
             Level.Text = player.Level.ToString();
             Level.LoadContent();
             charName.Text = player.Name;
             charName.LoadContent();
-            foreach (Image image in MenuItems)
-            {
-                image.LoadContent();
-                image.Position.X = (ScreenManager.instance.Dimensions.X - image.texture.Width) / 2;
-                image.Position.Y = (ScreenManager.instance.Dimensions.Y - image.texture.Height) / 2;
-            }
-            PlayerImage.Position.X = MenuItems[0].Position.X + 118;
-            PlayerImage.Position.Y = MenuItems[0].Position.Y + 100;
-            charName.Position.X = MenuItems[0].Position.X + (300 - charName.Font.MeasureString(charName.Text).X) / 2;
-            charName.Position.Y = MenuItems[0].Position.Y;
+            PlayerImage.Position.X = ((ScreenManager.instance.Dimensions.X - 1300) / 2) + 118;
+            PlayerImage.Position.Y = ((ScreenManager.instance.Dimensions.Y - 835) / 2) + 100;
+            charName.Position.X = ((ScreenManager.instance.Dimensions.X - 1300) / 2) + (300 - charName.Font.MeasureString(charName.Text).X) / 2;
+            charName.Position.Y = ((ScreenManager.instance.Dimensions.Y - 835) / 2);
+            SetMenu<GameMenu.Stats>(ref stats, 0);
+            SetMenu<GameMenu.Equipment>(ref equipment, 1);
+            SetMenu<GameMenu.Inventory>(ref inventory, 2);
+            SetMenu<GameMenu.Skills>(ref skills, 3);
+            SetMenu<GameMenu.Relics>(ref relics, 4);
+            SetMenu<GameMenu.Beastiary>(ref beastiary, 5);
+            SetMenu<GameMenu.Map>(ref map, 6);
+            SetMenu<GameMenu.Save>(ref save, 7);
+            SetMenu<GameMenu.Settings>(ref settings, 8);
+            stats.LoadContent(player);
+            equipment.LoadContent(player);
+            inventory.LoadContent();
+            skills.LoadContent();
+            relics.LoadContent();
+            beastiary.LoadContent();
+            map.LoadContent();
+            save.LoadContent();
+            settings.LoadContent();
         }
         public void UnloadContent()
         {
             PlayerImage.UnloadContent();
             Level.UnloadContent();
-            foreach (Image image in MenuItems)
-            {
-                image.UnloadContent();
-            }
         }
         public void Update(GameTime gameTime, Player player)
         {
@@ -163,6 +92,8 @@ namespace The_Dream.Classes
                 if (InputManager.Instance.KeyPressed(Keys.Escape))
                 {
                     paused = false;
+                    menu.inCategory = false;
+                    InMenu = false;
                 }
             }
             if (paused == false)
@@ -204,11 +135,45 @@ namespace The_Dream.Classes
                         paused = false;
                     }
                 }
+                if (MenuNumber > 8)
+                {
+                    MenuNumber = 0;
+                }
+                if (MenuNumber < 0)
+                {
+                    MenuNumber = 8;
+                }
+                menu = dMenu[MenuNumber];
+                menu.Update(gameTime, player, InMenu);
                 if (InMenu == true)
                 {
-                    if (InputManager.Instance.KeyPressed(Keys.X))
+                    if (menu.subCat == true)
                     {
-                        InMenu = false;
+                        if (InputManager.Instance.KeyPressed(Keys.Z))
+                        {
+                            menu.inCategory = true;
+                        }
+                    }
+                    else
+                    {
+                        if (InputManager.Instance.KeyPressed(Keys.X))
+                        {
+                            InMenu = false;
+                        }
+                    }
+                    if (menu.inCategory == true)
+                    {
+                        if (InputManager.Instance.KeyPressed(Keys.X))
+                        {
+                            menu.inCategory = false;
+                        }
+                    }
+                    else
+                    {
+                        if (InputManager.Instance.KeyPressed(Keys.X))
+                        {
+                            InMenu = false;
+                        }
                     }
                 }
                 if (InputManager.Instance.KeyPressed(Keys.Z))
@@ -223,21 +188,13 @@ namespace The_Dream.Classes
                 {
                     MenuNumber--;
                 }
-                LoadMenu(MenuNumber, player);
-                foreach (Image image in MenuItems)
-                {
-                    image.Update(gameTime);
-                }
             }
         }
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Player player)
         {
             if (paused == true)
             {
-                foreach (Image image in MenuItems)
-                {
-                    image.Draw(spriteBatch);
-                }
+                menu.Draw(spriteBatch, InMenu, player);
                 Level.Draw(spriteBatch);
                 PlayerImage.Draw(spriteBatch);
                 charName.Draw(spriteBatch);

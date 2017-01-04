@@ -242,13 +242,6 @@ namespace The_Dream.Classes
             {
                 sprite.image.Draw(spriteBatch);
             }
-            foreach (NPC npc in NPCs)
-            {
-                if (npc.Talking == true)
-                {
-                    npc.portrait.Draw(spriteBatch);
-                }
-            }
         }
     }
 }
