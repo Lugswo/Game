@@ -64,10 +64,14 @@ namespace The_Dream.Classes
         [XmlIgnore]
         public NetConnection Connection { get; set; }
         public Image levelUpImage;
+        public Image hair;
+        public Image eyes;
         public Skills.Skill shiftSkill;
         public Player()
         {
             PlayerImage = new Image();
+            hair = new Image();
+            eyes = new Image();
             Blanks = new List<MapSprite>();
             DeadZone = new Rectangle();
             Attacking = NextAttack = zPressed = false;
@@ -89,6 +93,7 @@ namespace The_Dream.Classes
             shiftSkill = new Skills.Skill();
             shiftSkill.SkillID = 0;
             skillPointsImage = new Image();
+            skillPointsImage.Layer = .97f;
         }
         public void UpdateHitTimer(GameTime gameTime)
         {
@@ -117,13 +122,16 @@ namespace The_Dream.Classes
             maxHealth = Health;
             PlayerImage.Path = "Gameplay/Characters/Player/Player";
             PlayerImage.Effects = "SpriteSheetEffect";
-            PlayerImage.spriteSheetEffect.AmountOfFrames = new Vector2(6, 16);
+            PlayerImage.spriteSheetEffect.AmountOfFrames.X = 6;
+            PlayerImage.spriteSheetEffect.AmountOfFrames.Y = 16;
             PlayerImage.LoadContent();
             ChangedFrames = false;
             NextLevel = 100 + Level * Level * Level;
             skillPointsImage.Position.Y = 125;
             skillPointsImage.Position.X = 125;
             skillPointsImage.LoadContent();
+            hair.LoadContent();
+            eyes.LoadContent();
         }
         public void UnloadContent()
         {
@@ -131,6 +139,8 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime)
         {
+            hair.Position = PlayerImage.Position;
+            eyes.Position = PlayerImage.Position;
             PlayerImage.IsActive = true;
             if (VelocityX == 0 && VelocityY == 0 && Attacking == false)
             {
@@ -232,6 +242,12 @@ namespace The_Dream.Classes
                 EXP = 0;
             }
             PlayerImage.Update(gameTime);
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            PlayerImage.Draw(spriteBatch);
+            hair.Draw(spriteBatch);
+            eyes.Draw(spriteBatch);
         }
     }
 }

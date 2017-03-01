@@ -14,7 +14,10 @@ namespace The_Dream.Classes.Items
             dropChance = 1000000;
             ItemID = 1;
             category = Subcategory.ITEM;
-            Name = "TestItem";
+            name.Text = "TestItem";
+            name.color = new Color(255, 255, 255, 255);
+            description.Text = "This item is a test item.";
+            description.color = new Color(255, 255, 255, 255);
         }
         public override void LoadContent()
         {

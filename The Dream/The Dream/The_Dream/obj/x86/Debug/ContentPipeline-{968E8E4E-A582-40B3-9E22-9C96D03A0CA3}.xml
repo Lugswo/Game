@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Player.xnb</Output>
-      <Time>2017-01-04T13:27:16.9593415-08:00</Time>
+      <Time>2017-02-27T13:24:03.6028703-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Backgrounds\Down Map\Down Map.png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Dialogue.xnb</Output>
-      <Time>2016-11-07T14:29:31.1728522-08:00</Time>
+      <Time>2017-02-28T11:28:49.2382603-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Characters\NPCs\TestNPC\Sprite.png</Source>
@@ -224,7 +224,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory.xnb</Output>
-      <Time>2016-11-29T13:22:49.143863-08:00</Time>
+      <Time>2017-01-24T12:48:45.6151317-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\GUI\Menu\Map.png</Source>
@@ -296,7 +296,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InInventory.xnb</Output>
-      <Time>2016-11-22T12:48:13.6604704-08:00</Time>
+      <Time>2017-01-24T12:48:38.7513996-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\GUI\Menu\InMap.png</Source>
@@ -350,7 +350,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Gear.xnb</Output>
-      <Time>2016-11-22T13:20:59.348982-08:00</Time>
+      <Time>2017-01-24T12:47:21.4813073-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\GUI\Menu\Inventory\Items.png</Source>
@@ -359,7 +359,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Items.xnb</Output>
-      <Time>2016-11-22T13:21:04.5166541-08:00</Time>
+      <Time>2017-01-24T12:48:05.991079-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\GUI\Menu\Inventory\InGear.png</Source>
@@ -368,7 +368,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\InGear.xnb</Output>
-      <Time>2016-11-29T13:24:22.090019-08:00</Time>
+      <Time>2017-01-24T13:15:37.0117449-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\GUI\Menu\Inventory\InItems.png</Source>
@@ -377,7 +377,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\InItems.xnb</Output>
-      <Time>2016-12-05T14:16:19.9291406-08:00</Time>
+      <Time>2017-01-24T13:16:06.6749307-08:00</Time>
     </Item>
     <Item>
       <Source>Gameplay\Items\ItemFrame.png</Source>
@@ -423,6 +423,186 @@
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Settings\InSettings.xnb</Output>
       <Time>2016-09-06T14:45:50-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Skills\TestSkill2\Icon.png</Source>
+      <Name>Gameplay\Skills\TestSkill2\Icon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Icon.xnb</Output>
+      <Time>2017-01-30T14:17:17.2772478-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Skills\TestSkill2\Sprite.png</Source>
+      <Name>Gameplay\Skills\TestSkill2\Sprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Sprite.xnb</Output>
+      <Time>2017-01-30T14:18:39.3315216-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\Hair\Hair1.png</Source>
+      <Name>Gameplay\Characters\Player\Hair\Hair1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair1.xnb</Output>
+      <Time>2017-02-22T13:49:30.5550433-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Arrow.png</Source>
+      <Name>GUI\Arrow</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Arrow.xnb</Output>
+      <Time>2017-01-11T14:18:18.9744268-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\GUI\Menu\Items.png</Source>
+      <Name>Gameplay\GUI\Menu\Items</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Items.xnb</Output>
+      <Time>2017-01-24T12:48:09.2161776-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Skills\Skill Line.png</Source>
+      <Name>Gameplay\Skills\Skill Line</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\Skill Line.xnb</Output>
+      <Time>2017-02-01T14:27:00.8183173-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Character Creation.png</Source>
+      <Name>GUI\Character Creation\Character Creation</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Character Creation.xnb</Output>
+      <Time>2017-02-08T14:22:37.8149541-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Category.png</Source>
+      <Name>GUI\Character Creation\Category</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Category.xnb</Output>
+      <Time>2017-02-20T14:12:46.991786-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Cover.png</Source>
+      <Name>GUI\Character Creation\Cover</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Cover.xnb</Output>
+      <Time>2017-02-08T14:30:41.7102263-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Hair\Hair1.png</Source>
+      <Name>GUI\Character Creation\Hair\Hair1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair1.xnb</Output>
+      <Time>2017-02-22T13:49:09.4110212-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Background.png</Source>
+      <Name>GUI\Character Creation\Background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Background.xnb</Output>
+      <Time>2017-02-13T13:20:12.1258041-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Selected Category.png</Source>
+      <Name>GUI\Character Creation\Selected Category</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected Category.xnb</Output>
+      <Time>2017-02-20T14:14:25.2103305-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Hair\Hair2.png</Source>
+      <Name>GUI\Character Creation\Hair\Hair2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair2.xnb</Output>
+      <Time>2017-02-20T14:22:05.6978775-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Selected.png</Source>
+      <Name>GUI\Character Creation\Selected</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected.xnb</Output>
+      <Time>2017-02-20T14:22:10.0433323-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Cursor.png</Source>
+      <Name>GUI\Cursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Cursor.xnb</Output>
+      <Time>2017-02-20T14:27:34.0316493-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\Hair\Hair2.png</Source>
+      <Name>Gameplay\Characters\Player\Hair\Hair2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair2.xnb</Output>
+      <Time>2017-02-22T13:49:40.8715195-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Eyes\Eyes1.png</Source>
+      <Name>GUI\Character Creation\Eyes\Eyes1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes1.xnb</Output>
+      <Time>2017-02-23T14:59:04.8328745-08:00</Time>
+    </Item>
+    <Item>
+      <Source>GUI\Character Creation\Eyes\Eyes2.png</Source>
+      <Name>GUI\Character Creation\Eyes\Eyes2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes2.xnb</Output>
+      <Time>2017-02-23T14:59:22.0752902-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\Eyes\Eyes1.png</Source>
+      <Name>Gameplay\Characters\Player\Eyes\Eyes1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb</Output>
+      <Time>2017-02-27T13:22:54.0304388-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\Characters\Player\Eyes\Eyes2.png</Source>
+      <Name>Gameplay\Characters\Player\Eyes\Eyes2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb</Output>
+      <Time>2017-02-27T13:23:13.5600328-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -10,17 +10,24 @@ namespace The_Dream.Classes.GameMenu
 {
     public class Settings : MenuTab
     {
-        bool hotKey;
+        bool hotKey, keyReleased;
+        Image shiftKey;
         public Settings()
         {
             image.Path = "Gameplay/GUI/Menu/Settings/Settings";
             inImage.Path = "Gameplay/GUI/Menu/Settings/InSettings";
             subCat = true;
             hotKey = false;
+            shiftKey = new Image();
         }
         public override void LoadContent()
         {
             base.LoadContent();
+            shiftKey.LoadContent();
+            shiftKey.Text = "Shift: No Skill";
+            shiftKey.color = new Color(252, 252, 252, 252);
+            shiftKey.Position.X = 100;
+            shiftKey.Position.Y = 100;
         }
         public override void UnloadContent()
         {
@@ -33,23 +40,34 @@ namespace The_Dream.Classes.GameMenu
             {
                 if (inCategory == true)
                 {
-                    if (InputManager.Instance.KeyPressed(Keys.Z))
+                    if (hotKey == false)
                     {
-                        hotKey = true;
-                        while (hotKey == true)
+                        if (InputManager.Instance.KeyPressed(Keys.Z))
                         {
-                            if (player.skills.Count > 0)
+                            hotKey = true;
+                            keyReleased = false;
+                        }
+                    }
+                    if (InputManager.Instance.KeyUp(Keys.Z))
+                    {
+                        keyReleased = true;
+                    }
+                    if (hotKey == true && keyReleased == true)
+                    {
+                        if (player.skills.Count > 0)
+                        {
+                            if (InputManager.Instance.KeyPressed(Keys.Z))
                             {
-                                if (InputManager.Instance.KeyPressed(Keys.Z))
-                                {
-                                    player.shiftSkill = player.skills[0];
-                                    hotKey = false;
-                                }
-                            }
-                            else
-                            {
+                                player.shiftSkill = player.skills[0];
+                                player.shiftSkill.icon.Position.X = 100 + shiftKey.Font.MeasureString("Shift: ").X;
+                                player.shiftSkill.icon.Position.Y = 100;
+                                shiftKey.Text = "Shift: ";
                                 hotKey = false;
                             }
+                        }
+                        else
+                        {
+                            hotKey = false;
                         }
                     }
                 }
@@ -63,6 +81,11 @@ namespace The_Dream.Classes.GameMenu
                 {
                     skill.icon.Draw(spriteBatch);
                 }
+            }
+            shiftKey.DrawString(spriteBatch);
+            if (player.shiftSkill.icon.texture != null)
+            {
+                player.shiftSkill.icon.Draw(spriteBatch);
             }
             base.Draw(spriteBatch, inMenu, player);
         }

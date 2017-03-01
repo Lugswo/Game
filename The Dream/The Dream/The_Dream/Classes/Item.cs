@@ -10,10 +10,10 @@ namespace The_Dream.Classes
     public class Item : Sprite
     {
         public Image inventoryImage;
-        public bool Dropped, pickedUp, itemAdded;
-        public int ItemID, dropChance, X, Y;
+        public bool Dropped, pickedUp, itemAdded, selected;
+        public int ItemID, dropChance, X, Y, numberOwned;
         public Subcategory category;
-        public string Name;
+        public Image name, description, numberOwnedImage;
         public Image itemFrame;
         public enum Subcategory
         {
@@ -29,6 +29,19 @@ namespace The_Dream.Classes
             image.Layer = .4f;
             itemAdded = false;
             itemFrame = new Image();
+            selected = false;
+            name = new Image();
+            description = new Image();
+            name.Position.X = 760;
+            name.Position.Y = 746;
+            description.Position.X = 760;
+            description.Position.Y = 777;
+            name.Layer = .94f;
+            description.Layer = .94f;
+            numberOwned = 1;
+            numberOwnedImage = new Image();
+            numberOwnedImage.Text = numberOwned.ToString() + "x";
+            numberOwnedImage.Layer = .96f;
         }
         public void HorizontalMove(int mX)
         {
@@ -44,6 +57,9 @@ namespace The_Dream.Classes
             inventoryImage.LoadContent();
             itemFrame.Path = "Gameplay/Items/ItemFrame";
             itemFrame.LoadContent();
+            name.LoadContent();
+            description.LoadContent();
+            numberOwnedImage.LoadContent();
         }
         public virtual void UnloadContent()
         {

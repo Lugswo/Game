@@ -59,6 +59,8 @@ namespace The_Dream.Classes
             charName.LoadContent();
             PlayerImage.Position.X = ((ScreenManager.instance.Dimensions.X - 1300) / 2) + 118;
             PlayerImage.Position.Y = ((ScreenManager.instance.Dimensions.Y - 835) / 2) + 100;
+            Level.Position.X = PlayerImage.Position.X + 25;
+            Level.Position.Y = PlayerImage.Position.Y + 126;
             charName.Position.X = ((ScreenManager.instance.Dimensions.X - 1300) / 2) + (300 - charName.Font.MeasureString(charName.Text).X) / 2;
             charName.Position.Y = ((ScreenManager.instance.Dimensions.Y - 835) / 2);
             SetMenu<GameMenu.Stats>(ref stats, 0);
@@ -79,6 +81,9 @@ namespace The_Dream.Classes
             map.LoadContent();
             save.LoadContent();
             settings.LoadContent();
+            PlayerImage.Layer = .95f;
+            charName.Layer = .95f;
+            Level.Layer = .95f;
         }
         public void UnloadContent()
         {
@@ -113,11 +118,6 @@ namespace The_Dream.Classes
             }
             if (paused == true)
             {
-                Level = new Image();
-                Level.Text = player.Level.ToString();
-                Level.Position.X = PlayerImage.Position.X + 25;
-                Level.Position.Y = PlayerImage.Position.Y + 126;
-                Level.LoadContent();
                 Level.Update(gameTime);
                 PlayerImage.Update(gameTime);
                 if (InMenu == false)
@@ -195,7 +195,7 @@ namespace The_Dream.Classes
             if (paused == true)
             {
                 menu.Draw(spriteBatch, InMenu, player);
-                Level.Draw(spriteBatch);
+                Level.DrawString(spriteBatch);
                 PlayerImage.Draw(spriteBatch);
                 charName.Draw(spriteBatch);
             }

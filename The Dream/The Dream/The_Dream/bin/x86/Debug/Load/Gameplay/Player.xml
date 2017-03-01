@@ -27,5 +27,11 @@
       </AmountOfFrames>
     </spriteSheetEffect>
   </PlayerImage>
+  <hair>
+    <Path>Gameplay/Characters/Player/Hair/Hair1</Path>
+  </hair>
+  <eyes>
+    <Path>Gameplay/Characters/Player/Eyes/Eyes1</Path>
+  </eyes>
   <MoveSpeed>400</MoveSpeed>
 </Player>

@@ -16,6 +16,8 @@ namespace The_Dream.Classes
         [XmlIgnore]
         public Vector2 Dimensions { private set; get; }
         [XmlIgnore]
+        public Vector2 realDimensions { private set; get; }
+        [XmlIgnore]
         public ContentManager Content { private set; get; }
         XmlManager<GameScreen> xmlGameScreenManager;
 
@@ -74,8 +76,8 @@ namespace The_Dream.Classes
         public ScreenManager()
         {
             Dimensions = new Vector2(
-                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2, 1010);
-                //GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+                1920, 1080);
+            realDimensions = new Vector2(960, 540);
             currentScreen = new SplashScreen();
             xmlGameScreenManager = new XmlManager<GameScreen>();
             xmlGameScreenManager.type = currentScreen.type;

@@ -20,6 +20,9 @@ namespace The_Dream.Classes.Skills
             startLag = 0;
             endLag = 100;
             cooldown = 0;
+            description = "Shoots a small, damage dealing projectile in front of you.";
+            icon.Position.X = ScreenManager.instance.Dimensions.X / 2 - halfIcon;
+            icon.Position.Y = ScreenManager.instance.Dimensions.Y / 2 - halfIcon;
         }
         public override void LoadContent(int fX, int fY)
         {

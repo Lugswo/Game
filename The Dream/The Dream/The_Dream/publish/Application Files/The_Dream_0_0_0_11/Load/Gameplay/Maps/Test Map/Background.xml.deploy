@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Map>
+  <Sprite>
+    <image>
+      <Layer>0</Layer>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>0</X>
+        <Y>0</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Sprite>
+    <image>
+      <Layer>0</Layer>
+      <Path>Gameplay/Backgrounds/Map1/Map1</Path>
+      <Position>
+        <X>1999</X>
+        <Y>0</Y>
+      </Position>
+    </image>
+  </Sprite>
+  <Blank>
+    <image>
+      <Layer>0</Layer>
+      <Path>Gameplay/Backgrounds/Blanks/Black</Path>
+      <Position>
+        <X>1999</X>
+        <Y>2000</Y>
+      </Position>
+    </image>
+  </Blank>
+  <Texture>
+    <image>
+      <Layer>.5</Layer>
+      <Path>Gameplay/Textures/Tree</Path>
+      <Position>
+        <X>100</X>
+        <Y>100</Y>
+      </Position>
+    </image>
+  </Texture>
+  <NPC>
+    <image>
+      <Layer>.5</Layer>
+      <Effects>SpriteSheetEffect</Effects>
+      <spriteSheetEffect>
+        <AmountOfFrames>
+          <X>2</X>
+          <Y>1</Y>
+        </AmountOfFrames>
+      </spriteSheetEffect>
+      <Path>Gameplay/Characters/NPCs/TestNPC/Sprite</Path>
+      <Position>
+        <X>300</X>
+        <Y>100</Y>
+      </Position>
+    </image>
+    <portrait>
+      <Path>Gameplay/Characters/NPCs/TestNPC/Portrait</Path>
+    </portrait>
+    <Name>Test</Name>
+    <Greeting>Helloooooooooooooooo ohdsijfoilksdfj okdsi hfosidlk fjosikdxz,lf joiewlkds.</Greeting>
+    <Greeting>Hi.</Greeting>
+    <Dialogue>You aren't Chrom.</Dialogue>
+    <Dialogue>I'm Chrom.</Dialogue>
+    <Farewell>Bye.</Farewell>
+    <Farwell>Goodbye.</Farwell>
+  </NPC>
+</Map>

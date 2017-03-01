@@ -32,8 +32,8 @@
     <UpdateUrl>http://localhost/The_Dream/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>0.0.0.11</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -155,7 +155,6 @@
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Server.cs" />
     <Compile Include="Classes\SetHostScreen.cs" />
-    <Compile Include="Classes\Skills\DamageSkill.cs" />
     <Compile Include="Classes\Skills\Skill.cs" />
     <Compile Include="Classes\Skills\TestSkill.cs" />
     <Compile Include="Classes\Skills\TestSkill2.cs" />
@@ -232,6 +231,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Load\CharacterCreationScreen.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\The_DreamContent\The_DreamContent.contentproj">
@@ -266,7 +269,7 @@
     <None Include="The_Dream_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="Load\ClientIPandHost.xml">
+    <PublishFile Include="Load\CharacterCreationScreen.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -276,7 +279,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="Load\Gameplay\GameMenu.xml">
+    <PublishFile Include="Load\ClientIPandHost.xml">
       <Visible>False</Visible>
       <Group>
       </Group>
@@ -386,6 +389,46 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+    <PublishFile Include="Microsoft.Xna.Framework">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Prerequisite</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Xna.Framework.Game">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Prerequisite</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Xna.Framework.GamerServices">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Xna.Framework.Graphics">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Prerequisite</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
     <PublishFile Include="Microsoft.Xna.Framework.Input.Touch">
       <Visible>False</Visible>
       <Group>
@@ -393,6 +436,16 @@
       <TargetPath>
       </TargetPath>
       <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Microsoft.Xna.Framework.Storage">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Prerequisite</PublishState>
       <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>

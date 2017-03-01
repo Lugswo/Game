@@ -13,6 +13,8 @@ namespace The_Dream.Classes.GameMenu
         public Image inImage;
         public bool inCategory;
         public bool subCat;
+        public const int categoryOffset = 760;
+        public const int yOffset = 156;
         public MenuTab()
         {
             image = new Image();

@@ -15,7 +15,7 @@ namespace The_Dream.Classes
         public string Text, FontName;
         public string Path;
         public Vector2 Position, Scale;
-        public Rectangle SourceRect;
+        public Rectangle SourceRect, rect;
         public bool IsActive;
         [XmlIgnore]
         public Texture2D texture;
@@ -186,19 +186,33 @@ namespace The_Dream.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
-            spriteBatch.Draw(texture, Position + origin, SourceRect, Color.White * Alpha,
+            origin = new Vector2((SourceRect.Width) / 2, (SourceRect.Height) / 2);
+            spriteBatch.Draw(texture, (Position + origin), SourceRect, Color.White * Alpha,
                 0.0f, origin, Scale, SpriteEffects.None, Layer);
         }
         public void DrawString(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, Text, Position, color, 0.0f, origin, Scale, SpriteEffects.None, Layer);
+            origin = new Vector2((SourceRect.Width) / 2, (SourceRect.Height) / 2);
+            if (color.A != 0)
+            {
+                spriteBatch.DrawString(Font, Text, Position + origin, color * Alpha, 0.0f, origin, Scale, SpriteEffects.None, Layer);
+            }
+            else
+            {
+                spriteBatch.DrawString(Font, Text, Position + origin, Color.Black * Alpha, 0.0f, origin, Scale, SpriteEffects.None, Layer);
+            }
         }
         public void DrawFaded(SpriteBatch spriteBatch)
         {
             origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
             spriteBatch.Draw(texture, Position + origin, SourceRect, Color.Gray * Alpha,
                 0.0f, origin, Scale, SpriteEffects.None, Layer);
+        }
+        public void DrawToRectangle(SpriteBatch spriteBatch)
+        {
+            origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
+            Rectangle originOffset = new Rectangle((int)origin.X + rect.X, (int)origin.Y + rect.Y, rect.Width, rect.Height);
+            spriteBatch.Draw(texture, originOffset, SourceRect, Color.White * Alpha, 0.0f, origin, SpriteEffects.None, Layer);
         }
     }
 }

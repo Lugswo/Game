@@ -149,3 +149,24 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Game
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill\Icon.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Settings\Settings.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Icon.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Sprite.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair1.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Arrow.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Items.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\Skill Line.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Character Creation.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Category.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Load\CharacterCreationScreen.xml
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Cover.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair1.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Background.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected Category.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair2.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Cursor.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair2.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes1.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes2.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb

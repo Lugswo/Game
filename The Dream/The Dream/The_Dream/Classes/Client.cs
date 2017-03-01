@@ -90,7 +90,11 @@ namespace The_Dream.Classes
                         {
                             Player temp = new Player();
                             ClientInc.ReadAllProperties(temp);
+                            temp.hair.Path = ClientInc.ReadString();
+                            temp.eyes.Path = ClientInc.ReadString();
                             temp.PlayerImage.Layer = .5f;
+                            temp.hair.Layer = .51f;
+                            temp.eyes.Layer = .51f;
                             temp.LoadContent();
                             PlayerList.Add(temp);
                         }
@@ -172,13 +176,17 @@ namespace The_Dream.Classes
                             temp.image.LoadContent();
                             skillList.Add(temp);
                             endLagTimer += ClientInc.ReadInt32();
+                            temp.areaX = ClientInc.ReadInt32();
+                            temp.areaY = ClientInc.ReadInt32();
                         }
                         else if (b == (byte)PacketTypes.REMOVESKILL)
                         {
                             int count = ClientInc.ReadInt32();
                             for (int i = 0; i < count; i++)
                             {
-                                skillList.Remove(skillList[ClientInc.ReadInt32()]);
+                                int j = ClientInc.ReadInt32();
+                                j = j - i;
+                                skillList.Remove(skillList[j]);
                             }
                         }
                         else if (b == (byte)PacketTypes.LEVELUP)
@@ -258,7 +266,11 @@ namespace The_Dream.Classes
                             {
                                 Player temp = new Player();
                                 ClientInc.ReadAllProperties(temp);
+                                temp.hair.Path = ClientInc.ReadString();
+                                temp.eyes.Path = ClientInc.ReadString();
                                 temp.PlayerImage.Layer = .5f;
+                                temp.hair.Layer = .51f;
+                                temp.eyes.Layer = .51f;
                                 temp.LoadContent();
                                 temp.pX = temp.X;
                                 temp.pY = temp.Y;
@@ -300,6 +312,7 @@ namespace The_Dream.Classes
                         }
                         break;
                     case NetIncomingMessageType.ConnectionLatencyUpdated:
+                        text.Text = ClientInc.ReadFloat().ToString();
                         break;
                 }
             }
@@ -866,7 +879,7 @@ namespace The_Dream.Classes
             }
             if (InputManager.Instance.KeyPressed(Keys.LeftShift))
             {
-                if (endLagTimer <= 0 && PlayerList[PlayerID].Attacking == false)
+                if (endLagTimer <= 0 && PlayerList[PlayerID].Attacking == false && paused == false)
                 {
                     if (PlayerList[PlayerID].shiftSkill.SkillID != 0)
                     {
@@ -875,6 +888,8 @@ namespace The_Dream.Classes
                         int skillNum = PlayerList[PlayerID].shiftSkill.SkillID;
                         outmsg.Write(skillNum);
                         outmsg.Write(PlayerList[PlayerID].Direction());
+                        outmsg.Write(PlayerList[PlayerID].AreaX);
+                        outmsg.Write(PlayerList[PlayerID].AreaY);
                         client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered);
                     }
                 }
@@ -992,6 +1007,8 @@ namespace The_Dream.Classes
             playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             ClientOut.WriteAllProperties(player);
+            ClientOut.Write(player.hair.Path);
+            ClientOut.Write(player.eyes.Path);
             client.Connect(hostip, 25565, ClientOut);
             PlayerList = new List<Player>();
             image.Path = "Gameplay/Characters/Player/Player";
@@ -1012,6 +1029,8 @@ namespace The_Dream.Classes
             updateMonsters.LoadContent();
             SetItem<Items.TestItem>(ref testItem, testItem.ItemID);
             skillList = new List<Skills.Skill>();
+            text.LoadContent();
+            text.Position.X = 600;
         }
         public void UnloadContent()
         {
@@ -1034,9 +1053,6 @@ namespace The_Dream.Classes
                     }
                 }
                 health.Text = "HP: " + PlayerList[PlayerID].Health.ToString() + "/" + PlayerList[PlayerID].maxHealth;
-                //text = new Image();
-                //text.Text = PlayerList[PlayerID].Level.ToString();
-                //text.LoadContent();
                 GetInput(paused);
                 SendPlayerState();
                 if (Talking == false)
@@ -1205,10 +1221,7 @@ namespace The_Dream.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (text.texture != null)
-            {
-                text.Draw(spriteBatch);
-            }
+            text.DrawString(spriteBatch);
             if (PlayerList.Count > PlayerID)
             {
                 health.DrawString(spriteBatch);
@@ -1224,7 +1237,7 @@ namespace The_Dream.Classes
                 {
                     if (PlayerList[PlayerID].AreaX == p.AreaX && PlayerList[PlayerID].AreaY == p.AreaY)
                     {
-                        p.PlayerImage.Draw(spriteBatch);
+                        p.Draw(spriteBatch);
                         if (p.levelUp == true)
                         {
                             p.levelUpImage.Position.X = p.PlayerImage.Position.X - ((p.levelUpImage.spriteSheetEffect.FrameWidth - p.PlayerImage.spriteSheetEffect.FrameWidth) / 2);
@@ -1244,7 +1257,10 @@ namespace The_Dream.Classes
                 }
                 foreach (Skills.Skill skill in skillList)
                 {
-                    skill.Draw(spriteBatch);
+                    if (skill.areaX == PlayerList[PlayerID].AreaX && skill.areaY == PlayerList[PlayerID].AreaY)
+                    {
+                        skill.Draw(spriteBatch);
+                    }
                 }
             }
         }

@@ -11,8 +11,8 @@ namespace The_Dream.Classes.GameMenu
     public class Inventory : MenuTab
     {
         public List<Item> inventory;
-        int category;
-        bool setImage;
+        int category, selectedItem;
+        bool setImage, enterCategory;
         Vector2 pos;
         Image categoryImage;
         Image inCategoryImage;
@@ -26,6 +26,7 @@ namespace The_Dream.Classes.GameMenu
             categoryImage.LoadContent();
             inCategoryImage.LoadContent();
             subCat = true;
+            enterCategory = true;
         }
         void DifferentImage(string s)
         {
@@ -39,7 +40,7 @@ namespace The_Dream.Classes.GameMenu
             inCategoryImage.LoadContent();
             categoryImage.Position = pos;
             inCategoryImage.Position = pos;
-            inCategoryImage.Layer = 1.0f;
+            inCategoryImage.Layer = .91f;
         }
         public override void LoadContent()
         {
@@ -57,6 +58,7 @@ namespace The_Dream.Classes.GameMenu
             {
                 if (inCategory == false)
                 {
+                    enterCategory = true;
                     if (InputManager.Instance.KeyPressed(Keys.Down))
                     {
                         category++;
@@ -76,6 +78,54 @@ namespace The_Dream.Classes.GameMenu
                         category--;
                     }
                 }
+                else
+                {
+                    if (inventory.Count > 0 && enterCategory == true)
+                    {
+                        enterCategory = false;
+                        inventory[0].selected = true;
+                        selectedItem = 0;
+                    }
+                    if (inventory.Count > 0)
+                    {
+                        if (selectedItem > 0)
+                        {
+                            if (InputManager.Instance.KeyPressed(Keys.Left))
+                            {
+                                inventory[selectedItem].selected = false;
+                                selectedItem -= 1;
+                                inventory[selectedItem].selected = true;
+                            }
+                        }
+                        if (selectedItem < inventory.Count - 1)
+                        {
+                            if (InputManager.Instance.KeyPressed(Keys.Right))
+                            {
+                                inventory[selectedItem].selected = false;
+                                selectedItem += 1;
+                                inventory[selectedItem].selected = true;
+                            }
+                        }
+                        if (selectedItem >= 5)
+                        {
+                            if (InputManager.Instance.KeyPressed(Keys.Up))
+                            {
+                                inventory[selectedItem].selected = false;
+                                selectedItem -= 6;
+                                inventory[selectedItem].selected = true;
+                            }
+                        }
+                        if (selectedItem <= inventory.Count - 6)
+                        {
+                            if (InputManager.Instance.KeyPressed(Keys.Down))
+                            {
+                                inventory[selectedItem].selected = false;
+                                selectedItem += 6;
+                                inventory[selectedItem].selected = true;
+                            }
+                        }
+                    }
+                }
                 if (setImage == false)
                 {
                     inventory.Clear();
@@ -90,30 +140,79 @@ namespace The_Dream.Classes.GameMenu
                     }
                     foreach (Item item in player.inventory)
                     {
+                        string inventoryItems = string.Empty;
+                        foreach (Item item2 in inventory)
+                        {
+                            inventoryItems += item2.name.Text;
+                        }
                         if (category == 0)
                         {
                             if (item.category == Item.Subcategory.GEAR)
                             {
-                                inventory.Add(item);
+                                if (!(inventoryItems.Contains(item.name.Text)))
+                                {
+                                    Item temp = (Item)Activator.CreateInstance(item.GetType());
+                                    temp.LoadContent();
+                                    inventory.Add(temp);
+                                }
+                                else
+                                {
+                                    foreach (Item item3 in inventory)
+                                    {
+                                        if (item.name.Text == item3.name.Text)
+                                        {
+                                            item3.numberOwned++;
+                                            item3.numberOwnedImage.Text = item3.numberOwned.ToString() + "x";
+                                        }
+                                    }
+                                }
                             }
                         }
                         else if (category == 1)
                         {
                             if (item.category == Item.Subcategory.ITEM)
                             {
-                                inventory.Add(item);
+                                if (!(inventoryItems.Contains(item.name.Text)))
+                                {
+                                    Item temp = (Item)Activator.CreateInstance(item.GetType());
+                                    temp.LoadContent();
+                                    inventory.Add(temp);
+                                }
+                                else
+                                {
+                                    foreach (Item item3 in inventory)
+                                    {
+                                        if (item.name.Text == item3.name.Text)
+                                        {
+                                            item3.numberOwned++;
+                                            item3.numberOwnedImage.Text = item3.numberOwned.ToString() + "x";
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+                    int count = 0;
+                    int yCount = 0;
+                    foreach (Item item in inventory)
+                    {
+                        if (count == 6)
+                        {
+                            count = 0;
+                            yCount++;
+                        }
+                        item.inventoryImage.Alpha = 1.0f;
+                        item.inventoryImage.Layer = .95f;
+                        item.itemFrame.Position.X = categoryOffset + (count * 130) + 10;
+                        item.itemFrame.Position.Y = yOffset + 10 + (yCount * 130);
+                        item.itemFrame.Layer = .94f;
+                        item.inventoryImage.Position.X = (item.itemFrame.Position.X + (item.itemFrame.texture.Width / 2)) - (item.inventoryImage.texture.Width / 2);
+                        item.inventoryImage.Position.Y = (item.itemFrame.Position.Y + (item.itemFrame.texture.Height / 2)) - (item.inventoryImage.texture.Height / 2);
+                        item.numberOwnedImage.Position.X = item.itemFrame.Position.X + item.itemFrame.texture.Width - item.numberOwnedImage.Font.MeasureString(item.numberOwnedImage.Text).X;
+                        item.numberOwnedImage.Position.Y = item.itemFrame.Position.Y + item.itemFrame.texture.Height - item.numberOwnedImage.Font.MeasureString(item.numberOwnedImage.Text).Y;
+                        count++;
+                    }
                     setImage = true;
-                }
-                int count = 0;
-                foreach (Item item in inventory)
-                {
-                    count++;
-                    item.inventoryImage.Alpha = 1.0f;
-                    item.itemFrame.Position.X = count * 50;
-                    item.itemFrame.Layer = 1.0f;
                 }
                 base.Update(gameTime, player, inMenu);
             }
@@ -122,7 +221,7 @@ namespace The_Dream.Classes.GameMenu
                 setImage = false;
             }
         }
-        public override void Draw(SpriteBatch spriteBatch, bool inMenu)
+        public override void Draw(SpriteBatch spriteBatch, bool inMenu, Player player)
         {
             base.Draw(spriteBatch, inMenu);
             if (inMenu == true)
@@ -134,11 +233,32 @@ namespace The_Dream.Classes.GameMenu
                 if (inCategory == true)
                 {
                     inCategoryImage.Draw(spriteBatch);
+                    foreach (Item item in inventory)
+                    {
+                        if (item.selected == true)
+                        {
+                            item.itemFrame.Draw(spriteBatch);
+                            item.inventoryImage.Draw(spriteBatch);
+                            item.name.DrawString(spriteBatch);
+                            item.description.DrawString(spriteBatch);
+                            item.numberOwnedImage.DrawString(spriteBatch);
+                        }
+                        else
+                        {
+                            item.itemFrame.DrawFaded(spriteBatch);
+                            item.inventoryImage.DrawFaded(spriteBatch);
+                            item.numberOwnedImage.DrawString(spriteBatch);
+                        }
+                    }
                 }
-                foreach (Item item in inventory)
+                else
                 {
-                    item.itemFrame.Draw(spriteBatch);
-                    item.inventoryImage.Draw(spriteBatch);
+                    foreach (Item item in inventory)
+                    {
+                        item.itemFrame.DrawFaded(spriteBatch);
+                        item.inventoryImage.DrawFaded(spriteBatch);
+                        item.numberOwnedImage.DrawString(spriteBatch);
+                    }
                 }
             }
         }

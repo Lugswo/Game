@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace The_Dream.Classes
@@ -9,7 +10,8 @@ namespace The_Dream.Classes
     public class InputManager
     {
         KeyboardState currentKeyState, prevKeyState;
-        MouseState currentMouseState, prevMouseState;
+        public MouseState currentMouseState, prevMouseState;
+        public Point currentMousePosition, prevMousePosition;
         private static InputManager instance;
         public static InputManager Instance
         {
@@ -26,10 +28,13 @@ namespace The_Dream.Classes
         {
             prevKeyState = currentKeyState;
             prevMouseState = currentMouseState;
+            prevMousePosition.X = currentMousePosition.X;
+            prevMousePosition.Y = currentMousePosition.Y;
             if (!ScreenManager.Instance.IsTransitioning)
             {
                 currentKeyState = Keyboard.GetState();
                 currentMouseState = Mouse.GetState();
+                currentMousePosition = new Point(currentMouseState.X * 2, currentMouseState.Y * 2);
             }
         }
         public bool KeyPressed(params Keys[] keys)
@@ -77,6 +82,34 @@ namespace The_Dream.Classes
             return false;
         }
         public bool LeftClick()
+        {
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool MouseInArea(Rectangle rect)
+        {
+            Rectangle hitBox = rect;
+            if (rect.Contains(currentMousePosition))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool LeftClickArea(Rectangle rect)
+        {
+            if (MouseInArea(rect))
+            {
+                if (currentMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool HoldingLeftClick()
         {
             if (currentMouseState.LeftButton == ButtonState.Pressed)
             {

@@ -21,9 +21,17 @@ namespace The_Dream.Classes
                 for (int i = 0; i < menu.Items.Count; i++)
                 {
                     menu.Items[i].image.Update(gameTime);
+                    bool invisibleMenu = true;
+                    foreach (MenuItem item in menu.Items)
+                    {
+                        if (item.image.Alpha != 0)
+                        {
+                            invisibleMenu = false;
+                        }
+                    }
                     float first = menu.Items[0].image.Alpha;
                     float last = menu.Items[menu.Items.Count - 1].image.Alpha;
-                    if (first == 0.0f && last == 0.0f)
+                    if (invisibleMenu == true)
                     {
                         menu.ID = menu.Items[menu.ItemNumber].LinkID;
                     }

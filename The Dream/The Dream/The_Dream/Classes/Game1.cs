@@ -11,7 +11,7 @@ namespace The_Dream.Classes
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteSortMode sortMode;
+        Matrix SpriteScale;
 
         public Game1()
         {
@@ -28,11 +28,9 @@ namespace The_Dream.Classes
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
-            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
+            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.realDimensions.X;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.realDimensions.Y;
             graphics.ApplyChanges();
-            Window.AllowUserResizing = true;
-            sortMode = new SpriteSortMode();
             base.Initialize();
         }
 
@@ -48,6 +46,9 @@ namespace The_Dream.Classes
             ScreenManager.Instance.GraphicsDevice = GraphicsDevice;
             ScreenManager.Instance.SpriteBatch = spriteBatch;
             ScreenManager.Instance.LoadContent(Content);
+            float screenscale = (float)graphics.GraphicsDevice.Viewport.Width / 1920f;
+            SpriteScale = Matrix.CreateScale(screenscale, screenscale, 1);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -85,9 +86,9 @@ namespace The_Dream.Classes
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
             // TODO: Add your drawing code here
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, null);
+            // SamplerState.PointClamp
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, null, null, null, null, SpriteScale);
             ScreenManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

@@ -45,3 +45,23 @@ Content\Gameplay\Skills\TestSkill\Sprite.xnb
 Content\Gameplay\Skills\TestSkill\Icon.xnb
 Content\Gameplay\GUI\Menu\Settings\Settings.xnb
 Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
+Content\Gameplay\Skills\TestSkill2\Icon.xnb
+Content\Gameplay\Skills\TestSkill2\Sprite.xnb
+Content\Gameplay\Characters\Player\Hair\Hair1.xnb
+Content\GUI\Arrow.xnb
+Content\Gameplay\GUI\Menu\Items.xnb
+Content\Gameplay\Skills\Skill Line.xnb
+Content\GUI\Character Creation\Character Creation.xnb
+Content\GUI\Character Creation\Category.xnb
+Content\GUI\Character Creation\Cover.xnb
+Content\GUI\Character Creation\Hair\Hair1.xnb
+Content\GUI\Character Creation\Background.xnb
+Content\GUI\Character Creation\Selected Category.xnb
+Content\GUI\Character Creation\Hair\Hair2.xnb
+Content\GUI\Character Creation\Selected.xnb
+Content\GUI\Cursor.xnb
+Content\Gameplay\Characters\Player\Hair\Hair2.xnb
+Content\GUI\Character Creation\Eyes\Eyes1.xnb
+Content\GUI\Character Creation\Eyes\Eyes2.xnb
+Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
+Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
