@@ -10,6 +10,7 @@ using Lidgren.Network;
 
 namespace The_Dream.Classes
 {
+    [Serializable]
     public class Player
     {
         public Image PlayerImage;
@@ -25,48 +26,88 @@ namespace The_Dream.Classes
         public int NextLevel { get; set; }
         public int StatPoints { get; set; }
         public string Name { get; set; }
+        public int xSpawn { get; set; }
+        public int ySpawn { get; set; }
+        public int areaXSpawn { get; set; }
+        public int areaYSpawn { get; set; }
+        [XmlIgnore]
         public int X { get; set; }
+        [XmlIgnore]
         public int Y { get; set; }
+        [XmlIgnore]
         public int AreaX { get; set; }
+        [XmlIgnore]
         public int AreaY { get; set; }
+        [XmlIgnore]
         public int VelocityX { get; set; }
+        [XmlIgnore]
         public int VelocityY { get; set; }
+        [XmlIgnore]
         public int PositionX { get; set; }
+        [XmlIgnore]
         public int PositionY { get; set; }
+        [XmlIgnore]
         public bool Attacking { get; set; }
+        [XmlIgnore]
         public bool NextAttack { get; set;}
+        [XmlIgnore]
         public bool levelUp { get; set; }
         public int HealthRegen { get; set; }
+        [XmlIgnore]
         public double OneSecond;
+        [XmlIgnore]
         public double combatTimer;
+        [XmlIgnore]
         public bool zPressed;
+        [XmlIgnore]
         public bool inCombat;
+        [XmlIgnore]
         public int Combo { get; set; }
+        [XmlIgnore]
         public bool aUp, aDown, aLeft, aRight, Up, Down, Left, Right, cUp, cDown, cLeft, cRight;
+        [XmlIgnore]
         public int pX;
+        [XmlIgnore]
         public int pY;
         public int moveSpeed;
+        [XmlIgnore]
         bool ChangedFrames;
+        [XmlIgnore]
         public int AttackCounter;
+        [XmlIgnore]
         public List<MapSprite> Blanks;
+        [XmlIgnore]
         public Rectangle DeadZone;
+        [XmlIgnore]
         public Rectangle HitBox;
+        [XmlIgnore]
         public Rectangle upAttackHitBox, downAttackHitBox, leftAttackHitBox, rightAttackHitBox, facingHitBox;
+        [XmlIgnore]
         public bool newArea = false;
+        [XmlIgnore]
         public int prevDir;
+        [XmlIgnore]
         public int HitTimer;
+        [XmlIgnore]
         public int maxHealth;
         public int skillPoints;
+        [XmlIgnore]
         public Image skillPointsImage;
         public List<Item> inventory;
-        [XmlElement("Skill")]
+        [XmlIgnore]
         public List<Skills.Skill> skills;
         [XmlIgnore]
+        public List<Skills.Skill> binds;
+        [XmlIgnore]
         public NetConnection Connection { get; set; }
+        [XmlIgnore]
         public Image levelUpImage;
         public Image hair;
         public Image eyes;
-        public Skills.Skill shiftSkill;
+        public Keys skill1Bind;
+        public List<int> skillIds, bindIds;
+        [XmlIgnore]
+        public Globals globals;
         public Player()
         {
             PlayerImage = new Image();
@@ -90,10 +131,12 @@ namespace The_Dream.Classes
             moveSpeed = 10;
             inventory = new List<Item>();
             skills = new List<Skills.Skill>();
-            shiftSkill = new Skills.Skill();
-            shiftSkill.SkillID = 0;
             skillPointsImage = new Image();
             skillPointsImage.Layer = .97f;
+            binds = new List<Skills.Skill>();
+            skillIds = new List<int>();
+            bindIds = new List<int>();
+            globals = new Globals();
         }
         public void UpdateHitTimer(GameTime gameTime)
         {
@@ -132,6 +175,13 @@ namespace The_Dream.Classes
             skillPointsImage.LoadContent();
             hair.LoadContent();
             eyes.LoadContent();
+            globals.LoadContent();
+            foreach (int id in skillIds)
+            {
+                Skills.Skill temp = new Skills.Skill();
+                temp = (Classes.Skills.Skill)Activator.CreateInstance(globals.dSkills[id].GetType());
+                skills.Add(temp);
+            }
         }
         public void UnloadContent()
         {

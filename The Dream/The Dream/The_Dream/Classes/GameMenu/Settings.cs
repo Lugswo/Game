@@ -58,11 +58,11 @@ namespace The_Dream.Classes.GameMenu
                         {
                             if (InputManager.Instance.KeyPressed(Keys.Z))
                             {
-                                player.shiftSkill = player.skills[0];
-                                player.shiftSkill.icon.Position.X = 100 + shiftKey.Font.MeasureString("Shift: ").X;
-                                player.shiftSkill.icon.Position.Y = 100;
-                                shiftKey.Text = "Shift: ";
-                                hotKey = false;
+                                //player.binds[0] = player.skills[0];
+                                //player.skill1.icon.Position.X = 100 + shiftKey.Font.MeasureString("Shift: ").X;
+                                //player.skill1.icon.Position.Y = 100;
+                                //shiftKey.Text = "Shift: ";
+                                //hotKey = false;
                             }
                         }
                         else
@@ -83,10 +83,10 @@ namespace The_Dream.Classes.GameMenu
                 }
             }
             shiftKey.DrawString(spriteBatch);
-            if (player.shiftSkill.icon.texture != null)
-            {
-                player.shiftSkill.icon.Draw(spriteBatch);
-            }
+            //if (player.skill1.icon.texture != null)
+            //{
+            //    player.skill1.icon.Draw(spriteBatch);
+            //}
             base.Draw(spriteBatch, inMenu, player);
         }
     }

@@ -160,6 +160,7 @@
     <Compile Include="Classes\Skills\TestSkill2.cs" />
     <Compile Include="Classes\SoundItem.cs" />
     <Compile Include="Classes\SoundManager.cs" />
+    <Compile Include="Classes\Textbox.cs" />
     <Compile Include="Classes\TextScrollEffect.cs" />
     <Compile Include="Classes\UpdateGameMenu.cs" />
     <Compile Include="Classes\GameplayScreen.cs" />

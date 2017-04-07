@@ -94,7 +94,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>/ayNavmhsv8hpLKgZpFA6kaU4Xg=</dsig:DigestValue>
+        <dsig:DigestValue>A/tIwJo3BVLv9jYEQz+RxvqTMCE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -314,15 +314,6 @@
       <dsig:DigestValue>O5I3mfaEx1blb7hYX24mkvRvJKQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\Gameplay\GUI\Menu\InSkills.xnb" size="9038">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>H3uebw5LUWYZqZUkCD0gTJrle0s=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="Content\Gameplay\GUI\Menu\InStats.xnb" size="9080">
     <hash>
       <dsig:Transforms>
@@ -431,7 +422,16 @@
       <dsig:DigestValue>368RmAP/zYp6DXPXLKIeFNg/Rpc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\Gameplay\GUI\Menu\Skills.xnb" size="8994">
+  <file name="Content\Gameplay\GUI\Menu\Skills\InSkills.xnb" size="9038">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>H3uebw5LUWYZqZUkCD0gTJrle0s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Gameplay\GUI\Menu\Skills\Skills.xnb" size="8994">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />

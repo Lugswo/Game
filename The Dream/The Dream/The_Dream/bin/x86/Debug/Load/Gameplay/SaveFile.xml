@@ -1,37 +1,299 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Player>
-  <Name>GUY</Name>
-  <Strength>5</Strength>
-  <Defense>5</Defense>
-  <Dexterity>5</Dexterity>
-  <Intelligence>5</Intelligence>
-  <Speed>5</Speed>
-  <Level>1</Level>
-  <EXP>0</EXP>
-  <Health>100</Health>
-  <Energy>100</Energy>
-  <NextLevel>100</NextLevel>
-  <StatPoints>0</StatPoints>
-  <AreaX>1</AreaX>
-  <AreaY>1</AreaY>
-  <X>10</X>
-  <Y>10</Y>
-  <HealthRegen>1</HealthRegen>
+<?xml version="1.0" encoding="utf-8"?>
+<Player xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PlayerImage>
+    <Alpha>1</Alpha>
+    <Text />
+    <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Player</Path>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <Scale>
+      <X>1</X>
+      <Y>1</Y>
+    </Scale>
+    <SourceRect>
+      <X>60</X>
+      <Y>0</Y>
+      <Width>60</Width>
+      <Height>60</Height>
+      <Location>
+        <X>60</X>
+        <Y>0</Y>
+      </Location>
+    </SourceRect>
+    <rect>
+      <X>0</X>
+      <Y>0</Y>
+      <Width>0</Width>
+      <Height>0</Height>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+    </rect>
+    <IsActive>false</IsActive>
+    <color>
+      <R>0</R>
+      <G>0</G>
+      <B>0</B>
+      <A>0</A>
+      <PackedValue>0</PackedValue>
+    </color>
     <Effects>SpriteSheetEffect</Effects>
+    <fadeEffect>
+      <IsActive>false</IsActive>
+      <FadeSpeed>2</FadeSpeed>
+      <Increase>false</Increase>
+    </fadeEffect>
+    <expandEffect>
+      <IsActive>false</IsActive>
+      <ExpandSpeed>1.5</ExpandSpeed>
+      <Increase>true</Increase>
+    </expandEffect>
     <spriteSheetEffect>
+      <IsActive>true</IsActive>
+      <FrameCounter>80</FrameCounter>
+      <SwitchFrame>100</SwitchFrame>
+      <CurrentFrame>
+        <X>1</X>
+        <Y>0</Y>
+      </CurrentFrame>
       <AmountOfFrames>
         <X>6</X>
         <Y>16</Y>
       </AmountOfFrames>
     </spriteSheetEffect>
+    <showSpriteEffect>
+      <IsActive>false</IsActive>
+      <Sprite>
+        <X>0</X>
+        <Y>0</Y>
+      </Sprite>
+      <AmountOfSprites>
+        <X>0</X>
+        <Y>0</Y>
+      </AmountOfSprites>
+    </showSpriteEffect>
+    <textScrollEffect>
+      <IsActive>false</IsActive>
+      <scrollSpeed>10</scrollSpeed>
+      <text />
+      <originalText />
+      <textNumber>0</textNumber>
+      <currentText />
+    </textScrollEffect>
+    <dimensions>
+      <X>361</X>
+      <Y>960</Y>
+    </dimensions>
+    <Layer>0.5</Layer>
   </PlayerImage>
+  <moveSpeed>10</moveSpeed>
+  <skillPoints>0</skillPoints>
+  <inventory />
   <hair>
+    <Alpha>1</Alpha>
+    <Text />
+    <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Hair/Hair1</Path>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <Scale>
+      <X>1</X>
+      <Y>1</Y>
+    </Scale>
+    <SourceRect>
+      <X>0</X>
+      <Y>0</Y>
+      <Width>61</Width>
+      <Height>10</Height>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+    </SourceRect>
+    <rect>
+      <X>0</X>
+      <Y>0</Y>
+      <Width>0</Width>
+      <Height>0</Height>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+    </rect>
+    <IsActive>false</IsActive>
+    <color>
+      <R>0</R>
+      <G>0</G>
+      <B>0</B>
+      <A>0</A>
+      <PackedValue>0</PackedValue>
+    </color>
+    <Effects />
+    <fadeEffect>
+      <IsActive>false</IsActive>
+      <FadeSpeed>2</FadeSpeed>
+      <Increase>false</Increase>
+    </fadeEffect>
+    <expandEffect>
+      <IsActive>false</IsActive>
+      <ExpandSpeed>1.5</ExpandSpeed>
+      <Increase>true</Increase>
+    </expandEffect>
+    <spriteSheetEffect>
+      <IsActive>false</IsActive>
+      <FrameCounter>0</FrameCounter>
+      <SwitchFrame>100</SwitchFrame>
+      <CurrentFrame>
+        <X>1</X>
+        <Y>0</Y>
+      </CurrentFrame>
+      <AmountOfFrames>
+        <X>0</X>
+        <Y>0</Y>
+      </AmountOfFrames>
+    </spriteSheetEffect>
+    <showSpriteEffect>
+      <IsActive>false</IsActive>
+      <Sprite>
+        <X>0</X>
+        <Y>0</Y>
+      </Sprite>
+      <AmountOfSprites>
+        <X>0</X>
+        <Y>0</Y>
+      </AmountOfSprites>
+    </showSpriteEffect>
+    <textScrollEffect>
+      <IsActive>false</IsActive>
+      <scrollSpeed>10</scrollSpeed>
+      <text />
+      <originalText />
+      <textNumber>0</textNumber>
+      <currentText />
+    </textScrollEffect>
+    <dimensions>
+      <X>61</X>
+      <Y>10</Y>
+    </dimensions>
+    <Layer>0.51</Layer>
   </hair>
   <eyes>
+    <Alpha>1</Alpha>
+    <Text />
+    <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Eyes/Eyes1</Path>
+    <Position>
+      <X>0</X>
+      <Y>0</Y>
+    </Position>
+    <Scale>
+      <X>1</X>
+      <Y>1</Y>
+    </Scale>
+    <SourceRect>
+      <X>0</X>
+      <Y>0</Y>
+      <Width>61</Width>
+      <Height>60</Height>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+    </SourceRect>
+    <rect>
+      <X>0</X>
+      <Y>0</Y>
+      <Width>0</Width>
+      <Height>0</Height>
+      <Location>
+        <X>0</X>
+        <Y>0</Y>
+      </Location>
+    </rect>
+    <IsActive>false</IsActive>
+    <color>
+      <R>0</R>
+      <G>0</G>
+      <B>0</B>
+      <A>0</A>
+      <PackedValue>0</PackedValue>
+    </color>
+    <Effects />
+    <fadeEffect>
+      <IsActive>false</IsActive>
+      <FadeSpeed>2</FadeSpeed>
+      <Increase>false</Increase>
+    </fadeEffect>
+    <expandEffect>
+      <IsActive>false</IsActive>
+      <ExpandSpeed>1.5</ExpandSpeed>
+      <Increase>true</Increase>
+    </expandEffect>
+    <spriteSheetEffect>
+      <IsActive>false</IsActive>
+      <FrameCounter>0</FrameCounter>
+      <SwitchFrame>100</SwitchFrame>
+      <CurrentFrame>
+        <X>1</X>
+        <Y>0</Y>
+      </CurrentFrame>
+      <AmountOfFrames>
+        <X>0</X>
+        <Y>0</Y>
+      </AmountOfFrames>
+    </spriteSheetEffect>
+    <showSpriteEffect>
+      <IsActive>false</IsActive>
+      <Sprite>
+        <X>0</X>
+        <Y>0</Y>
+      </Sprite>
+      <AmountOfSprites>
+        <X>0</X>
+        <Y>0</Y>
+      </AmountOfSprites>
+    </showSpriteEffect>
+    <textScrollEffect>
+      <IsActive>false</IsActive>
+      <scrollSpeed>10</scrollSpeed>
+      <text />
+      <originalText />
+      <textNumber>0</textNumber>
+      <currentText />
+    </textScrollEffect>
+    <dimensions>
+      <X>61</X>
+      <Y>60</Y>
+    </dimensions>
+    <Layer>0.51</Layer>
   </eyes>
-  <MoveSpeed>400</MoveSpeed>
+  <skill1Bind>None</skill1Bind>
+  <skillIds>
+    <int>1</int>
+    <int>2</int>
+  </skillIds>
+  <bindIds />
+  <Level>3</Level>
+  <Strength>5</Strength>
+  <Defense>5</Defense>
+  <Dexterity>5</Dexterity>
+  <Intelligence>5</Intelligence>
+  <Speed>5</Speed>
+  <Health>100</Health>
+  <Energy>100</Energy>
+  <EXP>0</EXP>
+  <NextLevel>127</NextLevel>
+  <StatPoints>0</StatPoints>
+  <Name>s</Name>
+  <xSpawn>10</xSpawn>
+  <ySpawn>10</ySpawn>
+  <areaXSpawn>1</areaXSpawn>
+  <areaYSpawn>1</areaYSpawn>
+  <HealthRegen>1</HealthRegen>
 </Player>

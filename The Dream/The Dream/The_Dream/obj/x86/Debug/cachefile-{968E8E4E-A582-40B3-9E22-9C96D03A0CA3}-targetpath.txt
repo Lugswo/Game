@@ -8,6 +8,22 @@ Content\Gameplay\Characters\Player\notPlayer.xnb
 Content\Gameplay\Monsters\TestMonster.xnb
 Content\Gameplay\Effects\Level Up.xnb
 Content\Gameplay\Monsters\TestMonster2.xnb
+Content\Gameplay\GUI\Menu\Stats.xnb
+Content\Gameplay\GUI\Menu\Equipment.xnb
+Content\Gameplay\GUI\Menu\Map.xnb
+Content\Gameplay\GUI\Menu\Relics.xnb
+Content\Gameplay\GUI\Menu\Save.xnb
+Content\Gameplay\GUI\Menu\Settings\Settings.xnb
+Content\Gameplay\GUI\Menu\Skills\Skills.xnb
+Content\Gameplay\GUI\Menu\Beastiary.xnb
+Content\Gameplay\GUI\Menu\InBeastiary.xnb
+Content\Gameplay\GUI\Menu\InEquipment.xnb
+Content\Gameplay\GUI\Menu\InMap.xnb
+Content\Gameplay\GUI\Menu\InRelics.xnb
+Content\Gameplay\GUI\Menu\InSave.xnb
+Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
+Content\Gameplay\GUI\Menu\Skills\InSkills.xnb
+Content\Gameplay\GUI\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 Content\SplashScreen\Title.xnb
 Content\Gameplay\Characters\Player\Player.xnb
@@ -20,38 +36,22 @@ Content\Gameplay\Items\TestGear\Drop.xnb
 Content\Gameplay\Items\TestGear\Inventory.xnb
 Content\Gameplay\Items\TestItem\Drop.xnb
 Content\Gameplay\Items\TestItem\Inventory.xnb
-Content\Gameplay\GUI\Menu\Stats.xnb
-Content\Gameplay\GUI\Menu\Equipment.xnb
-Content\Gameplay\GUI\Menu\Inventory.xnb
-Content\Gameplay\GUI\Menu\Map.xnb
-Content\Gameplay\GUI\Menu\Relics.xnb
-Content\Gameplay\GUI\Menu\Save.xnb
-Content\Gameplay\GUI\Menu\Skills.xnb
-Content\Gameplay\GUI\Menu\Beastiary.xnb
-Content\Gameplay\GUI\Menu\InBeastiary.xnb
-Content\Gameplay\GUI\Menu\InEquipment.xnb
-Content\Gameplay\GUI\Menu\InInventory.xnb
-Content\Gameplay\GUI\Menu\InMap.xnb
-Content\Gameplay\GUI\Menu\InRelics.xnb
-Content\Gameplay\GUI\Menu\InSave.xnb
-Content\Gameplay\GUI\Menu\InSkills.xnb
-Content\Gameplay\GUI\Menu\InStats.xnb
 Content\Gameplay\GUI\Menu\Inventory\Gear.xnb
-Content\Gameplay\GUI\Menu\Inventory\Items.xnb
-Content\Gameplay\GUI\Menu\Inventory\InGear.xnb
-Content\Gameplay\GUI\Menu\Inventory\InItems.xnb
 Content\Gameplay\Items\ItemFrame.xnb
 Content\Gameplay\Skills\TestSkill\Sprite.xnb
 Content\Gameplay\Skills\TestSkill\Icon.xnb
-Content\Gameplay\GUI\Menu\Settings\Settings.xnb
-Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
 Content\Gameplay\Skills\TestSkill2\Icon.xnb
 Content\Gameplay\Skills\TestSkill2\Sprite.xnb
 Content\Gameplay\Characters\Player\Hair\Hair1.xnb
-Content\GUI\Arrow.xnb
-Content\Gameplay\GUI\Menu\Items.xnb
-Content\Gameplay\Skills\Skill Line.xnb
 Content\GUI\Character Creation\Character Creation.xnb
+Content\GUI\Arrow.xnb
+Content\Gameplay\GUI\Menu\Inventory\InGear.xnb
+Content\Gameplay\GUI\Menu\Inventory\Items.xnb
+Content\Gameplay\GUI\Menu\Items.xnb
+Content\Gameplay\GUI\Menu\Inventory.xnb
+Content\Gameplay\GUI\Menu\InInventory.xnb
+Content\Gameplay\GUI\Menu\Inventory\InItems.xnb
+Content\Gameplay\Skills\Skill Line.xnb
 Content\GUI\Character Creation\Category.xnb
 Content\GUI\Character Creation\Cover.xnb
 Content\GUI\Character Creation\Hair\Hair1.xnb
@@ -65,3 +65,7 @@ Content\GUI\Character Creation\Eyes\Eyes1.xnb
 Content\GUI\Character Creation\Eyes\Eyes2.xnb
 Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
 Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
+Content\Gameplay\GUI\Menu\Skills\Skill Box.xnb
+Content\Gameplay\GUI\Menu\Skills\Select.xnb
+Content\GUI\Textbox.xnb
+Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb

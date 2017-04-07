@@ -130,7 +130,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Game
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Map.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Relics.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Save.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Beastiary.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InBeastiary.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InEquipment.xnb
@@ -138,7 +137,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Game
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InMap.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InRelics.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InSave.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InSkills.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InStats.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Gear.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Items.xnb
@@ -170,3 +168,116 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes2.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skills.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\InSkills.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Box.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Select.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Textbox.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb
+\\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.csprojResolveAssemblyReference.cache
+\\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+\\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.csprojResolveAssemblyReference.cache
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\ClientIPandHost.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Down Map\Background.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\ServerIPandHost.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Right Map\Background.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Maps\Test Map\Background.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Player.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Gameplay\Sound.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Menus\MultiplayerScreen.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\Menus\TitleMenu.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\ScreenManager.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\SplashScreen.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Load\CharacterCreationScreen.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Fonts\Secret of Mana.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Screen.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\ScreenManager\FadeImage.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Map1\Map1.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Textures\Tree.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Blanks\Black.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\notPlayer.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Effects\Level Up.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Monsters\TestMonster2.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Stats.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Equipment.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Map.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Relics.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Save.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Settings\Settings.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skills.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Beastiary.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InBeastiary.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InEquipment.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InMap.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InRelics.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InSave.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\InSkills.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InStats.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\SplashScreen\Title.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Player.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Backgrounds\Down Map\Down Map.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Emotes\Speech Bubble.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Dialogue.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\NPCs\TestNPC\Sprite.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\NPCs\TestNPC\Portrait.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Items\TestGear\Drop.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Items\TestGear\Inventory.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Items\TestItem\Drop.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Items\TestItem\Inventory.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Gear.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Items\ItemFrame.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill\Sprite.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill\Icon.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Icon.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\TestSkill2\Sprite.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair1.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Character Creation.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Arrow.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\InGear.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\Items.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Items.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\InInventory.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Inventory\InItems.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Skills\Skill Line.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Category.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Cover.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair1.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Background.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected Category.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Hair\Hair2.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Selected.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Cursor.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Hair\Hair2.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes1.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Character Creation\Eyes\Eyes2.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Box.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Select.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Textbox.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\The_Dream.exe.manifest
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\The_Dream.application
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\The_Dream.exe
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\The_Dream.pdb
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.dll
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Game.dll
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.dll
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Storage.dll
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Game.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.GamerServices.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\bin\x86\Debug\Microsoft.Xna.Framework.Storage.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.TrustInfo.xml
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe.manifest
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.application
+C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.pdb

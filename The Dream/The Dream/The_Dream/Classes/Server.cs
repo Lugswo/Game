@@ -25,8 +25,7 @@ namespace The_Dream.Classes
         List<Vector2> AreasAdded;
         Map map;
         List<Skills.Skill> skillList;
-        Dictionary<int, Skills.Skill> dSkills;
-        Skills.TestSkill testSkill;
+        Globals globals;
         enum PacketTypes
         {
             LOGIN,
@@ -133,11 +132,6 @@ namespace The_Dream.Classes
                 maps.Add(temp);
             }
         }
-        public void SetSkill<T>(ref T skill, int ID)
-        {
-            skill = (T)Activator.CreateInstance(typeof(T));
-            dSkills.Add(ID, (skill as Skills.Skill));
-        }
         public void ReceivePacket()
         {
             while ((ServerInc = server.ReadMessage()) != null)
@@ -153,8 +147,15 @@ namespace The_Dream.Classes
                             player.hair.Path = ServerInc.ReadString();
                             player.eyes.Path = ServerInc.ReadString();
                             player.Connection = ServerInc.SenderConnection;
+                            int c = ServerInc.ReadInt32();
+                            for (int i = 0; i < c; i++)
+                            {
+                                player.skillIds.Add(ServerInc.ReadInt32());
+                            }
                             GameState.Add(player);
-                            LoadMap(player.AreaX, player.AreaY);
+                            LoadMap(player.areaXSpawn, player.areaYSpawn);
+                            player.AreaX = player.areaXSpawn;
+                            player.AreaY = player.areaYSpawn;
                             addedNewPlayer = false;
                             while (addedNewPlayer == false)
                             {
@@ -285,7 +286,7 @@ namespace The_Dream.Classes
                                 int ID = ServerInc.ReadInt32();
                                 int direction = ServerInc.ReadInt32();
                                 Skills.Skill skill;
-                                skill = (Skills.Skill)Activator.CreateInstance(dSkills[ID].GetType());
+                                skill = (Skills.Skill)Activator.CreateInstance(globals.dSkills[ID].GetType());
                                 skill.LoadContent(p.X, p.Y);
                                 if (direction == 0)
                                 {
@@ -421,9 +422,8 @@ namespace The_Dream.Classes
             map = new Map();
             AreasAdded = new List<Vector2>();
             skillList = new List<Skills.Skill>();
-            dSkills = new Dictionary<int, Skills.Skill>();
-            testSkill = new Skills.TestSkill();
-            SetSkill(ref testSkill, testSkill.SkillID);
+            globals = new Globals();
+            globals.LoadContent();
         }
         public void UnloadContent()
         {

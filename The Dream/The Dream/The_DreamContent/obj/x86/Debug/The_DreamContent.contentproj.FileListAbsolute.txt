@@ -5,3 +5,5 @@ C:\Users\Lugswo\Desktop\Game-master\The Dream\The Dream\The_DreamContent\obj\x86
 C:\Users\Lugsw\Desktop\Game-master\The Dream\The Dream\The_DreamContent\obj\x86\Debug\The_DreamContent.contentprojResolveAssemblyReference.cache
 C:\Users\Lugswo\Desktop\Client\The Dream\The_DreamContent\obj\x86\Debug\The_DreamContent.contentprojResolveAssemblyReference.cache
 C:\cygwin64\home\Lugswo\Game\The Dream\The Dream\The_DreamContent\obj\x86\Debug\The_DreamContent.contentprojResolveAssemblyReference.cache
+\\SCPLAPTOP\The Dream\The Dream\The_DreamContent\obj\x86\Debug\The_DreamContent.contentprojResolveAssemblyReference.cache
+C:\Users\Lugsw\Desktop\Game\The Dream\The_DreamContent\obj\x86\Debug\The_DreamContent.contentprojResolveAssemblyReference.cache

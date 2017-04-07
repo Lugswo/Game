@@ -40,6 +40,7 @@ namespace The_Dream.Classes
         Dictionary<int, Item> Items;
         Items.TestItem testItem;
         List<Skills.Skill> skillList;
+        Player player;
         enum PacketTypes
         {
             LOGIN,
@@ -92,11 +93,14 @@ namespace The_Dream.Classes
                             ClientInc.ReadAllProperties(temp);
                             temp.hair.Path = ClientInc.ReadString();
                             temp.eyes.Path = ClientInc.ReadString();
-                            temp.PlayerImage.Layer = .5f;
-                            temp.hair.Layer = .51f;
-                            temp.eyes.Layer = .51f;
-                            temp.LoadContent();
-                            PlayerList.Add(temp);
+                            if (!(player.hair.Path == temp.hair.Path) && !(player.eyes.Path == temp.eyes.Path))
+                            {
+                                temp.PlayerImage.Layer = .5f;
+                                temp.hair.Layer = .51f;
+                                temp.eyes.Layer = .51f;
+                                temp.LoadContent();
+                                PlayerList.Add(temp);
+                            }
                         }
                         else if (b == (byte)PacketTypes.WORLDSTATE)
                         {
@@ -262,7 +266,7 @@ namespace The_Dream.Classes
                         {
                             PlayerList.Clear();
                             int count = ClientInc.ReadInt32();
-                            for (int i = 0; i < count; i++)
+                            for (int i = 0; i < count - 1; i++)
                             {
                                 Player temp = new Player();
                                 ClientInc.ReadAllProperties(temp);
@@ -276,6 +280,11 @@ namespace The_Dream.Classes
                                 temp.pY = temp.Y;
                                 PlayerList.Add(temp);
                             }
+                            player.LoadContent();
+                            player.PlayerImage.Layer = .5f;
+                            player.hair.Layer = .51f;
+                            player.eyes.Layer = .51f;
+                            PlayerList.Add(player);
                             PlayerID = count;
                         }
                         else if (b == (byte)PacketTypes.REMOVEPLAYER)
@@ -766,6 +775,14 @@ namespace The_Dream.Classes
                             npc.image.Position.Y = npc.OriginalPosition.Y - map.DeadZone.Height + ScreenManager.instance.Dimensions.Y;
                         }
                     }
+                    if (map.Left == false && map.Right == false)
+                    {
+                        PlayerList[PlayerID].PositionX = 1920 / 2;
+                    }
+                    if (map.Up == false && map.Down == false)
+                    {
+                        PlayerList[PlayerID].PositionY = 1080 / 2;
+                    }
                 }
                 else if (fadeImage.Alpha == 0.0f)
                 {
@@ -877,15 +894,15 @@ namespace The_Dream.Classes
                     }
                 }
             }
-            if (InputManager.Instance.KeyPressed(Keys.LeftShift))
+            if (InputManager.Instance.KeyPressed(PlayerList[PlayerID].skill1Bind))
             {
                 if (endLagTimer <= 0 && PlayerList[PlayerID].Attacking == false && paused == false)
                 {
-                    if (PlayerList[PlayerID].shiftSkill.SkillID != 0)
+                    if (PlayerList[PlayerID].binds[0].SkillID != 0)
                     {
                         NetOutgoingMessage outmsg = client.CreateMessage();
                         outmsg.Write((byte)PacketTypes.SKILL);
-                        int skillNum = PlayerList[PlayerID].shiftSkill.SkillID;
+                        int skillNum = PlayerList[PlayerID].binds[0].SkillID;
                         outmsg.Write(skillNum);
                         outmsg.Write(PlayerList[PlayerID].Direction());
                         outmsg.Write(PlayerList[PlayerID].AreaX);
@@ -1002,13 +1019,18 @@ namespace The_Dream.Classes
             ClientOut = client.CreateMessage();
             client.Start();
             ClientOut.Write((byte)PacketTypes.LOGIN);
-            Player player = new Player();
+            player = new Player();
             XmlManager<Player> playerLoader;
             playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
             ClientOut.WriteAllProperties(player);
             ClientOut.Write(player.hair.Path);
             ClientOut.Write(player.eyes.Path);
+            ClientOut.Write(player.skillIds.Count);
+            foreach (int i in player.skillIds)
+            {
+                ClientOut.Write(i);
+            }
             client.Connect(hostip, 25565, ClientOut);
             PlayerList = new List<Player>();
             image.Path = "Gameplay/Characters/Player/Player";
@@ -1221,7 +1243,7 @@ namespace The_Dream.Classes
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            text.DrawString(spriteBatch);
+            //text.DrawString(spriteBatch);
             if (PlayerList.Count > PlayerID)
             {
                 health.DrawString(spriteBatch);

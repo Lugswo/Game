@@ -14,6 +14,10 @@
   <StatPoints>0</StatPoints>
   <AreaX>1</AreaX>
   <AreaY>1</AreaY>
+  <xSpawn>10</xSpawn>
+  <ySpawn>10</ySpawn>
+  <areaXSpawn>1</areaXSpawn>
+  <areaYSpawn>1</areaYSpawn>
   <X>10</X>
   <Y>10</Y>
   <HealthRegen>1</HealthRegen>
@@ -34,4 +38,11 @@
     <Path>Gameplay/Characters/Player/Eyes/Eyes1</Path>
   </eyes>
   <MoveSpeed>400</MoveSpeed>
+  <binds>
+    <Bind>
+      <SkillID>0</SkillID>
+    </Bind>
+  </binds>
+  <skills>
+  </skills>
 </Player>

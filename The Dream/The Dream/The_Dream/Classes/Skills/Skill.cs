@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Dream.Classes.Skills
 {
+    [XmlInclude(typeof(TestSkill))]
+    [XmlInclude(typeof(TestSkill2))]
+    [Serializable]
     public class Skill
     {
         public const int halfIcon = 50;
@@ -19,6 +25,7 @@ namespace The_Dream.Classes.Skills
         public int skillDamage;
         public int range, moved, projSpeed;
         public string description;
+        [XmlIgnore]
         public Skill parentSkill;
         public List<Skill> requiredSkills;
         public Vector2 offset;
@@ -63,6 +70,10 @@ namespace The_Dream.Classes.Skills
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             image.Draw(spriteBatch);
+        }
+        public virtual void DrawIcon(SpriteBatch spriteBatch)
+        {
+            icon.Draw(spriteBatch);
         }
     }
 }

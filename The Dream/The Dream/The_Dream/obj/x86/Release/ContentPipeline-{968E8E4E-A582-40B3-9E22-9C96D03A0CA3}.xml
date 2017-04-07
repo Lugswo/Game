@@ -146,15 +146,6 @@
       <Time>2016-09-06T14:45:50-07:00</Time>
     </Item>
     <Item>
-      <Source>Gameplay\GUI\Menu\Skills.png</Source>
-      <Name>Gameplay\GUI\Menu\Skills</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills.xnb</Output>
-      <Time>2016-09-06T14:45:50-07:00</Time>
-    </Item>
-    <Item>
       <Source>Gameplay\GUI\Menu\Beastiary.png</Source>
       <Name>Gameplay\GUI\Menu\Beastiary</Name>
       <Importer>TextureImporter</Importer>
@@ -215,15 +206,6 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Settings\InSettings.xnb</Output>
-      <Time>2016-09-06T14:45:50-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Gameplay\GUI\Menu\InSkills.png</Source>
-      <Name>Gameplay\GUI\Menu\InSkills</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InSkills.xnb</Output>
       <Time>2016-09-06T14:45:50-07:00</Time>
     </Item>
     <Item>
@@ -603,6 +585,24 @@
       <Options>None</Options>
       <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb</Output>
       <Time>2017-02-27T13:23:13.5600328-08:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\GUI\Menu\Skills\Skills.png</Source>
+      <Name>Gameplay\GUI\Menu\Skills\Skills</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills\Skills.xnb</Output>
+      <Time>2016-09-06T14:45:50-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Gameplay\GUI\Menu\Skills\InSkills.png</Source>
+      <Name>Gameplay\GUI\Menu\Skills\InSkills</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills\InSkills.xnb</Output>
+      <Time>2016-09-06T14:45:50-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

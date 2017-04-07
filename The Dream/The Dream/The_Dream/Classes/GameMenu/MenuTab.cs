@@ -14,6 +14,7 @@ namespace The_Dream.Classes.GameMenu
         public bool inCategory;
         public bool subCat;
         public const int categoryOffset = 760;
+        public const int xOffset = 610;
         public const int yOffset = 156;
         public MenuTab()
         {
@@ -39,14 +40,7 @@ namespace The_Dream.Classes.GameMenu
         }
         public virtual void LoadContent(Player player)
         {
-            image.LoadContent();
-            image.Position.X = (ScreenManager.instance.Dimensions.X - image.texture.Width) / 2;
-            image.Position.Y = (ScreenManager.instance.Dimensions.Y - image.texture.Height) / 2;
-            inImage.LoadContent();
-            inImage.Position.X = (ScreenManager.instance.Dimensions.X - image.texture.Width) / 2;
-            inImage.Position.Y = (ScreenManager.instance.Dimensions.Y - image.texture.Height) / 2;
-            image.Layer = .8f;
-            inImage.Layer = .8f;
+            LoadContent();
         }
         public virtual void UnloadContent()
         {

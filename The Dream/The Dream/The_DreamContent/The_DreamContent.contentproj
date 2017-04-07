@@ -143,7 +143,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\GUI\Menu\Skills.png">
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skills.png">
       <Name>Skills</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -199,7 +199,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\GUI\Menu\InSkills.png">
+    <Compile Include="Gameplay\GUI\Menu\Skills\InSkills.png">
       <Name>InSkills</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -499,6 +499,34 @@
   <ItemGroup>
     <Compile Include="Gameplay\Characters\Player\Eyes\Eyes2.png">
       <Name>Eyes2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Box.png">
+      <Name>Skill Box</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Select.png">
+      <Name>Select</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\Textbox.png">
+      <Name>Textbox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Select.png">
+      <Name>Skill Select</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

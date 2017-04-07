@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Dream.Classes.Skills
 {
+    [Serializable]
     public class TestSkill : Skill
     {
         public TestSkill()

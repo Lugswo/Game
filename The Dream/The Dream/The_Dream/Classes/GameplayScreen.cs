@@ -54,12 +54,13 @@ namespace The_Dream.Classes
             XmlManager<Player> playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/Savefile.xml");
             XmlManager<Map> mapLoader = new XmlManager<Map>();
-            map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.AreaX, player.AreaY] + "/Background.xml");
+            map = mapLoader.Load("Load/Gameplay/Maps/" + map.Area[player.areaXSpawn, player.areaYSpawn] + "/Background.xml");
             map.LoadContent();
             client.GetReferences(map);
             XmlManager<UpdateGameMenu> menuLoader = new XmlManager<UpdateGameMenu>();
             gameMenu = new UpdateGameMenu();
             gameMenu.LoadContent(player);
+
             //XmlManager<SoundManager> soundLoader = new XmlManager<SoundManager>();
             //soundManager = soundLoader.Load("Load/Gameplay/Sound.xml");
             //soundManager.LoadContent();

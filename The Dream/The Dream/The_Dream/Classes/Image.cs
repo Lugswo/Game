@@ -210,9 +210,9 @@ namespace The_Dream.Classes
         }
         public void DrawToRectangle(SpriteBatch spriteBatch)
         {
-            origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
-            Rectangle originOffset = new Rectangle((int)origin.X + rect.X, (int)origin.Y + rect.Y, rect.Width, rect.Height);
-            spriteBatch.Draw(texture, originOffset, SourceRect, Color.White * Alpha, 0.0f, origin, SpriteEffects.None, Layer);
+            //origin = new Vector2(SourceRect.Width / 2, SourceRect.Height / 2);
+            //Rectangle originOffset = new Rectangle((int)origin.X + rect.X, (int)origin.Y + rect.Y, rect.Width, rect.Height);
+            spriteBatch.Draw(texture, rect, SourceRect, Color.White * Alpha, 0.0f, origin, SpriteEffects.None, Layer);
         }
     }
 }

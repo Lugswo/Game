@@ -26,7 +26,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Ga
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Relics.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Save.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Settings\Settings.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Beastiary.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InBeastiary.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InEquipment.xnb
@@ -34,7 +33,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Ga
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InRelics.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InSave.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InSkills.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\InStats.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\SplashScreen\Title.xnb
@@ -100,3 +98,5 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\obj\x86\Release\The_Dream.
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\obj\x86\Release\The_Dream.exe
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\obj\x86\Release\The_Dream.pdb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\obj\x86\Release\The_Dream.csprojResolveAssemblyReference.cache
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills\Skills.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Release\Content\Gameplay\GUI\Menu\Skills\InSkills.xnb

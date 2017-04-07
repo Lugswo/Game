@@ -75,7 +75,7 @@ namespace The_Dream.Classes
             stats.LoadContent(player);
             equipment.LoadContent(player);
             inventory.LoadContent();
-            skills.LoadContent();
+            skills.LoadContent(player);
             relics.LoadContent();
             beastiary.LoadContent();
             map.LoadContent();
@@ -92,6 +92,7 @@ namespace The_Dream.Classes
         }
         public void Update(GameTime gameTime, Player player)
         {
+            Level.Text = player.Level.ToString();
             if (paused == true)
             {
                 if (InputManager.Instance.KeyPressed(Keys.Escape))

@@ -14,7 +14,6 @@ Content\Gameplay\GUI\Menu\Map.xnb
 Content\Gameplay\GUI\Menu\Relics.xnb
 Content\Gameplay\GUI\Menu\Save.xnb
 Content\Gameplay\GUI\Menu\Settings\Settings.xnb
-Content\Gameplay\GUI\Menu\Skills.xnb
 Content\Gameplay\GUI\Menu\Beastiary.xnb
 Content\Gameplay\GUI\Menu\InBeastiary.xnb
 Content\Gameplay\GUI\Menu\InEquipment.xnb
@@ -22,7 +21,6 @@ Content\Gameplay\GUI\Menu\InMap.xnb
 Content\Gameplay\GUI\Menu\InRelics.xnb
 Content\Gameplay\GUI\Menu\InSave.xnb
 Content\Gameplay\GUI\Menu\Settings\InSettings.xnb
-Content\Gameplay\GUI\Menu\InSkills.xnb
 Content\Gameplay\GUI\Menu\InStats.xnb
 Content\Gameplay\Backgrounds\Right Map\Right Map.xnb
 Content\SplashScreen\Title.xnb
@@ -65,3 +63,5 @@ Content\GUI\Character Creation\Eyes\Eyes1.xnb
 Content\GUI\Character Creation\Eyes\Eyes2.xnb
 Content\Gameplay\Characters\Player\Eyes\Eyes1.xnb
 Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
+Content\Gameplay\GUI\Menu\Skills\Skills.xnb
+Content\Gameplay\GUI\Menu\Skills\InSkills.xnb
