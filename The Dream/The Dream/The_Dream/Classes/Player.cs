@@ -93,7 +93,8 @@ namespace The_Dream.Classes
         public int skillPoints;
         [XmlIgnore]
         public Image skillPointsImage;
-        public List<Item> inventory;
+        [XmlIgnore]
+        public List<Items.Item> inventory;
         [XmlIgnore]
         public List<Skills.Skill> skills;
         [XmlIgnore]
@@ -104,8 +105,11 @@ namespace The_Dream.Classes
         public Image levelUpImage;
         public Image hair;
         public Image eyes;
-        public Keys skill1Bind;
-        public List<int> skillIds, bindIds;
+        public List<Keys> skillBinds;
+        [XmlElement("Bind")]
+        public List<int> bindIds;
+        public List<int> skillIds;
+        public List<int> itemIds;
         [XmlIgnore]
         public Globals globals;
         public Player()
@@ -129,14 +133,16 @@ namespace The_Dream.Classes
             inCombat = false;
             combatTimer = 0;
             moveSpeed = 10;
-            inventory = new List<Item>();
+            inventory = new List<Items.Item>();
             skills = new List<Skills.Skill>();
             skillPointsImage = new Image();
             skillPointsImage.Layer = .97f;
             binds = new List<Skills.Skill>();
             skillIds = new List<int>();
             bindIds = new List<int>();
+            itemIds = new List<int>();
             globals = new Globals();
+            skillBinds = new List<Keys>();
         }
         public void UpdateHitTimer(GameTime gameTime)
         {
@@ -176,11 +182,40 @@ namespace The_Dream.Classes
             hair.LoadContent();
             eyes.LoadContent();
             globals.LoadContent();
+            int count = skillBinds.Count;
+            for (int i = 0; i < 10 - count; i++)
+            {
+                Keys temp = new Keys();
+                skillBinds.Add(temp);
+            }
             foreach (int id in skillIds)
             {
                 Skills.Skill temp = new Skills.Skill();
                 temp = (Classes.Skills.Skill)Activator.CreateInstance(globals.dSkills[id].GetType());
+                temp.icon.LoadContent();
                 skills.Add(temp);
+            }
+            foreach (int id in bindIds)
+            {
+                if (id != 0)
+                {
+                    Skills.Skill temp = new Skills.Skill();
+                    temp = (Classes.Skills.Skill)Activator.CreateInstance(globals.dSkills[id].GetType());
+                    temp.icon.LoadContent();
+                    binds.Add(temp);
+                }
+                else
+                {
+                    Skills.Skill temp = new Skills.Skill();
+                    temp.SkillID = 0;
+                    binds.Add(temp);
+                }
+            }
+            foreach (int id in itemIds)
+            {
+                Items.Item temp = new Items.Item();
+                temp = (Classes.Items.Item)Activator.CreateInstance(globals.dItems[id].GetType());
+                inventory.Add(temp);
             }
         }
         public void UnloadContent()

@@ -14,10 +14,12 @@ namespace The_Dream.Classes.GameMenu
     [XmlInclude(typeof(Classes.Skills.Skill))]
     public class Save : MenuTab
     {
+        Globals globals;
         public Save()
         {
             image.Path = "Gameplay/GUI/Menu/Save";
             inImage.Path = "Gameplay/GUI/Menu/InSave";
+            globals = new Globals();
         }
         public override void LoadContent()
         {
@@ -34,10 +36,7 @@ namespace The_Dream.Classes.GameMenu
             {
                 if (InputManager.Instance.KeyPressed(Keys.Z))
                 {
-                    XmlSerializer ser = new XmlSerializer(typeof(Player));
-                    StreamWriter writer = new StreamWriter("Load/Gameplay/Savefile.xml");
-                    ser.Serialize(writer, player);
-                    writer.Close();
+                    globals.Save(player);
                 }
             }
         }

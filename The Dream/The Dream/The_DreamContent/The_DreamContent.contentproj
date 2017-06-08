@@ -525,8 +525,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Select.png">
-      <Name>Skill Select</Name>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Select Text.png">
+      <Name>Skill Select Text</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Tree.png">
+      <Name>Skill Tree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Select Skill Tree.png">
+      <Name>Select Skill Tree</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Gameplay\GUI\Menu\Skills\Skill Selector.png">
+      <Name>Skill Selector</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

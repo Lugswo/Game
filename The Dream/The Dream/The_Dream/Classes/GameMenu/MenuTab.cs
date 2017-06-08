@@ -16,12 +16,30 @@ namespace The_Dream.Classes.GameMenu
         public const int categoryOffset = 760;
         public const int xOffset = 610;
         public const int yOffset = 156;
+        public class Category
+        {
+            public Image image;
+        }
         public MenuTab()
         {
             image = new Image();
             inImage = new Image();
             subCat = false;
             inCategory = false;
+        }
+        public void DifferentImage(string s, Image categoryImage, Image inCategoryImage, Vector2 pos)
+        {
+            categoryImage.UnloadContent();
+            inCategoryImage.UnloadContent();
+            categoryImage = new Image();
+            inCategoryImage = new Image();
+            categoryImage.Path = "Gameplay/GUI/Menu/Inventory/" + s;
+            inCategoryImage.Path = "Gameplay/GUI/Menu/Inventory/In" + s;
+            categoryImage.LoadContent();
+            inCategoryImage.LoadContent();
+            categoryImage.Position = pos;
+            inCategoryImage.Position = pos;
+            inCategoryImage.Layer = .91f;
         }
         public virtual void LoadOnPause(Player player)
         {

@@ -68,4 +68,7 @@ Content\Gameplay\Characters\Player\Eyes\Eyes2.xnb
 Content\Gameplay\GUI\Menu\Skills\Skill Box.xnb
 Content\Gameplay\GUI\Menu\Skills\Select.xnb
 Content\GUI\Textbox.xnb
-Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb
+Content\Gameplay\GUI\Menu\Skills\Skill Tree.xnb
+Content\Gameplay\GUI\Menu\Skills\Select Skill Tree.xnb
+Content\Gameplay\GUI\Menu\Skills\Skill Select Text.xnb
+Content\Gameplay\GUI\Menu\Skills\Skill Selector.xnb

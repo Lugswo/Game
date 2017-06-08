@@ -10,7 +10,7 @@ namespace The_Dream.Classes.GameMenu
 {
     public class Inventory : MenuTab
     {
-        public List<Item> inventory;
+        public List<Items.Item> inventory;
         int category, selectedItem;
         bool setImage, enterCategory;
         Vector2 pos;
@@ -19,7 +19,7 @@ namespace The_Dream.Classes.GameMenu
         public Inventory()
         {
             category = 0;
-            inventory = new List<Item>();
+            inventory = new List<Items.Item>();
             setImage = false;
             categoryImage = new Image();
             inCategoryImage = new Image();
@@ -27,20 +27,6 @@ namespace The_Dream.Classes.GameMenu
             inCategoryImage.LoadContent();
             subCat = true;
             enterCategory = true;
-        }
-        void DifferentImage(string s)
-        {
-            categoryImage.UnloadContent();
-            inCategoryImage.UnloadContent();
-            categoryImage = new Image();
-            inCategoryImage = new Image();
-            categoryImage.Path = "Gameplay/GUI/Menu/Inventory/" + s;
-            inCategoryImage.Path = "Gameplay/GUI/Menu/Inventory/In" + s;
-            categoryImage.LoadContent();
-            inCategoryImage.LoadContent();
-            categoryImage.Position = pos;
-            inCategoryImage.Position = pos;
-            inCategoryImage.Layer = .91f;
         }
         public override void LoadContent()
         {
@@ -132,32 +118,32 @@ namespace The_Dream.Classes.GameMenu
                     pos = image.Position;
                     if (category == 0)
                     {
-                        DifferentImage("Gear");
+                        DifferentImage("Gear", categoryImage, inCategoryImage, pos);
                     }
                     else if (category == 1)
                     {
-                        DifferentImage("Items");
+                        DifferentImage("Items", categoryImage, inCategoryImage, pos);
                     }
-                    foreach (Item item in player.inventory)
+                    foreach (Items.Item item in player.inventory)
                     {
                         string inventoryItems = string.Empty;
-                        foreach (Item item2 in inventory)
+                        foreach (Items.Item item2 in inventory)
                         {
                             inventoryItems += item2.name.Text;
                         }
                         if (category == 0)
                         {
-                            if (item.category == Item.Subcategory.GEAR)
+                            if (item.category == Items.Item.Subcategory.GEAR)
                             {
                                 if (!(inventoryItems.Contains(item.name.Text)))
                                 {
-                                    Item temp = (Item)Activator.CreateInstance(item.GetType());
+                                    Items.Item temp = (Items.Item)Activator.CreateInstance(item.GetType());
                                     temp.LoadContent();
                                     inventory.Add(temp);
                                 }
                                 else
                                 {
-                                    foreach (Item item3 in inventory)
+                                    foreach (Items.Item item3 in inventory)
                                     {
                                         if (item.name.Text == item3.name.Text)
                                         {
@@ -170,17 +156,17 @@ namespace The_Dream.Classes.GameMenu
                         }
                         else if (category == 1)
                         {
-                            if (item.category == Item.Subcategory.ITEM)
+                            if (item.category == Items.Item.Subcategory.ITEM)
                             {
                                 if (!(inventoryItems.Contains(item.name.Text)))
                                 {
-                                    Item temp = (Item)Activator.CreateInstance(item.GetType());
+                                    Items.Item temp = (Items.Item)Activator.CreateInstance(item.GetType());
                                     temp.LoadContent();
                                     inventory.Add(temp);
                                 }
                                 else
                                 {
-                                    foreach (Item item3 in inventory)
+                                    foreach (Items.Item item3 in inventory)
                                     {
                                         if (item.name.Text == item3.name.Text)
                                         {
@@ -194,7 +180,7 @@ namespace The_Dream.Classes.GameMenu
                     }
                     int count = 0;
                     int yCount = 0;
-                    foreach (Item item in inventory)
+                    foreach (Items.Item item in inventory)
                     {
                         if (count == 6)
                         {
@@ -233,7 +219,7 @@ namespace The_Dream.Classes.GameMenu
                 if (inCategory == true)
                 {
                     inCategoryImage.Draw(spriteBatch);
-                    foreach (Item item in inventory)
+                    foreach (Items.Item item in inventory)
                     {
                         if (item.selected == true)
                         {
@@ -253,7 +239,7 @@ namespace The_Dream.Classes.GameMenu
                 }
                 else
                 {
-                    foreach (Item item in inventory)
+                    foreach (Items.Item item in inventory)
                     {
                         item.itemFrame.DrawFaded(spriteBatch);
                         item.inventoryImage.DrawFaded(spriteBatch);

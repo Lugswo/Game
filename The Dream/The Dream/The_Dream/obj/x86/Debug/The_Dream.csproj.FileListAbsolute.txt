@@ -173,7 +173,6 @@ C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Game
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Box.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Select.xnb
 C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\GUI\Textbox.xnb
-C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb
 \\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.csprojResolveAssemblyReference.cache
 \\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 \\SCPLAPTOP\The Dream\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe
@@ -281,3 +280,7 @@ C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.TrustInf
 C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.exe.manifest
 C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.application
 C:\Users\Lugsw\Desktop\Game\The Dream\The_Dream\obj\x86\Debug\The_Dream.pdb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Tree.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Select Skill Tree.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Select Text.xnb
+C:\Users\Lugswo\Desktop\The Dream\The Dream\The_Dream\bin\x86\Debug\Content\Gameplay\GUI\Menu\Skills\Skill Selector.xnb

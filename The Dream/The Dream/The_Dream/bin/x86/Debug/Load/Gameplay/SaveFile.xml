@@ -6,21 +6,21 @@
     <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Player</Path>
     <Position>
-      <X>0</X>
-      <Y>0</Y>
+      <X>1730</X>
+      <Y>540</Y>
     </Position>
     <Scale>
       <X>1</X>
       <Y>1</Y>
     </Scale>
     <SourceRect>
-      <X>60</X>
-      <Y>0</Y>
+      <X>120</X>
+      <Y>180</Y>
       <Width>60</Width>
       <Height>60</Height>
       <Location>
-        <X>60</X>
-        <Y>0</Y>
+        <X>120</X>
+        <Y>180</Y>
       </Location>
     </SourceRect>
     <rect>
@@ -33,7 +33,7 @@
         <Y>0</Y>
       </Location>
     </rect>
-    <IsActive>false</IsActive>
+    <IsActive>true</IsActive>
     <color>
       <R>0</R>
       <G>0</G>
@@ -57,8 +57,8 @@
       <FrameCounter>80</FrameCounter>
       <SwitchFrame>100</SwitchFrame>
       <CurrentFrame>
-        <X>1</X>
-        <Y>0</Y>
+        <X>2</X>
+        <Y>3</Y>
       </CurrentFrame>
       <AmountOfFrames>
         <X>6</X>
@@ -91,16 +91,15 @@
     <Layer>0.5</Layer>
   </PlayerImage>
   <moveSpeed>10</moveSpeed>
-  <skillPoints>0</skillPoints>
-  <inventory />
+  <skillPoints>1</skillPoints>
   <hair>
     <Alpha>1</Alpha>
     <Text />
     <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Hair/Hair1</Path>
     <Position>
-      <X>0</X>
-      <Y>0</Y>
+      <X>1730</X>
+      <Y>540</Y>
     </Position>
     <Scale>
       <X>1</X>
@@ -189,8 +188,8 @@
     <FontName>Fonts/Secret of Mana</FontName>
     <Path>Gameplay/Characters/Player/Eyes/Eyes1</Path>
     <Position>
-      <X>0</X>
-      <Y>0</Y>
+      <X>1730</X>
+      <Y>540</Y>
     </Position>
     <Scale>
       <X>1</X>
@@ -273,19 +272,42 @@
     </dimensions>
     <Layer>0.51</Layer>
   </eyes>
-  <skill1Bind>None</skill1Bind>
+  <skillBinds>
+    <Keys>F</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+    <Keys>None</Keys>
+  </skillBinds>
+  <Bind>1</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
   <skillIds>
     <int>1</int>
-    <int>2</int>
   </skillIds>
-  <bindIds />
+  <itemIds>
+    <int>1</int>
+    <int>1</int>
+  </itemIds>
   <Level>3</Level>
   <Strength>5</Strength>
   <Defense>5</Defense>
   <Dexterity>5</Dexterity>
   <Intelligence>5</Intelligence>
   <Speed>5</Speed>
-  <Health>100</Health>
+  <Health>85</Health>
   <Energy>100</Energy>
   <EXP>0</EXP>
   <NextLevel>127</NextLevel>

@@ -15,8 +15,8 @@ namespace The_Dream.Classes
         public int XSpawn, YSpawn, Health, Armor, Attack, MonsterID, EXP, X, Y, AreaX, AreaY, pX, pY, hitCounter, hitTimer, PositionX, PositionY, moveSpeed;
         public Vector2 OriginalPosition;
         public Random random;
-        public List<Item> DropList;
-        public List<Item> Drops;
+        public List<Items.Item> DropList;
+        public List<Items.Item> Drops;
         public Monster()
         {
             CanSpawn = Boss = false;
@@ -24,8 +24,8 @@ namespace The_Dream.Classes
             OriginalPosition = Vector2.Zero;
             hitCounter = 0;
             image.Effects = "SpriteSheetEffect";
-            DropList = new List<Item>();
-            Drops = new List<Item>();
+            DropList = new List<Items.Item>();
+            Drops = new List<Items.Item>();
             random = new Random();
         }
         public void SetItem<T>(ref T item)
@@ -34,12 +34,12 @@ namespace The_Dream.Classes
             {
                 item = (T)Activator.CreateInstance(typeof(T));
             }
-            DropList.Add(item as Item);
+            DropList.Add(item as Items.Item);
         }
         public void Drop()
         {
             int rand = random.Next(0, 1000000);
-            foreach (Item item in DropList)
+            foreach (Items.Item item in DropList)
             {
                 if (rand <= item.dropChance)
                 {

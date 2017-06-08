@@ -87,14 +87,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="The_Dream.exe" size="127904">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="The_Dream.exe" size="130976">
       <assemblyIdentity name="The_Dream" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>a6AhekPxdonATiw9mJYwrPoYBbA=</dsig:DigestValue>
+        <dsig:DigestValue>l0CX2dTfzSXLZsLoXTYiDomi/S4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -410,7 +410,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>ZQSgLyvaBBSz5h77/Qe/8HEMxAk=</dsig:DigestValue>
+      <dsig:DigestValue>BljfZWogdyuByJpCnS+DAQ8p5Do=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Gameplay\GUI\Menu\Settings\Settings.xnb" size="4342187">
@@ -419,7 +419,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>jtA+XC1UYoMCf97foOi18WzuMUE=</dsig:DigestValue>
+      <dsig:DigestValue>16S/3wk5p+vInvN17DgegIr0lJI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Gameplay\GUI\Menu\Skills\InSkills.xnb" size="4342187">
@@ -429,6 +429,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>kDF//W2JTST+gBORAre3WT7Og1I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Gameplay\GUI\Menu\Skills\Select Skill Tree.xnb" size="486187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>CctcHcU+2xTlO+HesOWFdK6Rqq0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Gameplay\GUI\Menu\Skills\Select.xnb" size="90187">
@@ -449,13 +458,31 @@
       <dsig:DigestValue>2NqZGS9a4ZjLx1kNjBoMd4Varkw=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Content\Gameplay\GUI\Menu\Skills\Skill Select.xnb" size="5456187">
+  <file name="Content\Gameplay\GUI\Menu\Skills\Skill Select Text.xnb" size="5456187">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
       <dsig:DigestValue>aZOCLlsEp3nDWzzUW4wUnNav3iU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Gameplay\GUI\Menu\Skills\Skill Selector.xnb" size="48587">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>vxZ9yvkcCgjOgBPUhKxobvuo6pU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Content\Gameplay\GUI\Menu\Skills\Skill Tree.xnb" size="448187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>+6LR3JuWqWHee854ID9ciEHuMtY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Content\Gameplay\GUI\Menu\Skills\Skills.xnb" size="4342187">
@@ -800,13 +827,13 @@
       <dsig:DigestValue>8zN2aL3f6WhR2T3kLc2pZQL2TNY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Load\Gameplay\Player.xml" size="1111">
+  <file name="Load\Gameplay\Player.xml" size="1190">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>fEpepgBQnCGVUuy1iH66aXw8ixo=</dsig:DigestValue>
+      <dsig:DigestValue>cY8RK3NC04BhMpSHeNKqKWuw9gA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Load\Gameplay\Sound.xml" size="269">

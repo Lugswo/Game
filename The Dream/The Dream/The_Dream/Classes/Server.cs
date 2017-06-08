@@ -412,7 +412,7 @@ namespace The_Dream.Classes
             {
                 server.Start();
                 hostip = "localhost";
-            }
+             }
             GameState = new List<Player>();
             playerUpdate = new PlayerUpdate();
             updateMonsters = new UpdateMonsters();
@@ -484,7 +484,7 @@ namespace The_Dream.Classes
                 foreach (AreaMonsters area in updateMonsters.AreaList)
                 {
                     int count = 0;
-                    foreach (Item item in area.Drops)
+                    foreach (Items.Item item in area.Drops)
                     {
                         if (item.itemAdded == true)
                         {
@@ -496,7 +496,7 @@ namespace The_Dream.Classes
                         NetOutgoingMessage outmsg2 = server.CreateMessage();
                         outmsg2.Write((byte)PacketTypes.ADDITEM);
                         outmsg2.Write(count);
-                        foreach (Item item in area.Drops)
+                        foreach (Items.Item item in area.Drops)
                         {
                             if (item.itemAdded == true)
                             {
@@ -552,7 +552,7 @@ namespace The_Dream.Classes
                         NetOutgoingMessage outmsg2 = server.CreateMessage();
                         outmsg2.Write((byte)PacketTypes.REMOVEITEM);
                         int count = 0;
-                        foreach (Item item in area.Drops)
+                        foreach (Items.Item item in area.Drops)
                         {
                             item.Update(gameTime, p);
                             if (item.pickedUp == true)
@@ -562,7 +562,7 @@ namespace The_Dream.Classes
                         }
                         outmsg2.Write(count);
                         List<int> temp = new List<int>();
-                        foreach (Item item in area.Drops)
+                        foreach (Items.Item item in area.Drops)
                         {
                             if (item.pickedUp == true)
                             {

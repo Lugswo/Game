@@ -10,24 +10,23 @@ namespace The_Dream.Classes.GameMenu
 {
     public class Settings : MenuTab
     {
-        bool hotKey, keyReleased;
-        Image shiftKey;
+        int category;
+        bool enterCategory, setImage;
+        Vector2 pos;
+        Image categoryImage;
+        Image inCategoryImage;
         public Settings()
         {
             image.Path = "Gameplay/GUI/Menu/Settings/Settings";
             inImage.Path = "Gameplay/GUI/Menu/Settings/InSettings";
             subCat = true;
-            hotKey = false;
-            shiftKey = new Image();
+            pos = new Vector2();
+            categoryImage = new Image();
+            categoryImage = new Image();
         }
         public override void LoadContent()
         {
             base.LoadContent();
-            shiftKey.LoadContent();
-            shiftKey.Text = "Shift: No Skill";
-            shiftKey.color = new Color(252, 252, 252, 252);
-            shiftKey.Position.X = 100;
-            shiftKey.Position.Y = 100;
         }
         public override void UnloadContent()
         {
@@ -38,55 +37,48 @@ namespace The_Dream.Classes.GameMenu
             base.Update(gameTime, player, inMenu);
             if (inMenu == true)
             {
-                if (inCategory == true)
+                if (inCategory == false)
                 {
-                    if (hotKey == false)
+                    enterCategory = true;
+                    if (InputManager.Instance.KeyPressed(Keys.Down))
                     {
-                        if (InputManager.Instance.KeyPressed(Keys.Z))
-                        {
-                            hotKey = true;
-                            keyReleased = false;
-                        }
+                        category++;
+                        setImage = false;
                     }
-                    if (InputManager.Instance.KeyUp(Keys.Z))
+                    if (InputManager.Instance.KeyPressed(Keys.Up))
                     {
-                        keyReleased = true;
+                        category--;
+                        setImage = false;
                     }
-                    if (hotKey == true && keyReleased == true)
+                    if (category < 0)
                     {
-                        if (player.skills.Count > 0)
+                        category++;
+                    }
+                    if (category > 1)
+                    {
+                        category--;
+                    }
+                }
+                else
+                {
+                    if (setImage == false)
+                    {
+                        pos = image.Position;
+                        if (category == 0)
                         {
-                            if (InputManager.Instance.KeyPressed(Keys.Z))
-                            {
-                                //player.binds[0] = player.skills[0];
-                                //player.skill1.icon.Position.X = 100 + shiftKey.Font.MeasureString("Shift: ").X;
-                                //player.skill1.icon.Position.Y = 100;
-                                //shiftKey.Text = "Shift: ";
-                                //hotKey = false;
-                            }
+                            DifferentImage("Gear", categoryImage, inCategoryImage, pos);
                         }
-                        else
+                        else if (category == 1)
                         {
-                            hotKey = false;
+                            DifferentImage("Items", categoryImage, inCategoryImage, pos);
                         }
+
                     }
                 }
             }
         }
         public override void Draw(SpriteBatch spriteBatch, bool inMenu, Player player)
         {
-            if (hotKey == true)
-            {
-                foreach (Classes.Skills.Skill skill in player.skills)
-                {
-                    skill.icon.Draw(spriteBatch);
-                }
-            }
-            shiftKey.DrawString(spriteBatch);
-            //if (player.skill1.icon.texture != null)
-            //{
-            //    player.skill1.icon.Draw(spriteBatch);
-            //}
             base.Draw(spriteBatch, inMenu, player);
         }
     }

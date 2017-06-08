@@ -36,11 +36,10 @@ namespace The_Dream.Classes
         bool releasedPause = true;
         Image text = new Image();
         Image health;
-        List<Item> itemsDropped;
-        Dictionary<int, Item> Items;
-        Items.TestItem testItem;
+        List<Items.Item> itemsDropped;
         List<Skills.Skill> skillList;
-        Player player;
+        public Player player;
+        Globals globals;
         enum PacketTypes
         {
             LOGIN,
@@ -70,14 +69,6 @@ namespace The_Dream.Classes
         {
             MOVE,
             NONE
-        }
-        void SetItem<T>(ref T item, int ID)
-        {
-            if (item == null)
-            {
-                item = (T)Activator.CreateInstance(typeof(T));
-            }
-            Items.Add(ID, (item as Item));
         }
         public void RecievePacket()
         {
@@ -221,9 +212,9 @@ namespace The_Dream.Classes
                             for (int i = 0; i < count; i++)
                             {
                                 Type type;
-                                type = Items[ClientInc.ReadInt32()].GetType();
-                                Item temp = new Item();
-                                temp = (Item)Activator.CreateInstance(type);
+                                type = globals.dItems[ClientInc.ReadInt32()].GetType();
+                                Items.Item temp = new Items.Item();
+                                temp = (Items.Item)Activator.CreateInstance(type);
                                 temp.X = ClientInc.ReadInt32();
                                 temp.Y = ClientInc.ReadInt32();
                                 temp.LoadContent();
@@ -280,7 +271,6 @@ namespace The_Dream.Classes
                                 temp.pY = temp.Y;
                                 PlayerList.Add(temp);
                             }
-                            player.LoadContent();
                             player.PlayerImage.Layer = .5f;
                             player.hair.Layer = .51f;
                             player.eyes.Layer = .51f;
@@ -310,6 +300,7 @@ namespace The_Dream.Classes
                                 int j = ClientInc.ReadInt32();
                                 j = j - i;
                                 PlayerList[PlayerID].inventory.Add(itemsDropped[j]);
+                                PlayerList[PlayerID].itemIds.Add(itemsDropped[j].ItemID);
                                 itemsDropped.Remove(itemsDropped[j]);
                             }
                         }
@@ -370,7 +361,7 @@ namespace The_Dream.Classes
                 {
                     s.image.Position.X = s.OriginalPosition.X;
                 }
-                foreach (Item item in itemsDropped)
+                foreach (Items.Item item in itemsDropped)
                 {
                     item.image.Position.X = item.X;
                 }
@@ -413,7 +404,7 @@ namespace The_Dream.Classes
                 {
                     m.image.Position.X = m.OriginalPosition.X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
                 }
-                foreach (Item item in itemsDropped)
+                foreach (Items.Item item in itemsDropped)
                 {
                     item.image.Position.X = item.X - map.DeadZone.Right + (int)ScreenManager.instance.Dimensions.X;
                 }
@@ -456,7 +447,7 @@ namespace The_Dream.Classes
                 {
                     m.image.Position.Y = m.OriginalPosition.Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
                 }
-                foreach (Item item in itemsDropped)
+                foreach (Items.Item item in itemsDropped)
                 {
                     item.image.Position.Y = item.Y - map.DeadZone.Bottom + (int)ScreenManager.instance.Dimensions.Y;
                 }
@@ -499,7 +490,7 @@ namespace The_Dream.Classes
                 {
                     m.image.Position.Y = m.OriginalPosition.Y;
                 }
-                foreach (Item item in itemsDropped)
+                foreach (Items.Item item in itemsDropped)
                 {
                     item.image.Position.Y = item.Y;
                 }
@@ -514,7 +505,7 @@ namespace The_Dream.Classes
                         PlayerList[PlayerID].pX = PlayerList[PlayerID].X;
                         mapMoveX = (PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2);
                         map.HorizontalMove();
-                        foreach (Item item in itemsDropped)
+                        foreach (Items.Item item in itemsDropped)
                         {
                             item.HorizontalMove(mapMoveX);
                         }
@@ -527,7 +518,7 @@ namespace The_Dream.Classes
                             map.Moved.X = PlayerList[PlayerID].pX;
                             mapMoveX = (PlayerList[PlayerID].pX - (int)ScreenManager.instance.Dimensions.X / 2);
                             map.HorizontalMove();
-                            foreach (Item item in itemsDropped)
+                            foreach (Items.Item item in itemsDropped)
                             {
                                 item.HorizontalMove(mapMoveX);
                             }
@@ -542,7 +533,7 @@ namespace The_Dream.Classes
                         PlayerList[PlayerID].pX = PlayerList[PlayerID].X;
                         mapMoveX = (PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2);
                         map.HorizontalMove();
-                        foreach (Item item in itemsDropped)
+                        foreach (Items.Item item in itemsDropped)
                         {
                             item.HorizontalMove(mapMoveX);
                         }
@@ -555,7 +546,7 @@ namespace The_Dream.Classes
                             map.Moved.X = PlayerList[PlayerID].pX;
                             mapMoveX = (PlayerList[PlayerID].pX - (int)ScreenManager.instance.Dimensions.X / 2);
                             map.HorizontalMove();
-                            foreach (Item item in itemsDropped)
+                            foreach (Items.Item item in itemsDropped)
                             {
                                 item.HorizontalMove(mapMoveX);
                             }
@@ -570,7 +561,7 @@ namespace The_Dream.Classes
                 {
                     mapMoveX = (PlayerList[PlayerID].X - (int)ScreenManager.instance.Dimensions.X / 2);
                     map.HorizontalMove();
-                    foreach (Item item in itemsDropped)
+                    foreach (Items.Item item in itemsDropped)
                     {
                         item.HorizontalMove(mapMoveX);
                     }
@@ -585,7 +576,7 @@ namespace The_Dream.Classes
                         PlayerList[PlayerID].pY = PlayerList[PlayerID].Y;
                         mapMoveY = PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2;
                         map.VerticalMove();
-                        foreach (Item item in itemsDropped)
+                        foreach (Items.Item item in itemsDropped)
                         {
                             item.VerticalMove(mapMoveY);
                         }
@@ -602,7 +593,7 @@ namespace The_Dream.Classes
                             map.Moved.Y = PlayerList[PlayerID].pY;
                             mapMoveY = (PlayerList[PlayerID].pY - (int)ScreenManager.instance.Dimensions.Y / 2);
                             map.VerticalMove();
-                            foreach (Item item in itemsDropped)
+                            foreach (Items.Item item in itemsDropped)
                             {
                                 item.VerticalMove(mapMoveY);
                             }
@@ -613,7 +604,7 @@ namespace The_Dream.Classes
                         PlayerList[PlayerID].pY = PlayerList[PlayerID].Y;
                         mapMoveY = PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2;
                         map.VerticalMove();
-                        foreach (Item item in itemsDropped)
+                        foreach (Items.Item item in itemsDropped)
                         {
                             item.VerticalMove(mapMoveY);
                         }
@@ -630,7 +621,7 @@ namespace The_Dream.Classes
                             map.Moved.Y = PlayerList[PlayerID].pY;
                             mapMoveY = (PlayerList[PlayerID].pY - (int)ScreenManager.instance.Dimensions.Y / 2);
                             map.VerticalMove();
-                            foreach (Item item in itemsDropped)
+                            foreach (Items.Item item in itemsDropped)
                             {
                                 item.VerticalMove(mapMoveY);
                             }
@@ -641,7 +632,7 @@ namespace The_Dream.Classes
                 {
                     mapMoveY = PlayerList[PlayerID].Y - (int)ScreenManager.instance.Dimensions.Y / 2;
                     map.VerticalMove();
-                    foreach (Item item in itemsDropped)
+                    foreach (Items.Item item in itemsDropped)
                     {
                         item.VerticalMove(mapMoveY);
                     }
@@ -894,20 +885,23 @@ namespace The_Dream.Classes
                     }
                 }
             }
-            if (InputManager.Instance.KeyPressed(PlayerList[PlayerID].skill1Bind))
+            foreach (Keys key in player.skillBinds)
             {
-                if (endLagTimer <= 0 && PlayerList[PlayerID].Attacking == false && paused == false)
+                if (InputManager.Instance.KeyPressed(key))
                 {
-                    if (PlayerList[PlayerID].binds[0].SkillID != 0)
+                    if (endLagTimer <= 0 && PlayerList[PlayerID].Attacking == false && paused == false)
                     {
-                        NetOutgoingMessage outmsg = client.CreateMessage();
-                        outmsg.Write((byte)PacketTypes.SKILL);
-                        int skillNum = PlayerList[PlayerID].binds[0].SkillID;
-                        outmsg.Write(skillNum);
-                        outmsg.Write(PlayerList[PlayerID].Direction());
-                        outmsg.Write(PlayerList[PlayerID].AreaX);
-                        outmsg.Write(PlayerList[PlayerID].AreaY);
-                        client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered);
+                        if (PlayerList[PlayerID].binds[player.skillBinds.IndexOf(key)].SkillID != 0)
+                        {
+                            NetOutgoingMessage outmsg = client.CreateMessage();
+                            outmsg.Write((byte)PacketTypes.SKILL);
+                            int skillNum = PlayerList[PlayerID].binds[0].SkillID;
+                            outmsg.Write(skillNum);
+                            outmsg.Write(PlayerList[PlayerID].Direction());
+                            outmsg.Write(PlayerList[PlayerID].AreaX);
+                            outmsg.Write(PlayerList[PlayerID].AreaY);
+                            client.SendMessage(outmsg, NetDeliveryMethod.ReliableOrdered);
+                        }
                     }
                 }
             }
@@ -940,6 +934,7 @@ namespace The_Dream.Classes
             }
             if (InputManager.Instance.KeyDown(Keys.Q))
             {
+                globals.Save(player);
                 if (host == true)
                 {
                     NetOutgoingMessage outmsg2 = client.CreateMessage();
@@ -1006,10 +1001,9 @@ namespace The_Dream.Classes
             dialogueImage = new Image();
             health = new Image();
             updateMonsters = new UpdateMonsters();
-            itemsDropped = new List<Item>();
-            Items = new Dictionary<int, Item>();
-            testItem = new Items.TestItem();
+            itemsDropped = new List<Items.Item>();
             endLagTimer = 0;
+            globals = new Globals();
         }
         public void LoadContent()
         {
@@ -1023,6 +1017,7 @@ namespace The_Dream.Classes
             XmlManager<Player> playerLoader;
             playerLoader = new XmlManager<Player>();
             player = playerLoader.Load("Load/Gameplay/SaveFile.xml");
+            player.LoadContent();
             ClientOut.WriteAllProperties(player);
             ClientOut.Write(player.hair.Path);
             ClientOut.Write(player.eyes.Path);
@@ -1049,10 +1044,10 @@ namespace The_Dream.Classes
             health.color = new Color(255, 0, 0, 255);
             health.LoadContent();
             updateMonsters.LoadContent();
-            SetItem<Items.TestItem>(ref testItem, testItem.ItemID);
             skillList = new List<Skills.Skill>();
             text.LoadContent();
             text.Position.X = 600;
+            globals.LoadContent();
         }
         public void UnloadContent()
         {
@@ -1251,7 +1246,7 @@ namespace The_Dream.Classes
                 {
                     m.Draw(spriteBatch);
                 }
-                foreach (Item item in itemsDropped)
+                foreach (Items.Item item in itemsDropped)
                 {
                     item.Draw(spriteBatch);
                 }

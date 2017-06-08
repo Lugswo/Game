@@ -38,11 +38,14 @@
     <Path>Gameplay/Characters/Player/Eyes/Eyes1</Path>
   </eyes>
   <MoveSpeed>400</MoveSpeed>
-  <binds>
-    <Bind>
-      <SkillID>0</SkillID>
-    </Bind>
-  </binds>
-  <skills>
-  </skills>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
+  <Bind>0</Bind>
 </Player>

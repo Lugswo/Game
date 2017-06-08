@@ -8,21 +8,21 @@
         <beforeApplicationStartup />
       </update>
     </subscription>
-    <deploymentProvider codebase="http://desktop-f74l22m/The_Dream/The_Dream.application" />
+    <deploymentProvider codebase="http://scplaptop/The_Dream/The_Dream.application" />
   </deployment>
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
     <framework targetVersion="4.0" profile="Client" supportedRuntime="4.0.30319" />
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="The_Dream.exe.manifest" size="41008">
+    <dependentAssembly dependencyType="install" codebase="The_Dream.exe.manifest" size="42250">
       <assemblyIdentity name="The_Dream.exe" version="0.0.0.11" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>m7VaWrQgSrkPFaNzyOW4UIdT5HE=</dsig:DigestValue>
+        <dsig:DigestValue>CrvZvAgD/Tk/NC0dkBgcu50+veA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

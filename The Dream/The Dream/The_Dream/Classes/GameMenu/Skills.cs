@@ -19,35 +19,50 @@ namespace The_Dream.Classes.GameMenu
             {
                 name = new Image();
                 button = new Image();
+                skill = new Image();
             }
             public void LoadContent()
             {
                 button.Path = "Gameplay/GUI/Menu/Skills/Skill Box";
-                name.Text = "None";
                 button.LoadContent();
                 name.LoadContent();
                 button.Layer = .941f;
                 name.Layer = .941f;
+                if (skill.Path != "")
+                {
+                    skill.LoadContent();
+                    skill.Layer = .942f;
+                }
             }
             public void UnloadContent()
             {
                 button.UnloadContent();
                 name.UnloadContent();
+                skill.UnloadContent();
             }
             public void Update(GameTime gameTime)
             {
                 button.Update(gameTime);
                 name.Update(gameTime);
+                skill.Update(gameTime);
             }
             public void Draw(SpriteBatch spriteBatch)
             {
                 button.Draw(spriteBatch);
                 name.DrawString(spriteBatch);
+                if (skill.texture != null)
+                {
+                    skill.Draw(spriteBatch);
+                }
             }
             public void DrawFaded(SpriteBatch spriteBatch)
             {
                 button.DrawFaded(spriteBatch);
                 name.DrawString(spriteBatch);
+                if (skill.texture != null)
+                {
+                    skill.DrawFaded(spriteBatch);
+                }
             }
         }
         public List<Classes.Skills.Skill> skillList;
@@ -60,11 +75,14 @@ namespace The_Dream.Classes.GameMenu
         Image cursor;
         Image selection;
         Image skillSelection;
+        Image skillSelector;
+        Image skillTree;
+        Image skillTreeSelection;
         float mouseScaler;
         int category, skillSelect;
         List<Bind> binds;
         Textbox keyBindBox;
-        bool keyBound, releaseZ, setIcons, settingSkill;
+        bool keyBound, releaseZ, setIcons, settingSkill, hoveringSkillTree, skillBound;
         public Skills()
         {
             image.Path = "Gameplay/GUI/Menu/Skills/Skills";
@@ -87,11 +105,16 @@ namespace The_Dream.Classes.GameMenu
             keyBindBox = new Textbox("Press the key you would like to bind to");
             category = 1;
             keyBound = false;
+            skillBound = false;
             releaseZ = false;
             skillSelect = 0;
             setIcons = false;
             settingSkill = false;
             skillSelection = new Image();
+            skillSelector = new Image();
+            skillTreeSelection = new Image();
+            skillTree = new Image();
+            hoveringSkillTree = false;
         }
         public override void LoadOnPause(Player player)
         {
@@ -143,6 +166,18 @@ namespace The_Dream.Classes.GameMenu
             cursor.Layer = .999f;
             foreach (Bind b in binds)
             {
+                if (player.binds[binds.IndexOf(b)].SkillID != 0)
+                {
+                    b.skill.Path = player.binds[binds.IndexOf(b)].icon.Path;
+                }
+                if (player.skillBinds[binds.IndexOf(b)].ToString() != null)
+                {
+                    b.name.Text = player.skillBinds[binds.IndexOf(b)].ToString();
+                }
+                else
+                {
+                    b.name.Text = "None";
+                }
                 b.LoadContent();
             }
             binds[0].button.Position.X = xOffset + 50;
@@ -159,18 +194,33 @@ namespace The_Dream.Classes.GameMenu
             }
             foreach (Bind b in binds)
             {
-                b.name.Position.X = b.button.Position.X + ((b.button.texture.Width - b.name.Font.MeasureString("None").X) / 2);
-                b.name.Position.Y = b.button.Position.Y - b.name.Font.MeasureString("None").Y;
+                b.name.Position.X = b.button.Position.X + ((b.button.texture.Width - b.name.Font.MeasureString(b.name.Text).X) / 2);
+                b.name.Position.Y = b.button.Position.Y - b.name.Font.MeasureString(b.name.Text).Y;
+                b.skill.Position.X = b.button.Position.X + 20;
+                b.skill.Position.Y = b.button.Position.Y + 20;
             }
             selection.Path = "Gameplay/GUI/Menu/Skills/Select";
             selection.LoadContent();
             selection.Layer = .94f;
             keyBindBox.LoadContent();
-            skillSelection.Path = "Gameplay/GUI/Menu/Skills/Skill Select";
+            skillSelection.Path = "Gameplay/GUI/Menu/Skills/Skill Select Text";
             skillSelection.Layer = .95f;
             skillSelection.Position.X = 185;
             skillSelection.Position.Y = 100;
             skillSelection.LoadContent();
+            skillSelector.Path = "Gameplay/GUI/Menu/Skills/Skill Selector";
+            skillSelector.Layer = .96f;
+            skillSelector.LoadContent();
+            skillTree.Path = "Gameplay/GUI/Menu/Skills/Skill Tree";
+            skillTree.Layer = .93f;
+            skillTree.Position.X = xOffset + 100;
+            skillTree.Position.Y = binds[binds.Count - 1].button.Position.Y + binds[binds.Count - 1].button.texture.Height + 100;
+            skillTree.LoadContent();
+            skillTreeSelection.Path = "Gameplay/GUI/Menu/Skills/Select Skill Tree";
+            skillTreeSelection.Layer = .92f;
+            skillTreeSelection.Position.X = xOffset + 95;
+            skillTreeSelection.Position.Y = binds[binds.Count - 1].button.Position.Y + binds[binds.Count - 1].button.texture.Height + 95;
+            skillTreeSelection.LoadContent();
         }
         public override void UnloadContent()
         {
@@ -228,17 +278,27 @@ namespace The_Dream.Classes.GameMenu
                 }
                 if (category == binds.Count + 1)
                 {
-                    //selection = go to skill tree pos
+                    hoveringSkillTree = true;
                 }
                 else
                 {
                     selection.Position = binds[category - 1].button.Position;
                     selection.Position.X -= 5;
                     selection.Position.Y -= 5;
+                    hoveringSkillTree = false;
                 }
                 if (inCategory == true)
                 {
-                    if (category <= binds.Count)
+                    if (skillBound == true)
+                    {
+                        if (InputManager.Instance.KeyReleased(Keys.Z))
+                        {
+                            keyBound = false;
+                            skillBound = false;
+                            inCategory = false;
+                        }
+                    }
+                    else if (category <= binds.Count)
                     {
                         if (player.skills.Count > 0)
                         {
@@ -266,10 +326,10 @@ namespace The_Dream.Classes.GameMenu
                                     settingSkill = true;
                                     binds[category - 1].name.Position.X = binds[category - 1].button.Position.X + ((binds[category - 1].button.texture.Width - binds[category - 1].name.Font.MeasureString(binds[category - 1].name.Text).X) / 2);
                                     binds[category - 1].name.Position.Y = binds[category - 1].button.Position.Y - binds[category - 1].name.Font.MeasureString(binds[category - 1].name.Text).Y;
-                                    player.skill1Bind = currentKeys[0];
+                                    player.skillBinds[category - 1] = currentKeys[0];
                                 }
                             }
-                            else if (keyBound == true)
+                            else if (keyBound == true && skillBound == false)
                             {
                                 if (setIcons == false)
                                 {
@@ -287,7 +347,51 @@ namespace The_Dream.Classes.GameMenu
                                         skill.icon.Position.Y = 200 + 50 + (ycount * 100);
                                         count++;
                                     }
+                                    skillSelector.Position.X = player.skills[0].icon.Position.X - 5;
+                                    skillSelector.Position.Y = player.skills[0].icon.Position.Y - 5;
                                     setIcons = true;
+                                }
+                                else
+                                {
+                                    if (InputManager.Instance.KeyPressed(Keys.Left))
+                                    {
+                                        skillSelect--;
+                                    }
+                                    else if (InputManager.Instance.KeyPressed(Keys.Right))
+                                    {
+                                        skillSelect++;
+                                    }
+                                    else if (InputManager.Instance.KeyPressed(Keys.Up))
+                                    {
+                                        skillSelect = skillSelect - 10;
+                                    }
+                                    else if (InputManager.Instance.KeyPressed(Keys.Down))
+                                    {
+                                        skillSelect = skillSelect + 10;
+                                    }
+                                    if (skillSelect >= player.skills.Count)
+                                    {
+                                        skillSelect = player.skills.Count - 1;
+                                    }
+                                    else
+                                    {
+                                        skillSelect = 0;
+                                    }
+                                    skillSelector.Position.X = player.skills[skillSelect].icon.Position.X - 5;
+                                    skillSelector.Position.Y = player.skills[skillSelect].icon.Position.Y - 5;
+                                    if (InputManager.Instance.KeyPressed(Keys.Z))
+                                    {
+                                        player.binds[category - 1] = player.skills[skillSelect];
+                                        player.bindIds[category - 1] = player.skills[skillSelect].SkillID;
+                                        Vector2 temp = binds[category - 1].skill.Position;
+                                        binds[category - 1].skill = new Image();
+                                        binds[category - 1].skill.Path = player.skills[skillSelect].icon.Path;
+                                        binds[category - 1].skill.Position = temp;
+                                        binds[category - 1].skill.Layer = .942f;
+                                        binds[category - 1].skill.LoadContent();
+                                        skillBound = true;
+                                        settingSkill = false;
+                                    }
                                 }
                             }
                         }
@@ -379,13 +483,29 @@ namespace The_Dream.Classes.GameMenu
         public override void Draw(SpriteBatch spriteBatch, bool inMenu, Player player)
         {
             base.Draw(spriteBatch, inMenu, player);
-            foreach (Bind b in binds)
+            if (inMenu == false)
             {
-                b.DrawFaded(spriteBatch);
+                foreach (Bind b in binds)
+                {
+                    b.DrawFaded(spriteBatch);
+                    skillTree.DrawFaded(spriteBatch);
+                }
             }
-            if (inMenu == true)
+            else
             {
-                selection.Draw(spriteBatch);
+                foreach (Bind b in binds)
+                {
+                    b.Draw(spriteBatch);
+                }
+                skillTree.Draw(spriteBatch);
+                if (hoveringSkillTree == true)
+                {
+                    skillTreeSelection.Draw(spriteBatch);
+                }
+                else
+                {
+                    selection.Draw(spriteBatch);
+                }
                 if (inCategory == true)
                 {
                     if (category <= binds.Count)
@@ -394,9 +514,10 @@ namespace The_Dream.Classes.GameMenu
                         {
                             keyBindBox.Draw(spriteBatch);
                         }
-                        else
+                        else if (skillBound == false)
                         {
                             skillSelection.Draw(spriteBatch);
+                            skillSelector.Draw(spriteBatch);
                             foreach (Classes.Skills.Skill skill in player.skills)
                             {
                                 skill.DrawIcon(spriteBatch);

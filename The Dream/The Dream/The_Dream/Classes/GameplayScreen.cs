@@ -59,7 +59,7 @@ namespace The_Dream.Classes
             client.GetReferences(map);
             XmlManager<UpdateGameMenu> menuLoader = new XmlManager<UpdateGameMenu>();
             gameMenu = new UpdateGameMenu();
-            gameMenu.LoadContent(player);
+            gameMenu.LoadContent(client.player);
 
             //XmlManager<SoundManager> soundLoader = new XmlManager<SoundManager>();
             //soundManager = soundLoader.Load("Load/Gameplay/Sound.xml");
